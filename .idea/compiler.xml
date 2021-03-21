@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Java project" />
-        <module name="ingswAM2021-Cannilla-Corsa-Casale" />
+        <module name="AM11" />
       </profile>
     </annotationProcessing>
   </component>

@@ -2,13 +2,13 @@ package it.polimi.ingsw;
 
 public class ActionToken {
 
-    private int Action;
+    private final int action;
 
     public ActionToken(int action) {
-        Action = action;
+        this.action = action;
     }
 
     public int getAction() {
-        return Action;
+        return action;
     }
 }

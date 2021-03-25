@@ -2,33 +2,24 @@ package it.polimi.ingsw;
 
 public class PersonalBoard {
 
-    private int Position;
-    private int[][] WarehouseDepot;
-    private ProductionCard[][] DevCardSlot;
-    private int[] Strongbox;
+    private int position;
+    private WarehouseDepot warehouseDepot;
+    private ProdCardSlot prodCardSlot;
+    private Strongbox strongbox;
 
 // constructor of PersonalBoard
-    public PersonalBoard(int position, int[][] warehouseDepot, ProductionCard[][] devCardSlot, int[] strongbox) {
-        Position = position;
-        WarehouseDepot = warehouseDepot;
-        DevCardSlot = devCardSlot;
-        Strongbox = strongbox;
+    public PersonalBoard() {
+        position = 0;
+        strongbox = new Strongbox();
+        warehouseDepot = new WarehouseDepot();
+        prodCardSlot = new ProdCardSlot();
     }
 // getter position
     public int getPosition() {
-        return Position;
+        return position;
     }
-// getter strongbox
-    public int[] getStrongbox() {
-        return Strongbox;
-    }
-
 // setter position
     public void setPosition(int position) {
-        Position = position;
-    }
-// setter strongbox
-    public void setStrongbox(int[] strongbox) {
-        Strongbox = strongbox;
+        this.position = position;
     }
 }

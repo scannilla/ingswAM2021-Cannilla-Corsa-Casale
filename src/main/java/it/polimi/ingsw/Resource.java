@@ -2,13 +2,13 @@ package it.polimi.ingsw;
 
 public class Resource {
 
-    private int Type;
+    private final int type;
 //constructor Type
     public Resource(int type) {
-        Type = type;
+        this.type = type;
     }
 //getter Type
     public int getType() {
-        return Type;
+        return type;
     }
 }

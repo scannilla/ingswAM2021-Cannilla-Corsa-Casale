@@ -1,34 +1,47 @@
 package it.polimi.ingsw;
 
+//tbh nobody did import this, so nobody is gonna touch it
 import javax.naming.spi.ResolveResult;
 
 public class WarehouseDepot {
-    private int[][] depot;
+    private final Resource[][] depot;
 
     public WarehouseDepot() {
-        depot = new int[3][3];
+        depot = new Resource[3][];
+        depot[0] = new Resource[1];
+        depot[1] = new Resource[2];
+        depot[2] = new Resource[3];
     }
 
-    public void setTopRow(Resource resource) {
-        depot[0][0] = resource.getType();
+    public void insertInTopRow(Resource resource) {
+        depot[0][0] = resource;
     }
 
-    //TODO check exceptions if amount>2
-    public void setMiddleRow(Resource resource, int amount) {
-        depot[1][0] = resource.getType();
-        if (amount == 2)
-            depot[1][1] = resource.getType();
-        else
-            depot[1][1] = 0;
+    public void insertInMiddleRow(Resource resource) {
+        if(depot[1][0] != null)
+            depot[1][1] = resource;
+        else depot[1][0] = resource;
     }
 
-    public void setBottomRow(Resource resource, int amount) {
-        for (int i = 0; i<amount; i++) {
-            depot[2][i] = resource.getType();
-        }
-        for(int i=0; i<3-amount; i++)
-            depot[2][2-i] = 0;
+    public void insertInBottomRow(Resource resource) {
+        int i=0;
+        while(depot[2][i]==null && i<3)
+            i++;
+        depot[2][i] = resource;
     }
 
-    //TODD getters
+    public Resource checkResource(int column) {
+        if(depot[column-1][0]!=null)
+            return depot[column-1][0];
+        else return null;
+    }
+
+    public void useResource(int column) {
+        int i = column-1;
+        while(depot[column-1][i]==null && i>0)
+            i--;
+        depot[column-1][i] = null;
+    }
+
+
 }

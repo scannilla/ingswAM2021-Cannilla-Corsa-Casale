@@ -1,7 +1,8 @@
 package it.polimi.ingsw;
 
 public class Strongbox {
-    private int[] values;
+    private final int[] values;
+    private final int coins=0, stones=1, servants=2, shields=3;
 
 
     public Strongbox() {
@@ -9,34 +10,34 @@ public class Strongbox {
     }
 
     public int getCoins() {
-        return values[0];
+        return values[coins];
     }
 
     public int getStones() {
-        return values[1];
+        return values[stones];
     }
 
     public int getServants() {
-        return values[2];
+        return values[servants];
     }
 
     public int getShields() {
-        return values[3];
+        return values[shields];
     }
 
-    public void setCoins(int coins) {
-        values[0] = coins;
+    public void setCoins(int coinsN) {
+        values[coins] = coinsN;
     }
 
-    public void setStones(int stones) {
-        values[1] = stones;
+    public void setStones(int stonesN) {
+        values[stones] = stonesN;
     }
 
-    public void setServants(int servants) {
-        values[2] = servants;
+    public void setServants(int servantsN) {
+        values[servants] = servantsN;
     }
 
-    public void setShields(int shields) {
-        values[3] = shields;
+    public void setShields(int shieldsN) {
+        values[shields] = shieldsN;
     }
 }

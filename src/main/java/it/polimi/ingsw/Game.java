@@ -1,8 +1,8 @@
 package it.polimi.ingsw;
 
 public class Game {
-    private int numberOfPlayers;
-    private Player[] players;
+    private final int numberOfPlayers;
+    private final Player[] players;
     private ProductionCard[] productionCardsDeck;
     private LeaderCard[] leaderCardsDeck;
     private ActionToken[] actionTokensPile;

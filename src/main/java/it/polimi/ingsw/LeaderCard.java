@@ -1,43 +1,27 @@
 package it.polimi.ingsw;
 
-public class LeaderCard {
+public abstract class LeaderCard {
 
-    private int[] RequiredRes;
-    private int[][] RequiredCard;
-    private int wp;
-    private Ability SpecialAbility;
+    private final int[] requiredRes;
+    private final int[][] requiredCard;
+    private final int wp;
 
     //constructor Leader Card
-    public LeaderCard(int[] requiredRes, int[][] requiredCard, int wp, Ability specialAbility) {
-        RequiredRes = requiredRes;
-        RequiredCard = requiredCard;
+    public LeaderCard(int[] requiredRes, int[][] requiredCard, int wp) {
+        this.requiredRes = requiredRes;
+        this.requiredCard = requiredCard;
         this.wp = wp;
-        SpecialAbility = specialAbility;
     }
 
-// getter Required Resources
     public int[] getRequiredRes() {
-
-        return RequiredRes;
-
+        return requiredRes;
     }
-// getter Required Card
+
     public int[][] getRequiredCard() {
-
-        return RequiredCard;
-
+        return requiredCard;
     }
-// getter Win Points
-    public int getWp(){
 
+    public int getWp() {
         return wp;
-
     }
-// getter Special Ability
-    public Ability getSpecialAbility(){
-
-        return SpecialAbility;
-
-    }
-
 }

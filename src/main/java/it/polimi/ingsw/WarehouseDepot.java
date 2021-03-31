@@ -23,10 +23,9 @@ public class WarehouseDepot {
     }
 
     /**
-     * This method sets the bottom row of depot with amount of this Resource
+     * insert a new resource in the WarehouseDepot
      * @param resource Resource
      */
-
     public void insertNewResource(Resource resource) throws IllegalArgumentException {
         int column=-1;
         int optimized;
@@ -72,13 +71,23 @@ public class WarehouseDepot {
         }
     }
 
-
+    /**
+     * return the resource that is in this column
+     * @param column int
+     * @return depit[column][0]
+     */
     private Resource checkResource(int column) {
         if(depot[column][0]!=null)
             return depot[column][0];
         else return null;
     }
 
+    /**
+     * modify Warehouse Depot to optimize slots
+     * @param column int
+     * @return changed
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
     private int optimizeDepot(int column) throws IllegalArgumentException{
         Resource temp;
         int changed;
@@ -115,6 +124,11 @@ public class WarehouseDepot {
         return changed;
     }
 
+    /**
+     * use a resource from depot
+     * @param resource Resource
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
     public void useResource(Resource resource) throws IllegalArgumentException{
         int column=-1;
         int i;

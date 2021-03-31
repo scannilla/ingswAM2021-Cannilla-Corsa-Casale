@@ -7,16 +7,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class MarketStructure {
+    /**
+     * matrix of Market Marble [4][3]
+     */
     private final MarketMarble[][] marketStructure;
+    /**
+     * marble out of the structure
+     */
     private MarketMarble outMarble;
+    /**
+     * vector of all Market Marbles
+     */
     private final MarketMarble[] allMarbles;
+    /**
+     * list of all Market Marbles
+     */
     List<MarketMarble> MarblesList;
 
+    /**
+     * constructor of a new Market Structure and of 13 Market Marbles
+     */
     public MarketStructure() {
         marketStructure = new MarketMarble[4][3];
         allMarbles = new MarketMarble[13];
     }
 
+    /**
+     * initialize the market randomising the distribution of Market Marbles
+     */
     public void initializeMarket() {
         int k=0;
         //JSON parsing
@@ -31,6 +49,11 @@ public class MarketStructure {
 
     }
 
+    /**
+     * select the line of market's matrix form which the player takes Market Marbles
+     * @param line int
+     * @return marblesArray
+     */
     public MarketMarble[] selectLine(int line) {
         MarketMarble[] marblesArray = new MarketMarble[4];
         for(int i=0; i<4; i++)
@@ -42,7 +65,12 @@ public class MarketStructure {
         return marblesArray;
     }
 
-    public MarketMarble[] selecColumn(int column) {
+    /**
+     * select the column of market's matrix from which the player takes Market Marbles
+     * @param column int
+     * @return marblesArray
+     */
+    public MarketMarble[] selectColumn(int column) {
         MarketMarble[] marblesArray = new MarketMarble[3];
         System.arraycopy(marketStructure[column], 0, marblesArray, 0, 3);
         marketStructure[column][0] = outMarble;

@@ -1,9 +1,19 @@
 package it.polimi.ingsw;
 
 public class ProdCardSlot {
-    private final ProductionCard[][] slots; //ProdCards matrix
+    /**
+     * matrix representing slots where the player can insert Production Cards
+     */
+    private final ProductionCard[][] slots;
+    /**
+     * vector representing only cards that the player can activate (top cards of every column of the matrix)
+     */
     private final ProductionCard[] topCards; //active Production Cards
 
+    /**
+     * constructor of a new matrix of slots and a new vector of top cards
+     * initialize all to null
+     */
     public ProdCardSlot() {
         slots = new ProductionCard[3][3];
         topCards = new ProductionCard[3];
@@ -14,7 +24,13 @@ public class ProdCardSlot {
         }
     }
 
-    //when a new prod card is bought it's inserted in the DevCardSlots
+
+    /**
+     * when a new Production Card is bought it is inerted in a slot
+     * @param card int
+     * @param place int
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
     public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException {
         int level = card.getLevel();
         String s = "Place not empty";
@@ -45,10 +61,21 @@ public class ProdCardSlot {
         }
     }
 
+    /**
+     * getter of all top cards
+     * @return topCards
+     */
     public ProductionCard[] getTopCards() {
         return topCards;
     }
 
+    /**
+     * getter the card in column of this level (0 = level 1; 1 = level 2; 2 = level 3)
+     * @param column int
+     * @param level int
+     * @return slots[column][level]
+     * @throws NullPointerException NullPointerException
+     */
     //TODO check try/catch
     public ProductionCard getCard(int column, int level) throws NullPointerException {
         try {

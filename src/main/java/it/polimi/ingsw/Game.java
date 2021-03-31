@@ -21,6 +21,7 @@ public class Game {
      * This attribute represents pile of action tokens
      */
     private ActionToken[] actionTokensPile;
+    private final MarketStructure market = new MarketStructure();
     //TODO create market structure and its working
     /**
      * This method creates a new Game and initializes its parameters (numberofplayers and array players)
@@ -36,6 +37,7 @@ public class Game {
      */
     public void initialSet() {//TODO sets the game for the start
     /* create prod card deck, create leader card deck, if numberoofplayers==1 create action token pile */
+        market.initializeMarket();
     }
     /**
      * This method gives to each player 4 leader cards

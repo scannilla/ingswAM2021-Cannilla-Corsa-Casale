@@ -1,8 +1,8 @@
 package it.polimi.ingsw;
 
 public class ProdCardSlot {
-    private ProductionCard[][] slots; //ProdCards matrix
-    private ProductionCard[] topCards; //active Production Cards
+    private final ProductionCard[][] slots; //ProdCards matrix
+    private final ProductionCard[] topCards; //active Production Cards
 
     public ProdCardSlot() {
         slots = new ProductionCard[3][3];
@@ -15,51 +15,37 @@ public class ProdCardSlot {
     }
 
     //when a new prod card is bought it's inserted in the DevCardSlots
-    /*public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException {
+    public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException {
         int level = card.getLevel();
+        String s = "Place not empty";
+        if(place<0 || place>3)
+            throw new IllegalArgumentException("Illegal place");
+        int i=0;
         if (level==1) {
-            for(int i=0; i<3; i++) {
-                if(slots[2][0]!=null)
-                    throw new IllegalArgumentException();
-                if(slots[i][0]==null) {
-                    slots[i][0] = card;
-                    topcards[i] = card;
-                    break;
-                }
-            }
+            if(slots[3][0]!=null)
+                throw new IllegalArgumentException("Already full");
+            while(slots[i][0]!=null && i<3)
+                i++;
+            slots[i][0]=card;
+            topCards[i]=card;
         }
         if (level==2) {
             if(slots[place][1]==null && slots[place][0]!=null) {
                 slots[place][1] = card;
-                topcards[place] = card;
+                topCards[place] = card;
             }
-            else throw new IllegalArgumentException();
+            else throw new IllegalArgumentException(s);
         }
         if (level==3) {
             if(slots[place][2]==null && slots[place][1]!=null && slots[place][0]!=null) {
                 slots[place][2] = card;
-                topcards[place] = card;
+                topCards[place] = card;
             }
-            else throw new IllegalArgumentException();
+            else throw new IllegalArgumentException(s);
         }
-    } */
-
-    public void insertNewCard(ProductionCard card, int column) {
-        int i=0;
-        while(slots[column][i]!=null && i<3)
-            i++;
-        slots[column][i]=card;
     }
 
     public ProductionCard[] getTopCards() {
-        int j=0;
-        for(int i=0; i<3; i++) {
-            while (slots[i][j] != null && j < 3)
-                j++;
-            if(j==0)
-                topCards[i]= null;
-            else topCards[i] = slots[i][j - 1];
-        }
         return topCards;
     }
 

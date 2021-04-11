@@ -4,7 +4,7 @@ public class Player {
     /**
      * This attribute represents this player's personal board
      */
-    private PersonalBoard personalboard;
+    private PersonalBoard personalBoard;
     /**
      * This attribute represents if a player is active or not
      */
@@ -12,30 +12,28 @@ public class Player {
     /**
      * This attribute represents player's leader cards
      */
-    private LeaderCard[] leadercards;
+    private final LeaderCard[] leaderCards = new LeaderCard[2];
+
+    private final LeaderCard[] activeLeaderCards = new LeaderCard[2];
     /**
      * This attribute represents player's nickname
      */
     private String nickname;
     /**
      * This method create a new player initializing all his attribute
-     * @param personalboard PersonalBoard
-     * @param active boolean
-     * @param leadercards LeaderCard[]
      * @param nickname String
      */
-    public Player(PersonalBoard personalboard, boolean active, LeaderCard[] leadercards, String nickname) { //player constructor
-        this.personalboard = personalboard;
-        this.active = active;
-        this.leadercards = leadercards;
+    public Player(String nickname) { //player constructor
+        this.personalBoard = new PersonalBoard();
+        this.active = false;
         this.nickname = nickname;
     }
     /**
      * This method returns player's personal board with all its attributes
      * @return personalboard
      */
-    public PersonalBoard getPersonalboard() { //getter of personal board
-        return personalboard;
+    public PersonalBoard getPersonalBoard() { //getter of personal board
+        return personalBoard;
     }
     /**
      * This method returns true if player is active, false instead

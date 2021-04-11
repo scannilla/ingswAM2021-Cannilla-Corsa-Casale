@@ -73,4 +73,36 @@ public class Strongbox {
     public void setShields(int shieldsN) {
         values[shields] = shieldsN;
     }
+
+    /**
+     * return the difference between possessed and requested resources
+     * @param resource Resource
+     * @param amount int
+     * @return (values[i] - amount)
+     */
+    public int isEnough(Resource resource, int amount) {
+        int i = resource.getResType();
+        return (values[i] - amount); // control in the controller if the returned int is <0
+    }                                // if return<0 you haven't enough amount of resource
+                                     // if =0 you have exactly the amount of resource
+                                     // if >0 you have more resource of the amount
+
+    /**
+     * return an array with the amount of all Resource in the Strongbox
+     * @return alResources
+     */
+    public int[] getStrongboxResourcesAmount(){
+
+        int[] allResources = new int[4];
+
+        allResources[0] = getCoins();
+        allResources[1] = getStones();
+        allResources[2] = getServants();
+        allResources[3] = getShields();
+
+        return allResources;
+
+    }
+
+
 }

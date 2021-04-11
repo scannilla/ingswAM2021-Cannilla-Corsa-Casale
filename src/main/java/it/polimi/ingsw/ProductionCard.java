@@ -4,15 +4,15 @@ public class ProductionCard {
     /**
      * This attribute represents the type of this Production Card
      */
-    private int type;
+    private final int type;
     /**
      * This attribute represents the level of this Production Card
      */
-    private int level;
+    private final int level;
     /**
      * This attribute represents the win points of this Production Card
      */
-    private int wp; //WinPoints
+    private final int wp; //WinPoints
     /**
      * This attribute represents needed resources to buy card
      * costArray[0] = number of needed coins
@@ -20,7 +20,7 @@ public class ProductionCard {
      * costArray[2] = number of needed servants
      * costArray[3] = number of needed shields
      */
-    private int[] costArray; //Needed resources to buy card
+    private final Resource[] costArray; //Needed resources to buy card
     /**
      * This attribute represents needed resources to activate production
      *  requiredRes[0] = number of needed coins
@@ -28,7 +28,7 @@ public class ProductionCard {
      *  requiredRes[2] = number of needed servants
      *  requiredRes[3] = number of needed shields
      */
-    private int[] requiredRes; //Needed resources to start production
+    private final Resource[] requiredRes; //Needed resources to start production
     /**
      * This attribute represents created resources from production
      * givenRes[0] = number of coins produced
@@ -36,7 +36,11 @@ public class ProductionCard {
      * givenRes[2] = number of servants produced
      * givenRes[3] = number of shields produced
      */
-    private int[] givenRes; //Given resources from production
+    private final Resource[] givenRes; //Given resources from production
+
+
+
+    private final int givenFaithPoints;
     /**
      * This method creates a new production card with this attribute
      * @param type int
@@ -46,14 +50,16 @@ public class ProductionCard {
      * @param requiredRes int[]
      * @param givenRes int[]
      */
-    public ProductionCard(int type, int level, int wp, int[] costArray, int[] requiredRes, int[] givenRes) {
+    public ProductionCard(int type, int level, int wp, Resource[] costArray, Resource[] requiredRes, Resource[] givenRes, int givenFaithPoints) {
         this.type = type;
         this.level = level;
         this.wp = wp;
         this.costArray = costArray;
         this.requiredRes = requiredRes;
         this.givenRes = givenRes;
+        this.givenFaithPoints = givenFaithPoints;
     }
+
     /**
      * This method returns the type of this Production Card
      * @return type
@@ -83,7 +89,7 @@ public class ProductionCard {
      * costArray[2] = number of needed servants
      * costArray[3] = number of needed shields
      */
-    public int[] getCostArray() {
+    public Resource[] getCostArray() {
         return costArray;
     }
 
@@ -95,7 +101,7 @@ public class ProductionCard {
      *  requiredRes[2] = number of needed servants
      *  requiredRes[3] = number of needed shields
      */
-    public int[] getRequiredRes() {
+    public Resource[] getRequiredRes() {
         return requiredRes;
     }
     /**
@@ -106,7 +112,7 @@ public class ProductionCard {
      * givenRes[2] = number of servants produced
      * givenRes[3] = number of shields produced
      */
-    public int[] getGivenRes() {
+    public Resource[] getGivenRes() {
         return givenRes;
     }
 

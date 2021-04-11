@@ -4,15 +4,17 @@ public abstract class LeaderCard {
     /**
      * represents required resources to buy this Leader Card
      */
-    private final int[] requiredRes;
+    private Resource[] requiredRes;
     /**
      * represents required cards to buy this leader card
      */
-    private final int[][] requiredCard;
+    private int requiredType[];
+
+    private int requiredLevel[];
     /**
      * represents this Leader Card win points
      */
-    private final int wp;
+    private int wp;
 
     /**
      * constructor of this Leader Card
@@ -21,26 +23,12 @@ public abstract class LeaderCard {
      * @param wp int
      */
     public LeaderCard(int[] requiredRes, int[][] requiredCard, int wp) {
-        this.requiredRes = requiredRes;
-        this.requiredCard = requiredCard;
-        this.wp = wp;
+         //TODO
     }
 
-    /**
-     * getter required resources to buy this Leader Card
-     * @return requiredRes
-     */
-    public int[] getRequiredRes() {
-        return requiredRes;
-    }
 
-    /**
-     * getter Required Cards to buy this Leader Card
-     * @return requiredCard
-     */
-    public int[][] getRequiredCard() {
-        return requiredCard;
-    }
+
+
 
     /**
      * getter win points of this Leader Card
@@ -48,5 +36,29 @@ public abstract class LeaderCard {
      */
     public int getWp() {
         return wp;
+    }
+
+    /**
+     * getter Required Resource to activate this card
+     * @return requiredRes
+     */
+    public Resource[] getRequiredRes() {
+        return requiredRes;
+    }
+
+    /**
+     * getter required type of card to activate this card
+     * @return requiredType
+     */
+    public int[] getRequiredType() {
+        return requiredType;
+    }
+
+    /**
+     * getter Required Level of card to activate this card
+     * @return requiredLevel
+     */
+    public int[] getRequiredLevel() {
+        return requiredLevel;
     }
 }

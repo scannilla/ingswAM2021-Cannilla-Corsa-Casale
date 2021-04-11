@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 //tbh nobody did import this, so nobody is gonna touch it
 import javax.naming.spi.ResolveResult;
 import javax.print.attribute.standard.RequestingUserName;
+import java.util.*;
 
 public class WarehouseDepot {
     /**
@@ -157,6 +158,21 @@ public class WarehouseDepot {
                 }
             }
         }
+
+    }
+
+    /**
+     * return an array with all amount of al Resource in the Warehouse Depot
+     * @return ResourceCounter.resCount(allResources) <-- this is an array
+     */
+    public int[] getDepotResourceAmount() {
+        Resource[] allResources = new Resource[6];
+
+        System.arraycopy(depot[0], 0, allResources, 0, 1);
+        System.arraycopy(depot[1], 0, allResources, 1, 2);
+        System.arraycopy(depot[2], 0, allResources, 3, 3);
+
+        return ResourceCounter.resCount(allResources);
 
     }
 

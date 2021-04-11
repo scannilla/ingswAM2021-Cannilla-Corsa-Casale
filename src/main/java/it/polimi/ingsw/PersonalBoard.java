@@ -41,4 +41,20 @@ public class PersonalBoard {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    /**
+     * Return Warehouse Depot of this Personal Board
+     * @return warehouseDepot
+     */
+    public WarehouseDepot getWarehouseDepot() {
+        return warehouseDepot;
+    }
+
+    /**
+     * Return Strongbox of this Personal Board
+     * @return strongbox
+     */
+    public Strongbox getStrongbox() {
+        return strongbox;
+    }
 }

@@ -50,16 +50,32 @@ public class LeaderOfDepots extends LeaderCard{
     /**
      * add one element of extraResource in extraDepot
      */
-    public void addNewResource(){
+    public void addNewResource(Resource resource) throws IllegalArgumentException{
+
+        if(resource.getResType() != this.extraResource.getResType()) //resource type added is wrong
+            throw new IllegalArgumentException("wrong resource");
+
+        if (extraDepot[0] != null && extraDepot[1] != null) //extra depot full
+            throw new IllegalArgumentException("already full");
+
+
         if (extraDepot[0] == null)
             extraDepot[0] = extraResource;
         else extraDepot[1] = extraResource;
-    }
+
+        }
 
     /**
      * use one element of extraDepot
      */
-    public void useResource(){
+    public void useResource(Resource resource) throws IllegalArgumentException{
+
+        if(resource.getResType() != this.extraResource.getResType()) //wrong resource to pop
+            throw new IllegalArgumentException("wrong resource");
+
+        if (extraDepot[0] == null && extraDepot[1] == null) //extra depot empty
+            throw new IllegalArgumentException("already empty");
+
         if (extraDepot[1] != null)
             extraDepot[1] = null;
         else extraDepot[0] = null;

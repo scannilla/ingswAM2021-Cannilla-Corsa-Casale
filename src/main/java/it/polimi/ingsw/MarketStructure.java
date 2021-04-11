@@ -1,6 +1,5 @@
 package it.polimi.ingsw;
 
-import jdk.vm.ci.code.site.Mark;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,34 +9,26 @@ public class MarketStructure {
     /**
      * matrix of Market Marble [4][3]
      */
-    private final MarketMarble[][] marketStructure;
+    private final MarketMarble[][] marketStructure = new MarketMarble[4][3];
     /**
      * marble out of the structure
      */
     private MarketMarble outMarble;
     /**
-     * vector of all Market Marbles
+     * array of all Market Marbles
      */
-    private final MarketMarble[] allMarbles;
+    private final MarketMarble[] allMarbles = new MarketMarble[13];
     /**
      * list of all Market Marbles
      */
     List<MarketMarble> MarblesList;
 
-    /**
-     * constructor of a new Market Structure and of 13 Market Marbles
-     */
-    public MarketStructure() {
-        marketStructure = new MarketMarble[4][3];
-        allMarbles = new MarketMarble[13];
-    }
 
     /**
      * initialize the market randomising the distribution of Market Marbles
      */
     public void initializeMarket() {
         int k=0;
-        //JSON parsing
         MarblesList = Arrays.asList(allMarbles);
         Collections.shuffle(MarblesList);
         MarblesList.toArray(allMarbles);

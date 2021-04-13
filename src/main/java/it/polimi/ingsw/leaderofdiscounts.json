@@ -1,0 +1,47 @@
+{
+  "LeaderOfDiscountsDeck" : [
+    {
+      "requiredRes" : [],
+      "requiredType" : [
+        1,
+        3
+     ],
+      "requiredLevel" : [],
+      "wp" : 2,
+      "discountedRes" : 2
+    },
+
+    {
+      "requiredRes" : [],
+      "requiredType" : [
+        2,
+        4
+      ],
+      "requiredLevel" : [],
+      "wp" : 2,
+      "discountedRes" : 3
+},
+
+{
+      "requiredRes" : [],
+      "requiredType" : [
+        1,
+        2
+      ],
+      "requiredLevel" : [],
+      "wp" : 2,
+      "discountedRes" : 1
+},
+
+{
+      "requiredRes" : [],
+      "requiredType" : [
+        3,
+        4
+      ],
+      "requiredLevel" : [],
+      "wp" : 2,
+      "discountedRes" : 0
+}
+  ]
+}

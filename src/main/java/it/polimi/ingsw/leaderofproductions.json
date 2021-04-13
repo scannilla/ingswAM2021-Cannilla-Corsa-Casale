@@ -1,0 +1,54 @@
+{
+  "LeaderOfProductions" : [
+
+
+    {
+    "requiredRes" : [],
+    "requiredType" : [
+        3
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : 3
+
+},
+
+{
+    "requiredRes" : [],
+    "requiredType" : [
+        2
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : 2
+},
+
+{
+    "requiredRes" : [],
+    "requiredType" : [
+        4
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : 1
+},
+
+{
+    "requiredRes" : [],
+    "requiredType" : [
+        1
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : 0
+}
+    ]
+}

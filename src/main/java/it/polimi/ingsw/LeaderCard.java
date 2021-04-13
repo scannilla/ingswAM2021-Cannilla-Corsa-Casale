@@ -11,6 +11,8 @@ public abstract class LeaderCard {
     private int requiredType[];
 
     private int requiredLevel[];
+
+    private int ability;
     /**
      * represents this Leader Card win points
      */
@@ -61,4 +63,10 @@ public abstract class LeaderCard {
     public int[] getRequiredLevel() {
         return requiredLevel;
     }
+
+    public int getAbility() {
+        return ability;
+    }
+
+
 }

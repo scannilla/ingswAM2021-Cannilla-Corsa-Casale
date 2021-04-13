@@ -32,9 +32,9 @@ public class ActionTokenPile {
     public ActionToken popToken() {
         ActionToken token;
         token = tokensPile.get(i);
+        i++;
         if (token.getAction()==5)
             this.createPile();
-        i++;
         return token;
     }
 }

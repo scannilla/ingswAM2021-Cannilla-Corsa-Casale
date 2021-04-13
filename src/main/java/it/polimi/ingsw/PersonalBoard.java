@@ -57,4 +57,8 @@ public class PersonalBoard {
     public Strongbox getStrongbox() {
         return strongbox;
     }
+
+    public ProdCardSlot getProdCardSlot() {
+        return prodCardSlot;
+    }
 }

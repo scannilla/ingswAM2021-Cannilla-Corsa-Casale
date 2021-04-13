@@ -1,0 +1,56 @@
+{
+  "LeaderOfConversionsDeck" : [
+      {
+        "RequiredRes": [
+        ],
+        "RequiredType": [
+        3,
+        3,
+        2
+        ],
+        "RequiredLevel": [
+        ],
+        "wp": 5,
+        "ConvertedResource": 2
+      },
+      {
+        "RequiredRes": [
+        ],
+        "RequiredType": [
+        1,
+        1,
+        4
+        ],
+        "RequiredLevel": [
+        ],
+        "wp": 5,
+        "ConvertedResource": 4
+      },
+      {
+        "RequiredRes": [
+        ],
+        "RequiredType": [
+        2,
+        2,
+        3
+        ],
+        "RequiredLevel": [
+        ],
+        "wp": 5,
+        "ConvertedResource": 1
+      },
+      {
+        "RequiredRes": [
+        ],
+        "RequiredType": [
+        4,
+        4,
+        1
+        ],
+        "RequiredLevel": [
+        ],
+        "wp": 5,
+        "ConvertedResource": 0
+      }
+    ]
+  }

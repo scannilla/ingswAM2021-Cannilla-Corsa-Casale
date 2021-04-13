@@ -17,11 +17,6 @@ public class ProdCardSlot {
     public ProdCardSlot() {
         slots = new ProductionCard[3][3];
         topCards = new ProductionCard[3];
-        for(int i=0; i<3; i++) {
-            topCards[i]=null;
-            for (int j = 0; j < 3; j++)
-                slots[i][j] = null;
-        }
     }
 
 
@@ -83,5 +78,18 @@ public class ProdCardSlot {
         } catch (Exception NullPointerException) {
             return null;
         }
+    }
+
+    public ProductionCard[] getActiveCardsAsArr() {
+        ProductionCard[] allCardsArray = new ProductionCard[12];
+        int k=0;
+        for(int i=0; i<3; i++)
+            for(int j=0; j<3; j++) {
+                if (slots[i][j] != null) {
+                    allCardsArray[k] = slots[i][j];
+                    k++;
+                }
+            }
+        return allCardsArray;
     }
 }

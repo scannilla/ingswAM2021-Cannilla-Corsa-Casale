@@ -2,7 +2,6 @@ package it.polimi.ingsw;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ActionTokenPile {
@@ -13,7 +12,7 @@ public class ActionTokenPile {
     /**
      * Array with all Action Tokens
      */
-    ActionToken[] allTokensArr = new ActionToken[13];
+    ActionToken[] allTokensArr = new ActionToken[7];
     int i = 0;
 
     /**

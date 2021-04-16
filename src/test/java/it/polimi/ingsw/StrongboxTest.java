@@ -6,26 +6,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StrongboxTest {
 
-Strongbox strongboxTest = new Strongbox(2, 0 ,0 ,0);
+Strongbox strongboxTest = new Strongbox();
 
 
     @Test
     void getCoins() {
+        strongboxTest.setCoins(2);
         assertEquals(2, strongboxTest.getCoins());
     }
 
     @Test
     void getStones() {
+        strongboxTest.setStones(0);
         assertEquals(0, strongboxTest.getStones());
     }
 
     @Test
     void getServants() {
+        strongboxTest.setServants(0);
         assertEquals(0, strongboxTest.getServants());
     }
 
     @Test
     void getShields() {
+        strongboxTest.setShields(0);
         assertEquals(0, strongboxTest.getShields());
     }
 

@@ -1,9 +1,6 @@
 package it.polimi.ingsw;
 
 //tbh nobody did import this, so nobody is gonna touch it
-import javax.naming.spi.ResolveResult;
-import javax.print.attribute.standard.RequestingUserName;
-import java.util.*;
 
 public class WarehouseDepot {
     /**
@@ -13,8 +10,10 @@ public class WarehouseDepot {
      * depot[2] = third row of depot (3 resources)
      */
     private final Resource[][] depot;
+
+
     /**
-     * This method creates a new Warehouse Depot initialized to 0
+     * This method creates a new Warehouse Depot initialized to null
      */
     public WarehouseDepot() {
         depot = new Resource[3][];
@@ -22,60 +21,58 @@ public class WarehouseDepot {
         depot[1] = new Resource[2];
         depot[2] = new Resource[3];
     }
-
     /**
      * insert a new resource in the WarehouseDepot
      * @param resource Resource
+     * @param column int
      */
-    public void insertNewResource(Resource resource) throws IllegalArgumentException {
-        int column=-1;
-        int optimized;
-        String s = "Unable to insert new resource";
-        for(int i=2; i>=0; i--) {
-            try {checkResource(i);}
-            catch (NullPointerException e)
-            {
-                depot[i][0] = resource;
-                column=3;
-            }
-            finally {
-                if(resource==checkResource(i))
-                    column = i;
+    public void insertNewResource(Resource resource, int column) throws IllegalArgumentException {
+
+        String message = "Unable to insert the resource.";
+
+        for(int i=0; i<3; i++)
+            if (i!=column)
+                if(checkResource(i)==resource)
+                    throw new IllegalArgumentException(message);
+
+        if (depot[column][0] != null && depot[column][0] != resource){
+            throw new IllegalArgumentException(message);
+        }
+
+        if (column == 0){
+            if (depot[0][0] != null){
+                throw new IllegalArgumentException(message);
+            } else {
+                depot[0][0] = resource;
             }
         }
-        if(column==-1)
-            throw new IllegalArgumentException(s);
-        if (column==0) {
-            try {
-                optimized = optimizeDepot(column);
-            }
-            catch (Exception e) {
-                throw new IllegalArgumentException(s);
-            }
-            if(optimized==1) {
+
+        if (column == 1){
+            if (depot[1][0] == resource && depot[1][1] == null){
                 depot[1][1] = resource;
-            }
-            else {
-                depot[2][1] = resource;
-            }
-        }
-        else if(column==1) {
-            if(depot[1][1]==null)
-                depot[1][1] = resource;
-            else {
-                try {optimizeDepot(column); }
-                catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException(s);
-                }
-                depot[2][2]=resource;
+            } else if (depot[1][0] == null){
+                depot[1][0] = resource;
+            } else {
+                throw new IllegalArgumentException(message);
             }
         }
+
+        if (column == 2) {
+            if(depot[2][2]!=null)
+                throw new IllegalArgumentException(message);
+            int i=0;
+            while(depot[2][i]!=null && i<3)
+                i++;
+            depot[2][i]=resource;
+        }
+
+
     }
 
     /**
      * return the resource that is in this column
      * @param column int
-     * @return depit[column][0]
+     * @return depot[column][0]
      */
     private Resource checkResource(int column) {
         if(depot[column][0]!=null)
@@ -146,14 +143,14 @@ public class WarehouseDepot {
         depot[column][i] = null;
         if (i==0) {
             if (column==1) {
-                depot [1][0] = depot [0][0];
-                depot [0][0] = null;
+                depot [1][0] = depot [1][1];
+                depot [1][1] = null;
             }
             if (column==2) {
                 for(int j=0; i<2; i++) {
-                    if(depot[1][j]!=null) {
-                        depot[2][j] = depot[1][i];
-                        depot[1][j] = null;
+                    if(depot[2][j]!=null) {
+                        depot[2][j+1] = depot[2][i];
+                        depot[2][j] = null;
                     }
                 }
             }

@@ -13,14 +13,17 @@ public final class ResourceCounter {
     public static int[] resCount(Resource[] resources){
         int[] counter = {0, 0, 0, 0};
         for (Resource resource : resources) {
-            if (resource.getResType() == 0)
-                counter[0]++;
-            if (resource.getResType() == 1)
-                counter[1]++;
-            if (resource.getResType() == 2)
-                counter[2]++;
-            if (resource.getResType() == 3)
-                counter[3]++;
+
+            if (resource != null) {
+                if (resource.getResType() == 0)
+                    counter[0]++;
+                if (resource.getResType() == 1)
+                    counter[1]++;
+                if (resource.getResType() == 2)
+                    counter[2]++;
+                if (resource.getResType() == 3)
+                    counter[3]++;
+            }
         }
         return counter;
     }

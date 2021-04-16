@@ -1,11 +1,11 @@
 package it.polimi.ingsw;
 
+import com.google.gson.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import com.google.gson.*;
 
 public final class GSON {
 

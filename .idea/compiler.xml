@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Java project" />
         <module name="AM11" />
+        <module name="demoJUNIT" />
       </profile>
     </annotationProcessing>
   </component>

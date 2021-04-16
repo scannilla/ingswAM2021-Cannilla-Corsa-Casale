@@ -2,9 +2,7 @@ package it.polimi.ingsw;
 
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ActionTokenTest {
 
@@ -19,7 +17,7 @@ class ActionTokenTest {
 
 
     @Test
-    void getAction() {
+     void getAction() {
 
         assertEquals(0, actionTokenTest1.getAction());
         assertEquals(1, actionTokenTest2.getAction());

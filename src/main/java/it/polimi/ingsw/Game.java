@@ -30,6 +30,8 @@ public class Game {
      */
     private final MarketStructure market = new MarketStructure();
 
+    private final VaticanReport vaticanReport = new VaticanReport();
+
 
 
     /**
@@ -45,6 +47,8 @@ public class Game {
      * This method initializes the game to the start state
      */
     public void initialSet() throws IOException {//TODO sets the game for the start
+        for(Player p: players)
+            p.setConnectedGame(this);
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
         //GSON.actionTokensPileParser();
         GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/prodcards.json"));
@@ -94,5 +98,21 @@ public class Game {
      */
     public Player[] getPlayers() {
         return players;
+    }
+
+    public VaticanReport getVaticanReport() {
+        return vaticanReport;
+    }
+
+    public void activateEvent(int event) {
+        for (Player p : players) {
+            if(p.getPersonalBoard().getPosition()>(this.getVaticanReport().getActivationPosition()[event])-(this.getVaticanReport().getReportsLength()[event]))
+                p.setWp(p.getWp()+this.getVaticanReport().getPopeFavourTile()[event]);
+        }
+        this.getVaticanReport().getActivatedEvent()[event]=true;
+    }
+
+    public MarketStructure getMarket() {
+        return market;
     }
 }

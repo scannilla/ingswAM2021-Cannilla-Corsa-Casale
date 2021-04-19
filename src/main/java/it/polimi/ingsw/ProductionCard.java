@@ -116,6 +116,7 @@ public class ProductionCard {
         return givenRes;
     }
 
-
-
+    public int getGivenFaithPoints() {
+        return givenFaithPoints;
+    }
 }

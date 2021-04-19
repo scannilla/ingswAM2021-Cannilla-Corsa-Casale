@@ -1,0 +1,20 @@
+{
+  "VaticanReport": {
+    "numberOfReports": 3,
+    "reportsLength": [
+      4,
+      4,
+      4
+    ],
+    "activationPosition": [
+      8,
+      16,
+      24
+    ],
+    "popeFavourTile": [
+      2,
+      3,
+      4
+    ]
+  }
+}

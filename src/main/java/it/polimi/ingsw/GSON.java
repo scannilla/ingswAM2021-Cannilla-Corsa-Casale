@@ -47,7 +47,7 @@ public final class GSON {
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
-        ActionTokenPile actionTokenPile = gson.fromJson(streamReader, ActionTokenPile.class);
+        //BROKEN, BUG ActionTokenPile actionTokenPile = gson.fromJson(streamReader, ActionTokenPile.class);
         streamReader.close();
     }
 
@@ -62,6 +62,15 @@ public final class GSON {
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         MarketStructure marketStructure = gson.fromJson(streamReader, MarketStructure.class);
+        streamReader.close();
+    }
+
+    public static void vaticanReportParser(File file) throws IOException {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        FileInputStream inputStream = new FileInputStream(file);
+        InputStreamReader streamReader = new InputStreamReader(inputStream);
+        VaticanReport vaticanReport = gson.fromJson(streamReader, VaticanReport.class);
         streamReader.close();
     }
 }

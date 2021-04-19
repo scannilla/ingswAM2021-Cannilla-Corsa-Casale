@@ -1,6 +1,9 @@
 package it.polimi.ingsw;
 
 //tbh nobody did import this, so nobody is gonna touch it
+import javax.naming.spi.ResolveResult;
+import javax.print.attribute.standard.RequestingUserName;
+import java.util.*;
 
 public class WarehouseDepot {
     /**
@@ -10,10 +13,8 @@ public class WarehouseDepot {
      * depot[2] = third row of depot (3 resources)
      */
     private final Resource[][] depot;
-
-
     /**
-     * This method creates a new Warehouse Depot initialized to null
+     * This method creates a new Warehouse Depot initialized to 0
      */
     public WarehouseDepot() {
         depot = new Resource[3][];
@@ -21,10 +22,10 @@ public class WarehouseDepot {
         depot[1] = new Resource[2];
         depot[2] = new Resource[3];
     }
+
     /**
      * insert a new resource in the WarehouseDepot
      * @param resource Resource
-     * @param column int
      */
     public void insertNewResource(Resource resource, int column) throws IllegalArgumentException {
 
@@ -72,7 +73,7 @@ public class WarehouseDepot {
     /**
      * return the resource that is in this column
      * @param column int
-     * @return depot[column][0]
+     * @return depit[column][0]
      */
     private Resource checkResource(int column) {
         if(depot[column][0]!=null)
@@ -143,14 +144,14 @@ public class WarehouseDepot {
         depot[column][i] = null;
         if (i==0) {
             if (column==1) {
-                depot [1][0] = depot [1][1];
-                depot [1][1] = null;
+                depot [1][0] = depot [0][0];
+                depot [0][0] = null;
             }
             if (column==2) {
                 for(int j=0; i<2; i++) {
-                    if(depot[2][j]!=null) {
-                        depot[2][j+1] = depot[2][i];
-                        depot[2][j] = null;
+                    if(depot[1][j]!=null) {
+                        depot[2][j] = depot[1][i];
+                        depot[1][j] = null;
                     }
                 }
             }

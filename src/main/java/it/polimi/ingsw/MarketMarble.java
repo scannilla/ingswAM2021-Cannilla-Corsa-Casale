@@ -18,4 +18,9 @@ public class MarketMarble {
     public int getColor() {
         return color;
     }
+
+    public void returnAbility() {
+        if(color==0)
+            ;
+    }
 }

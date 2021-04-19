@@ -91,17 +91,13 @@ public class Strongbox {
      * return an array with the amount of all Resource in the Strongbox
      * @return alResources
      */
+
+    public void insertNewResource(Resource resource) {
+        values[resource.getResType()]++;
+    }
+
     public int[] getStrongboxResourcesAmount(){
-
-        int[] allResources = new int[4];
-
-        allResources[0] = getCoins();
-        allResources[1] = getStones();
-        allResources[2] = getServants();
-        allResources[3] = getShields();
-
-        return allResources;
-
+        return values;
     }
 
 

@@ -4,7 +4,7 @@ public class Player {
     /**
      * This attribute represents this player's personal board
      */
-    private PersonalBoard personalBoard;
+    private final PersonalBoard personalBoard;
     /**
      * This attribute represents if a player is active or not
      */
@@ -19,6 +19,10 @@ public class Player {
      * This attribute represents player's nickname
      */
     private String nickname;
+
+    private Game connectedGame;
+
+    private int wp=0;
     /**
      * This method create a new player initializing all his attribute
      * @param nickname String
@@ -30,7 +34,7 @@ public class Player {
     }
     /**
      * This method returns player's personal board with all its attributes
-     * @return personalboard
+     * @return personalBoard
      */
     public PersonalBoard getPersonalBoard() { //getter of personal board
         return personalBoard;

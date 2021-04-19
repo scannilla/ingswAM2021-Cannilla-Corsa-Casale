@@ -6,8 +6,8 @@
       "wp": 1,
       "costArray": [
         {"resType" : 3},
-        3,
-        3
+        {"resType" : 3},
+        {"resType" : 3}
       ],
       "requiredRes": [
         0

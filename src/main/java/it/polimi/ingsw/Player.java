@@ -46,4 +46,125 @@ public class Player {
     public boolean isActive() { //returns if the player is active or not
         return active;
     }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    /**
+     * put activated LeaderCard in the array of activeLeaderCards
+     * @param leaderCard LeaderCard
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
+    public void activateLeaderCard(LeaderCard leaderCard) throws IllegalArgumentException{
+        if(leaderCards[0]!=leaderCard && leaderCards[1]!=leaderCard)
+            throw new IllegalArgumentException("Card not found");
+        if(leaderCard.getRequiredRes()[0]!=null) {
+            int[] counter = ResourceCounter.resCount(leaderCard.getRequiredRes());
+            int[] depotCounter = personalBoard.getWarehouseDepot().getDepotResourceAmount();
+            int[] strongboxCounter = personalBoard.getStrongbox().getStrongboxResourcesAmount();
+            int[] leaderDepotCounter1 = {0, 0, 0, 0};
+            int[] leaderDepotCounter2 = {0, 0, 0, 0};
+            if (activeLeaderCards[0].getAbility() == 1)
+                leaderDepotCounter1 = ResourceCounter.resCount(((LeaderOfDepots) activeLeaderCards[0]).getExtraDepot());
+            if (activeLeaderCards[1].getAbility() == 1)
+                leaderDepotCounter2 = ResourceCounter.resCount(((LeaderOfDepots) activeLeaderCards[1]).getExtraDepot());
+
+            for (int i = 0; i < 4; i++) {
+                if (counter[i] > (depotCounter[i] + strongboxCounter[i] + leaderDepotCounter1[i] + leaderDepotCounter2[i])) {
+                    throw new IllegalArgumentException("Not enough resources");
+                } else {
+                    if (activeLeaderCards[0] != null)
+                        activeLeaderCards[1] = leaderCard;
+                    else activeLeaderCards[0] = leaderCard;
+                }
+            }
+        }
+        else {
+            for(int i=0; i<leaderCard.getRequiredType().length; i++) {
+                int found = leaderCard.getRequiredType().length;
+                for(ProductionCard card : this.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()) {
+                    if(leaderCard.getRequiredType()[i] == card.getType()) {
+                        if(i-1<=leaderCard.getRequiredLevel().length && leaderCard.getRequiredLevel()[i]>=0) {
+                            if (leaderCard.getRequiredLevel()[i] == card.getLevel())
+                                found--;
+                        }
+                        else
+                            found--;
+                    }
+                }
+                if(found<=0) {
+                    if (activeLeaderCards[0] != null)
+                        activeLeaderCards[1] = leaderCard;
+                    else activeLeaderCards[0] = leaderCard;
+                }
+            }
+        }
+        this.setWp(this.getWp()+leaderCard.getWp());
+    }
+
+    public void buyProductionCard(ProductionCard productionCard){
+
+
+    }
+
+    public void activateStandardProduction (int position) throws IllegalArgumentException{
+        ProductionCard card = personalBoard.getProdCardSlot().getTopCards()[position];
+        int[] required = ResourceCounter.resCount(card.getRequiredRes());
+        int[] total = personalBoard.getWarehouseDepot().getDepotResourceAmount();
+        for(int i=0; i<4; i++) {
+            if(total[i]-required[i]<=0)
+                throw new IllegalArgumentException();
+        }
+        for(Resource resource : card.getRequiredRes())
+            personalBoard.getWarehouseDepot().useResource(resource);
+        for(Resource resource: card.getGivenRes()) {
+            personalBoard.getStrongbox().insertNewResource(resource);
+        }
+        if(card.getGivenFaithPoints()!=0) {
+            increaseFaith(card.getGivenFaithPoints());
+        }
+
+    }
+
+    private void increaseFaith(int faithPoints) {
+        personalBoard.setPosition(personalBoard.getPosition()+faithPoints);
+        int i=0;
+        while (connectedGame.getVaticanReport().getActivatedEvent()[i] && i<connectedGame.getVaticanReport().getNumberOfReports())
+            i++;
+        if(personalBoard.getPosition()+faithPoints>=connectedGame.getVaticanReport().getActivationPosition()[i])
+            connectedGame.activateEvent(i);
+
+    }
+
+    public void setConnectedGame(Game connectedGame) {
+        this.connectedGame = connectedGame;
+    }
+
+    public int getWp() {
+        return wp;
+    }
+
+    public void setWp(int wp) {
+        this.wp = wp;
+    }
+
+    public void buyResourceFromMarket(int line) throws IllegalArgumentException{
+        int var;
+        if(line<0 || line >6)
+            throw new IllegalArgumentException();
+        if(line<3)
+            var=4;
+        else
+            var=3;
+        MarketMarble[] marbles = new MarketMarble[var];
+        if(var==4)
+            marbles = connectedGame.getMarket().selectLine(line);
+        else
+            marbles = connectedGame.getMarket().selectColumn(line-3);
+
+        for(MarketMarble marble : marbles) {
+            //marble.getColor()
+        }
+    }
 }

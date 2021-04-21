@@ -1,6 +1,5 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,6 @@ public class MarketStructure {
      * list of all Market Marbles
      */
     List<MarketMarble> MarblesList;
-
 
     /**
      * initialize the market randomising the distribution of Market Marbles

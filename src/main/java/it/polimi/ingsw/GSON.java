@@ -47,7 +47,7 @@ public final class GSON {
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
-        //BROKEN, BUG ActionTokenPile actionTokenPile = gson.fromJson(streamReader, ActionTokenPile.class);
+        ActionTokenPile actionTokenPile = gson.fromJson(streamReader, ActionTokenPile.class);
         streamReader.close();
     }
 

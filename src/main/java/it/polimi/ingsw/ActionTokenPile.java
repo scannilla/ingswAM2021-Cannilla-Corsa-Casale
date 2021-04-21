@@ -25,7 +25,7 @@ public class ActionTokenPile {
     }
 
     /**
-     * return selected Action Token, if action = 5 the method reshuffle the pile
+     * return selected Action Token, if action = 5 the method reshuffles the pile
      * @return token
      */
     public ActionToken popToken() {

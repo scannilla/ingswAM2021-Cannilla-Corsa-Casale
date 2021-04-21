@@ -12,10 +12,25 @@ public class Strongbox {
     private final int coins=0, stones=1, servants=2, shields=3;
 
     /**
-     * This method create a new Strongbox initialized to 0
+     * This method creates a new Strongbox initialized to 0
      */
     public Strongbox() {
         values = new int[4];
+    }
+
+    /**
+     * This method creates a new Strongbox initialized to the paramethers values
+     * @param coins int
+     * @param stones int
+     * @param servants int
+     * @param shields int
+     */
+    public Strongbox(int coins, int stones, int servants, int shields){
+        values = new int[4];
+        values[0] = coins;
+        values[1] = stones;
+        values[2] = servants;
+        values[3] = shields;
     }
     /**
      * This method return amount of coins in the strongbox

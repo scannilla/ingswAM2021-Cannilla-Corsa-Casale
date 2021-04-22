@@ -22,7 +22,7 @@ public abstract class LeaderCard {
 
     /**
      * constructor of this Leader Card
-     * @param requiredRes int[]
+     * @param requiredRes Resource
      * @param requiredCard int[][]
      * @param wp int
      */

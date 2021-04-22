@@ -45,14 +45,98 @@ class GSONTest {
 
 
     @Test
-    void leaderCardParser() {
+    void leaderCardParserTest() {
+        File fileTest = new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json");
+
+        try {
+            int i=0;
+            LeaderCardsDeck leaderCardsDeckTest = GSON.leaderCardParser(fileTest);
+
+            for (LeaderCard leaderCardTest : leaderCardsDeckTest.getLeaderCardsDeck()){
+                assertNotNull(leaderCardTest);
+            }
+            for (LeaderCard leaderCard : leaderCardsDeckTest.getLeaderCardsDeck()) {
+                if (i == 3) {
+                    assertEquals(5, leaderCard.getWp());
+                }
+                i++;
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
     }
 
     @Test
-    void actionTokensPileParser() {
+    void actionTokensPileParserTest() {
+        File fileTest = new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json");
+
+        try {
+            ActionTokenPile actionTokenPileTest = GSON.actionTokensPileParser(fileTest);
+            actionTokenPileTest.createPile();
+            for(int i=0; i<20; i++) {
+                assertNotNull(actionTokenPileTest.popToken());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    void marketStructureParser() {
+    void marketStructureParserTest() {
+
+        File fileTest = new File("src/main/java/it/polimi/ingsw/marbles/marbles.json");
+
+        try{
+            MarketStructure marketStructureTest = GSON.marketStructureParser(fileTest);
+            assertEquals(0, marketStructureTest.getAllMarbles()[0].getColor());
+            assertEquals(0, marketStructureTest.getAllMarbles()[1].getColor());
+            assertEquals(0, marketStructureTest.getAllMarbles()[2].getColor());
+            assertEquals(0, marketStructureTest.getAllMarbles()[3].getColor());
+            assertEquals(1, marketStructureTest.getAllMarbles()[4].getColor());
+            assertEquals(1, marketStructureTest.getAllMarbles()[5].getColor());
+            assertEquals(2, marketStructureTest.getAllMarbles()[6].getColor());
+            assertEquals(2, marketStructureTest.getAllMarbles()[7].getColor());
+            assertEquals(3, marketStructureTest.getAllMarbles()[8].getColor());
+            assertEquals(3, marketStructureTest.getAllMarbles()[9].getColor());
+            assertEquals(4, marketStructureTest.getAllMarbles()[10].getColor());
+            assertEquals(4, marketStructureTest.getAllMarbles()[11].getColor());
+            assertEquals(5, marketStructureTest.getAllMarbles()[12].getColor());
+
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
+
+
+    @Test
+    void vaticanReportParserTest(){
+
+        File fileTest = new File("src/main/java/it/polimi/ingsw/vatReport.json");
+
+
+        try{
+            VaticanReport vaticanReportTest = GSON.vaticanReportParser(fileTest);
+            assertEquals(3, vaticanReportTest.getNumberOfReports());
+            assertEquals(4, vaticanReportTest.getReportsLength()[0]);
+            assertEquals(4, vaticanReportTest.getReportsLength()[1]);
+            assertEquals(4, vaticanReportTest.getReportsLength()[2]);
+            assertEquals(8, vaticanReportTest.getActivationPosition()[0]);
+            assertEquals(16, vaticanReportTest.getActivationPosition()[1]);
+            assertEquals(24, vaticanReportTest.getActivationPosition()[2]);
+            assertEquals(2, vaticanReportTest.getPopeFavourTile()[0]);
+            assertEquals(3, vaticanReportTest.getPopeFavourTile()[1]);
+            assertEquals(4, vaticanReportTest.getPopeFavourTile()[2]);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

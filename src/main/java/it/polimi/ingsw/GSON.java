@@ -20,18 +20,19 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
-    public static void productionCardParser(File file) throws IOException {
+    public static ProductionCardsDeck productionCardParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         ProductionCardsDeck productionCardsDeck = gson.fromJson(streamReader, ProductionCardsDeck.class);
         streamReader.close();
+        return productionCardsDeck;
     }
 
     /**
      * Parsing of all Leader Cards
-     * @param file File
+     * @param  file File
      * @throws IOException IOException
      */
     public static LeaderCardsDeck leaderCardParser(File file) throws IOException {
@@ -54,13 +55,14 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
-    public static void actionTokensPileParser(File file) throws IOException {
+    public static ActionTokenPile actionTokensPileParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         ActionTokenPile actionTokenPile = gson.fromJson(streamReader, ActionTokenPile.class);
         streamReader.close();
+        return actionTokenPile;
     }
 
     /**
@@ -68,22 +70,24 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
-    public static void marketStructureParser(File file) throws IOException {
+    public static MarketStructure marketStructureParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         MarketStructure marketStructure = gson.fromJson(streamReader, MarketStructure.class);
         streamReader.close();
+        return marketStructure;
     }
 
-    public static void vaticanReportParser(File file) throws IOException {
+    public static VaticanReport vaticanReportParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         VaticanReport vaticanReport = gson.fromJson(streamReader, VaticanReport.class);
         streamReader.close();
+        return vaticanReport;
     }
 
 }

@@ -64,8 +64,7 @@ public class MarketStructure {
     public MarketMarble[] selectColumn(int column) {
         MarketMarble[] marblesArray = new MarketMarble[3];
         System.arraycopy(marketStructure[column], 0, marblesArray, 0, 3);
-        marketStructure[column][0] = outMarble;
-        outMarble = marketStructure[column][3];
+        outMarble = marketStructure[column][2];
         for (int i = 1; i < 3; i++)
             marketStructure[column][i] = marketStructure[column][i - 1];
         marketStructure[column][0] = outMarble;

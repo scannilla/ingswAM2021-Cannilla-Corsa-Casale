@@ -80,4 +80,10 @@ public class LeaderOfDepots extends LeaderCard {
             extraDepot[1] = null;
         else extraDepot[0] = null;
     }
+
+
+
+
+
+
 }

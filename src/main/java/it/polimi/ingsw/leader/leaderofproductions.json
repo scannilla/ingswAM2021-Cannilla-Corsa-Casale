@@ -11,7 +11,7 @@
         2
     ],
     "wp" : 4,
-    "requiredResource" : 3
+    "requiredResource" : {"resType" :3}
 
 },
 
@@ -24,7 +24,7 @@
         2
     ],
     "wp" : 4,
-    "requiredResource" : 2
+    "requiredResource" : {"resType" :2}
 },
 
 {
@@ -36,7 +36,7 @@
         2
     ],
     "wp" : 4,
-    "requiredResource" : 1
+    "requiredResource" : {"resType" :1}
 },
 
 {
@@ -48,7 +48,7 @@
         2
     ],
     "wp" : 4,
-    "requiredResource" : 0
+    "requiredResource" : {"resType" :0}
 }
     ]
 }

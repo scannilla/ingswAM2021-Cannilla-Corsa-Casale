@@ -21,7 +21,7 @@ public class ProdCardSlot {
 
 
     /**
-     * when a new Production Card is bought it is inerted in a slot
+     * when a new Production Card is bought it is inserted in a slot
      * @param card int
      * @param place int
      * @throws IllegalArgumentException IllegalArgumentException

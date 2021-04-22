@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.marbles;
+
+import it.polimi.ingsw.resources.Resource;
 
 public class MarketMarble {
     private final int color;
@@ -19,8 +21,11 @@ public class MarketMarble {
         return color;
     }
 
-    public void returnAbility() {
-        if(color==0)
-            ;
+    public Resource returnAbility() throws Exception{
+        if (color==0)
+            throw new Exception("white");
+        if (color==5)
+            throw new Exception("red");
+        else return (new Resource(color));
     }
 }

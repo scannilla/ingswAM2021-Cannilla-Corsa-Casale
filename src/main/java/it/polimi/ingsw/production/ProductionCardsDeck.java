@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.production;
+
+import it.polimi.ingsw.production.ProductionCard;
 
 public class ProductionCardsDeck {
     /**

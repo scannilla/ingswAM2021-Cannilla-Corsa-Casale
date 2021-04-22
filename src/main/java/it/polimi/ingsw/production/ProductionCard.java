@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.production;
+
+import it.polimi.ingsw.resources.Resource;
 
 public class ProductionCard {
     /**

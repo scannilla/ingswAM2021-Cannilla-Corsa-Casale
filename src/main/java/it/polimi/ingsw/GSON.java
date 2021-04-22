@@ -1,11 +1,17 @@
 package it.polimi.ingsw;
 
 import com.google.gson.*;
+import it.polimi.ingsw.leader.LeaderCard;
+import it.polimi.ingsw.leader.LeaderCardsDeck;
+import it.polimi.ingsw.marbles.MarketStructure;
+import it.polimi.ingsw.production.ProductionCardsDeck;
+import it.polimi.ingsw.tokens.ActionTokenPile;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public final class GSON {
 
@@ -28,13 +34,19 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
-    public static void leaderCardParser(File file) throws IOException {
+    public static LeaderCardsDeck leaderCardParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         FileInputStream inputStream = new FileInputStream(file);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         LeaderCardsDeck leaderCardsDeck = gson.fromJson(streamReader, LeaderCardsDeck.class);
-        streamReader.close();
+        ArrayList<LeaderCard> deck = new ArrayList<>(leaderCardsDeck.getLeaderOfConversionsDeck());
+        deck.addAll(leaderCardsDeck.getLeaderOfDepotsDeck());
+        deck.addAll(leaderCardsDeck.getLeaderOfDiscountsDeck());
+        deck.addAll(leaderCardsDeck.getLeaderOfProductionsDeck());
+        leaderCardsDeck.setLeaderCardsDeck(deck);
+
+        return leaderCardsDeck;
     }
 
     /**
@@ -73,4 +85,5 @@ public final class GSON {
         VaticanReport vaticanReport = gson.fromJson(streamReader, VaticanReport.class);
         streamReader.close();
     }
+
 }

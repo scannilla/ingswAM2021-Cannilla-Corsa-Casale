@@ -1,6 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.leader;
 
-public class LeaderOfProductions extends LeaderCard{
+import it.polimi.ingsw.resources.Resource;
+
+public class LeaderOfProductions extends LeaderCard {
     /**
      * required resource to activate the production
      */

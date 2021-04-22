@@ -1,6 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.leader;
 
-public class LeaderOfDiscounts extends LeaderCard{
+import it.polimi.ingsw.resources.Resource;
+
+public class LeaderOfDiscounts extends LeaderCard {
 
     /**
      * resource that can be excluded from the price of a general card

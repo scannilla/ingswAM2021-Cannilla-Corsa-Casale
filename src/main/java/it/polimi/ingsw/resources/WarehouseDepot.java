@@ -1,9 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.resources;
 
 //tbh nobody did import this, so nobody is gonna touch it
-import javax.naming.spi.ResolveResult;
-import javax.print.attribute.standard.RequestingUserName;
-import java.util.*;
+import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.resources.ResourceCounter;
 
 public class WarehouseDepot {
     /**
@@ -87,41 +86,6 @@ public class WarehouseDepot {
      * @return changed
      * @throws IllegalArgumentException IllegalArgumentException
      */
-    private int optimizeDepot(int column) throws IllegalArgumentException{
-        Resource temp;
-        int changed;
-        String s = "Optimization Impossible";
-        if(column != 0 && column != 1)
-            throw new IllegalArgumentException(s);
-        if (column==0) {
-            if(depot[1][1]==null) {
-                temp = depot[0][0];
-                depot[0][0] = depot[1][0];
-                depot[1][0] = temp;
-                changed=1;
-            }
-            else if(depot[2][1]==null) {
-                temp = depot[0][0];
-                depot[0][0] = depot[2][0];
-                depot[2][0] = temp;
-                changed=2;
-            }
-            else throw new IllegalArgumentException(s);
-        }
-        else {
-            if(depot[2][2]==null) {
-                temp = depot[1][0];
-                depot[1][0] = depot [2][0];
-                if(depot[2][1]!=null)
-                    depot [1][1] = depot [2][0];
-                depot[2][0] = temp;
-                depot[2][1] = temp;
-                changed=2;
-            }
-            else throw new IllegalArgumentException(s);
-        }
-        return changed;
-    }
 
     /**
      * use a resource from depot

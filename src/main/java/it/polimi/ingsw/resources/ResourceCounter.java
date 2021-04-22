@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.resources;
+
+import it.polimi.ingsw.resources.Resource;
 
 public final class ResourceCounter {
     /**

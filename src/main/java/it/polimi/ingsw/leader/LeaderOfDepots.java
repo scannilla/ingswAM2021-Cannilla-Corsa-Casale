@@ -1,8 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.leader;
 
-import java.lang.ref.ReferenceQueue;
+import it.polimi.ingsw.resources.Resource;
 
-public class LeaderOfDepots extends LeaderCard{
+public class LeaderOfDepots extends LeaderCard {
     /**
      * resource that can be added to extraDepot
      */

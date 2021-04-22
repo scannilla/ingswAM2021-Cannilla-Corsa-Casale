@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.marbles;
+
+import it.polimi.ingsw.marbles.MarketMarble;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,10 +49,10 @@ public class MarketStructure {
         MarketMarble[] marblesArray = new MarketMarble[4];
         for(int i=0; i<4; i++)
             marblesArray[i] = marketStructure[i][line];
-        marketStructure[0][line] = outMarble;
-        outMarble = marketStructure[4][line];
+        outMarble = marketStructure[3][line];
         for(int i=1; i<4; i++)
             marketStructure[i][line] = marketStructure[i-1][line];
+        marketStructure[0][line] = outMarble;
         return marblesArray;
     }
 
@@ -66,6 +68,11 @@ public class MarketStructure {
         outMarble = marketStructure[column][3];
         for (int i = 1; i < 3; i++)
             marketStructure[column][i] = marketStructure[column][i - 1];
+        marketStructure[column][0] = outMarble;
         return marblesArray;
+    }
+
+    public MarketMarble[] getAllMarbles() {
+        return allMarbles;
     }
 }

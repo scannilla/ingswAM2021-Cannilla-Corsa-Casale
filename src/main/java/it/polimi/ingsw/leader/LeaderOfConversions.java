@@ -1,6 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.leader;
 
-public class LeaderOfConversions extends LeaderCard{
+import it.polimi.ingsw.resources.Resource;
+
+public class LeaderOfConversions extends LeaderCard {
     /**
      * White Marble = convertedResource
      */

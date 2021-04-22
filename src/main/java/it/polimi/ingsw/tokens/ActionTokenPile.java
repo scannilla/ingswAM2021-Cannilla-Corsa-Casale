@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.tokens;
+
+import it.polimi.ingsw.tokens.ActionToken;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,11 +10,11 @@ public class ActionTokenPile {
     /**
      * List that represents the pile with all Action Tokens
      */
-    List<ActionToken> tokensPile;
+    private List<ActionToken> tokensPile;
     /**
      * Array with all Action Tokens
      */
-    ActionToken[] allTokensArr = new ActionToken[7];
+    private final ActionToken[] allTokensArr = new ActionToken[7];
     int i = 0;
 
     /**

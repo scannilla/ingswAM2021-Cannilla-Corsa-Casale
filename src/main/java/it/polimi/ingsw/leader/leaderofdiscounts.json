@@ -1,5 +1,5 @@
 {
-  "LeaderOfDiscountsDeck" : [
+  "leaderOfDiscountsDeck" : [
     {
       "requiredRes" : [],
       "requiredType" : [
@@ -8,7 +8,7 @@
      ],
       "requiredLevel" : [],
       "wp" : 2,
-      "discountedRes" : 2
+      "discountedRes" : {"resType" :2}
     },
 
     {
@@ -19,7 +19,7 @@
       ],
       "requiredLevel" : [],
       "wp" : 2,
-      "discountedRes" : 3
+      "discountedRes" : {"resType" :3}
 },
 
 {
@@ -30,7 +30,7 @@
       ],
       "requiredLevel" : [],
       "wp" : 2,
-      "discountedRes" : 1
+      "discountedRes" : {"resType" :1}
 },
 
 {
@@ -41,7 +41,7 @@
       ],
       "requiredLevel" : [],
       "wp" : 2,
-      "discountedRes" : 0
+      "discountedRes" : {"resType" :0}
 }
   ]
 }

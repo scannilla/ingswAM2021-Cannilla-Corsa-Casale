@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.production;
 
 public class ProdCardSlot {
     /**
@@ -29,11 +29,11 @@ public class ProdCardSlot {
     public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException {
         int level = card.getLevel();
         String s = "Place not empty";
-        if(place<0 || place>3)
+        if(place<=0 || place>3)
             throw new IllegalArgumentException("Illegal place");
         int i=0;
         if (level==1) {
-            if(slots[3][0]!=null)
+            if(slots[2][0]!=null)
                 throw new IllegalArgumentException("Already full");
             while(slots[i][0]!=null && i<3)
                 i++;
@@ -41,16 +41,16 @@ public class ProdCardSlot {
             topCards[i]=card;
         }
         if (level==2) {
-            if(slots[place][1]==null && slots[place][0]!=null) {
-                slots[place][1] = card;
-                topCards[place] = card;
+            if(slots[place-1][1]==null && slots[place][0]!=null) {
+                slots[place-1][1] = card;
+                topCards[place-1] = card;
             }
             else throw new IllegalArgumentException(s);
         }
         if (level==3) {
-            if(slots[place][2]==null && slots[place][1]!=null && slots[place][0]!=null) {
-                slots[place][2] = card;
-                topCards[place] = card;
+            if(slots[place-1][2]==null && slots[place][1]!=null && slots[place][0]!=null) {
+                slots[place-1][2] = card;
+                topCards[place-1] = card;
             }
             else throw new IllegalArgumentException(s);
         }
@@ -74,7 +74,7 @@ public class ProdCardSlot {
     //TODO check try/catch
     public ProductionCard getCard(int column, int level) throws NullPointerException {
         try {
-            return slots[column][level];
+            return slots[column][level-1];
         } catch (Exception NullPointerException) {
             return null;
         }

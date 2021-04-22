@@ -1,6 +1,11 @@
 package it.polimi.ingsw;
 
 
+import it.polimi.ingsw.leader.LeaderCardsDeck;
+import it.polimi.ingsw.marbles.MarketStructure;
+import it.polimi.ingsw.production.ProductionCardsDeck;
+import it.polimi.ingsw.tokens.ActionToken;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -50,10 +55,10 @@ public class Game {
         for(Player p: players)
             p.setConnectedGame(this);
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
-        //GSON.actionTokensPileParser();
-        GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/prodcards.json"));
-        //GSON.leaderCardParser(new File(""));
-        //GSON.marketStructureParser();
+        GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+        GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
+        GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
+        GSON.marketStructureParser(new File("src/main/java/it/polimi/ingsw/marbles/marbles.json"));
         market.initializeMarket();
     }
     /**

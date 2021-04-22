@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.leader;
+
+import it.polimi.ingsw.resources.Resource;
 
 public abstract class LeaderCard {
     /**

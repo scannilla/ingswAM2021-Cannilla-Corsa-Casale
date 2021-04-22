@@ -1,4 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.production;
+
+import it.polimi.ingsw.production.ProductionCard;
+import it.polimi.ingsw.production.ProductionCardsDeck;
 
 import java.util.Arrays;
 import java.util.Collections;

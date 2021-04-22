@@ -1,5 +1,13 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.leader.LeaderCard;
+import it.polimi.ingsw.leader.LeaderOfConversions;
+import it.polimi.ingsw.leader.LeaderOfDepots;
+import it.polimi.ingsw.marbles.MarketMarble;
+import it.polimi.ingsw.production.ProductionCard;
+import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.resources.ResourceCounter;
+
 public class Player {
     /**
      * This attribute represents this player's personal board
@@ -157,14 +165,52 @@ public class Player {
             var=4;
         else
             var=3;
-        MarketMarble[] marbles = new MarketMarble[var];
+        MarketMarble[] marbles;
         if(var==4)
             marbles = connectedGame.getMarket().selectLine(line);
         else
             marbles = connectedGame.getMarket().selectColumn(line-3);
 
         for(MarketMarble marble : marbles) {
-            //marble.getColor()
+            try {
+                Resource resource = marble.returnAbility();
+                int column=0;
+                //
+                personalBoard.getWarehouseDepot().insertNewResource(resource, column);
+            } catch (Exception exc) {
+                if (exc.getMessage().equals("red"))
+                    this.increaseFaith(1);
+                else if (exc.getMessage().equals("white"));
+                    //TODO leader ability
+            }
+
         }
     }
+
+    public void activateLeaderofConversionAbility () throws IllegalArgumentException{
+        LeaderOfConversions card;
+        if(activeLeaderCards[0].getAbility()!=2 && activeLeaderCards[1].getAbility()!=2)
+            throw new IllegalArgumentException();
+        else if(activeLeaderCards[0].getAbility()==2 && activeLeaderCards[1].getAbility()==2)
+            //user choice
+            ;
+        else {
+            if (activeLeaderCards[0].getAbility()==2)
+                card = (LeaderOfConversions) activeLeaderCards[0];
+            else
+                card = (LeaderOfConversions) activeLeaderCards[1];
+            //user choice
+            int column;
+            try {
+               // this.getPersonalBoard().getWarehouseDepot().insertNewResource(card.getConvertedResource(), column);
+            } catch (IllegalArgumentException e) {
+                //repeat
+            }
+
+        }
+    }
+
+
+
+
 }

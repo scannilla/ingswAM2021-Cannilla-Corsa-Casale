@@ -8,6 +8,7 @@ import it.polimi.ingsw.tokens.ActionToken;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Game {
     /**
@@ -17,7 +18,7 @@ public class Game {
     /**
      * This attribute represents the list of players who is playing in the game
      */
-    private final Player[] players;
+    private final ArrayList<Player> players;
     /**
      * This attribute represents full deck of 48 production cards
      */
@@ -44,7 +45,7 @@ public class Game {
      * @param numberOfPlayers int
      * @param players Player[]
      */
-    public Game(int numberOfPlayers, Player[] players) {
+    public Game(int numberOfPlayers, ArrayList<Player> players) {
         this.numberOfPlayers = numberOfPlayers;
         this.players = players;
     }

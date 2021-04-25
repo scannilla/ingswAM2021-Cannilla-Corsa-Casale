@@ -10,9 +10,9 @@ public abstract class LeaderCard {
     /**
      * represents required cards to buy this leader card
      */
-    private int requiredType[];
+    private int[] requiredType;
 
-    private int requiredLevel[];
+    private int[] requiredLevel;
 
     private int ability;
     /**

@@ -6,21 +6,9 @@ public class LeaderOfDepots extends LeaderCard {
     /**
      * resource that can be added to extraDepot
      */
-    protected final Resource extraResource;
-    protected final Resource[] extraDepot;
+    protected Resource extraResource;
+    protected Resource[] extraDepot;
 
-    /**
-     * constructor of this Leader Card
-     * @param requiredRes int[]
-     * @param requiredCard int[][]
-     * @param wp int
-     * @param extraResource Resource
-     */
-    public LeaderOfDepots(int[] requiredRes, int[][] requiredCard, int wp, Resource extraResource) {
-        super(requiredRes, requiredCard, wp);
-        this.extraResource = extraResource;
-        extraDepot = new Resource[2];
-    }
 
     /**
      * getter ability of this Leader Card (1 = extraDepot)

@@ -7,7 +7,7 @@ public class LeaderOfDiscounts extends LeaderCard {
     /**
      * resource that can be excluded from the price of a general card
      */
-    private final Resource discountedRes;
+    private Resource discountedRes;
 
     /**
      * constructor of this Leader Card

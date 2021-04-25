@@ -26,12 +26,6 @@ public abstract class LeaderCard {
      * @param requiredCard int[][]
      * @param wp int
      */
-    public LeaderCard(int[] requiredRes, int[][] requiredCard, int wp) {
-         //TODO
-    }
-
-
-
 
 
     /**

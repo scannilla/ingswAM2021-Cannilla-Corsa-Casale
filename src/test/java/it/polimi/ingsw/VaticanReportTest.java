@@ -11,10 +11,6 @@ class VaticanReportTest {
 
     File fileTest = new File("src/main/java/it/polimi/ingsw/vatReport.json");
 
-
-
-
-
     @Test
     void getReportsLength() {
         int[] arrayTest = {4, 4, 4};

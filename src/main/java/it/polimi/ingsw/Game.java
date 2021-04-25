@@ -102,7 +102,7 @@ public class Game {
      * getter of player Array playing this match
      * @return players
      */
-    public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 

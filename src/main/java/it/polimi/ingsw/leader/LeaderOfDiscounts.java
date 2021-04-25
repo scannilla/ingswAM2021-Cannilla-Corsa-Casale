@@ -9,17 +9,7 @@ public class LeaderOfDiscounts extends LeaderCard {
      */
     private Resource discountedRes;
 
-    /**
-     * constructor of this Leader Card
-     * @param requiredRes int[]
-     * @param requiredCard int[][]
-     * @param wp int
-     * @param discountedRes Resource
-     */
-    public LeaderOfDiscounts(int[] requiredRes, int[][] requiredCard, int wp, Resource discountedRes) {
-        super(requiredRes, requiredCard, wp);
-        this.discountedRes = discountedRes;
-    }
+
 
     /**
      * getter ability of this Leader Card (0 = discount)

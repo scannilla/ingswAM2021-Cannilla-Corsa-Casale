@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +46,8 @@ public class ServerMain {
         PrintWriter out;
         String nickname;
         ArrayList<Player> connectedPlayers = new ArrayList<>();
+        ArrayList<Socket> clientSockets = new ArrayList<>();
+        HashMap<Player, Socket> mapAllPlayer = new HashMap<>();
 
         try {
             clientSocket = serverSocket.accept();
@@ -52,11 +56,13 @@ public class ServerMain {
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
                 out.println("insert a nickname");
                 nickname= in.readLine();
-                connectedPlayers.add(new Player(nickname));
+
+
             }
             while (nickname==null);
             numberOfPlayers = new GameSetup(clientSocket).setupGame();
-            executor.submit(new ServerProtocol(clientSocket));
+            executor.submit(new ServerProtocolWaiting(clientSocket));
+            mapAllPlayer.put(new Player(nickname), clientSocket);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,26 +84,34 @@ public class ServerMain {
                 }
                 while (nickname==null);
                 connectedClients++;
-                connectedPlayers.add(new Player(nickname));
-                executor.submit(new ServerProtocol(clientSocket));
+                executor.submit(new ServerProtocolWaiting(clientSocket));
+                mapAllPlayer.put(new Player(nickname), clientSocket);
 
             } catch (IOException e) {
                 e.printStackTrace();
                 break;
             }
         }
+        executor.shutdownNow();
         Game game = new Game(numberOfPlayers, connectedPlayers);
         try {
             game.initialSet();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        for (Map.Entry<Player, Socket> entry : mapAllPlayer.entrySet()) {
+            executor.submit(new ServerGameProtocol(entry.getKey(), game, entry.getValue()));
+        }
+
         while (true) {
             try {
+
                 if (!executor.awaitTermination(2, TimeUnit.HOURS)) break;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
 
     }

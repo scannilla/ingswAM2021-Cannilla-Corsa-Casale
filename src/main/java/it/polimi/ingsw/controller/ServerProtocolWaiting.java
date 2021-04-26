@@ -1,17 +1,21 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Game;
+import it.polimi.ingsw.Player;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ServerProtocol implements Runnable {
+public class ServerProtocolWaiting implements Runnable {
     private static int numberOfClients = 0;
     private final Socket client;
     private final int clientNumber;
 
-    public ServerProtocol(Socket client) {
+
+    public ServerProtocolWaiting(Socket client) {
         this.client = client;
         numberOfClients++;
         clientNumber = numberOfClients;

@@ -47,11 +47,15 @@ public class ServerGameProtocol implements Runnable {
                 break;
             }
 
-            String command = cmd.substring(cmd.indexOf(" "));
-            String firstParameter = cmd.substring(cmd.indexOf(" ") + 1);
-            //String secondParameter = cmd.substring(cmd)
-            String jsonString = ("{command :" + command + "}");
-            Command clientCommand = new Command(cmd);
+            String[] command = new String[5];
+            command = cmd.replace("\\s", "").split("-");
+            String jsonString = ("{\"command\" :" + command[0] + "}" + "{\"firstParameter\" :" + command[1] + "}" +
+                    "{\"secondParameter\": " + command[2] + "}") ;
+            Command c = GSON.commandParser(jsonString);
+            c.setCommandPlayer(player);
+            out.println(c.executeCommand());
+
+
 
 
         }

@@ -111,7 +111,7 @@ public class Player {
         this.setWp(this.getWp()+leaderCard.getWp());
     }
 
-    public void buyProductionCard(ProductionCard productionCard){
+    public void buyProductionCard(int rowIndex, int columnIndex){
 
 
     }

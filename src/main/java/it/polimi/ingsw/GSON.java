@@ -6,6 +6,7 @@ import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 import it.polimi.ingsw.tokens.ActionTokenPile;
+import it.polimi.ingsw.controller.Command;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -85,6 +86,11 @@ public final class GSON {
         VaticanReport vaticanReport = gson.fromJson(streamReader, VaticanReport.class);
         streamReader.close();
         return vaticanReport;
+    }
+
+    public static Command commandParser(String jsonString) {
+        Gson g = new Gson();
+        return g.fromJson(jsonString, Command.class);
     }
 
 }

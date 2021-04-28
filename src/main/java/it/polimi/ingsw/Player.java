@@ -210,6 +210,10 @@ public class Player {
         }
     }
 
+    public LeaderCard[] getLeaderCards() {
+        return leaderCards;
+    }
+
 
 
 

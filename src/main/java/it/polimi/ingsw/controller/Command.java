@@ -7,7 +7,10 @@ import java.util.Locale;
 
 public class Command{
 
-    String command;
+    private String command;
+    private String firstParameter;
+    private String secondParameter;
+    private Player commandPlayer;
 
     public String executeCommand() {
         switch (command) {

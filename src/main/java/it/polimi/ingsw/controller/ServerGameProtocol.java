@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.GSON;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 

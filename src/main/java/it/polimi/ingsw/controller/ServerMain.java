@@ -19,6 +19,11 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerMain {
 
+    /**
+     * this method sets the connection with the clients
+     * @param args String[]
+     */
+
     public static void main (String[] args) {
         int portNumber;
         ExecutorService executor = Executors.newCachedThreadPool();

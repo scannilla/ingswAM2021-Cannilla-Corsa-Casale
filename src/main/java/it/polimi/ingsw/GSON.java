@@ -18,6 +18,7 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
+
     public static ProductionCardsDeck productionCardParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -53,6 +54,7 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
+
     public static ActionTokenPile actionTokensPileParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -68,6 +70,7 @@ public final class GSON {
      * @param file File
      * @throws IOException IOException
      */
+
     public static MarketStructure marketStructureParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -77,6 +80,12 @@ public final class GSON {
         streamReader.close();
         return marketStructure;
     }
+
+    /**
+     * Parsing of Vatican Report
+     * @param file File
+     * @throws IOException IOException
+     */
 
     public static VaticanReport vaticanReportParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();

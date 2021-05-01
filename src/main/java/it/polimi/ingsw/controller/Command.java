@@ -13,6 +13,12 @@ public class Command{
     private String[] parameters;
     private Player commandPlayer;
 
+    /**
+     * this method executes every command sent from the client
+     * @return String
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
+
     public String executeCommand() {
         switch (command) {
             case "buyproductioncard":
@@ -100,8 +106,22 @@ public class Command{
                         return "chosen line out of bounds";
                     }
                 }
+
+
             case "activateproduction":
-                //ask client where to take resources from
+                int chosenPosition = Integer.parseInt(parameters[0]);
+                if (chosenPosition < 1 || chosenPosition > 3){
+                    return "choose a valid position";
+                }
+                try {
+                    commandPlayer.activateStandardProduction(chosenPosition - 1);
+                    return "production activated";
+                    } catch (IllegalArgumentException e) {
+                        return "production can't be activated";
+                    }
+
+
+
             case "activateleaderability":
                 //only certain abilities can be activated
                 break;
@@ -147,6 +167,12 @@ public class Command{
         }
         return "generic error";
     }
+
+    /**
+     * setter for the actual player
+     * @param player Player
+     */
+
 
     public void setCommandPlayer(Player player) {
         this.commandPlayer = player;

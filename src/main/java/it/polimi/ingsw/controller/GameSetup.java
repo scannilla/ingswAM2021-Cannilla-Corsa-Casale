@@ -7,14 +7,33 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class GameSetup {
+
+    /**
+     * represents the number of players connected
+     */
+
     private int numberOfPlayers;
+
+    /**
+     * represents the client socket
+     */
+
     private final Socket clientSocket;
+
+    /**
+     * this method starts the game setup and sets the nuer of players
+     *
+     */
 
     public GameSetup(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
-
+    /**
+     * this method starts the game setup and sets the nuer of players
+     * @return numberOfPlayers
+     * @throws IOException IOException
+     */
 
     public int setupGame () {
         BufferedReader in;

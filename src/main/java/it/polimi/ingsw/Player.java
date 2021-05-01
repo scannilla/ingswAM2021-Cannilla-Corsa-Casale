@@ -27,9 +27,13 @@ public class Player {
      * This attribute represents player's nickname
      */
     private String nickname;
-
+    /**
+     * This attribute represents connected game
+     */
     private Game connectedGame;
-
+    /**
+     * This attribute represents win points
+     */
     private int wp=0;
     /**
      * This method create a new player initializing all his attribute
@@ -108,12 +112,21 @@ public class Player {
         }
         this.setWp(this.getWp()+leaderCard.getWp());
     }
-
+    /**
+     * this method buys a production card
+     * @param rowIndex int
+     * @param columnIndex int
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
     public void buyProductionCard(int rowIndex, int columnIndex){
 
 
     }
-
+    /**
+     * this method activated standard production power for the selected production card
+     * @param position int
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
     public void activateStandardProduction (int position) throws IllegalArgumentException{
         ProductionCard card = personalBoard.getProdCardSlot().getTopCards()[position];
         int[] required = ResourceCounter.resCount(card.getRequiredRes());
@@ -131,7 +144,10 @@ public class Player {
         }
 
     }
-
+    /**
+     * this method increases faith for the selected faith points
+     * @param faithPoints int
+     */
     private void increaseFaith(int faithPoints) {
         personalBoard.setPosition(personalBoard.getPosition()+faithPoints);
         int i=0;

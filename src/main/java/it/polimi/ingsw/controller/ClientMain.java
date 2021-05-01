@@ -3,7 +3,14 @@ package it.polimi.ingsw.controller;
 import java.io.*;
 import java.net.*;
 
+
 public class ClientMain {
+
+    /**
+     * this method sets the connection with the server
+     * @throws IOException IOException
+     */
+
 
     public static void main(String[] args) throws IOException {
         int portNumber;

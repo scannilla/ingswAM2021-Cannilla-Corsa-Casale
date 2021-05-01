@@ -10,16 +10,40 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ServerProtocolWaiting implements Runnable {
+
+    /**
+     * this attribute represents the number of connected clients
+     */
+
     private static int numberOfClients = 0;
+
+    /**
+     * this attribute represents the client socket
+     */
+
     private final Socket client;
+
+    /**
+     * this attribute represents the id of the connected clinet
+     */
+
     private final int clientNumber;
 
+    /**
+     * this method creates a new waiting room for the selected client
+     * @client Socket
+     */
 
     public ServerProtocolWaiting(Socket client) {
         this.client = client;
         numberOfClients++;
         clientNumber = numberOfClients;
     }
+
+    /**
+     * this method catches the command sent from the client
+     * @throws IOException IOException
+     */
 
     @Override
     public void run() {

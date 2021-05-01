@@ -114,9 +114,19 @@ public class Game {
         return players;
     }
 
+    /**
+     * getter of vatican report
+     * @return vaticanReport
+     */
+
     public VaticanReport getVaticanReport() {
         return vaticanReport;
     }
+
+    /**
+     * this method activates the vatican report
+     * @param event int
+     */
 
     public void activateEvent(int event) {
         for (Player p : players) {
@@ -125,6 +135,11 @@ public class Game {
         }
         this.getVaticanReport().eventActivated(event);
     }
+
+    /**
+     * getter of the market
+     * @return market
+     */
 
     public MarketStructure getMarket() {
         return market;

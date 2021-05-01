@@ -39,7 +39,7 @@ public class PersonalBoard {
         return position;
     }
     /**
-     * This method set faith marker's position on this personal board
+     * This method sets faith marker's position on this personal board
      * @param position int
      */
     public void setPosition(int position) {
@@ -62,6 +62,10 @@ public class PersonalBoard {
         return strongbox;
     }
 
+    /**
+     * Return production card slots of this Personal Board
+     * @return prodCardSlot
+     */
     public ProdCardSlot getProdCardSlot() {
         return prodCardSlot;
     }

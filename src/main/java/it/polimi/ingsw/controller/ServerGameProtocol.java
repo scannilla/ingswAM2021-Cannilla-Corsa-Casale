@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.GSON;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.GSON;
 
 import java.io.*;
 import java.net.Socket;
@@ -48,17 +49,22 @@ public class ServerGameProtocol implements Runnable {
                 break;
             }
 
-            String[] command = new String[5];
-            command = cmd.replace("\\s", "").split("-");
-            String jsonString = ("{\"command\" :" + command[0] + "}" + "{\"firstParameter\" :" + command[1] + "}" +
-                    "{\"secondParameter\": " + command[2] + "}") ;
+            String[] command = cmd.replace("\\s", "").split("-");
+            String jsonString = ("{\"command\" :" + command[0] + "}");
+            if(command.length>1) {
+                jsonString = jsonString.concat("{\"parameters\" : [");
+                for (int i = 0; i < command.length-1; i++)
+                    jsonString = jsonString.concat("\"" +command[i]+"\",");
+                jsonString = jsonString.concat("\"" +command[command.length-1]+"\"");
+            }
             Command c = GSON.commandParser(jsonString);
             c.setCommandPlayer(player);
-            out.println(c.executeCommand());
-
-
-
-
+            String returnValue = c.executeCommand();
+            RequiredClientActions action = new RequiredClientActions(c, clientSocket, player);;
+            if(returnValue.contains("$"))
+                action.execute(returnValue.replace("$", ""));
+            else
+                out.println(c.executeCommand());
         }
 
 

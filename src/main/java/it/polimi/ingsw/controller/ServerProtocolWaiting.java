@@ -44,8 +44,6 @@ public class ServerProtocolWaiting implements Runnable {
                     break;
                 else {
                     System.out.println("Received " + command);
-                    //String json = ("{");
-                    //Command command1 = new Command();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

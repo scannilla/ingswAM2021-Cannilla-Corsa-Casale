@@ -4,7 +4,10 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsDeck;
+import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.tokens.ActionToken;
+import it.polimi.ingsw.tokens.ActionTokenPile;
+import it.polimi.ingsw.leader.LeaderCard;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,18 +29,21 @@ public class Game {
     /**
      * This attribute represents full deck of 16 leader cards
      */
-    private final LeaderCardsDeck leaderCardsDeck = new LeaderCardsDeck();
+    private LeaderCardsDeck leaderCardsDeck;
     /**
      * This attribute represents pile of action tokens
      */
-    private ActionToken[] actionTokensPile;
+    private ActionTokenPile actionTokensPile;
     /**
      * create a new Market Structure
      */
-    private final MarketStructure market = new MarketStructure();
+    private MarketStructure market;
 
     private final VaticanReport vaticanReport = new VaticanReport();
 
+    private final ProductionCardsMarket cardsMarket = new ProductionCardsMarket();
+
+    private ProductionCardsDeck deck;
 
 
     /**
@@ -56,11 +62,13 @@ public class Game {
         for(Player p: players)
             p.setConnectedGame(this);
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
-        GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
-        GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
-        GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
-        GSON.marketStructureParser(new File("src/main/java/it/polimi/ingsw/marbles/marbles.json"));
+        actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+        deck = GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
+        leaderCardsDeck = GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
+        market = GSON.marketStructureParser(new File("src/main/java/it/polimi/ingsw/marbles/marbles.json"));
         market.initializeMarket();
+        cardsMarket.setMarket(deck);
+        leaderCardsDeck.shuffleDeck();
     }
     /**
      * This method gives to each player 4 leader cards
@@ -86,7 +94,7 @@ public class Game {
      * This method returns pile of Action Tokens
      * @return actionTokensPile
      */
-    public ActionToken[] getActionTokensPile() {
+    public ActionTokenPile getActionTokensPile() {
         return actionTokensPile;
     }
 
@@ -115,10 +123,19 @@ public class Game {
             if(p.getPersonalBoard().getPosition()>(this.getVaticanReport().getActivationPosition()[event])-(this.getVaticanReport().getReportsLength()[event]))
                 p.setWp(p.getWp()+this.getVaticanReport().getPopeFavourTile()[event]);
         }
-        this.getVaticanReport().getActivatedEvent()[event]=true;
+        this.getVaticanReport().eventActivated(event);
     }
 
     public MarketStructure getMarket() {
         return market;
+    }
+
+    /**
+     * getter of the cards market
+     * @return cardsMarket
+     */
+
+    public ProductionCardsMarket getCardsMarket() {
+        return cardsMarket;
     }
 }

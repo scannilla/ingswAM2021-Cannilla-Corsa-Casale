@@ -74,7 +74,7 @@ public class WarehouseDepot {
      * @param column int
      * @return depit[column][0]
      */
-    private Resource checkResource(int column) {
+    public Resource checkResource(int column) {
         if(depot[column][0]!=null)
             return depot[column][0];
         else return null;

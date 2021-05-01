@@ -31,9 +31,12 @@ public class GameSetup {
         do {
             out.println("Insert number of players 1-4");
             try {
-                numberOfPlayers = in.read();
+                numberOfPlayers = Integer.parseInt(in.readLine());
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+            catch (NumberFormatException e) {
+                out.println("Insert a valid number");
             }
         }
         while (numberOfPlayers!=1 && numberOfPlayers != 2 && numberOfPlayers !=3 && numberOfPlayers != 4);

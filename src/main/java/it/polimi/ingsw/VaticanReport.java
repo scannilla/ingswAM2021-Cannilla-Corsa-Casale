@@ -1,16 +1,16 @@
 package it.polimi.ingsw;
 
-public class VaticanReport {
+public final class VaticanReport {
 
     private  int numberOfReports;
 
     private int[] reportsLength = new int[numberOfReports];
 
-    private int[] activationPosition = new int[numberOfReports];
+    private final int[] activationPosition = new int[numberOfReports];
 
     private int[] popeFavourTile = new int[numberOfReports];
 
-    private boolean[] activatedEvent = new boolean[numberOfReports];
+    private final boolean[] activatedEvent = new boolean[numberOfReports];
 
     public void setNumberOfReports(int numberOfReports){
         this.numberOfReports = numberOfReports;
@@ -31,6 +31,11 @@ public class VaticanReport {
     public void setReportsLength(int[] reportsLength) {
         this.reportsLength = reportsLength;
     }
+
+    /**
+     * Return vector of reports length of this Vatican Report
+     * @return reportsLength int[]
+     */
 
     public int[] getReportsLength() {
         return reportsLength;

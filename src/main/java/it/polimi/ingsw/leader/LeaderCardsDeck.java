@@ -1,6 +1,8 @@
 package it.polimi.ingsw.leader;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class LeaderCardsDeck {
     /**
@@ -34,5 +36,20 @@ public class LeaderCardsDeck {
 
     public ArrayList<LeaderOfProductions> getLeaderOfProductionsDeck() {
         return leaderOfProductionsDeck;
+    }
+
+    public void shuffleDeck() {
+        Collections.shuffle(leaderCardsDeck);
+    }
+
+    private LeaderCard popCard() {
+        return leaderCardsDeck.remove(0);
+    }
+
+    public ArrayList<LeaderCard> pick4cards () {
+        ArrayList<LeaderCard> cards = new ArrayList<>();
+        for (int i=0; i<4; i++)
+            cards.add(this.popCard());
+        return cards;
     }
 }

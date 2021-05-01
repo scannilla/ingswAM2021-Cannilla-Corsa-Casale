@@ -25,10 +25,10 @@ public class ServerMain {
         if (args.length == 1) {
             portNumber = Integer.parseInt(args[0]);
         } else {
-            portNumber = 16024;
+            portNumber = 48745;
         }
         System.out.println("Starting server");
-        ServerSocket serverSocket = null;
+        ServerSocket serverSocket =null;
         try {
             serverSocket = new ServerSocket(portNumber);
         } catch (IOException e) {
@@ -36,8 +36,7 @@ public class ServerMain {
         }
 
         if(serverSocket==null)
-            System.out.println("unable to create server socket");
-            System.exit(1);
+            System.exit(9);
 
         Socket clientSocket;
 
@@ -46,7 +45,6 @@ public class ServerMain {
         PrintWriter out;
         String nickname;
         ArrayList<Player> connectedPlayers = new ArrayList<>();
-        ArrayList<Socket> clientSockets = new ArrayList<>();
         HashMap<Player, Socket> mapAllPlayer = new HashMap<>();
 
         try {
@@ -56,10 +54,9 @@ public class ServerMain {
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
                 out.println("insert a nickname");
                 nickname= in.readLine();
-
-
             }
             while (nickname==null);
+            System.out.println(nickname);
             numberOfPlayers = new GameSetup(clientSocket).setupGame();
             executor.submit(new ServerProtocolWaiting(clientSocket));
             mapAllPlayer.put(new Player(nickname), clientSocket);
@@ -98,7 +95,10 @@ public class ServerMain {
             game.initialSet();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Unable to start game");
         }
+
+
 
         for (Map.Entry<Player, Socket> entry : mapAllPlayer.entrySet()) {
             executor.submit(new ServerGameProtocol(entry.getKey(), game, entry.getValue()));
@@ -106,7 +106,6 @@ public class ServerMain {
 
         while (true) {
             try {
-
                 if (!executor.awaitTermination(2, TimeUnit.HOURS)) break;
             } catch (InterruptedException e) {
                 e.printStackTrace();

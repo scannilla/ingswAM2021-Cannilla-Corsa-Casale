@@ -20,7 +20,7 @@ public class Player {
     /**
      * This attribute represents player's leader cards
      */
-    private final LeaderCard[] leaderCards = new LeaderCard[2];
+    private LeaderCard[] leaderCards = new LeaderCard[2];
 
     private final LeaderCard[] activeLeaderCards = new LeaderCard[2];
     /**
@@ -75,8 +75,6 @@ public class Player {
             int[] leaderDepotCounter2 = {0, 0, 0, 0};
             if (activeLeaderCards[0].getAbility() == 1)
                 leaderDepotCounter1 = ResourceCounter.resCount(((LeaderOfDepots) activeLeaderCards[0]).getExtraDepot());
-            if (activeLeaderCards[1].getAbility() == 1)
-                leaderDepotCounter2 = ResourceCounter.resCount(((LeaderOfDepots) activeLeaderCards[1]).getExtraDepot());
 
             for (int i = 0; i < 4; i++) {
                 if (counter[i] > (depotCounter[i] + strongboxCounter[i] + leaderDepotCounter1[i] + leaderDepotCounter2[i])) {
@@ -124,8 +122,7 @@ public class Player {
             if(total[i]-required[i]<=0)
                 throw new IllegalArgumentException();
         }
-        for(Resource resource : card.getRequiredRes())
-            personalBoard.getWarehouseDepot().useResource(resource);
+        //ask client where he wants to take resources
         for(Resource resource: card.getGivenRes()) {
             personalBoard.getStrongbox().insertNewResource(resource);
         }
@@ -187,7 +184,7 @@ public class Player {
         }
     }
 
-    public void activateLeaderofConversionAbility () throws IllegalArgumentException{
+    public void activateLeaderOfConversionAbility() throws IllegalArgumentException{
         LeaderOfConversions card;
         if(activeLeaderCards[0].getAbility()!=2 && activeLeaderCards[1].getAbility()!=2)
             throw new IllegalArgumentException();
@@ -213,6 +210,28 @@ public class Player {
     public LeaderCard[] getLeaderCards() {
         return leaderCards;
     }
+
+    public void setLeaderCards(LeaderCard[] leaderCards) {
+        this.leaderCards = leaderCards;
+    }
+
+    public void discardLeaderCard(LeaderCard card) throws IllegalArgumentException{
+        if ((card == activeLeaderCards[0] || card == activeLeaderCards[1]) || (card != leaderCards[0] && card != leaderCards[1]))
+            throw  new IllegalArgumentException();
+        else if (card == leaderCards[0]) {
+            leaderCards[0] = null;
+            increaseFaith(1);
+        }
+        else {
+            leaderCards[1] = null;
+            increaseFaith(1);
+        }
+    }
+
+    public Game getConnectedGame() {
+        return connectedGame;
+    }
+
 
 
 

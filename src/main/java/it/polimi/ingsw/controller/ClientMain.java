@@ -10,7 +10,7 @@ public class ClientMain {
         String hostName;
 
         if (args.length != 2) {
-            portNumber = 16024;
+            portNumber = 48745;
             hostName = "127.0.0.1";
         }
         else {
@@ -21,9 +21,11 @@ public class ClientMain {
 
         try (Socket socket = new Socket(hostName, portNumber);
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
         ) {
+            ClientListener listener = new ClientListener(socket);
+            Thread listenerThread = new Thread(listener);
+            listenerThread.start();
             String userInput;
             while ((userInput = stdIn.readLine()) != null) {
                 out.println(userInput);

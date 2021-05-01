@@ -210,4 +210,64 @@ class WarehouseDepotTest {
 
     }
 
+    @Test
+    void moveResourceTest(){
+
+        Resource cointTest = new Resource(0);
+        Resource stonesTest = new Resource(1);
+        Resource servantsTest = new Resource(2);
+
+        WarehouseDepot warehouseDepotTest = new WarehouseDepot();
+        warehouseDepotTest.insertNewResource(cointTest, 0);
+
+        warehouseDepotTest.insertNewResource(stonesTest, 1);
+        warehouseDepotTest.insertNewResource(stonesTest, 1);
+        warehouseDepotTest.insertNewResource(servantsTest, 2);
+        warehouseDepotTest.insertNewResource(servantsTest, 2);
+
+        warehouseDepotTest.moveResources(1, 2);
+
+
+        assertEquals(2, warehouseDepotTest.checkResource(1).getResType());
+        assertEquals(1, warehouseDepotTest.checkResource(2).getResType());
+
+
+    }
+
+    @Test
+    void moveResourceTestException1(){
+        WarehouseDepot warehouseDepotTest = new WarehouseDepot();
+        Resource coinTest = new Resource(0);
+        Resource stonesTest = new Resource(1);
+        warehouseDepotTest.insertNewResource(stonesTest, 2);
+        warehouseDepotTest.insertNewResource(stonesTest, 2);
+        warehouseDepotTest.insertNewResource(stonesTest, 2);
+        warehouseDepotTest.insertNewResource(coinTest, 1);
+        warehouseDepotTest.insertNewResource(coinTest, 1);
+        try {
+            warehouseDepotTest.moveResources(2, 1);
+        } catch (IllegalArgumentException e){
+            String actualMessage = e.getMessage();
+            assertTrue(actualMessage.contains("Unable to move resource"));
+        }
+        }
+
+    @Test
+    void moveResourceTestException2(){
+        WarehouseDepot warehouseDepotTest = new WarehouseDepot();
+        Resource coinTest = new Resource(0);
+        Resource stonesTest = new Resource(1);
+        warehouseDepotTest.insertNewResource(stonesTest, 2);
+        warehouseDepotTest.insertNewResource(stonesTest, 2);
+        warehouseDepotTest.insertNewResource(stonesTest, 2);
+        warehouseDepotTest.insertNewResource(coinTest, 1);
+        warehouseDepotTest.insertNewResource(coinTest, 1);
+        try {
+            warehouseDepotTest.moveResources(1, 2);
+        } catch (IllegalArgumentException e){
+            String actualMessage = e.getMessage();
+            assertTrue(actualMessage.contains("Unable to move resource"));
+        }
+    }
+
 }

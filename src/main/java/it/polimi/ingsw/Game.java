@@ -70,12 +70,7 @@ public class Game {
         cardsMarket.setMarket(deck);
         leaderCardsDeck.shuffleDeck();
     }
-    /**
-     * This method gives to each player 4 leader cards
-     */
-    public void giveLeaderCards() { //TODO gives to each player 4 leader cards
 
-    }
     /**
      * This method returns deck of Production Cards
      * @return ProductionCard[] productionCardsDeck
@@ -106,10 +101,10 @@ public class Game {
         return numberOfPlayers;
     }
 
-    /**
-     * getter of player Array playing this match
-     * @return players
-     */
+                /**
+                 * getter of player Array playing this match
+                 * @return players
+                 */
     public ArrayList<Player> getPlayers() {
         return players;
     }

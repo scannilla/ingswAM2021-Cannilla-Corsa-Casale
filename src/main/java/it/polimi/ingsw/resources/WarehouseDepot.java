@@ -138,5 +138,46 @@ public class WarehouseDepot {
 
     }
 
+    public void moveResources(int line1, int line2) throws IllegalArgumentException {
+
+        Resource[] swapResource = new Resource[3];
+        int[] resourceAmount = getDepotResourceAmount();
+        int typeResourceLine1 = depot[line1][0].getResType();
+        int typeResourceLine2 = depot[line2][0].getResType();
+
+
+        if (line1>line2) {
+            if (resourceAmount[typeResourceLine1] > resourceAmount[typeResourceLine2])
+                throw new IllegalArgumentException("Unable to move resource");
+            for (int i=0; i<line2; i++) {
+                swapResource[i] = depot[line1][i];
+                depot[line1][i] = depot[line2][i];
+                depot[line2][i] = swapResource[i];
+            }
+        } else if (line1<line2){
+            if(resourceAmount[typeResourceLine1]<resourceAmount[typeResourceLine2]){
+                throw new IllegalArgumentException("Unable to move resource");
+            }
+            for (int i=0; i<line1; i++){
+                swapResource[i] = depot[line1][i];
+                depot[line1][i] = depot[line2][i];
+                depot[line2][i] = swapResource[i];
+            }
+        }
+
+
+
+    }
+
+    public int isEnoughWarehouse(Resource resource, int amount){
+
+        int[] values = getDepotResourceAmount();
+        int i = resource.getResType();
+
+        return (values[i] - amount); // if return<0 you haven't enough amount of resource
+                                    // if =0 you have exactly the amount of resource
+                                    // if >0 you have more resource of the amount
+    }
+
 
 }

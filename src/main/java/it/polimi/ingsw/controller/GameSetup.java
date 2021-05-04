@@ -32,7 +32,7 @@ public class GameSetup {
     /**
      * this method starts the game setup and sets the nuer of players
      * @return numberOfPlayers
-     * @throws IOException IOException
+     * @throws IOException
      */
 
     public int setupGame () {

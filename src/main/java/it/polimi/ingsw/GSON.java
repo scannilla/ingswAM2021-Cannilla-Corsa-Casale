@@ -16,7 +16,7 @@ public final class GSON {
     /**
      * Parsing of all Production Cards
      * @param file File
-     * @throws IOException IOException
+     * @throws IOException
      */
 
     public static ProductionCardsDeck productionCardParser(File file) throws IOException {
@@ -32,7 +32,7 @@ public final class GSON {
     /**
      * Parsing of all Leader Cards
      * @param  file File
-     * @throws IOException IOException
+     * @throws IOException
      */
     public static LeaderCardsDeck leaderCardParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
@@ -52,7 +52,7 @@ public final class GSON {
     /**
      * Parsing of all Action Tokens
      * @param file File
-     * @throws IOException IOException
+     * @throws IOException
      */
 
     public static ActionTokenPile actionTokensPileParser(File file) throws IOException {
@@ -68,7 +68,7 @@ public final class GSON {
     /**
      * Parsing of Market Structure
      * @param file File
-     * @throws IOException IOException
+     * @throws IOException
      */
 
     public static MarketStructure marketStructureParser(File file) throws IOException {
@@ -82,9 +82,10 @@ public final class GSON {
     }
 
     /**
-     * Parsing of Vatican Report
-     * @param file File
-     * @throws IOException IOException
+     * parsing for vatican report
+     * @param file
+     * @return vaticanReport VaticanReport
+     * @throws IOException
      */
 
     public static VaticanReport vaticanReportParser(File file) throws IOException {
@@ -97,6 +98,11 @@ public final class GSON {
         return vaticanReport;
     }
 
+    /**
+     * parsing for command
+     * @param jsonString String
+     * @return Command
+     */
     public static Command commandParser(String jsonString) {
         Gson g = new Gson();
         return g.fromJson(jsonString, Command.class);

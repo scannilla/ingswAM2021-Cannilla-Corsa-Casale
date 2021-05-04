@@ -11,16 +11,26 @@ import java.net.Socket;
 
 public class Command{
 
+    /**
+     * this attribute represent the command sent from the client
+     */
     private String command;
+
+    /**
+     * this attribute represents the parameters chosen by the client
+     */
     private String[] parameters;
+
+    /**
+     * this attribute represents the player
+     */
     private Player commandPlayer;
 
     /**
      * this method executes every command sent from the client
      * @return String
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @throws IllegalArgumentException
      */
-
     public String executeCommand() {
         switch (command) {
             case "buyproductioncard":
@@ -171,8 +181,6 @@ public class Command{
      * setter for the actual player
      * @param player Player
      */
-
-
     public void setCommandPlayer(Player player) {
         this.commandPlayer = player;
     }

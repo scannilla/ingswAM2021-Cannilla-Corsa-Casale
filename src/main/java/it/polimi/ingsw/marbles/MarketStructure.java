@@ -71,6 +71,10 @@ public class MarketStructure {
         return marblesArray;
     }
 
+    /**
+     * returns an array with all marbles
+     * @return allMarbles MarketMarble[]
+     */
     public MarketMarble[] getAllMarbles() {
         return allMarbles;
     }

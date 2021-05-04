@@ -118,7 +118,7 @@ public class Player {
      * this method buys a production card
      * @param rowIndex int
      * @param columnIndex int
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @throws IllegalArgumentException
      */
     public void buyProductionCard(int rowIndex, int columnIndex, int position){
         try {
@@ -131,7 +131,7 @@ public class Player {
     /**
      * this method activated standard production power for the selected production card
      * @param position int
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @throws IllegalArgumentException
      */
     public void activateStandardProduction (int position) throws IllegalArgumentException{
         ProductionCard card = personalBoard.getProdCardSlot().getTopCards()[position];
@@ -164,18 +164,35 @@ public class Player {
 
     }
 
+    /**
+     * sets the connected game
+     * @param connectedGame
+     */
     public void setConnectedGame(Game connectedGame) {
         this.connectedGame = connectedGame;
     }
 
+    /**
+     * getter of the win points
+     * @return wp int
+     */
     public int getWp() {
         return wp;
     }
 
+    /**
+     * sets the win points
+     * @param wp int
+     */
     public void setWp(int wp) {
         this.wp = wp;
     }
 
+    /**
+     * this method buys resources from market
+     * @param line int
+     * @throws IllegalArgumentException
+     */
     public void buyResourceFromMarket(int line) throws IllegalArgumentException{
         int var;
         if(line<0 || line >6)
@@ -206,6 +223,10 @@ public class Player {
         }
     }
 
+    /**
+     * activates an ability of a leader of conversion card
+     * @throws IllegalArgumentException
+     */
     public void activateLeaderOfConversionAbility() throws IllegalArgumentException{
         LeaderOfConversions card;
         if(activeLeaderCards[0].getAbility()!=2 && activeLeaderCards[1].getAbility()!=2)
@@ -229,14 +250,27 @@ public class Player {
         }
     }
 
+    /**
+     * getter for the vector of leader cards
+     * @return leaderCards LeaderCard[]
+     */
     public LeaderCard[] getLeaderCards() {
         return leaderCards;
     }
 
+    /**
+     * sets leader cards
+     * @param leaderCards LeaderCard[]
+     */
     public void setLeaderCards(LeaderCard[] leaderCards) {
         this.leaderCards = leaderCards;
     }
 
+    /**
+     * discards a leader card
+     * @param card LeaderCard
+     * @throws IllegalArgumentException
+     */
     public void discardLeaderCard(LeaderCard card) throws IllegalArgumentException{
         if ((card == activeLeaderCards[0] || card == activeLeaderCards[1]) || (card != leaderCards[0] && card != leaderCards[1]))
             throw  new IllegalArgumentException();

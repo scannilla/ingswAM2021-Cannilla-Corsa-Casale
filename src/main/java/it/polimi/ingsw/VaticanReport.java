@@ -9,13 +9,13 @@ public final class VaticanReport {
     private  int numberOfReports;
 
     /**
-     * This attribute represents the lenght of each report
+     * This attribute represents the length of each report
      */
 
     private final int[] reportsLength = new int[numberOfReports];
 
     /**
-     * This attribute represents the activation position fot this Vatican Report
+     * This attribute represents the activation position for this Vatican Report
      */
 
     private final int[] activationPosition = new int[numberOfReports];
@@ -33,8 +33,10 @@ public final class VaticanReport {
     private final boolean[] activatedEvent = new boolean[numberOfReports];
 
 
-
-
+    /**
+     * activates an event
+     * @param event int
+     */
     public void eventActivated(int event) {
         activatedEvent[event]=true;
     }

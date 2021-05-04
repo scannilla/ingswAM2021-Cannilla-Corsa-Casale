@@ -21,6 +21,10 @@ public class MarketMarble {
         return color;
     }
 
+    /**
+     * this method throws an exception if the color has an invalid value
+     * @throws Exception
+     */
     public Resource returnAbility() throws Exception{
         if (color==0)
             throw new Exception("white");

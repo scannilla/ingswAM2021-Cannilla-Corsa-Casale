@@ -5,6 +5,10 @@ import java.util.Objects;
 public class Resource {
     /**
      * This attribute represents type of this Resource
+     * coin 0
+     * stone 1
+     * servant 2
+     * shield 3
      */
     private final int resType;
     /**

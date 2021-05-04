@@ -113,6 +113,10 @@ public class Strongbox {
         values[resource.getResType()]++;
     }
 
+    /**
+     * getter for the strongbox resource amount
+     * @return values int[]
+     */
     public int[] getStrongboxResourcesAmount(){
         return values;
     }

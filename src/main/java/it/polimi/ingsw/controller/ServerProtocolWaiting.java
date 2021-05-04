@@ -44,7 +44,6 @@ public class ServerProtocolWaiting implements Runnable {
      * this method catches the command sent from the client
      * @throws IOException IOException
      */
-
     @Override
     public void run() {
         if (numberOfClients >= 4)

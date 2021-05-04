@@ -13,17 +13,37 @@ import java.util.Map;
 
 public class ServerGameProtocol implements Runnable {
 
+    /**
+     * this attribute represents the client socket
+     */
     private final Socket clientSocket;
+
+    /**
+     * this attribute represents the connected game
+     */
     private final Game connectedGame;
+
+    /**
+     * this attribute represents the player
+     */
     private final Player player;
 
-
+    /**
+     * constructor of ServerGameProtocol
+     * @param player Player
+     * @param connectedGame Game
+     * @param clSocket Socket
+     */
     public ServerGameProtocol(Player player, Game connectedGame, Socket clSocket) {
         this.clientSocket = clSocket;
         this.connectedGame = connectedGame;
         this.player = player;
     }
 
+    /**
+     * this method catches the command and the parameters from the client and parses it
+     * @throws IOException
+     */
     @Override
     public void run() {
         BufferedReader in = null;

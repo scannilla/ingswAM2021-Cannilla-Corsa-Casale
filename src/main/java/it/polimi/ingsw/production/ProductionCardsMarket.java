@@ -72,6 +72,13 @@ public class ProductionCardsMarket {
         return topCards;
     }
 
+    /**
+     * getter for the chosen production card
+     * @param x int
+     * @param y int
+     * @return ProductionCardsMarket ProductionCard
+     * @throws IllegalArgumentException
+     */
     public ProductionCard getCard(int x, int y) throws IllegalArgumentException{
         int k=0;
         while(productionCardsMarket[x][y][k]!=null && k<3)

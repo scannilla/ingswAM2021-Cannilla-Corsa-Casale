@@ -84,13 +84,13 @@ public class WarehouseDepot {
      * modify Warehouse Depot to optimize slots
      * @param column int
      * @return changed
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @throws IllegalArgumentException
      */
 
     /**
      * use a resource from depot
      * @param resource Resource
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @throws IllegalArgumentException
      */
     public void useResource(Resource resource) throws IllegalArgumentException{
         int column=-1;
@@ -138,6 +138,12 @@ public class WarehouseDepot {
 
     }
 
+    /**
+     * moves resource from line1 to line2
+     * @param line1 int
+     * @param line2 int
+     * @throws IllegalArgumentException
+     */
     public void moveResources(int line1, int line2) throws IllegalArgumentException {
 
         Resource[] swapResource = new Resource[3];
@@ -169,6 +175,13 @@ public class WarehouseDepot {
 
     }
 
+    /**
+     * this method tells if the amount of resources is enough
+     * if return<0 you haven't enough amount of resource
+     * if =0 you have exactly the amount of resource
+     * if >0 you have more resource of the amount
+     * @return values[i]-amount int
+     */
     public int isEnoughWarehouse(Resource resource, int amount){
 
         int[] values = getDepotResourceAmount();

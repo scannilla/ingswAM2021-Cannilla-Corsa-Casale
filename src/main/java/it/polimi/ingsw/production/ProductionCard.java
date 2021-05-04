@@ -118,6 +118,10 @@ public class ProductionCard {
         return givenRes;
     }
 
+    /**
+     * getter fot the given faith points
+     * @return givenFaithPoints int
+     */
     public int getGivenFaithPoints() {
         return givenFaithPoints;
     }

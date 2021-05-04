@@ -15,16 +15,40 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class RequiredClientActions {
+
+    /**
+     * represents the command sent from the client
+     */
     private final Command command;
+
+    /**
+     * represents the client socket
+     */
     private final Socket clientSocket;
+
+    /**
+     * represents the player
+     */
     private final Player player;
 
+    /**
+     * constructor of RequiredClientActions
+     * @param command Command
+     * @param clientSocket Socket
+     * @param player Player
+     */
     public RequiredClientActions(Command command, Socket clientSocket, Player player) {
         this.command = command;
         this.clientSocket = clientSocket;
         this.player = player;
     }
 
+    /**
+     * this method manages the user interactions, asking him where to take the resources from (strongbox, warehouse depot or extra depot)+
+     * @param cmd String
+     * @throws IllegalArgumentException
+     * @throws IOException
+     */
     public void execute(String cmd) {
 
         try {

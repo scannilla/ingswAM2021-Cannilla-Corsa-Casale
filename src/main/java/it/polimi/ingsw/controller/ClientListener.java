@@ -6,12 +6,23 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class ClientListener implements Runnable{
+
+    /**
+     * represents the client socket
+     */
     Socket clientSocket;
 
+    /**
+     * constructor for ClientListener
+     * @param clientSocket Socket
+     */
     public ClientListener(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
+    /**
+     * this method makes the client listen to the server
+     */
     @Override
     public void run() {
         try {

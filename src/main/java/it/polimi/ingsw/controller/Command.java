@@ -7,6 +7,8 @@ import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
+import java.net.Socket;
+
 public class Command{
 
     private String command;
@@ -22,8 +24,6 @@ public class Command{
     public String executeCommand() {
         switch (command) {
             case "buyproductioncard":
-                //ask client where to take resources from
-                //verificare che si abbiano abbastanza risorse
                 if(Integer.parseInt(parameters[0])<0 || Integer.parseInt(parameters[0])>3 || Integer.parseInt(parameters[1])<0 || Integer.parseInt(parameters[1])>2)
                     return "index out of bounds";
                 if(commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])][Integer.parseInt(parameters[1])]==null)
@@ -41,16 +41,14 @@ public class Command{
                 ProductionCard productionCardSold = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])][Integer.parseInt(parameters[1])];
                 Resource[] priceResources = productionCardSold.getCostArray();
                 int[] price = ResourceCounter.resCount(priceResources);
-                for (int i=0; i<4; i++){
-                    if (price[i] > commandPlayer.getPersonalBoard().getWarehouseDepot().isEnoughWarehouse(priceResources[i], price[i])+
-                                            commandPlayer.getPersonalBoard().getStrongbox().isEnough(priceResources[i], price[i])){
+                for (int i=0; i<4; i++) {
+                    if (price[i] > commandPlayer.getPersonalBoard().getWarehouseDepot().isEnoughWarehouse(priceResources[i], price[i]) +
+                            commandPlayer.getPersonalBoard().getStrongbox().isEnough(priceResources[i], price[i])) {
                         return "Not able to buy this Production Card";
-                    } else {
-                        commandPlayer.buyProductionCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
-                        return "Card bought";
                     }
-
                 }
+
+
                 if(level > 1) {
                     if (level == 2) {
                         for (int i = 0; i < 3; i++) {
@@ -67,7 +65,7 @@ public class Command{
                     }
                 }
                 else
-                    return "$Found";
+                    return "$buy";
 
 
             case "activateleadercard":
@@ -168,6 +166,7 @@ public class Command{
         return "generic error";
     }
 
+
     /**
      * setter for the actual player
      * @param player Player
@@ -178,6 +177,11 @@ public class Command{
         this.commandPlayer = player;
     }
 
-
-
+    /**
+     * getter for the parameters sent from the user
+     * @return parameters String[]
+     */
+    public String[] getParameters() {
+        return parameters;
+    }
 }

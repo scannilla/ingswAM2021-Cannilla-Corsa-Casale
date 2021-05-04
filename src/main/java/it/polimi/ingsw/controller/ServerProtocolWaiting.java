@@ -24,14 +24,14 @@ public class ServerProtocolWaiting implements Runnable {
     private final Socket client;
 
     /**
-     * this attribute represents the id of the connected clinet
+     * this attribute represents the id of the connected client
      */
 
     private final int clientNumber;
 
     /**
      * this method creates a new waiting room for the selected client
-     * @client Socket
+     * @param client Socket
      */
 
     public ServerProtocolWaiting(Socket client) {

@@ -45,21 +45,15 @@ public class ProductionCardsMarket {
      * @param productionCard ProductionCard
      * @throws IllegalArgumentException IllegalArgumentException
      */
-    public void buyCard (ProductionCard productionCard) throws IllegalArgumentException {
-        int k=0;
-        int done=0;
-        for(int i=0; i<3; i++)
-            for(int j=0; j<4; j++) {
-                while(productionCardsMarket[i][j][k]!=null && k<4)
-                    k++;
-                if(productionCardsMarket[i][j][k] == productionCard) {
-                    productionCardsMarket[i][j][k] = null;
-                    done = 1;
-                    break;
-                }
+    public ProductionCard buyCard (int row, int column) throws IllegalArgumentException {
+        ProductionCard card;
+        for (int i=0; i<4; i++)
+            if(productionCardsMarket[row][column][i]!= null) {
+                card = productionCardsMarket[row][column][i];
+                productionCardsMarket[row][column][i] = null;
+                return card;
             }
-        if(done==0)
-            throw new IllegalArgumentException();
+        throw new IllegalArgumentException();
     }
 
     /**

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.resources;
 
+import java.util.Objects;
+
 public class Resource {
     /**
      * This attribute represents type of this Resource
@@ -18,5 +20,37 @@ public class Resource {
      */
     public int getResType() {
         return resType;
+    }
+
+    public Resource(String string) {
+        switch (string) {
+            case "coin":
+                this.resType=0;
+                break;
+            case "stone":
+                this.resType=1;
+                break;
+            case "servant":
+                this.resType=2;
+                break;
+            case "shield":
+                this.resType=3;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Resource resource = (Resource) o;
+        return resType == resource.resType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resType);
     }
 }

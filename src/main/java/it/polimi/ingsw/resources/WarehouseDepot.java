@@ -174,9 +174,7 @@ public class WarehouseDepot {
         int[] values = getDepotResourceAmount();
         int i = resource.getResType();
 
-        return (values[i] - amount); // if return<0 you haven't enough amount of resource
-                                    // if =0 you have exactly the amount of resource
-                                    // if >0 you have more resource of the amount
+        return (values[i] - amount);
     }
 
 

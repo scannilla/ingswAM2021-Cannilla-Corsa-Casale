@@ -120,10 +120,13 @@ public class Player {
      * @param columnIndex int
      * @throws IllegalArgumentException IllegalArgumentException
      */
-    public void buyProductionCard(int rowIndex, int columnIndex){
-
-
-
+    public void buyProductionCard(int rowIndex, int columnIndex, int position){
+        try {
+            ProductionCard card = this.getConnectedGame().getCardsMarket().buyCard(rowIndex, columnIndex);
+            personalBoard.getProdCardSlot().insertNewCard(card, position);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        }
     }
     /**
      * this method activated standard production power for the selected production card
@@ -247,9 +250,23 @@ public class Player {
         }
     }
 
+    /**
+     * returns the vector of active leader cards
+     * @return activeLeaderCards LeaderCard[]
+     */
+    public LeaderCard[] getActiveLeaderCards() {
+        return activeLeaderCards;
+    }
+
+    /**
+     * returns the connected game
+     * @return connectedGame Game
+     */
     public Game getConnectedGame() {
         return connectedGame;
     }
+
+
 
 
 

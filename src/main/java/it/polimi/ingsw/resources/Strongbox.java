@@ -121,6 +121,41 @@ public class Strongbox {
         return values;
     }
 
+    /**
+     * uses a resource if there is one of the type indicated
+     * @param resource Resource
+     */
+    public void useResourceStrongbox(Resource resource) throws IllegalArgumentException{
+
+        switch (resource.getResType()){
+            case 0:
+                values[0] = values[0] - 1;
+                if (values[0] == -1){
+                    throw new IllegalArgumentException();
+                }
+                break;
+            case 1:
+                values[1] = values[1] - 1;
+                if (values[1] == -1){
+                    throw new IllegalArgumentException();
+                }
+                break;
+            case 2:
+                values[2] = values[2] - 1;
+                if (values[2] == -1){
+                    throw new IllegalArgumentException();
+                }
+                break;
+            case 3:
+                values[3] = values[3] - 1;
+                if (values[3] == -1){
+                    throw new IllegalArgumentException();
+                }
+                break;
+
+        }
+    }
+
 
 }
 

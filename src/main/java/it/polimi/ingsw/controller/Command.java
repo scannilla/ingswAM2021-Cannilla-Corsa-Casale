@@ -63,13 +63,13 @@ public class Command{
                     if (level == 2) {
                         for (int i = 0; i < 3; i++) {
                             if (commandPlayer.getPersonalBoard().getProdCardSlot().getCard(i, 1) != null)
-                                return "$Found";
+                                return "$buy";
                         }
                         return "No level 1 card active";
                     } else {
                         for (int i = 0; i < 3; i++) {
                             if (commandPlayer.getPersonalBoard().getProdCardSlot().getCard(i, 2) != null)
-                                return "$Found";
+                                return "$buy";
                         }
                         return "No level 2 card active";
                     }

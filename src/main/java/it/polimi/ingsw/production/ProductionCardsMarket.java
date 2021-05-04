@@ -42,8 +42,9 @@ public class ProductionCardsMarket {
     /**
      * This method remove the Production Card that the Player had just bought, if the Player can't buy the Production
      * Card throw an Exception
-     * @param productionCard ProductionCard
-     * @throws IllegalArgumentException IllegalArgumentException
+     * @param row int
+     * @param column int
+     * @throws IllegalArgumentException
      */
     public ProductionCard buyCard (int row, int column) throws IllegalArgumentException {
         ProductionCard card;

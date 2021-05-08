@@ -20,13 +20,6 @@ public abstract class LeaderCard {
      */
     private int wp;
 
-    /**
-     * constructor of this Leader Card
-     * @param requiredRes Resource
-     * @param requiredCard int[][]
-     * @param wp int
-     */
-
 
     /**
      * getter win points of this Leader Card

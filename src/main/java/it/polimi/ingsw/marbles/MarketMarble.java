@@ -13,6 +13,31 @@ public class MarketMarble {
         this.color = color;
     }
 
+    public MarketMarble(String color) throws IllegalArgumentException{
+        switch (color) {
+            case "white":
+                this.color=0;
+                break;
+            case "grey":
+                this.color=1;
+                break;
+            case "blue":
+                this.color=2;
+                break;
+            case "yellow":
+                this.color=3;
+                break;
+            case "purple":
+                this.color=4;
+                break;
+            case "red":
+                this.color=5;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
     /**
      * this method returns the color of this
      * @return color int

@@ -21,7 +21,7 @@ public class GameSetup {
     private final Socket clientSocket;
 
     /**
-     * this method starts the game setup and sets the nuer of players
+     * this method starts the game setup and sets the number of players
      *
      */
 
@@ -30,9 +30,8 @@ public class GameSetup {
     }
 
     /**
-     * this method starts the game setup and sets the nuer of players
+     * this method starts the game setup and sets the number of players
      * @return numberOfPlayers
-     * @throws IOException
      */
 
     public int setupGame () {

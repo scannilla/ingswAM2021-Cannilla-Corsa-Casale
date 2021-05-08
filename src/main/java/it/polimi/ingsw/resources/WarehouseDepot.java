@@ -28,20 +28,22 @@ public class WarehouseDepot {
      */
     public void insertNewResource(Resource resource, int column) throws IllegalArgumentException {
 
-        String message = "Unable to insert the resource.";
+        String outOfBounds = "Unable to insert the resource.";
+        String full = "This line is already full";
+        String wrong = "This line already has a different resource";
 
         for(int i=0; i<3; i++)
             if (i!=column)
                 if(checkResource(i)==resource)
-                    throw new IllegalArgumentException(message);
+                    throw new IllegalArgumentException(outOfBounds);
 
         if (depot[column][0] != null && depot[column][0] != resource){
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(wrong);
         }
 
         if (column == 0){
             if (depot[0][0] != null){
-                throw new IllegalArgumentException(message);
+                throw new IllegalArgumentException(full);
             } else {
                 depot[0][0] = resource;
             }
@@ -53,13 +55,13 @@ public class WarehouseDepot {
             } else if (depot[1][0] == null){
                 depot[1][0] = resource;
             } else {
-                throw new IllegalArgumentException(message);
+                throw new IllegalArgumentException(full);
             }
         }
 
         if (column == 2) {
             if(depot[2][2]!=null)
-                throw new IllegalArgumentException(message);
+                throw new IllegalArgumentException(full);
             int i=0;
             while(depot[2][i]!=null && i<3)
                 i++;

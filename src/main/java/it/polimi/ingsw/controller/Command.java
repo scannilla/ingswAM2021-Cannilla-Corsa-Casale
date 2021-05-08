@@ -1,13 +1,16 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.leader.LeaderOfDepots;
+import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
-import java.net.Socket;
+import java.util.Arrays;
+
 
 public class Command{
 
@@ -29,16 +32,22 @@ public class Command{
     /**
      * this method executes every command sent from the client
      * @return String
-     * @throws IllegalArgumentException
      */
     public String executeCommand() {
         switch (command) {
             case "buyproductioncard":
-                if(Integer.parseInt(parameters[0])<0 || Integer.parseInt(parameters[0])>3 || Integer.parseInt(parameters[1])<0 || Integer.parseInt(parameters[1])>2)
+                int row, column;
+                try {
+                    row = parseInt(parameters[0]);
+                    column = parseInt(parameters[1]);
+                } catch (NumberFormatException e) {
+                    return "Not a number";
+                }
+                if(row<0 || row>3 || column<0 || column>2)
                     return "index out of bounds";
-                if(commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])][Integer.parseInt(parameters[1])]==null)
+                if(commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row][column]==null)
                     return "there are no cards left on the selected pile";
-                int level = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])][Integer.parseInt(parameters[1])].getLevel();
+                int level = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row][column].getLevel();
                 if (level==1 || level ==2){
                     int count = 0;
                     for(int i=0; i<3; i++) {
@@ -79,7 +88,12 @@ public class Command{
 
 
             case "activateleadercard":
-                int chosenCard = Integer.parseInt(parameters[0]);
+                int chosenCard;
+                try {
+                    chosenCard = parseInt(parameters[0]);
+                } catch (NumberFormatException e) {
+                    return "Not a number";
+                }
                 if(chosenCard>=1 && chosenCard<=2) {
                     try {
                         commandPlayer.activateLeaderCard(commandPlayer.getLeaderCards()[chosenCard - 1]);
@@ -94,30 +108,33 @@ public class Command{
 
 
             case "buyresource":
-                int chosenLine = Integer.parseInt(parameters[1]);
-                if(!parameters[0].equals("column") && !parameters[0].equals("line"))
-                    return "select if you want to take resources either from a line or a column";
-
+                int chosenLine;
+                try{
+                    chosenLine = parseInt(parameters[0]);
+                } catch (NumberFormatException e) {
+                    return "Not a number";
+                }
                 if(parameters[0].equals("column")) {
-                    try {
-                        commandPlayer.buyResourceFromMarket(chosenLine + 3);
-                        return "resources taken";
-                    } catch (IllegalArgumentException e) {
-                        return "chosen column out of bounds";
-                    }
+                    if (chosenLine<1 || chosenLine>4)
+                        return "Index out of bounds";
+                    else return "$market";
                 }
-                else {
-                    try {
-                        commandPlayer.buyResourceFromMarket(chosenLine);
-                        return "resources taken";
-                    } catch (IllegalArgumentException e) {
-                        return "chosen line out of bounds";
-                    }
+                else if(parameters[0].equals("line")) {
+                    if (chosenLine < 1 || chosenLine > 3)
+                        return "Index out of bounds";
+                    else return "$market";
                 }
+                else return "Select either a column or a line";
+
 
 
             case "activateproduction":
-                int chosenPosition = Integer.parseInt(parameters[0]);
+                int chosenPosition;
+                try {
+                    chosenPosition = parseInt(parameters[0]);
+                } catch (NumberFormatException e) {
+                    return "Not a number";
+                }
                 if (chosenPosition < 1 || chosenPosition > 3){
                     return "choose a valid position";
                 }
@@ -149,8 +166,14 @@ public class Command{
                     }
                 }
 
-                case "discardleadercard":
-                if(Integer.parseInt(parameters[0])!=1 && Integer.parseInt(parameters[0])!=2)
+            case "discardleadercard":
+                int chosenDiscardedCard;
+                try{
+                    chosenDiscardedCard = parseInt(parameters[0]);
+                } catch (NumberFormatException e){
+                    return "Not a number";
+                }
+                if(chosenDiscardedCard!=1 && chosenDiscardedCard!=2)
                     return "Select a valid card";
                 try{
                     commandPlayer.discardLeaderCard(commandPlayer.getLeaderCards()[Integer.parseInt(parameters[0])-1]);
@@ -160,12 +183,16 @@ public class Command{
                 }
 
 
-            case "activatestandardproduction":
-                try{
-                    commandPlayer.activateStandardProduction(Integer.parseInt(parameters[0]));
-                    return "Standard Production Activated";
-                } catch(IllegalArgumentException e) {
-                    return "Can't start production with this resource";
+
+            case "activatecardproduction":
+                int chosenProdCard;
+                try {
+                    chosenProdCard = parseInt(parameters[0]);
+                    if (chosenProdCard<1 || chosenProdCard>3)
+                        return "Index out of bounds";
+                    return "$production";
+                } catch (NumberFormatException e) {
+                    return "Not a number";
                 }
 
             case "choosecards":
@@ -191,5 +218,13 @@ public class Command{
      */
     public String[] getParameters() {
         return parameters;
+    }
+
+    private int parseInt(String parameter) {
+        try {
+            return Integer.parseInt(parameter);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
     }
 }

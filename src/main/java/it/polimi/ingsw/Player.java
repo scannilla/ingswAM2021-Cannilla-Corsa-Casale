@@ -28,7 +28,7 @@ public class Player {
     /**
      * This attribute represents player's nickname
      */
-    private String nickname;
+    private final String nickname;
     /**
      * This attribute represents connected game
      */
@@ -118,7 +118,7 @@ public class Player {
      * this method buys a production card
      * @param rowIndex int
      * @param columnIndex int
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void buyProductionCard(int rowIndex, int columnIndex, int position){
         try {
@@ -131,7 +131,7 @@ public class Player {
     /**
      * this method activated standard production power for the selected production card
      * @param position int
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void activateStandardProduction (int position) throws IllegalArgumentException{
         ProductionCard card = personalBoard.getProdCardSlot().getTopCards()[position];
@@ -140,10 +140,6 @@ public class Player {
         for(int i=0; i<4; i++) {
             if(total[i]-required[i]<=0)
                 throw new IllegalArgumentException();
-        }
-        //ask client where he wants to take resources
-        for(Resource resource: card.getGivenRes()) {
-            personalBoard.getStrongbox().insertNewResource(resource);
         }
         if(card.getGivenFaithPoints()!=0) {
             increaseFaith(card.getGivenFaithPoints());
@@ -166,7 +162,7 @@ public class Player {
 
     /**
      * sets the connected game
-     * @param connectedGame
+     * @param connectedGame Game
      */
     public void setConnectedGame(Game connectedGame) {
         this.connectedGame = connectedGame;
@@ -193,39 +189,28 @@ public class Player {
      * @param line int
      * @throws IllegalArgumentException
      */
-    public void buyResourceFromMarket(int line) throws IllegalArgumentException{
-        int var;
-        if(line<0 || line >6)
-            throw new IllegalArgumentException();
-        if(line<3)
-            var=4;
-        else
-            var=3;
-        MarketMarble[] marbles;
-        if(var==4)
+    public MarketMarble[] buyResourceFromMarket(int line, String sel) throws IllegalArgumentException{
+        MarketMarble[]marbles;
+        if(sel.equals("line"))
             marbles = connectedGame.getMarket().selectLine(line);
+        else if (sel.equals("column"))
+            marbles = connectedGame.getMarket().selectColumn(line);
         else
-            marbles = connectedGame.getMarket().selectColumn(line-3);
-
-        for(MarketMarble marble : marbles) {
+            throw new IllegalArgumentException("not a line or a column");
+        for (MarketMarble marble : marbles){
             try {
-                Resource resource = marble.returnAbility();
-                int column=0;
-                //
-                personalBoard.getWarehouseDepot().insertNewResource(resource, column);
-            } catch (Exception exc) {
-                if (exc.getMessage().equals("red"))
-                    this.increaseFaith(1);
-                else if (exc.getMessage().equals("white"));
-                    //TODO leader ability
+                marble.returnAbility();
+            } catch (Exception e) {
+                if (e.getMessage().equals("red"))
+                    increaseFaith(1);
             }
-
         }
+        return marbles;
     }
 
     /**
      * activates an ability of a leader of conversion card
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void activateLeaderOfConversionAbility() throws IllegalArgumentException{
         LeaderOfConversions card;

@@ -1,9 +1,9 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.leader.LeaderCardsDeck;
+import it.polimi.ingsw.leader.LeaderOfConversions;
 import it.polimi.ingsw.leader.LeaderOfDepots;
-import it.polimi.ingsw.production.ProductionCard;
+import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.resources.Resource;
 
 import java.io.BufferedReader;
@@ -55,6 +55,7 @@ public class RequiredClientActions {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             String[] parameters = command.getParameters();
+
             switch(cmd) {
                 case "buy":
                     Resource[] costArray = player.getConnectedGame().getCardsMarket().getCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1])).getCostArray();
@@ -69,33 +70,7 @@ public class RequiredClientActions {
 
                             case "extradepot":
                                 Resource readResource = checkResource(chosenResource.split(" ")[0].toLowerCase());
-                                LeaderOfDepots card;
-                                boolean found=false;
-                                for (int i=0; i<2; i++){
-                                    if (player.getActiveLeaderCards()[i].getAbility() == 1){
-                                        card = ((LeaderOfDepots)player.getActiveLeaderCards()[i]);
-                                        if(readResource.equals(card.getResource()))
-                                            found = true;
-                                    }
-                                }
-                                if (!found) {
-                                    out.println("You don't have an extra depot for the selected resource");
-                                    break;
-                                }
-                                for (Resource res : costArray) {
-                                    if (res.equals(readResource)) {
-                                        for (LeaderOfDepots leaderCard : ((LeaderOfDepots[])player.getActiveLeaderCards())) {
-                                            if (leaderCard.getResource().equals(res)) {
-                                                try {
-                                                    leaderCard.useResource(res);
-                                                    res = null;
-                                                } catch (IllegalArgumentException e) {
-                                                    out.println("You don't have enough resources of the selected type in your extra depot");
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                                useExtraDepotResource(costArray, readResource, out);
                                 break;
 
                             case "strongbox":
@@ -122,9 +97,8 @@ public class RequiredClientActions {
                     int position;
                     do {
                         out.println("Select a position to insert the card in");
-                        position = Integer.parseInt(in.readLine());
-                    }
-                    while (position<1 || position > 3);
+                        position = CheckCommand.checkNumber(in, out, in.readLine());
+                    } while (position<1 || position > 3);
                     player.buyProductionCard(Integer.parseInt(parameters[0]),Integer.parseInt(parameters[1]), position);
                     break;
 
@@ -139,27 +113,8 @@ public class RequiredClientActions {
                                 break;
 
                             case "extradepot":
-                                Resource resExtra = checkResource(chosenResource.split(" ")[0].toLowerCase());
-                                boolean done=false;
-
-                                for (Resource test : requiredRes) {
-                                    if (resExtra.equals(test)) {
-                                        if (player.getActiveLeaderCards()[0].getAbility() == 1) {
-                                            if(((LeaderOfDepots)player.getActiveLeaderCards()[0]).getResource().equals(test)) {
-                                                ((LeaderOfDepots) player.getActiveLeaderCards()[0]).useResource(test);
-                                                test = null;
-                                                done = true;
-                                            }
-                                                //TODO
-                                        }
-                                        if (player.getActiveLeaderCards()[1].getAbility() == 1 && !done) {
-                                            if(((LeaderOfDepots)player.getActiveLeaderCards()[1]).getResource().equals(test)) {
-                                                ((LeaderOfDepots) player.getActiveLeaderCards()[1]).useResource(test);
-                                                test = null;
-                                            }
-                                        }
-                                    }
-                                }
+                                Resource resExtra = checkResource(chosenResource.split(" ")[0].toLowerCase()); //resExtra is the resource chosen by the client
+                                useExtraDepotResource(requiredRes, resExtra, out);
 
                                 break;
 
@@ -173,13 +128,152 @@ public class RequiredClientActions {
 
                     break;
 
+                case "market":
+                    MarketMarble[] marbles;
+                    int chosenLine = Integer.parseInt(parameters[1])-1;
+                    marbles = player.buyResourceFromMarket(chosenLine-1, parameters[0]);
+                    readMarbles(out, in, marbles);
 
+                case "standard":
+                    out.println("You can activate the standard production, select where you want tot take the resources from");
+                    int givenRes = 0;
+                    do {
+
+                        String chosenResource = in.readLine();
+                        switch (chosenResource.split(" ")[1].toLowerCase()) {
+                            case "warehousedepot":
+                                anyResource(new Resource(chosenResource.split(" ")[0].toLowerCase()), "warehouse", out, in);
+                                givenRes++;
+                                break;
+
+                            case "extradepot":
+                                Resource resExtra = checkResource(chosenResource.split(" ")[0].toLowerCase()); //resExtra is the resource chosen by the client
+                                anyResource(new Resource(chosenResource.split(" ")[0].toLowerCase()), "extra", out, in);
+                                givenRes++;
+                                break;
+
+                            default:
+                                out.println("Select a valid resource location (Warehouse Depot or Extra Depot)");
+                                break;
+                        }
+                    } while (givenRes<2);
+                    out.println("Now choose a resource to get from the production");
+                    do {
+                        String choice = in.readLine();
+                        try {
+                            Resource res = new Resource(choice.toLowerCase());
+                            insertResource(res, out, in);
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            out.println("select a valid resource");
+                        }
+                    } while (true);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * this method take any resource from Warehouse depot or Extra Depot
+     * @param resource Resource
+     * @param depotType String
+     * @param out PrintWriter
+     * @param in BufferedReader
+     */
+    private void anyResource(Resource resource, String depotType, PrintWriter out, BufferedReader in) {
+        do {
+            switch (depotType) {
+                case "warehouse":
+                    for (int i=0; i<3; i++) {
+                        if (player.getPersonalBoard().getWarehouseDepot().checkResource(i).equals(resource)) {
+                            player.getPersonalBoard().getWarehouseDepot().useResource(resource);
+                            out.println("resource taken");
+                            return;
+                        }
+                    }
+                    out.println("You don't have this resource in your warehouse depot, select a new resource and location");
+                    break;
+                case "extra":
+                    int position = CheckCommand.leaderCardChecker("depot", player, resource);
+                    if(position==0)
+                        out.println("You don't have any active Leader of Depots card");
+                    else if ((position==1 || position ==2 ) && ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).getExtraDepot()[0]!=null) {
+                        ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).useResource(resource);
+                        out.println("resource taken");
+                        return;
+                    }
+                    else if (position==3) {
+                        if(((LeaderOfDepots)player.getActiveLeaderCards()[0]).getExtraDepot()[0]!=null) {
+                            ((LeaderOfDepots) player.getActiveLeaderCards()[0]).useResource(resource);
+                            out.println("resource taken");
+                            return;
+                        }
+                        else if (((LeaderOfDepots)player.getActiveLeaderCards()[1]).getExtraDepot()[0]!=null){
+                            ((LeaderOfDepots) player.getActiveLeaderCards()[1]).useResource(resource);
+                            out.println("resource taken");
+                            return;
+                        }
+                    }
+                    break;
+            }
+            out.println("Insert a new resource and location");
+            String newInput = null;
+            try {
+                newInput = in.readLine();
+            } catch (IOException e) {
+                System.exit(1);
+            }
+            depotType = newInput.split(" ")[1];
+            resource =  new Resource(newInput.split(" ")[0]);
+
+        } while(true);
+    }
+
+    /**
+     * this method allow the player to use a resource from his/her ExtraDepot
+     * @param costArray Resource[]
+     * @param readResource Resource
+     * @param out PrintWriter
+     */
+    private void useExtraDepotResource(Resource[] costArray, Resource readResource, PrintWriter out) {
+        boolean done = false;
+        for (int i = 0; i< costArray.length; i++) {
+            if (readResource.equals(costArray[i])) {
+                if (player.getActiveLeaderCards()[0]!=null && player.getActiveLeaderCards()[0].getAbility() == 1) {
+                    if(((LeaderOfDepots)player.getActiveLeaderCards()[0]).getResource().equals(costArray[i])) {
+                        try {
+                            ((LeaderOfDepots) player.getActiveLeaderCards()[0]).useResource(costArray[i]);
+                           costArray[i] = null;
+                            done = true;
+                        } catch (IllegalArgumentException e){
+                            out.println(e.getMessage());
+                        }
+                        }
+                }
+                if (player.getActiveLeaderCards()[1] != null && player.getActiveLeaderCards()[1].getAbility() == 1 && !done) {
+                    if(((LeaderOfDepots)player.getActiveLeaderCards()[1]).getResource().equals(costArray[i])) {
+                        try {
+                            ((LeaderOfDepots) player.getActiveLeaderCards()[1]).useResource(costArray[i]);
+                            costArray[i] = null;
+                            done = true;
+                        } catch (IllegalArgumentException e){
+                            out.println(e.getMessage());
+                        }
+                    }
+                }
+            }
+            if(done)
+                break;
+        }
+    }
+
+    /**
+     * this method allow the player to use a resource from his/her Warehouse Depot
+     * @param out PrintWriter
+     * @param requiredRes Resource[]
+     * @param chosenResource String
+     */
     private void useWarehouseResource(PrintWriter out, Resource[] requiredRes, String chosenResource) {
         try {
             Resource resource = checkResource(chosenResource.split(" ")[0].toLowerCase());
@@ -204,6 +298,7 @@ public class RequiredClientActions {
     /**
      * this method checks if the selected resource is valid and creates a new resource
      * @param resource String
+     * @throws IllegalArgumentException e
      * @return new Resource(resource) Resource
      */
     private Resource checkResource(String resource) {
@@ -212,5 +307,110 @@ public class RequiredClientActions {
             return new Resource(resource);
         else
             throw new IllegalArgumentException();
+    }
+
+    /**
+     * Ask client where insert the new Resource
+     * @param res Resource
+     * @param out PrintWriter
+     * @param in BufferedReader
+     */
+    private void insertResource(Resource res, PrintWriter out, BufferedReader in) {
+
+        try {
+            do {
+                out.println("Select where you want to insert the new resource (warehouse depot or extra depot");
+                String choice = in.readLine().toLowerCase().replace(" ", "");
+                switch (choice) {
+                    case "warehousedepot":
+                        out.println("select a line to insert the resource into");
+                        int column=0;
+                         try {
+                             column = Integer.parseInt(in.readLine());
+                         } catch (NumberFormatException e) {
+                             out.println("Insert a valid number");
+                         }
+                         if(column!=0) {
+                             try {
+                                 player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column);
+                                 return;
+                             } catch (IllegalArgumentException e) {
+                                 out.println(e.getMessage());
+                                 out.println("Choose if you want to move your resources (move resources -first line -second line) or discard this resource (discard resource) otherwise just press anything to try again");
+                                 String[] action = in.readLine().toLowerCase().replace(" ", "").split("-");
+
+                                 String commandMove = action[0];
+
+
+                                 int line1 = CheckCommand.checkNumber(in, out, action[0]);
+                                 int line2 = CheckCommand.checkNumber(in, out, action[1]);
+                                 switch (commandMove){
+                                     case "moveresources":
+                                         player.getPersonalBoard().getWarehouseDepot().moveResources(line1, line2);
+
+                                         break;
+                                     case "discardresources":
+
+                                        break;
+                                 }
+                             }
+                         }
+
+                        break;
+                    case "extradepot":
+                        break;
+                    default:
+                        out.println("Select a valid location");
+                        break;
+                }
+            }
+            while (true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method read and analyze the marble array from the market for transform them into resource or to discard them
+     * @param out PrintWriter
+     * @param in BufferedReader
+     * @param marbles MarketMarble[]
+     */
+    private void readMarbles (PrintWriter out, BufferedReader in, MarketMarble[] marbles){
+        Resource resource1;
+        for (MarketMarble marble : marbles) {
+            try {
+                Resource resource = marble.returnAbility();
+                insertResource(resource, out, in);
+            } catch (Exception e) {
+                if(e.getMessage().equals("white")) {
+                    if(player.getActiveLeaderCards()[0]!=null && player.getActiveLeaderCards()[1]!=null && (player.getActiveLeaderCards()[0].getAbility()==2 || player.getActiveLeaderCards()[1].getAbility()==2)) {
+                        out.println("select if you want to transform or discard the white marble");
+                        try {
+                            String transformChoice= in.readLine();
+                            transformChoice = CheckCommand.commandChecker(new String[]{"transform", "discard"}, transformChoice, in, out);
+                            switch (transformChoice) {
+                                case "transform": //transform marble
+                                    if(player.getActiveLeaderCards()[0].getAbility()==2 && player.getActiveLeaderCards()[1].getAbility()==2) {
+                                        out.println("Select the resource you want to convert the marble into");
+
+                                    }
+                                    resource1 = ((LeaderOfConversions) player.getActiveLeaderCards()[0]).getConvertedResource();
+                                    break;
+                                case "discard": //discard white marble
+
+
+                            }
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+
+                    }
+                }
+                else {
+                    out.println("faith increased");
+                }
+            }
+        }
     }
 }

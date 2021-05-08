@@ -24,4 +24,6 @@ public class LeaderOfConversions extends LeaderCard {
     public Resource getConvertedResource() {
         return convertedResource;
     }
+
+
 }

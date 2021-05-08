@@ -92,7 +92,7 @@ public class WarehouseDepot {
     /**
      * use a resource from depot
      * @param resource Resource
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void useResource(Resource resource) throws IllegalArgumentException{
         int column=-1;
@@ -144,7 +144,7 @@ public class WarehouseDepot {
      * moves resource from line1 to line2
      * @param line1 int
      * @param line2 int
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void moveResources(int line1, int line2) throws IllegalArgumentException {
 

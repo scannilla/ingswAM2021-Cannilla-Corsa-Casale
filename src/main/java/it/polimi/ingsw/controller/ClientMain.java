@@ -8,9 +8,8 @@ public class ClientMain {
 
     /**
      * this method sets the connection with the server
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int portNumber;
         String hostName;
 

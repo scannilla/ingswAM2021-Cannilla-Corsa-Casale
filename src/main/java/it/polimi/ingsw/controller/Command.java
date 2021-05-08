@@ -57,7 +57,7 @@ public class Command{
                     if (count == 3)
                         return "No more space";
                     }
-                ProductionCard productionCardSold = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])][Integer.parseInt(parameters[1])];
+                ProductionCard productionCardSold = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row][column];
                 Resource[] priceResources = productionCardSold.getCostArray();
                 int[] price = ResourceCounter.resCount(priceResources);
                 for (int i=0; i<4; i++) {
@@ -153,8 +153,13 @@ public class Command{
 
 
             case "moveresources":
-                int line1 = Integer.parseInt(parameters[0]);
-                int line2 = Integer.parseInt(parameters[1]);
+                int line1, line2;
+                try{
+                    line1 = parseInt(parameters[0]);
+                    line2 = parseInt(parameters[1]);
+                } catch (NumberFormatException e) {
+                    return "Not a number";
+                }
                 if((line1<1 || line1>3) || (line2<1 || line2>3) || line1==line2)
                     return "Choose valid warehouse lines to switch ";
                 else {
@@ -176,7 +181,7 @@ public class Command{
                 if(chosenDiscardedCard!=1 && chosenDiscardedCard!=2)
                     return "Select a valid card";
                 try{
-                    commandPlayer.discardLeaderCard(commandPlayer.getLeaderCards()[Integer.parseInt(parameters[0])-1]);
+                    commandPlayer.discardLeaderCard(commandPlayer.getLeaderCards()[chosenDiscardedCard-1]);
                     return ("Card number " + parameters[0] + " discarded");
                 } catch (IllegalArgumentException e) {
                     return "Chosen card can't be discarded";
@@ -195,8 +200,30 @@ public class Command{
                     return "Not a number";
                 }
 
-            case "choosecards":
-                ;
+            case "standardproduction":
+                int counter = 0;
+                int [] resCounter;
+                int cardPosition = CheckCommand.leaderCardChecker("depot", commandPlayer);
+                for(int i : commandPlayer.getPersonalBoard().getWarehouseDepot().getDepotResourceAmount())
+                     counter += i;
+                if (counter >= 2)
+                    return "$standard";
+                else if (cardPosition > 0) {
+                    if(cardPosition == 3) {
+                        resCounter = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[0]).getExtraDepot());
+                        for (int i=0; i<4; i++)
+                            resCounter[i] += ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[1]).getExtraDepot())[i];
+                        if (Arrays.stream(resCounter).reduce(0, Integer::sum) + counter>=2)
+                            return "$standard";
+                    }
+                    else if (cardPosition == 1 || cardPosition == 2) {
+                        resCounter = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[cardPosition-1]).getExtraDepot());
+                        if (Arrays.stream(resCounter).reduce(0, Integer::sum) + counter>=2)
+                            return "$standard";
+                    }
+                    else
+                        return "Not enough resources in your depots";
+                }
 
             default: return "no such command";
         }

@@ -44,10 +44,9 @@ public class RequiredClientActions {
     }
 
     /**
-     * this method manages the user interactions, asking him where to take the resources from (strongbox, warehouse depot or extra depot)+
+     * this method manages the user interactions, asking him where to take the resources from
+     * (strongbox, warehouse depot or extra depot)
      * @param cmd String
-     * @throws IllegalArgumentException
-     * @throws IOException
      */
     public void execute(String cmd) {
 
@@ -59,6 +58,7 @@ public class RequiredClientActions {
             switch(cmd) {
                 case "buy":
                     Resource[] costArray = player.getConnectedGame().getCardsMarket().getCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1])).getCostArray();
+                    CheckCommand.checkDiscount(player, in, out, costArray);
                     out.println("you can buy the selected card, please choose the resources to use");
                     do {
                         String chosenResource = in.readLine();
@@ -277,11 +277,11 @@ public class RequiredClientActions {
     private void useWarehouseResource(PrintWriter out, Resource[] requiredRes, String chosenResource) {
         try {
             Resource resource = checkResource(chosenResource.split(" ")[0].toLowerCase());
-            for (Resource res : requiredRes) {
-                if (res.equals(resource)) {
+            for (int i=0; i< requiredRes.length; i++) {
+                if (requiredRes[i].equals(resource)) {
                     try {
-                        player.getPersonalBoard().getWarehouseDepot().useResource(res);
-                        res = null;
+                        player.getPersonalBoard().getWarehouseDepot().useResource(requiredRes[i]);
+                        requiredRes[i] = null;
                     } catch (IllegalArgumentException e) {
                         out.println("This resource isn't available in your warehouse depot");
                     }
@@ -302,7 +302,6 @@ public class RequiredClientActions {
      * @return new Resource(resource) Resource
      */
     private Resource checkResource(String resource) {
-        Resource res;
         if(resource.equals("coin") || resource.equals("stone") || resource.equals("servant") || resource.equals("shield") )
             return new Resource(resource);
         else

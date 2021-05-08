@@ -48,7 +48,8 @@ public class MarketMarble {
 
     /**
      * this method throws an exception if the color has an invalid value
-     * @throws Exception
+     * @return Resource
+     * @throws Exception e
      */
     public Resource returnAbility() throws Exception{
         if (color==0)

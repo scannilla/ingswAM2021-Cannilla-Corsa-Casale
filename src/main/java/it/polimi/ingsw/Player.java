@@ -187,7 +187,8 @@ public class Player {
     /**
      * this method buys resources from market
      * @param line int
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
+     * @return MarketMarble[] marbles
      */
     public MarketMarble[] buyResourceFromMarket(int line, String sel) throws IllegalArgumentException{
         MarketMarble[]marbles;

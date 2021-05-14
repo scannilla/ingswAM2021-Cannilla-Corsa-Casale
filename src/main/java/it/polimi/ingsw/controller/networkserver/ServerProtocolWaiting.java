@@ -1,7 +1,4 @@
-package it.polimi.ingsw.controller;
-
-import it.polimi.ingsw.Game;
-import it.polimi.ingsw.Player;
+package it.polimi.ingsw.controller.networkserver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,7 +56,8 @@ public class ServerProtocolWaiting implements Runnable {
         String command;
 
 
-        while (true) {
+
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 command = in.readLine();
                 if (command.equals("quit"))

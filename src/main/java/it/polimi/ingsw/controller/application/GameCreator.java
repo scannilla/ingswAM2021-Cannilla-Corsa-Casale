@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.application;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class GameSetup {
+public class GameCreator {
 
     /**
      * represents the number of players connected
@@ -25,7 +25,7 @@ public class GameSetup {
      *
      */
 
-    public GameSetup(Socket clientSocket) {
+    public GameCreator(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 

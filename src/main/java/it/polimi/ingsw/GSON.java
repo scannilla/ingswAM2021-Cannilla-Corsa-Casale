@@ -6,7 +6,7 @@ import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 import it.polimi.ingsw.tokens.ActionTokenPile;
-import it.polimi.ingsw.controller.Command;
+import it.polimi.ingsw.controller.application.Command;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public final class GSON {
     /**
      * Parsing of all Production Cards
      * @param file File
-     * @throws IOException
+     * @throws IOException e
      */
 
     public static ProductionCardsDeck productionCardParser(File file) throws IOException {
@@ -32,7 +32,7 @@ public final class GSON {
     /**
      * Parsing of all Leader Cards
      * @param  file File
-     * @throws IOException
+     * @throws IOException e
      */
     public static LeaderCardsDeck leaderCardParser(File file) throws IOException {
         GsonBuilder builder = new GsonBuilder();
@@ -52,7 +52,7 @@ public final class GSON {
     /**
      * Parsing of all Action Tokens
      * @param file File
-     * @throws IOException
+     * @throws IOException e
      */
 
     public static ActionTokenPile actionTokensPileParser(File file) throws IOException {
@@ -68,7 +68,7 @@ public final class GSON {
     /**
      * Parsing of Market Structure
      * @param file File
-     * @throws IOException
+     * @throws IOException e
      */
 
     public static MarketStructure marketStructureParser(File file) throws IOException {
@@ -83,9 +83,9 @@ public final class GSON {
 
     /**
      * parsing for vatican report
-     * @param file
+     * @param file file
      * @return vaticanReport VaticanReport
-     * @throws IOException
+     * @throws IOException e
      */
 
     public static VaticanReport vaticanReportParser(File file) throws IOException {

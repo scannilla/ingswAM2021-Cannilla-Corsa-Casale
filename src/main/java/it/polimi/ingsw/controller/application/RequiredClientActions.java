@@ -1,6 +1,8 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.application.CheckCommand;
+import it.polimi.ingsw.controller.application.Command;
 import it.polimi.ingsw.leader.LeaderOfConversions;
 import it.polimi.ingsw.leader.LeaderOfDepots;
 import it.polimi.ingsw.marbles.MarketMarble;
@@ -56,7 +58,7 @@ public class RequiredClientActions {
             String[] parameters = command.getParameters();
 
             switch(cmd) {
-                case "buy":
+                case "buy": //this case is activated when the player is trying to buy a new dev card
                     Resource[] costArray = player.getConnectedGame().getCardsMarket().getCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1])).getCostArray();
                     CheckCommand.checkDiscount(player, in, out, costArray);
                     out.println("you can buy the selected card, please choose the resources to use");
@@ -102,7 +104,7 @@ public class RequiredClientActions {
                     player.buyProductionCard(Integer.parseInt(parameters[0]),Integer.parseInt(parameters[1]), position);
                     break;
 
-                case "production":
+                case "activateproduction": //this case is activated when the player has activated a development card production
                     out.println("You can activate this production, select where you want to take the resources from");
                     Resource[] requiredRes = player.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()[Integer.parseInt(parameters[0])].getRequiredRes();
                     do {
@@ -128,13 +130,13 @@ public class RequiredClientActions {
 
                     break;
 
-                case "market":
+                case "buyfrommarket": //this case is activated when the player is buying resources from the market
                     MarketMarble[] marbles;
                     int chosenLine = Integer.parseInt(parameters[1])-1;
                     marbles = player.buyResourceFromMarket(chosenLine-1, parameters[0]);
                     readMarbles(out, in, marbles);
 
-                case "standard":
+                case "standardproduction": //this case is activated when the player has activated the standard production
                     out.println("You can activate the standard production, select where you want tot take the resources from");
                     int givenRes = 0;
                     do {
@@ -281,6 +283,7 @@ public class RequiredClientActions {
                 if (requiredRes[i].equals(resource)) {
                     try {
                         player.getPersonalBoard().getWarehouseDepot().useResource(requiredRes[i]);
+                        out.println("Resource used");
                         requiredRes[i] = null;
                     } catch (IllegalArgumentException e) {
                         out.println("This resource isn't available in your warehouse depot");
@@ -315,52 +318,47 @@ public class RequiredClientActions {
      * @param in BufferedReader
      */
     private void insertResource(Resource res, PrintWriter out, BufferedReader in) {
-
         try {
             do {
-                out.println("Select where you want to insert the new resource (warehouse depot or extra depot");
+                out.println("Select where you want to insert the new resource (warehouse depot or extra depot) or if you want to discard it");
                 String choice = in.readLine().toLowerCase().replace(" ", "");
+                choice = CheckCommand.commandChecker(new String[]{"warehousedepot","extradepot","discard"}, choice, in, out);
                 switch (choice) {
                     case "warehousedepot":
                         out.println("select a line to insert the resource into");
-                        int column=0;
-                         try {
-                             column = Integer.parseInt(in.readLine());
-                         } catch (NumberFormatException e) {
-                             out.println("Insert a valid number");
-                         }
-                         if(column!=0) {
-                             try {
-                                 player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column);
-                                 return;
-                             } catch (IllegalArgumentException e) {
-                                 out.println(e.getMessage());
-                                 out.println("Choose if you want to move your resources (move resources -first line -second line) or discard this resource (discard resource) otherwise just press anything to try again");
-                                 String[] action = in.readLine().toLowerCase().replace(" ", "").split("-");
-
-                                 String commandMove = action[0];
-
-
-                                 int line1 = CheckCommand.checkNumber(in, out, action[0]);
-                                 int line2 = CheckCommand.checkNumber(in, out, action[1]);
-                                 switch (commandMove){
-                                     case "moveresources":
-                                         player.getPersonalBoard().getWarehouseDepot().moveResources(line1, line2);
-
-                                         break;
-                                     case "discardresources":
-
-                                        break;
-                                 }
-                             }
-                         }
-
+                        String chosenColumn=in.readLine();
+                        int column = CheckCommand.checkNumber(in, out, chosenColumn);
+                        try {
+                            player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column);
+                            return;
+                        } catch (IllegalArgumentException e) {
+                            out.println(e.getMessage());
+                            out.println("Choose if you want to move your resources (move resources -first line -second line) or discard this resource (discard resource) otherwise just press anything to try again");
+                            String[] action = in.readLine().toLowerCase().replace(" ", "").split("-");
+                            String commandMove = action[0];
+                            switch (commandMove){
+                                case "moveresources":
+                                    int line1 = CheckCommand.checkNumber(in, out, action[1]);
+                                    int line2 = CheckCommand.checkNumber(in, out, action[2]);
+                                    try {
+                                        player.getPersonalBoard().getWarehouseDepot().moveResources(line1, line2);
+                                        out.println("The selected line have been correctly switched, now insert the command again");
+                                    } catch (IllegalArgumentException exc) {
+                                        out.println(exc.getMessage());
+                                    }
+                                    break;
+                                case "discardresource":
+                                    discardedResources();
+                                    return;
+                                }
+                            }
                         break;
                     case "extradepot":
                         break;
-                    default:
-                        out.println("Select a valid location");
-                        break;
+
+                    case "discard":
+                        discardedResources();
+                        return;
                 }
             }
             while (true);
@@ -386,19 +384,24 @@ public class RequiredClientActions {
                     if(player.getActiveLeaderCards()[0]!=null && player.getActiveLeaderCards()[1]!=null && (player.getActiveLeaderCards()[0].getAbility()==2 || player.getActiveLeaderCards()[1].getAbility()==2)) {
                         out.println("select if you want to transform or discard the white marble");
                         try {
-                            String transformChoice= in.readLine();
+                            String transformChoice= in.readLine().toLowerCase();
                             transformChoice = CheckCommand.commandChecker(new String[]{"transform", "discard"}, transformChoice, in, out);
                             switch (transformChoice) {
                                 case "transform": //transform marble
-                                    if(player.getActiveLeaderCards()[0].getAbility()==2 && player.getActiveLeaderCards()[1].getAbility()==2) {
-                                        out.println("Select the resource you want to convert the marble into");
-
+                                    int conversionPosition = CheckCommand.leaderCardChecker("conversion", player);
+                                    if(conversionPosition==1 || conversionPosition==2) {
+                                        resource1 = ((LeaderOfConversions)player.getActiveLeaderCards()[conversionPosition-1]).getConvertedResource();
+                                        insertResource(resource1, out, in);
                                     }
-                                    resource1 = ((LeaderOfConversions) player.getActiveLeaderCards()[0]).getConvertedResource();
+                                    else {
+                                        out.println("You can only convert one resource at a time, select the one you prefer");
+                                        String selectedResource = in.readLine().toLowerCase();
+                                        Resource chosenRes = new Resource(CheckCommand.commandChecker(new String[]{((LeaderOfConversions)player.getActiveLeaderCards()[0]).getConvertedResource().toString(), ((LeaderOfConversions)player.getActiveLeaderCards()[0]).getConvertedResource().toString()}, selectedResource, in, out));
+                                        insertResource(chosenRes, out, in);
+                                    }
                                     break;
-                                case "discard": //discard white marble
-
-
+                                case "discard":
+                                    out.println("White marble discarded");
                             }
                         } catch (IOException ioException) {
                             ioException.printStackTrace();

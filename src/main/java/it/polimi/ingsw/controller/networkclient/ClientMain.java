@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.networkclient;
 
 import java.io.*;
 import java.net.*;

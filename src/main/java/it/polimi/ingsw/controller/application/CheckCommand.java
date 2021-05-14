@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.leader.*;

@@ -25,9 +25,9 @@ public class ProductionCardsMarket {
             int j=i%4;
             productionCardsMarket[l][k%4][j]=productionCardsDeck.getProductionCardsDeck()[i];
             if(j==3) {
-                k++;
                 if(k%4==3)
                     l++;
+                k++;
             }
         }
         List<ProductionCard> prodList;

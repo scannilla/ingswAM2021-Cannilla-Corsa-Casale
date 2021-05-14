@@ -209,32 +209,6 @@ public class Player {
         return marbles;
     }
 
-    /**
-     * activates an ability of a leader of conversion card
-     * @throws IllegalArgumentException e
-     */
-    public void activateLeaderOfConversionAbility() throws IllegalArgumentException{
-        LeaderOfConversions card;
-        if(activeLeaderCards[0].getAbility()!=2 && activeLeaderCards[1].getAbility()!=2)
-            throw new IllegalArgumentException();
-        else if(activeLeaderCards[0].getAbility()==2 && activeLeaderCards[1].getAbility()==2)
-            //user choice
-            ;
-        else {
-            if (activeLeaderCards[0].getAbility()==2)
-                card = (LeaderOfConversions) activeLeaderCards[0];
-            else
-                card = (LeaderOfConversions) activeLeaderCards[1];
-            //user choice
-            int column;
-            try {
-               // this.getPersonalBoard().getWarehouseDepot().insertNewResource(card.getConvertedResource(), column);
-            } catch (IllegalArgumentException e) {
-                //repeat
-            }
-
-        }
-    }
 
     /**
      * getter for the vector of leader cards

@@ -58,17 +58,19 @@ public class Game {
     /**
      * This method initializes the game to the start state
      */
-    public void initialSet() throws IOException {//TODO sets the game for the start
+    public void initialSet() throws IOException {
         for(Player p: players)
             p.setConnectedGame(this);
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
-        actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+        if (numberOfPlayers==1)
+            actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
         deck = GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
         leaderCardsDeck = GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
         market = GSON.marketStructureParser(new File("src/main/java/it/polimi/ingsw/marbles/marbles.json"));
         market.initializeMarket();
         cardsMarket.setMarket(deck);
         leaderCardsDeck.shuffleDeck();
+        players.get(0).setActive(true);
     }
 
     /**
@@ -148,4 +150,25 @@ public class Game {
     public ProductionCardsMarket getCardsMarket() {
         return cardsMarket;
     }
+
+    /**
+     * return the next player of current player
+     * @param currentPlayer Player
+     * @return if the player next to current player is the last return the first player of the list
+     *         else return the player next to the current
+     * @throws IllegalArgumentException e
+     */
+    public Player nextPlayer(Player currentPlayer) throws IllegalArgumentException {
+        for (Player p : players) {
+            if (p==currentPlayer) {
+                if (players.indexOf(p) == numberOfPlayers - 1 && numberOfPlayers != 1)
+                    return players.get(0);
+                else
+                    return players.get(players.indexOf(p) + 1);
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+
 }

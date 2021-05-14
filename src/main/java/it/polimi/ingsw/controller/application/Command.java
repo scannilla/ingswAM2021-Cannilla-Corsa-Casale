@@ -1,11 +1,9 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.application.CheckCommand;
 import it.polimi.ingsw.leader.LeaderOfDepots;
-import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.production.ProductionCard;
-import it.polimi.ingsw.production.ProductionCardsDeck;
-import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
@@ -28,6 +26,7 @@ public class Command{
      * this attribute represents the player
      */
     private Player commandPlayer;
+
 
     /**
      * this method executes every command sent from the client
@@ -224,6 +223,8 @@ public class Command{
                     else
                         return "Not enough resources in your depots";
                 }
+            case "endturn":
+                return "end";
 
             default: return "no such command";
         }

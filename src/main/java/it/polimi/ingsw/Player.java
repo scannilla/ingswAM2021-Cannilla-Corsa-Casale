@@ -262,7 +262,13 @@ public class Player {
 
 
 
-
+    public void discardedResourceUser(Player player){
+        for (Player p : connectedGame.getPlayers()){
+            if (p != player){
+                p.increaseFaith(1);
+            }
+        }
+    }
 
 
 

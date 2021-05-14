@@ -24,7 +24,7 @@ public class ProdCardSlot {
      * when a new Production Card is bought it is inserted in a slot
      * @param card int
      * @param place int
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException {
         int level = card.getLevel();
@@ -69,7 +69,7 @@ public class ProdCardSlot {
      * @param column int
      * @param level int
      * @return slots[column][level]
-     * @throws NullPointerException
+     * @throws NullPointerException e
      */
     //TODO check try/catch
     public ProductionCard getCard(int column, int level) throws NullPointerException {

@@ -130,20 +130,37 @@ public class Command{
             case "activateproduction":
                 int chosenPosition;
                 try {
-                    chosenPosition = parseInt(parameters[0]);
+                    chosenPosition = Integer.parseInt(parameters[0]);
                 } catch (NumberFormatException e) {
                     return "Not a number";
                 }
                 if (chosenPosition < 1 || chosenPosition > 3){
                     return "choose a valid position";
                 }
-                try {
-                    commandPlayer.activateStandardProduction(chosenPosition - 1);
-                    return "production activated";
-                    } catch (IllegalArgumentException e) {
-                        return "production can't be activated";
+                ProductionCard card = commandPlayer.getPersonalBoard().getProdCardSlot().getTopCards()[chosenPosition-1];
+                Resource[] costArray = card.getCostArray();
+                int[] costAmount = ResourceCounter.resCount(costArray);
+                int[] resExtraAmount = {0, 0, 0, 0};
+                int[] resWarehouseAmount = commandPlayer.getPersonalBoard().getWarehouseDepot().getDepotResourceAmount();
+                int[] resAllAmount = {0, 0, 0, 0};
+                int numberOfDepotCards;
+                for (int j=0; j<costArray.length; j++){
+                    numberOfDepotCards = CheckCommand.leaderCardChecker("depot", commandPlayer, costArray[j]);
+                    if (numberOfDepotCards==1 || numberOfDepotCards == 2){
+                        resExtraAmount[j] = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[numberOfDepotCards-1]).getExtraDepot())[j];
+                    } else if (numberOfDepotCards == 3){
+                        resExtraAmount[j] = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[0]).getExtraDepot())[j] +
+                                ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[1]).getExtraDepot())[j];
                     }
+                    resAllAmount[j] = resExtraAmount[j] + resWarehouseAmount[j];
+                }
 
+                for(int i = 0; i< costAmount.length; i++){
+                    if (resAllAmount[i]<costAmount[i]){
+                        return "You have not enough resource to activate this production";
+                    }
+                }
+                return "$production " + chosenPosition;
 
 
             case "activateleaderability":
@@ -164,11 +181,12 @@ public class Command{
                 else {
                     try {
                         commandPlayer.getPersonalBoard().getWarehouseDepot().moveResources(line1 - 1, line2 - 1);
-                        return "Chosen lines have been switched";
+                        return "Resources switched successfully";
                     } catch (IllegalArgumentException e) {
                         return "Can't switch these lines";
                     }
                 }
+
 
             case "discardleadercard":
                 int chosenDiscardedCard;

@@ -102,6 +102,7 @@ public class RequiredClientActions {
                         position = CheckCommand.checkNumber(in, out, in.readLine());
                     } while (position<1 || position > 3);
                     player.buyProductionCard(Integer.parseInt(parameters[0]),Integer.parseInt(parameters[1]), position);
+                    out.println("Card inserted in the selected slot");
                     break;
 
                 case "activateproduction": //this case is activated when the player has activated a development card production
@@ -128,6 +129,7 @@ public class RequiredClientActions {
 
                     } while(Arrays.equals(requiredRes, new Resource[requiredRes.length]));
 
+                    out.println("Production activated and finished");
                     break;
 
                 case "buyfrommarket": //this case is activated when the player is buying resources from the market
@@ -135,6 +137,7 @@ public class RequiredClientActions {
                     int chosenLine = Integer.parseInt(parameters[1])-1;
                     marbles = player.buyResourceFromMarket(chosenLine-1, parameters[0]);
                     readMarbles(out, in, marbles);
+                    out.println("Resources bought");
 
                 case "standardproduction": //this case is activated when the player has activated the standard production
                     out.println("You can activate the standard production, select where you want tot take the resources from");
@@ -170,6 +173,7 @@ public class RequiredClientActions {
                             out.println("select a valid resource");
                         }
                     } while (true);
+                out.println("Standard production finished");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -354,6 +358,22 @@ public class RequiredClientActions {
                             }
                         break;
                     case "extradepot":
+                        int position = CheckCommand.leaderCardChecker("depot", player, res);
+                        if (position==0)
+                            out.println("You haven't leader card of depot");
+                        else if (position==1 || position==2) {
+                            try {
+                                ((LeaderOfDepots) player.getActiveLeaderCards()[position - 1]).addNewResource(res);
+                            } catch (IllegalArgumentException fail) {
+                                out.println(fail.getMessage());
+                            }
+                        }
+                        else {
+                            out.println("Choose if you want to insert this resource either in the first card or the second card");
+                            String select = in.readLine();
+                            int chosenCard = CheckCommand.checkNumber(in, out, select);
+
+                        }
                         break;
 
                     case "discard":
@@ -415,4 +435,10 @@ public class RequiredClientActions {
             }
         }
     }
+
+    private void discardedResources(){
+        player.discardedResourceUser(player);
+    }
+
+
 }

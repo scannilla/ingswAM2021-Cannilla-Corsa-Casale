@@ -69,6 +69,7 @@ public class ServerGameProtocol implements Callable<Integer> {
             }
             String cmd = null;
             try {
+                //out.println("What do you want to do?");
                 cmd = in.readLine();
             } catch (IOException e) {
                 e.printStackTrace();

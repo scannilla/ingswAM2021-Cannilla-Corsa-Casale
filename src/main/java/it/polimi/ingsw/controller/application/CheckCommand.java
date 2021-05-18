@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.Buffer;
+import java.util.Locale;
 
 public class CheckCommand {
 
@@ -77,7 +78,7 @@ public class CheckCommand {
     public static String commandChecker (String[] acceptedCommands, String givenCommand, BufferedReader in, PrintWriter out) throws IOException {
         String allCommands = "Please insert one of the following commands: ";
         for(String s : acceptedCommands) {
-            if (givenCommand.equalsIgnoreCase(s))
+            if (givenCommand.equalsIgnoreCase(s.replace(" ", "")))
                 return givenCommand;
             allCommands = allCommands.concat(" " + s + ",");
         }

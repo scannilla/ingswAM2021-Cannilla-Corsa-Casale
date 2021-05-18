@@ -17,11 +17,11 @@ public class Game {
     /**
      * This attribute represents the number of player in the game (1<n<4)
      */
-    private final int numberOfPlayers;
+    private int numberOfPlayers;
     /**
      * This attribute represents the list of players who is playing in the game
      */
-    private final ArrayList<Player> players;
+    private final ArrayList<Player> players = new ArrayList<>();
     /**
      * This attribute represents full deck of 48 production cards
      */
@@ -47,23 +47,15 @@ public class Game {
 
 
     /**
-     * This method creates a new Game and initializes its parameters (numberOfPlayers and array players)
-     * @param numberOfPlayers int
-     * @param players Player[]
-     */
-    public Game(int numberOfPlayers, ArrayList<Player> players) {
-        this.numberOfPlayers = numberOfPlayers;
-        this.players = players;
-    }
-    /**
      * This method initializes the game to the start state
      */
     public void initialSet() throws IOException {
         for(Player p: players)
             p.setConnectedGame(this);
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
-        if (numberOfPlayers==1)
+        if (numberOfPlayers==1) {
             actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+        }
         deck = GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
         leaderCardsDeck = GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
         market = GSON.marketStructureParser(new File("src/main/java/it/polimi/ingsw/marbles/marbles.json"));
@@ -170,5 +162,11 @@ public class Game {
         throw new IllegalArgumentException();
     }
 
+    public void addPlayer(Player player) {
+        this.players.add(player);
+    }
 
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
 }

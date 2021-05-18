@@ -92,6 +92,14 @@ public class CheckCommand {
         return correctCommand;
     }
 
+    public static boolean commandChecker (String[] acceptedCommands, String givenCommand) {
+        for(String s : acceptedCommands) {
+            if (s.equals(givenCommand))
+                return true;
+        }
+        return false;
+    }
+
     /**
      * This method return:
      * 0 if there aren't any active leader card of this player of this ability

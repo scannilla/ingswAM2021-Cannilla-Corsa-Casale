@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller.application;
 
+import it.polimi.ingsw.Game;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,7 +36,7 @@ public class GameCreator {
      * @return numberOfPlayers
      */
 
-    public int setupGame () {
+    public int createGame(Game game) {
         BufferedReader in;
         PrintWriter out;
         try {
@@ -47,17 +49,14 @@ public class GameCreator {
         }
 
         do {
-            out.println("Insert number of players 1-4");
             try {
-                numberOfPlayers = Integer.parseInt(in.readLine());
+                numberOfPlayers = CheckCommand.checkNumber(in, out, in.readLine());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            catch (NumberFormatException e) {
-                out.println("Insert a valid number");
-            }
         }
         while (numberOfPlayers!=1 && numberOfPlayers != 2 && numberOfPlayers !=3 && numberOfPlayers != 4);
+        game.setNumberOfPlayers(numberOfPlayers);
         return numberOfPlayers;
     }
 

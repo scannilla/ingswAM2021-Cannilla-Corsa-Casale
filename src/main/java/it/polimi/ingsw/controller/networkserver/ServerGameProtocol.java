@@ -35,9 +35,10 @@ public class ServerGameProtocol implements Callable<Integer> {
 
     /**
      * constructor of ServerGameProtocol
-     * @param player Player
+     *
+     * @param player        Player
      * @param connectedGame Game
-     * @param clSocket Socket
+     * @param clSocket      Socket
      */
     public ServerGameProtocol(Player player, Game connectedGame, Socket clSocket) {
         this.clientSocket = clSocket;
@@ -61,7 +62,10 @@ public class ServerGameProtocol implements Callable<Integer> {
             return 0;
         }
         new Thread(new CheckConnection(out)).start();
-        while(true) {
+        return 1;
+    }
+}
+        /* while (true) { DEPRECATED
             try {
                 checkConnection();
             } catch (EndingGameException e) {
@@ -87,21 +91,19 @@ public class ServerGameProtocol implements Callable<Integer> {
                     RequiredClientActions action = new RequiredClientActions(c, clientSocket, player);
                     int checkCard;
                     if (returnValue.contains("$")) {
-                        if(returnValue.contains("$production") && actionCounter <3) {
+                        if (returnValue.contains("$production") && actionCounter < 3) {
                             actionCounter++;
-                            checkCard = Integer.parseInt(returnValue.replace("$","").split(" ")[1]) -1;
-                            if(!activatedCard[checkCard]) {
+                            checkCard = Integer.parseInt(returnValue.replace("$", "").split(" ")[1]) - 1;
+                            if (!activatedCard[checkCard]) {
                                 action.execute(returnValue.replace("$", ""));
                                 activatedCard[checkCard] = true;
-                            }
-                            else
+                            } else
                                 out.println("You have already used this production");
-                        }
-                        else if (actionCounter == 0) {
+                        } else if (actionCounter == 0) {
                             action.execute(returnValue.replace("$", ""));
                             actionCounter = 1;
                         } else
-                        out.println("You already performed one action, wait for your next turn to do this action");
+                            out.println("You already performed one action, wait for your next turn to do this action");
                     } else if (returnValue.equals("end"))
                         endTurn(player);
                     else
@@ -115,16 +117,16 @@ public class ServerGameProtocol implements Callable<Integer> {
         return 1;
     }
 
-    private void endTurn(Player player){
-        actionCounter=0;
+    private void endTurn(Player player) {
+        actionCounter = 0;
         for (int i = 0; i < 3; i++) {
             activatedCard[i] = false;
         }
-        for(Player p : connectedGame.getPlayers()) {
-            if (p==player) {
+        for (Player p : connectedGame.getPlayers()) {
+            if (p == player) {
                 p.setActive(false);
                 try {
-                    Player next= connectedGame.nextPlayer(p);
+                    Player next = connectedGame.nextPlayer(p);
                     next.setActive(true);
                 } catch (IllegalArgumentException e) {
                     return;
@@ -142,8 +144,9 @@ public class ServerGameProtocol implements Callable<Integer> {
             //
         }
     }
+}
 
-    private String commandCreator(String cmd) {
+    /*private String commandCreator(String cmd) {
         String[] command = cmd.replace(" ", "").split("-");
         String jsonString = ("{\"command\" : \"" + command[0] + "\"");
         if (command.length > 1) {
@@ -155,5 +158,54 @@ public class ServerGameProtocol implements Callable<Integer> {
         jsonString = jsonString.concat("}");
         return jsonString;
     }
-}
+} /*
+
+/*
+
+            if (numbOfPlayers == playerNumber && fsm.getPhase().ordinal()==GamePhase.WAITING_ROOM.ordinal())
+                fsm.evolveGamePhase();
+            if (fsm.getPhase() == GamePhase.GAME_SETUP) {
+
+            }
+            String command;
+            try {
+                command = in.readLine().toLowerCase().replace(" ", "");
+            } catch (IOException e) {
+                return 17;
+            }
+            command = CheckCommand.commandChecker(fsm.validCommands(), command, in, out);
+            switch (fsm.getPhase()) {
+                case ACCEPTANCE:
+                    if (command.equals("creategame"))
+                        fsm.evolveGamePhase();
+                    break;
+                case GAME_CREATOR:
+                    if (command.equals("chooseplayers")) {
+                        if (id==1) {
+                            numbOfPlayers = new GameCreator(clientSocket).createGame(connectedGame);
+                        }
+                        else {
+                            out.println("You're not the first player, wait for the host to setup the game");
+                        }
+                        fsm.evolveGamePhase();
+                    }
+                    break;
+                case WAITING_ROOM:
+                    out.println("Wait for the other players to connect");
+                    break;
+                case GAME_SETUP:
+                    if(this.id<=numbOfPlayers)
+                        connectedGame.addPlayer(this.player);
+                    else
+                        out.println("This game is already full"); //disconnect player
+                    new GameSetup(clientSocket, connectedGame, player).gameSetUp(id-1);
+                    if(this.id == numbOfPlayers)
+                        connectedGame.initialSet();
+
+                    case GAME_PHASE:
+
+                case END:
+                case UNKNOWN:
+            }
+ */
 

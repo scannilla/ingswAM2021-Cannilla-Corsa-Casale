@@ -53,8 +53,21 @@ public class NewServerGameProtocol implements Callable<Integer> {
             } catch (IOException e) {
                 return 17;
             }
-            out.println(handler.tryCommand(command, clientSocket, player));
+            if(!command.equalsIgnoreCase("pong"))
+                out.println(handler.tryCommand(createCommand(command), clientSocket, player));
         }
+    }
 
+    private static String[] createCommand(String cmd){
+        String[] command = cmd.replace(" ", "").split("-");
+        String jsonString = ("{\"command\" : \"" + command[0] + "\"");
+        if (command.length > 1) {
+            jsonString = jsonString.concat(",\"parameters\" : [");
+            for (int i = 1; i < command.length - 1; i++)
+                jsonString = jsonString.concat("\"" + command[i] + "\",");
+            jsonString = jsonString.concat("\"" + command[command.length - 1] + "\"" + "]");
+        }
+        jsonString = jsonString.concat("}");
+        return new String[] {command[0], jsonString};
     }
 }

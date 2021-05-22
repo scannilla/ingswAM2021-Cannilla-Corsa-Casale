@@ -10,6 +10,8 @@ public class ProdCardSlot {
      */
     private final ProductionCard[] topCards; //active Production Cards
 
+    private boolean[] productionActivated = new boolean[3];
+
     /**
      * constructor of a new matrix of slots and a new vector of top cards
      * initialize all to null
@@ -95,5 +97,15 @@ public class ProdCardSlot {
                 }
             }
         return allCardsArray;
+    }
+
+    public boolean[] getProductionActivated() {
+        return productionActivated;
+    }
+
+    public void setProductionActivated(int position) throws IllegalArgumentException{
+        if(position < 1 || position> 3)
+            throw new IllegalArgumentException();
+        productionActivated[position-1] = true;
     }
 }

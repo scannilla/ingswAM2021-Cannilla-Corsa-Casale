@@ -37,6 +37,10 @@ public class Player {
      * This attribute represents win points
      */
     private int wp=0;
+
+    private boolean actionDone = false;
+
+    private int productionsActivated = 0;
     /**
      * This method create a new player initializing all his attribute
      * @param nickname String
@@ -229,7 +233,7 @@ public class Player {
     /**
      * discards a leader card
      * @param card LeaderCard
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public void discardLeaderCard(LeaderCard card) throws IllegalArgumentException{
         if ((card == activeLeaderCards[0] || card == activeLeaderCards[1]) || (card != leaderCards[0] && card != leaderCards[1]))
@@ -270,6 +274,19 @@ public class Player {
         }
     }
 
+    public boolean isActionDone() {
+        return actionDone;
+    }
 
+    public void setActionDone(boolean actionDone) {
+        this.actionDone = actionDone;
+    }
 
+    public int getProductionsActivated() {
+        return productionsActivated;
+    }
+
+    public void setProductionsActivated(int productionsActivated) {
+        this.productionsActivated = productionsActivated;
+    }
 }

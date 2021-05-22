@@ -78,7 +78,7 @@ public enum GamePhase implements Comparable<GamePhase> {
         return "UNKNOWN";
     }
 
-    public String[] validCommands (TurnPhase turnPhase) {
+    public String[] validCommands () {
         switch (this) {
             case ACCEPTANCE:
                 return new String[] {"create game"};
@@ -89,7 +89,8 @@ public enum GamePhase implements Comparable<GamePhase> {
             case GAME_SETUP:
                 return new String[] {"Coin", "Stone", "Servant", "Shield"};
             case GAME_PHASE:
-                return TurnPhase.validCommands(turnPhase);
+                return new String[] {"buy production card", "buy resource", "activate leader card", "card production", "standard production",
+                "move resources", "discard leader card", "end turn"};
 
         }
         return null;

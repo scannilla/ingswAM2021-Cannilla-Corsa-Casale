@@ -59,33 +59,6 @@ public class ServerMain {
         System.exit(1);
     }
 
-    private static void firstPlayer() {
-        BufferedReader in;
-        PrintWriter out;
-        String nickname;
-        try {
-            Socket clientSocket;
-            clientSocket = serverSocket.accept();
-            do {
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                out.println("insert a nickname");
-                nickname= in.readLine();
-            }
-            while (nickname==null);
-            System.out.println(nickname);
-            //numberOfPlayers = new GameCreator(clientSocket).createGame();
-            executor.submit(new ServerProtocolWaiting(clientSocket));
-            mapAllPlayer.put(new Player(nickname), clientSocket);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("unable to create game");
-            System.exit(1);
-        }
-        connectedClients = 1;
-    }
-
     private static void createWaitingLobby() {
         BufferedReader in;
         PrintWriter out;

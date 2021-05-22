@@ -97,6 +97,8 @@ public class Command{
      */
     private String buyProductionCard() {
         int row, column;
+        if(commandPlayer.isActionDone())
+            return "Action already done";
         try {
             row = parseInt(parameters[0]);
             column = parseInt(parameters[1]);
@@ -175,6 +177,8 @@ public class Command{
      * @return commandString String
      */
     private String buyResources() {
+        if(commandPlayer.isActionDone())
+            return "Action already done";
         int chosenLine;
         try{
             chosenLine = parseInt(parameters[0]);
@@ -199,6 +203,8 @@ public class Command{
      * @return commandString String
      */
     private String cardProduction() {
+        if(commandPlayer.getProductionsActivated()==3)
+            return "You have already activated all productions";
         int chosenPosition;
         try {
             chosenPosition = Integer.parseInt(parameters[0]);
@@ -208,6 +214,8 @@ public class Command{
         if (chosenPosition < 1 || chosenPosition > 3){
             return "choose a valid position";
         }
+        if(commandPlayer.getPersonalBoard().getProdCardSlot().getProductionActivated()[chosenPosition-1])
+            return "You have already activated this production";
         ProductionCard card = commandPlayer.getPersonalBoard().getProdCardSlot().getTopCards()[chosenPosition-1];
         Resource[] costArray = card.getCostArray();
         int[] costAmount = ResourceCounter.resCount(costArray);
@@ -231,6 +239,8 @@ public class Command{
                 return "You have not enough resource to activate this production";
             }
         }
+        commandPlayer.setActionDone(true);
+        commandPlayer.getPersonalBoard().getProdCardSlot().setProductionActivated(chosenPosition);
         return "$production " + chosenPosition;
     }
 

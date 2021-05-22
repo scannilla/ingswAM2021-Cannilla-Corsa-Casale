@@ -22,8 +22,7 @@ public class CommandsHandler {
         return instance;
     }
 
-    public String tryCommand(String command, Socket clientSocket, Player player) {
-        String[] cmd = commandReader(command);
+    public String tryCommand(String[] cmd, Socket clientSocket, Player player) {
         GamePhase phase = fsm.getPhase();
         switch (phase) {
             case ACCEPTANCE:
@@ -47,18 +46,11 @@ public class CommandsHandler {
                 }
                 return "ko";
             case GAME_PHASE:
-                if(player.isActive() && CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
-                    Command c = GSON.commandParser(commandCreator(command));
-                    c.executeCommand();
-                    if(CheckCommand.commandChecker(new String[] {"buyresource", "buyproductioncard", "cardproduction", "standardproduction"}, cmd[0])) {
-                        fsm.actionDone();
-                        fsm.evolveTurnPhase();
-                    }
-                    if(cmd[0].equals("endturn")) {
-                        fsm.evolveToTurnPhase(TurnPhase.END_TURN);
-                    }
-                    return "ok";
-                }
+                Command c = GSON.commandParser(cmd[1]);
+                c.setCommandPlayer(player);
+                String returnValue = c.executeCommand();
+                if (returnValue.contains("$"))
+                    new RequiredClientActions(c, clientSocket, player).execute(returnValue.replace("$",""));
                 return "ko";
             case END:
 
@@ -68,22 +60,6 @@ public class CommandsHandler {
         return "ko";
     }
 
-    private String[] commandReader(String command) {
-        return command.toLowerCase().replace(" ","").split("-");
-    }
-
-    private String commandCreator(String cmd) {
-        String[] command = cmd.replace(" ", "").split("-");
-        String jsonString = ("{\"command\" : \"" + command[0] + "\"");
-        if (command.length > 1) {
-            jsonString = jsonString.concat(",\"parameters\" : [");
-            for (int i = 1; i < command.length - 1; i++)
-                jsonString = jsonString.concat("\"" + command[i] + "\",");
-            jsonString = jsonString.concat("\"" + command[command.length - 1] + "\"" + "]");
-        }
-        jsonString = jsonString.concat("}");
-        return jsonString;
-    }
 
 
 }

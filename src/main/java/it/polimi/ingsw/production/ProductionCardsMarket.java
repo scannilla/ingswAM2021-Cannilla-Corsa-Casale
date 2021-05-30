@@ -1,5 +1,7 @@
 package it.polimi.ingsw.production;
 
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 
@@ -37,6 +39,7 @@ public class ProductionCardsMarket {
                 Collections.shuffle(prodList);
                 prodList.toArray(productionCardsMarket[i][j]);
             }
+        EventManager.notifyListener(EventType.CARDMARKET, this);
     }
 
     /**
@@ -44,16 +47,18 @@ public class ProductionCardsMarket {
      * Card throw an Exception
      * @param row int
      * @param column int
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException e
      */
     public ProductionCard buyCard (int row, int column) throws IllegalArgumentException {
         ProductionCard card;
-        for (int i=0; i<4; i++)
-            if(productionCardsMarket[row][column][i]!= null) {
+        for (int i=0; i<4; i++) {
+            if (productionCardsMarket[row][column][i] != null) {
                 card = productionCardsMarket[row][column][i];
                 productionCardsMarket[row][column][i] = null;
+                EventManager.notifyListener(EventType.CARDMARKET, this);
                 return card;
             }
+        }
         throw new IllegalArgumentException();
     }
 

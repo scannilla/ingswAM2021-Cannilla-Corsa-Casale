@@ -1,5 +1,7 @@
 package it.polimi.ingsw.marbles;
 
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.marbles.MarketMarble;
 
 import java.util.Arrays;
@@ -32,12 +34,14 @@ public class MarketStructure {
         MarblesList = Arrays.asList(allMarbles);
         Collections.shuffle(MarblesList);
         MarblesList.toArray(allMarbles);
-        for(int i=0; i<4; i++)
-            for(int j=0; j<3; j++) {
+        for(int i=0; i<4; i++) {
+            for (int j = 0; j < 3; j++) {
                 marketStructure[i][j] = allMarbles[k];
                 k++;
             }
-
+        }
+        outMarble=allMarbles[12];
+        EventManager.notifyListener(EventType.MARKET, this);
     }
 
     /**
@@ -53,6 +57,7 @@ public class MarketStructure {
         for(int i=1; i<4; i++)
             marketStructure[i][line] = marketStructure[i-1][line];
         marketStructure[0][line] = outMarble;
+        EventManager.notifyListener(EventType.MARKET, this);
         return marblesArray;
     }
 
@@ -68,6 +73,7 @@ public class MarketStructure {
         for (int i = 1; i < 3; i++)
             marketStructure[column][i] = marketStructure[column][i - 1];
         marketStructure[column][0] = outMarble;
+        EventManager.notifyListener(EventType.MARKET, this);
         return marblesArray;
     }
 
@@ -77,5 +83,21 @@ public class MarketStructure {
      */
     public MarketMarble[] getAllMarbles() {
         return allMarbles;
+    }
+
+    /**
+     * Getter of Market Structure
+     * @return marketStructure
+     */
+    public MarketMarble[][] getMarketStructure() {
+        return marketStructure;
+    }
+
+    /**
+     * Getter of Out Marble of Market Structure
+     * @return outMarble
+     */
+    public MarketMarble getOutMarble() {
+        return outMarble;
     }
 }

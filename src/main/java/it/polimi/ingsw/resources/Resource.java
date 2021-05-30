@@ -57,4 +57,19 @@ public class Resource {
     public int hashCode() {
         return Objects.hash(resType);
     }
+
+    /**
+     * This method returns this Resource formatted into a string
+     * @return String
+     */
+    @Override
+    public String toString() {
+        switch(resType) {
+            case 0: return "coin";
+            case 1: return "stone";
+            case 2: return "servant";
+            case 3: return "shield";
+        }
+        return null;
+    }
 }

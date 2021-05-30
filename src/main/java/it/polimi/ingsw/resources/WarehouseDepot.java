@@ -1,6 +1,6 @@
 package it.polimi.ingsw.resources;
 
-//tbh nobody did import this, so nobody is gonna touch it
+import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
@@ -172,9 +172,6 @@ public class WarehouseDepot {
                 depot[line2][i] = swapResource[i];
             }
         }
-
-
-
     }
 
     /**
@@ -192,5 +189,7 @@ public class WarehouseDepot {
         return (values[i] - amount);
     }
 
-
+    public Resource[][] getDepot() {
+        return depot;
+    }
 }

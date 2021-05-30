@@ -241,6 +241,7 @@ public class Command{
         }
         commandPlayer.setActionDone(true);
         commandPlayer.getPersonalBoard().getProdCardSlot().setProductionActivated(chosenPosition);
+        commandPlayer.setProductionsActivated(commandPlayer.getProductionsActivated()+1);
         return "$production " + chosenPosition;
     }
 

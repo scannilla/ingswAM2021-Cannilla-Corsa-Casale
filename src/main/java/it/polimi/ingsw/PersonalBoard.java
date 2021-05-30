@@ -12,15 +12,15 @@ public class PersonalBoard {
     /**
      * This attribute represents Warehouse Depot in the personal board
      */
-    private WarehouseDepot warehouseDepot;
+    private final WarehouseDepot warehouseDepot;
     /**
      * This attribute represents Slots where Production Cards will be insert in
      */
-    private ProdCardSlot prodCardSlot;
+    private final ProdCardSlot prodCardSlot;
     /**
      * This attribute represents the strongbox in the personal board
      */
-    private Strongbox strongbox;
+    private final Strongbox strongbox;
 
     /**
      * This method create a new personal board with all attribute initialized to 0

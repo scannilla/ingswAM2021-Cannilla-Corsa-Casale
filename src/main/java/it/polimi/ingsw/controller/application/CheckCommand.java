@@ -1,27 +1,32 @@
 package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.Buffer;
-import java.util.Locale;
+
+import java.net.Socket;
 
 public class CheckCommand {
-
-    public static void checkDiscount(Player player, BufferedReader in, PrintWriter out, Resource[] costArray) {
-        Resource discountedRes = null;
+    /**
+     * This method checks if player has a Leader Card of Discount to use and asks player if he wants to activate this card
+     * @param player Player
+     * @param clientSocket Socket
+     * @param costArray Resource[]
+     * @throws EndingGameException e
+     */
+    public static void checkDiscount(Player player, Socket clientSocket, Resource[] costArray) throws EndingGameException {
+        Resource discountedRes ;
         String response = "";
         if (player.getActiveLeaderCards()[0] != null && player.getActiveLeaderCards()[0] instanceof LeaderOfDiscounts) {
             do {
                 try {
-                    out.println("Do you want to use Discount ability? [yes/no]");
-                    response = in.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    MessageHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]", clientSocket);
+                    response = MessageHandler.readClientMessage(clientSocket);
+                } catch (EndingGameException e) {
+                    throw new EndingGameException();
                 }
                 if (response.equalsIgnoreCase("yes")) {
                     discountedRes = ((LeaderOfDiscounts) player.getActiveLeaderCards()[0]).getDiscountedRes();
@@ -39,10 +44,10 @@ public class CheckCommand {
             if (player.getActiveLeaderCards()[1] != null && player.getActiveLeaderCards()[1] instanceof LeaderOfDiscounts) {
                 do{
                     try {
-                        out.println("Do you want to use Discount ability? [yes/no]");
-                        response = in.readLine();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        MessageHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]", clientSocket);
+                        response = MessageHandler.readClientMessage(clientSocket);
+                    } catch (EndingGameException e) {
+                        throw new EndingGameException();
                     }
                     if(response.equalsIgnoreCase("yes")) {
                         discountedRes = ((LeaderOfDiscounts) player.getActiveLeaderCards()[1]).getDiscountedRes();
@@ -58,44 +63,55 @@ public class CheckCommand {
         }
         }
 
-
-    public static int checkNumber(BufferedReader in, PrintWriter out, String string) {
+    /**
+     * This method checks if player inserted a valid number
+     * @param clientSocket Socket
+     * @param string String
+     * @return number (-1 error)
+     */
+    public static int checkNumber(Socket clientSocket, String string) {
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
-                out.println("Insert a valid number");
             try {
-                String newNumber = in.readLine();
-                return checkNumber(in, out, newNumber);
-
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                MessageHandler.sendMessageToClient("Insert a valid number",clientSocket);
+                String newNumber = MessageHandler.readClientMessage(clientSocket);
+                return checkNumber(clientSocket, newNumber);
+            } catch (EndingGameException ex) {
+                ex.printStackTrace();
             }
         }
         return -1;
     }
 
-    public static String commandChecker (String[] acceptedCommands, String givenCommand, BufferedReader in, PrintWriter out) throws IOException {
+    /**
+     * This methods shows all commands that player can insert and checks if this command is valid
+     * @param acceptedCommands String[]
+     * @param givenCommand String
+     * @param clientSocket Socket
+     * @return givenCommand (correctCommand if error)
+     * @throws EndingGameException e
+     */
+    public static String commandChecker (String[] acceptedCommands, String givenCommand, Socket clientSocket) throws EndingGameException {
         String allCommands = "Please insert one of the following commands: ";
         for(String s : acceptedCommands) {
             if (givenCommand.equalsIgnoreCase(s.replace(" ", "")))
                 return givenCommand;
             allCommands = allCommands.concat(" " + s + ",");
         }
-        out.println(allCommands);
         String correctCommand = null;
         try {
-            correctCommand = commandChecker(acceptedCommands, in.readLine(), in, out);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1); //TODO inform all players that the game is over and close the connections
+            MessageHandler.sendMessageToClient(allCommands, clientSocket);
+            correctCommand = commandChecker(acceptedCommands, MessageHandler.readClientMessage(clientSocket), clientSocket);
+        } catch (EndingGameException e) {
+            throw new EndingGameException();
         }
         return correctCommand;
     }
 
     public static boolean commandChecker (String[] acceptedCommands, String givenCommand) {
         for(String s : acceptedCommands) {
-            if (s.equals(givenCommand))
+            if (s.replace(" ","").equals(givenCommand))
                 return true;
         }
         return false;

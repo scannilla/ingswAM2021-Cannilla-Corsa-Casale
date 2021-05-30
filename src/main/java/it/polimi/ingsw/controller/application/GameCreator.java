@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Game;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,9 +52,9 @@ public class GameCreator {
 
         do {
             try {
-                numberOfPlayers = CheckCommand.checkNumber(in, out, in.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
+                numberOfPlayers = CheckCommand.checkNumber(clientSocket, MessageHandler.readClientMessage(clientSocket));
+            } catch (EndingGameException e) {
+                throw new EndingGameException();
             }
         }
         while (numberOfPlayers!=1 && numberOfPlayers != 2 && numberOfPlayers !=3 && numberOfPlayers != 4);

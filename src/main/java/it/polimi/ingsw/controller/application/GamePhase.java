@@ -31,29 +31,6 @@ public enum GamePhase implements Comparable<GamePhase> {
         return UNKNOWN;
     }
 
-    static GamePhase fromString(String s){
-
-        switch (s.toUpperCase().charAt(0)){
-            case 'A':
-                return ACCEPTANCE;
-            case 'C':
-                return GAME_CREATOR;
-            case 'W':
-                return WAITING_ROOM;
-            case 'S':
-                return GAME_SETUP;
-            case 'G':
-                return GAME_PHASE;
-            case 'E':
-                return END;
-            case 'U':
-                return UNKNOWN;
-        }
-
-        return UNKNOWN;
-
-    }
-
     @Override
     public String toString() {
         switch (this){

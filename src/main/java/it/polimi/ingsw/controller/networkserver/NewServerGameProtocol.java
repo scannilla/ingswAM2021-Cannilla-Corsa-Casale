@@ -1,13 +1,14 @@
 package it.polimi.ingsw.controller.networkserver;
 
-import it.polimi.ingsw.Game;
+
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.application.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.Callable;
 
 public class NewServerGameProtocol implements Callable<Integer> {
@@ -16,7 +17,6 @@ public class NewServerGameProtocol implements Callable<Integer> {
      */
     private final Socket clientSocket;
 
-
     /**
      * this attribute represents the player
      */
@@ -24,38 +24,34 @@ public class NewServerGameProtocol implements Callable<Integer> {
 
     private static int playerNumber=0;
 
-    private final int id;
-
     private static CommandsHandler handler;
+
+
 
     public NewServerGameProtocol(Socket clientSocket, Player player, CommandsHandler handler) {
         this.clientSocket = clientSocket;
         this.player = player;
         playerNumber++;
-        id = playerNumber;
         NewServerGameProtocol.handler = handler;
     }
 
     @Override
     public Integer call() throws Exception {
-        BufferedReader in;
-        PrintWriter out;
-        try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-        } catch (IOException e) {
-            return 17;
-        }
+
+
+        new Thread(new CheckConnection(clientSocket));
         while (true) {
+            checkConnection();
             String command;
             try {
-                command = in.readLine();
-            } catch (IOException e) {
-                return 17;
+                command = MessageHandler.readClientMessage(clientSocket);
+                String response = handler.tryCommand(createCommand(command), clientSocket, player);
+                MessageHandler.sendMessageToClient(response, clientSocket);
+            } catch (EndingGameException e) {
+                break;
             }
-            if(!command.equalsIgnoreCase("pong"))
-                out.println(handler.tryCommand(createCommand(command), clientSocket, player));
         }
+        return 1;
     }
 
     private static String[] createCommand(String cmd){
@@ -69,5 +65,13 @@ public class NewServerGameProtocol implements Callable<Integer> {
         }
         jsonString = jsonString.concat("}");
         return new String[] {command[0], jsonString};
+    }
+
+    private void checkConnection(){
+        try {
+            clientSocket.setSoTimeout(5000);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,9 +1,8 @@
 package it.polimi.ingsw.controller.networkclient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import it.polimi.ingsw.controller.Message;
+
+import java.io.*;
 import java.net.Socket;
 
 public class ClientListener implements Runnable{
@@ -26,21 +25,31 @@ public class ClientListener implements Runnable{
      */
     @Override
     public void run() {
+        ObjectInputStream in;
+        ObjectOutputStream out;
         try {
-            String line;
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-            while(clientSocket!=null) {
-                line = in.readLine();
-                if(line.equals("ping"))
-                    out.println("pong");
-                else
-                    System.out.println(line);
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            out.flush();
+            in = new ObjectInputStream(clientSocket.getInputStream());
+
+            while (clientSocket != null) {
+                Message received;
+                try {
+                    received = (Message) in.readObject();
+                } catch (ClassNotFoundException | IOException e) {
+                    break;
+                }
+                if (received.getCode() == 5) {
+                    out.writeObject(new Message(6, "pong", null));
+                    out.flush();
+                }
+                System.out.println(received.getMessage());
+                in.close();
             }
         } catch (IOException e) {
-            System.out.println("unable to get in");
+            System.err.println("boh");
             e.printStackTrace();
-
+            System.exit(1);
         }
 
     }

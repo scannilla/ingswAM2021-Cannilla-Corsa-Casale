@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.leader.LeaderOfConversions;
@@ -41,6 +43,8 @@ public class Player {
     private boolean actionDone = false;
 
     private int productionsActivated = 0;
+
+    private boolean isLast = false;
     /**
      * This method create a new player initializing all his attribute
      * @param nickname String
@@ -131,6 +135,7 @@ public class Player {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
+        EventManager.notifyListener(EventType.PERSONALBOARD, this.personalBoard);
     }
     /**
      * this method activated standard production power for the selected production card
@@ -148,7 +153,6 @@ public class Player {
         if(card.getGivenFaithPoints()!=0) {
             increaseFaith(card.getGivenFaithPoints());
         }
-
     }
     /**
      * this method increases faith for the selected faith points
@@ -161,6 +165,7 @@ public class Player {
             i++;
         if(personalBoard.getPosition()+faithPoints>=connectedGame.getVaticanReport().getActivationPosition()[i])
             connectedGame.activateEvent(i);
+        EventManager.notifyListener(EventType.PERSONALBOARD, this.personalBoard);
 
     }
 
@@ -274,12 +279,12 @@ public class Player {
         }
     }
 
-    public boolean isActionDone() {
-        return actionDone;
+    public void lastPlayer() {
+        this.isLast = true;
     }
 
-    public void setActionDone(boolean actionDone) {
-        this.actionDone = actionDone;
+    public boolean isLast() {
+        return isLast;
     }
 
     public int getProductionsActivated() {
@@ -288,5 +293,13 @@ public class Player {
 
     public void setProductionsActivated(int productionsActivated) {
         this.productionsActivated = productionsActivated;
+    }
+
+    public boolean isActionDone() {
+        return actionDone;
+    }
+
+    public void setActionDone(boolean actionDone) {
+        this.actionDone = actionDone;
     }
 }

@@ -4,20 +4,17 @@ package it.polimi.ingsw.controller.networkserver;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndGame;
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.application.Automaton;
-import it.polimi.ingsw.controller.application.Command;
 import it.polimi.ingsw.controller.application.CommandsHandler;
-import it.polimi.ingsw.controller.application.GameCreator;
 
-import java.io.BufferedReader;
+
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.concurrent.*;
 
 
@@ -25,13 +22,11 @@ public class ServerMain {
 
     private static final LinkedHashMap<Player, Socket> mapAllPlayer = new LinkedHashMap<>();
 
-    private static int numberOfPlayers = 0;
-
-    private static int connectedClients = 0;
-
     private static ServerSocket serverSocket;
 
     private static final ExecutorService executor = Executors.newCachedThreadPool();
+
+    private static final CommandsHandler handler = CommandsHandler.instanceCreator(new Automaton());
 
 
 
@@ -42,48 +37,25 @@ public class ServerMain {
     public static void main (String[] args) {
         //starting server
         startServer(args);
-        //creation of the fsm
-        CommandsHandler handler = CommandsHandler.instanceCreator(new Automaton());
-        //if the number of players chosen is more than 1 all connected players are connected to a waiting lobby TODO move to FSM
-        createWaitingLobby();
-        //when all players are connected the game is created TODO move to FSM
-        executor.shutdownNow();
-        ArrayList<Player> players = new ArrayList<>(mapAllPlayer.keySet());
-
-        //actual game, move everything to a different function
-
-        //check if a thread either end or throws an exception
-
-        for(Socket sock : mapAllPlayer.values())
-            EndGame.end(sock);
-        System.exit(1);
-    }
-
-    private static void createWaitingLobby() {
-        BufferedReader in;
-        PrintWriter out;
-        String nickname;
-        while (connectedClients<numberOfPlayers) {
+        //creating socket for each player, the server only accept a maximum number of 4 players, as soon as someone disconnects from the server
+        //everyone receives a warning and the server shut down
+        ArrayList<Future<Integer>> futures = new ArrayList<>();
+        while(futures.size()<=4) {
             try {
-                Socket clientSocket;
-                clientSocket = serverSocket.accept();
-                nickname = null;
-                do {
-                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    out = new PrintWriter(clientSocket.getOutputStream(), true);
-                    out.println("insert a nickname");
-                    nickname= in.readLine();
+                futures.add(createConnection());
+            } catch (EndingGameException e) {
+                for (Socket sock : mapAllPlayer.values()) {
+                    EndGame.end(sock);
                 }
-                while (nickname==null);
-                connectedClients++;
-                executor.submit(new ServerProtocolWaiting(clientSocket));
-                mapAllPlayer.put(new Player(nickname), clientSocket);
-            } catch (IOException e) {
-                e.printStackTrace();
-                break;
+                System.out.println("Server shutting down");
+                System.exit(1);
             }
         }
+        //the server checks if one of the thread connected to a player ends
+        checkEnd(futures);
     }
+
+
 
     private static Integer checkEnd (ArrayList<Future<Integer>> futures){
         Integer end = 0;
@@ -104,16 +76,6 @@ public class ServerMain {
         return end;
     }
 
-    private static ArrayList<Future<Integer>> createProtocol (Game game) {
-        ExecutorService gameExecutor = Executors.newCachedThreadPool();
-        ArrayList<Future<Integer>> futures = new ArrayList<>();
-        Future<Integer> future;
-        for (Map.Entry<Player, Socket> entry : mapAllPlayer.entrySet()) {
-            future = gameExecutor.submit(new ServerGameProtocol(entry.getKey(), game, entry.getValue()));
-            futures.add(future);
-        }
-        return futures;
-    }
 
     private static void startServer(String[] args) {
         int portNumber;
@@ -130,6 +92,37 @@ public class ServerMain {
         }
         if(serverSocket==null)
             System.exit(9);
+    }
+
+    private static Future<Integer> createConnection() throws EndingGameException {
+        Socket clientSocket = null;
+        try {
+            clientSocket = serverSocket.accept();
+        } catch (IOException e) {
+            throw new EndingGameException();
+        }
+        String nickname;
+        try {
+            nickname = askForNickname(clientSocket);
+        } catch (EndingGameException e) {
+            throw new EndingGameException();
+        }
+        Player player = new Player(nickname);
+        mapAllPlayer.put(player, clientSocket);
+        return executor.submit(new NewServerGameProtocol(clientSocket, player, handler));
+    }
+
+    private static String askForNickname(Socket clientSocket) throws EndingGameException {
+        String nickname;
+        do {
+            try {
+                MessageHandler.sendMessageToClient("Insert a valid nickname", clientSocket);
+                nickname = MessageHandler.readClientMessage(clientSocket);
+            } catch (EndingGameException e) {
+                throw new EndingGameException();
+            }
+        } while (nickname.isBlank() || nickname.isEmpty());
+        return nickname;
     }
 
 }

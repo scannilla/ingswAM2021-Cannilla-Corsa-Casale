@@ -2,6 +2,8 @@ package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 
 import java.io.*;
 import java.net.Socket;
@@ -20,30 +22,25 @@ public class GameSetup {
         this.player = player;
     }
 
-    public void gameSetUp(int index) {
-        BufferedReader in;
-        PrintWriter out;
+    public void gameSetUp(int index) throws EndingGameException{
         try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-        } catch (IOException e) {
-            System.out.println("unable to connect");
-            return;
-        }
-        switch(index) {
-            case 0:
-                out.println("You're the first player so you're not gonna receive any resource or faith point");
-                break;
-            case 1:
-                out.println("You're the second player so you can choose a resource to add to your warehouse depot");
-                break;
-            case 2:
-                out.println("You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one");
-                break;
-            case 3:
-                out.println("You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one");
-                break;
+            switch (index) {
+                case 0:
+                    MessageHandler.sendMessageToClient("You're the first player so you're not gonna receive any resource or faith point", clientSocket);
+                    break;
+                case 1:
+                    MessageHandler.sendMessageToClient("You're the second player so you can choose a resource to add to your warehouse depot", clientSocket);
+                    break;
+                case 2:
+                    MessageHandler.sendMessageToClient("You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one", clientSocket);
+                    break;
+                case 3:
+                    MessageHandler.sendMessageToClient("You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one", clientSocket);
+                    break;
 
+            }
+        } catch (EndingGameException e) {
+            throw new EndingGameException();
         }
     }
 }

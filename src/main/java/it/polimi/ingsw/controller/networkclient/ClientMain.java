@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller.networkclient;
 
+import it.polimi.ingsw.controller.Message;
+
 import java.io.*;
 import java.net.*;
 
@@ -22,26 +24,29 @@ public class ClientMain {
             hostName = args[1];
         }
 
-
-
-        try (Socket socket = new Socket(hostName, portNumber);
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
-        ) {
-            ClientListener listener = new ClientListener(socket);
-            Thread listenerThread = new Thread(listener);
-            listenerThread.start();
-            String userInput;
-            while ((userInput = stdIn.readLine()) != null) {
-                out.println(userInput);
+        Socket clientSocket;
+        ObjectOutputStream out;
+        BufferedReader stdIn;
+        try {
+            clientSocket = new Socket(hostName, portNumber);
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            stdIn = new BufferedReader(new InputStreamReader(System.in));
+            new Thread(new ClientListener(clientSocket)).start();
+            String input;
+            while ((input = stdIn.readLine()) != null) {
+                out.writeObject(createMessage(input));
+                out.flush();
             }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    hostName);
+            System.err.println("Couldn't get the I/O for the current host");
             System.exit(1);
         }
+    }
+
+    private static Message createMessage(String input) {
+        return new Message(10, input, "prova");
     }
 }

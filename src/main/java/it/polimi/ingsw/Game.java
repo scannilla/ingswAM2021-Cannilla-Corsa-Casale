@@ -5,12 +5,12 @@ import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 import it.polimi.ingsw.production.ProductionCardsMarket;
-import it.polimi.ingsw.tokens.ActionToken;
 import it.polimi.ingsw.tokens.ActionTokenPile;
 import it.polimi.ingsw.leader.LeaderCard;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game {
@@ -44,6 +44,7 @@ public class Game {
     private final ProductionCardsMarket cardsMarket = new ProductionCardsMarket();
 
     private ProductionCardsDeck deck;
+
 
 
     /**
@@ -95,10 +96,10 @@ public class Game {
         return numberOfPlayers;
     }
 
-                /**
-                 * getter of player Array playing this match
-                 * @return players
-                 */
+    /**
+     * getter of player Array playing this match
+     * @return players
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -155,8 +156,11 @@ public class Game {
             if (p==currentPlayer) {
                 if (players.indexOf(p) == numberOfPlayers - 1 && numberOfPlayers != 1)
                     return players.get(0);
-                else
+                else if (numberOfPlayers != 1)
                     return players.get(players.indexOf(p) + 1);
+                else
+                    //TODO lorenzo's turn
+                    return null;
             }
         }
         throw new IllegalArgumentException();
@@ -169,4 +173,24 @@ public class Game {
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
+
+    public Player previousPlayer(Player player) {
+        for (Player p : players) {
+            if (p==player) {
+                if (players.indexOf(p) == 0 && numberOfPlayers != 1)
+                    return players.get(numberOfPlayers-1);
+                else if (numberOfPlayers != 1)
+                    return players.get(players.indexOf(p) - 1);
+                else
+                    //TODO lorenzo's turn
+                    return null;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public void gameOver(Player player) {
+        previousPlayer(player).lastPlayer();
+    }
+
 }

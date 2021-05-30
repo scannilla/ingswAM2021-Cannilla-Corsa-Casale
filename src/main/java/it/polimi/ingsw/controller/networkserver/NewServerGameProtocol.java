@@ -28,6 +28,12 @@ public class NewServerGameProtocol implements Callable<Integer> {
 
 
 
+    /**
+     * Constructor of this NewServerGameProtocol
+     * @param clientSocket Socket
+     * @param player Player
+     * @param handler CommandsHandler
+     */
     public NewServerGameProtocol(Socket clientSocket, Player player, CommandsHandler handler) {
         this.clientSocket = clientSocket;
         this.player = player;
@@ -54,6 +60,11 @@ public class NewServerGameProtocol implements Callable<Integer> {
         return 1;
     }
 
+    /**
+     * Constructor of a new command using parsing json
+     * @param cmd String
+     * @return command
+     */
     private static String[] createCommand(String cmd){
         String[] command = cmd.replace(" ", "").split("-");
         String jsonString = ("{\"command\" : \"" + command[0] + "\"");

@@ -10,10 +10,6 @@ import it.polimi.ingsw.leader.LeaderOfDepots;
 import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.resources.Resource;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Arrays;
 
@@ -76,24 +72,37 @@ public class RequiredClientActions {
      * @param resource Resource
      * @param depotType String
      */
-    private void anyResource(Resource resource, String depotType, PrintWriter out, BufferedReader in) {
+    private void anyResource(Resource resource, String depotType) throws EndingGameException {
         do {
             switch (depotType) {
                 case "warehouse":
                     for (int i=0; i<3; i++) {
                         if (player.getPersonalBoard().getWarehouseDepot().checkResource(i).equals(resource)) {
                             player.getPersonalBoard().getWarehouseDepot().useResource(resource);
-                            out.println("resource taken");
+                            try {
+                                MessageHandler.sendMessageToClient("resource taken", clientSocket);
+                            } catch (EndingGameException e){
+                                throw new EndingGameException();
+                            }
                             return;
                         }
                     }
-                    out.println("You don't have this resource in your warehouse depot, select a new resource and location");
+                    try {
+                        MessageHandler.sendMessageToClient("You don't have this resource in your warehouse depot, select a new resource and location", clientSocket);
+                    } catch (EndingGameException e){
+                        throw new EndingGameException();
+                    }
+
                     break;
                 case "extra":
                     int position = CheckCommand.leaderCardChecker("depot", player, resource);
                     if(position==0)
-                        out.println("You don't have any active Leader of Depots card");
-                    else if ((position==1 || position ==2 ) && ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).getExtraDepot()[0]!=null) {
+                        try {
+                            MessageHandler.sendMessageToClient("You don't have any active Leader of Depots card", clientSocket);
+                        } catch (EndingGameException e){
+                            throw new EndingGameException();
+                        }
+                        else if ((position==1 || position ==2 ) && ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).getExtraDepot()[0]!=null) {
                         ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).useResource(resource);
                         try {
                         MessageHandler.sendMessageToClient("resource taken", clientSocket);
@@ -114,7 +123,11 @@ public class RequiredClientActions {
                         }
                         else if (((LeaderOfDepots)player.getActiveLeaderCards()[1]).getExtraDepot()[0]!=null){
                             ((LeaderOfDepots) player.getActiveLeaderCards()[1]).useResource(resource);
-                            out.println("resource taken");
+                            try {
+                                MessageHandler.sendMessageToClient("resource taken", clientSocket);
+                            } catch (EndingGameException e){
+                                throw new EndingGameException();
+                            }
                             return;
                         }
                     }
@@ -138,7 +151,7 @@ public class RequiredClientActions {
      * @param costArray Resource[]
      * @param readResource Resource
      */
-    private void useExtraDepotResource(Resource[] costArray, Resource readResource, PrintWriter out) {
+    private void useExtraDepotResource(Resource[] costArray, Resource readResource) {
         boolean done = false;
         for (int i = 0; i< costArray.length; i++) {
             if (readResource.equals(costArray[i])) {
@@ -149,7 +162,11 @@ public class RequiredClientActions {
                            costArray[i] = null;
                             done = true;
                         } catch (IllegalArgumentException e){
-                            out.println(e.getMessage());
+                            try {
+                                MessageHandler.sendMessageToClient(e.getMessage(), clientSocket);
+                            } catch (EndingGameException endingGameException) {
+                                endingGameException.printStackTrace();
+                            }
                         }
                         }
                 }
@@ -160,7 +177,11 @@ public class RequiredClientActions {
                             costArray[i] = null;
                             done = true;
                         } catch (IllegalArgumentException e){
-                            out.println(e.getMessage());
+                            try {
+                                MessageHandler.sendMessageToClient(e.getMessage(), clientSocket);
+                            } catch (EndingGameException endingGameException) {
+                                endingGameException.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -175,25 +196,41 @@ public class RequiredClientActions {
      * @param requiredRes Resource[]
      * @param chosenResource String
      */
-    private void useWarehouseResource(PrintWriter out, Resource[] requiredRes, String chosenResource) {
+    private void useWarehouseResource(Resource[] requiredRes, String chosenResource) throws EndingGameException {
         try {
             Resource resource = checkResource(chosenResource.split(" ")[0].toLowerCase());
             for (int i=0; i< requiredRes.length; i++) {
                 if (requiredRes[i].equals(resource)) {
                     try {
                         player.getPersonalBoard().getWarehouseDepot().useResource(requiredRes[i]);
-                        out.println("Resource used");
+                        try {
+                            MessageHandler.sendMessageToClient("Resource used", clientSocket);
+                        } catch (EndingGameException e){
+                            throw new EndingGameException();
+                        }
                         requiredRes[i] = null;
                     } catch (IllegalArgumentException e) {
-                        out.println("This resource isn't available in your warehouse depot");
+                        try {
+                            MessageHandler.sendMessageToClient("This resource isn't available in your warehouse depot", clientSocket);
+                        } catch (EndingGameException ex){
+                            throw new EndingGameException();
+                        }
                     }
                     break;
                 }
-                out.println("This resource isn't required");
+                try {
+                    MessageHandler.sendMessageToClient("This resource isn't required", clientSocket);
+                } catch (EndingGameException e){
+                    throw new EndingGameException();
+                }
+            }
+        } catch (IllegalArgumentException | EndingGameException e) {
+            try{
+                MessageHandler.sendMessageToClient("Select a valid resource (Coin, Stone, Servant or Shield)", clientSocket);
+            } catch (EndingGameException ex){
+                throw new EndingGameException();
             }
 
-        } catch (IllegalArgumentException e) {
-            out.println("Select a valid resource (Coin, Stone, Servant or Shield)");
         }
     }
 
@@ -324,16 +361,24 @@ public class RequiredClientActions {
                                     }
                                     break;
                                 case "discard":
-                                    out.println("White marble discarded");
-                            }
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
+                                    try {
+                                        MessageHandler.sendMessageToClient("White marble discarded", clientSocket);
+                                    }catch (EndingGameException ex){
+                                        throw new EndingGameException();
+                                    }
+                                    }
+                        } catch (EndingGameException ex) {
+                           throw new EndingGameException();
                         }
 
                     }
                 }
                 else {
-                    out.println("faith increased");
+                    try {
+                        MessageHandler.sendMessageToClient("faith increased", clientSocket);
+                    } catch (EndingGameException ex){
+                        throw new EndingGameException();
+                    }
                 }
             }
         }

@@ -1,19 +1,21 @@
 package it.polimi.ingsw.controller;
 
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 import java.net.Socket;
 
-public class EndGame {
 
+public class EndGame {
+    /**
+     * This method print in this client that the game is over
+     * @param clientSocket Socket
+     */
     public static void end (Socket clientSocket){
-        PrintWriter out;
+
         try {
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            out.println("Game over, server shutting down");
-        } catch (IOException e) {
-            System.out.println("User already disconnected");
+            MessageHandler.sendMessageToClient("Game over, server shutting down", clientSocket);
+        } catch (EndingGameException e) {
+            System.err.println("User already disconnected");
         }
 
 

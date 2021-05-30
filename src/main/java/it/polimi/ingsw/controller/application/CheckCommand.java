@@ -109,6 +109,12 @@ public class CheckCommand {
         return correctCommand;
     }
 
+    /**
+     * This method checks if this command is valid
+     * @param acceptedCommands String[]
+     * @param givenCommand String
+     * @return true (false if error)
+     */
     public static boolean commandChecker (String[] acceptedCommands, String givenCommand) {
         for(String s : acceptedCommands) {
             if (s.replace(" ","").equals(givenCommand))
@@ -183,6 +189,15 @@ public class CheckCommand {
         return counter;
     }
 
+    /**
+     * This method checks if player has this type of Leader Card
+     * @param ability String
+     * @param player Player
+     * @return 0 if player has not this type of Leader Card
+     *         1 if player has in first position this type of Leader Card
+     *         2 if player has in second position this type of Leader Card
+     *         3 if player has in both position this type of Leader Card
+     */
     public static int leaderCardChecker (String ability, Player player) {
         int counter=0;
         switch (ability) {

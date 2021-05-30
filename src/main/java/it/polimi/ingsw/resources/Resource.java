@@ -26,6 +26,10 @@ public class Resource {
         return resType;
     }
 
+    /**
+     * This method determines the type of this resource (String)
+     * @param string String
+     */
     public Resource(String string) {
         switch (string) {
             case "coin":
@@ -45,6 +49,11 @@ public class Resource {
         }
     }
 
+    /**
+     * This method returns true if Resource o is equal to this resource
+     * @param o Object
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +62,10 @@ public class Resource {
         return resType == resource.resType;
     }
 
+    /**
+     * This method returns the hash value of this Resource
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(resType);

@@ -4,10 +4,7 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class GameCreator {
@@ -38,17 +35,7 @@ public class GameCreator {
      * @return numberOfPlayers
      */
 
-    public int createGame(Game game) {
-        BufferedReader in;
-        PrintWriter out;
-        try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-            return 0;
-        }
+    public int createGame(Game game) throws EndingGameException {
 
         do {
             try {

@@ -12,11 +12,20 @@ public class CommandsHandler {
     private static Automaton fsm;
     private static Game game;
 
+    /**
+     * Constructor of this CommandsHandler
+     * @param fsm Automaton
+     */
     private CommandsHandler(Automaton fsm) {
         CommandsHandler.fsm = fsm;
         game = new Game();
     }
 
+    /**
+     * Creates a new instance and returns it
+     * @param fsm Automaton
+     * @return instance
+     */
     public static CommandsHandler instanceCreator(Automaton fsm) {
         if(instance==null)
             instance = new CommandsHandler(fsm);

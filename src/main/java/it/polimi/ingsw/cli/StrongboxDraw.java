@@ -3,6 +3,8 @@ package it.polimi.ingsw.cli;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.Strongbox;
 
+import java.util.ArrayList;
+
 public class StrongboxDraw {
 
     //private Strongbox strongboxDrawn;

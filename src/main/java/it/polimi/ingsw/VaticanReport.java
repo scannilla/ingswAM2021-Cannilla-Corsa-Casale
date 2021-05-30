@@ -21,7 +21,7 @@ public final class VaticanReport {
     private final int[] activationPosition = new int[numberOfReports];
 
     /**
-     * This attribute represents the pope favour tile for this Vatican Report
+     * This attribute represents how many Win Points each Vatican Report gives
      */
 
     private final int[] popeFavourTile = new int[numberOfReports];

@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import java.util.LinkedHashMap;
+
 public final class VaticanReport {
 
     /**
@@ -32,6 +34,7 @@ public final class VaticanReport {
 
     private final boolean[] activatedEvent = new boolean[numberOfReports];
 
+    LinkedHashMap<Integer, Integer> winPoints = new LinkedHashMap<>();
 
     /**
      * activates an event

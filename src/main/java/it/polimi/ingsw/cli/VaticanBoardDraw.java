@@ -1,35 +1,24 @@
 package it.polimi.ingsw.cli;
 
+import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.VaticanReport;
 public class VaticanBoardDraw {
 
-    public int vatican[] = new int[3];
-    public int vaticanLength[] = new int[3];
-    public int winPoints[] = new int[8];
+    VaticanReport vaticanReport = new VaticanReport();
+
     public int pos;
 
-    public void drawVaticanRoad(int pos, int vatican[], int vaticanLength[], int winPoints[]) {
+    public void drawVaticanRoad( VaticanReport vaticanReport, PersonalBoard personalBoard) {
         String blueEscape = Color.ANSI_BLUE.escape();
-        // parsare con gson dal file vatReport.json
-        vatican[0]=8;
-        vatican[1]=14;
-        vatican[2]=21;
-        vaticanLength[0]=5;
-        vaticanLength[1]=3;
-        vaticanLength[2]=4;
-        winPoints[0]=1;
-        winPoints[1]=2;
-        winPoints[2]=3;
-        winPoints[3]=4;
-        winPoints[4]=5;
-        winPoints[5]=6;
-        winPoints[6]=7;
-        winPoints[7]=8;
-        pos=19;
-        drawColouredLine(vatican, vaticanLength);
-        drawSecondLine(winPoints, vatican, vaticanLength);
-        drawThirdLine(vatican, vaticanLength, pos);
-        drawFourthLine(vatican, vaticanLength);
-        drawColouredLine(vatican, vaticanLength);
+        int[] activationPosition = vaticanReport.getActivationPosition();
+        int[] vaticanLength = vaticanReport.getReportsLength();
+        int[] winPoints = vaticanReport.getPopeFavourTile();// TODO parse winPoints
+        int pos = personalBoard.getPosition();
+        drawColouredLine(activationPosition, vaticanLength);
+        drawSecondLine(winPoints, activationPosition, vaticanLength);
+        drawThirdLine(activationPosition, vaticanLength, pos);
+        drawFourthLine(activationPosition, vaticanLength);
+        drawColouredLine(activationPosition, vaticanLength);
         System.out.print("\n");
     }
 

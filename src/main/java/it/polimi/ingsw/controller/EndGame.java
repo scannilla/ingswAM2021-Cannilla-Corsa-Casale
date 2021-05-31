@@ -10,7 +10,7 @@ public class EndGame {
      * This method print in this client that the game is over
      * @param clientSocket Socket
      */
-    public static void end (Socket clientSocket){
+    public static void end (MessageHandler mHandler){
 
         try {
             MessageHandler.sendMessageToClient("Game over, server shutting down", clientSocket);

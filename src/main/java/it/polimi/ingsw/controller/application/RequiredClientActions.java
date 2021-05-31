@@ -15,10 +15,6 @@ import java.util.Arrays;
 
 public class RequiredClientActions {
 
-    /**
-     * represents the client socket
-     */
-    private final Socket clientSocket;
 
     /**
      * represents the player
@@ -31,11 +27,10 @@ public class RequiredClientActions {
     /**
      * constructor of RequiredClientActions
      * @param command Command
-     * @param clientSocket Socket
      * @param player Player
      */
-    public RequiredClientActions(Command command, Socket clientSocket, Player player) {
-        this.clientSocket = clientSocket;
+    public RequiredClientActions(Command command, Player player, MessageHandler mHandler) {
+
         this.player = player;
         this.parameters = command.getParameters();
     }

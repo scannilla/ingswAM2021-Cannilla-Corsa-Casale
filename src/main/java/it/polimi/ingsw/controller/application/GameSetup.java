@@ -4,13 +4,10 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
+import it.polimi.ingsw.resources.Resource;
 
-import java.io.*;
-import java.net.Socket;
 
 public class GameSetup {
-
-    private final Socket clientSocket;
 
     private final Game game;
 
@@ -42,5 +39,17 @@ public class GameSetup {
         } catch (EndingGameException e) {
             throw new EndingGameException();
         }
+
+    }
+
+    private void insertResource() throws EndingGameException {
+        mHandler.sendMessageToClient("select now the resource: coin, stone, servant or shield");
+        String chosenResource = CheckCommand.commandChecker(new String[] {"coin", "stone", "servant", "shield"}, mHandler.readClientMessage(), mHandler);
+        int chosenLine;
+        do {
+            mHandler.sendMessageToClient("Select where to insert the chosen resource");
+            chosenLine = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
+        } while (chosenLine<1 || chosenLine>3);
+        player.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(chosenResource),chosenLine);
     }
 }

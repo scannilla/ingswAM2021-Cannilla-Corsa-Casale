@@ -4,8 +4,9 @@ import it.polimi.ingsw.GSON;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 
-import java.net.Socket;
+import java.io.IOException;
 
 public class CommandsHandler {
     private static CommandsHandler instance;
@@ -36,12 +37,12 @@ public class CommandsHandler {
      * Tries to execute a command in different Phase:
      * checks if this command is executable in this phase, if not throws EndingGameException
      * @param cmd String[]
-     * @param clientSocket Socket
      * @param player Player
+     * @param mHandler MessageHandler
      * @return ok or ko
      * @throws EndingGameException e
      */
-    public String tryCommand(String[] cmd, Socket clientSocket, Player player) throws EndingGameException {
+    public String tryCommand(String[] cmd, Player player, MessageHandler mHandler) throws EndingGameException {
         GamePhase phase = fsm.getPhase();
         if(!game.getPlayers().contains(player))
             game.addPlayer(player);
@@ -55,7 +56,7 @@ public class CommandsHandler {
             case GAME_CREATOR:
                 int numbOfPlayers;
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
-                    numbOfPlayers = new GameCreator(clientSocket).createGame(game);
+                    numbOfPlayers = new GameCreator(mHandler).createGame(game);
                     new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
                     fsm.evolveGamePhase();
                     return "ok";
@@ -70,12 +71,17 @@ public class CommandsHandler {
                 }
                 return "ko";
             case GAME_PHASE:
+                if(!player.isActive()) {
+                    mHandler.sendMessageToClient("Wait for you turn");
+                    return "ok";
+                }
                 Command c = GSON.commandParser(cmd[1]);
                 c.setCommandPlayer(player);
                 String returnValue = c.executeCommand();
-                if (returnValue.contains("$"))
-                    new RequiredClientActions(c, clientSocket, player).execute(returnValue.replace("$",""));
-
+                if (returnValue.equals("end"))
+                    game.endTurn();
+                else if (returnValue.contains("$"))
+                    new RequiredClientActions(c, player, mHandler).execute(returnValue.replace("$",""));
                 return "ko";
             case END:
             case UNKNOWN:
@@ -93,7 +99,7 @@ class AutoCheckerWait implements Runnable {
     private final int numbOfPlayers;
 
     /**
-     * Conctructor of AutoCheckerWait
+     * Constructor of AutoCheckerWait
      * @param game Game
      * @param fsm Automaton
      * @param numbOfPlayers int
@@ -113,6 +119,11 @@ class AutoCheckerWait implements Runnable {
                 e.printStackTrace();
             }
             if (game.getPlayers().size() == numbOfPlayers && fsm.getPhase()==GamePhase.WAITING_ROOM) {
+                try {
+                    game.initialSet();
+                } catch (IOException e) {
+                    return;
+                }
                 fsm.evolveGamePhase();
                 return;
             }

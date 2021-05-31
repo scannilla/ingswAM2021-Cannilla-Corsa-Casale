@@ -1,23 +1,25 @@
 package it.polimi.ingsw.controller.networkclient;
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLOutput;
 
 public class ClientListener implements Runnable{
 
     /**
-     * represents the client socket
+     * represents the client message handler
      */
-    Socket clientSocket;
+    private  final ClientMessageHandler cmHandler;
 
     /**
      * constructor for ClientListener
-     * @param clientSocket Socket
      */
-    public ClientListener(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+    public ClientListener(ClientMessageHandler cmHandler) {
+        this.cmHandler = cmHandler;
     }
 
     /**
@@ -25,32 +27,13 @@ public class ClientListener implements Runnable{
      */
     @Override
     public void run() {
-        ObjectInputStream in;
-        ObjectOutputStream out;
-        try {
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
-            out.flush();
-            in = new ObjectInputStream(clientSocket.getInputStream());
-
-            while (clientSocket != null) {
-                Message received;
-                try {
-                    received = (Message) in.readObject();
-                } catch (ClassNotFoundException | IOException e) {
-                    break;
-                }
-                if (received.getCode() == 5) {
-                    out.writeObject(new Message(6, "pong", null));
-                    out.flush();
-                }
-                System.out.println(received.getMessage());
-                in.close();
+        while (true) {
+            try {
+                String read = cmHandler.readMessage();
+                System.out.println(read);
+            } catch (EndingGameException e) {
+                break;
             }
-        } catch (IOException e) {
-            System.err.println("boh");
-            e.printStackTrace();
-            System.exit(1);
         }
-
     }
 }

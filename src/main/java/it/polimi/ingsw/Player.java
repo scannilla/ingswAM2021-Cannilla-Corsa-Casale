@@ -158,7 +158,7 @@ public class Player {
      * this method increases faith for the selected faith points
      * @param faithPoints int
      */
-    private void increaseFaith(int faithPoints) {
+    public void increaseFaith(int faithPoints) {
         personalBoard.setPosition(personalBoard.getPosition()+faithPoints);
         int i=0;
         while (connectedGame.getVaticanReport().getActivatedEvent()[i] && i<connectedGame.getVaticanReport().getNumberOfReports())

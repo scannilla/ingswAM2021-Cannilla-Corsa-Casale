@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller.networkserver;
 
 
-import it.polimi.ingsw.Game;
+
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndGame;
 import it.polimi.ingsw.controller.EndingGameException;
@@ -45,12 +45,13 @@ public class ServerMain {
                 futures.add(createConnection());
             } catch (EndingGameException e) {
                 for (Socket sock : mapAllPlayer.values()) {
-                    EndGame.end(sock);
+                    //EndGame.end(); TODO change endgame
                 }
                 System.out.println("Server shutting down");
                 System.exit(1);
             }
         }
+
         //the server checks if one of the thread connected to a player ends
         checkEnd(futures);
     }
@@ -65,7 +66,7 @@ public class ServerMain {
                     end = f.get(5, TimeUnit.SECONDS);
                 } catch (InterruptedException | ExecutionException e) {
                     for(Socket sock : mapAllPlayer.values())
-                        EndGame.end(sock);
+                        //EndGame.end(sock); TODO change endgame
                     System.out.println("Server shutting down");
                     System.exit(1);
                 } catch (TimeoutException e) {
@@ -102,8 +103,9 @@ public class ServerMain {
             throw new EndingGameException();
         }
         String nickname;
+        MessageHandler mHandler = new MessageHandler(clientSocket);
         try {
-            nickname = askForNickname(clientSocket);
+            nickname = askForNickname(mHandler);
         } catch (EndingGameException e) {
             throw new EndingGameException();
         }
@@ -116,8 +118,8 @@ public class ServerMain {
         String nickname;
         do {
             try {
-                MessageHandler.sendMessageToClient("Insert a valid nickname", clientSocket);
-                nickname = MessageHandler.readClientMessage(clientSocket);
+                mHandler.sendMessageToClient("Insert a valid nickname");
+                nickname = mHandler.readClientMessage();
             } catch (EndingGameException e) {
                 throw new EndingGameException();
             }

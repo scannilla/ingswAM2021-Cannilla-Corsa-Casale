@@ -45,6 +45,8 @@ public class Game {
 
     private ProductionCardsDeck deck;
 
+    private Player activePlayer;
+
 
 
     /**
@@ -64,6 +66,7 @@ public class Game {
         cardsMarket.setMarket(deck);
         leaderCardsDeck.shuffleDeck();
         players.get(0).setActive(true);
+        activePlayer = players.get(0);
     }
 
     /**
@@ -191,6 +194,12 @@ public class Game {
 
     public void gameOver(Player player) {
         previousPlayer(player).lastPlayer();
+    }
+
+    public void endTurn() {
+        activePlayer.setActive(false);
+        activePlayer = nextPlayer(activePlayer);
+        activePlayer.setActive(true);
     }
 
 }

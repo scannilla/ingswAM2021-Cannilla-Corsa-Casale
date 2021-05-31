@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.networkclient;
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 
 import java.io.*;
@@ -25,17 +26,15 @@ public class ClientMain {
         }
 
         Socket clientSocket;
-        ObjectOutputStream out;
         BufferedReader stdIn;
         try {
             clientSocket = new Socket(hostName, portNumber);
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            ClientMessageHandler cmHandler = new ClientMessageHandler(clientSocket);
             stdIn = new BufferedReader(new InputStreamReader(System.in));
-            new Thread(new ClientListener(clientSocket)).start();
+            new Thread(new ClientListener(cmHandler)).start();
             String input;
             while ((input = stdIn.readLine()) != null) {
-                out.writeObject(createMessage(input));
-                out.flush();
+                cmHandler.sendMessageToServer(input);
             }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
@@ -43,10 +42,9 @@ public class ClientMain {
         } catch (IOException e) {
             System.err.println("Couldn't get the I/O for the current host");
             System.exit(1);
+        } catch (EndingGameException e) {
+            System.err.println("Game over, disconnecting");
+            System.exit(1);
         }
-    }
-
-    private static Message createMessage(String input) {
-        return new Message(10, input, "prova");
     }
 }

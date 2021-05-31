@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.networkserver;
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CheckConnection implements Runnable{
 
-    private final Socket clientSocket;
+    private final MessageHandler mHandler;
 
     public CheckConnection(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -18,12 +19,6 @@ public class CheckConnection implements Runnable{
 
     @Override
     public void run() {
-        ObjectOutputStream out;
-        try {
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
-        } catch (IOException e) {
-           return;
-        }
         while(true) {
             try {
                 TimeUnit.SECONDS.sleep(2);
@@ -31,8 +26,8 @@ public class CheckConnection implements Runnable{
                 return;
             }
             try {
-                out.writeObject(new Message(5,"ping", null));
-            } catch (IOException e) {
+                mHandler.sendMessageToClient("ping", 5);
+            } catch (EndingGameException e) {
                 return;
             }
         }

@@ -31,13 +31,23 @@ public final class MessageHandler {
      * @param message String
      * @throws EndingGameException e
      */
-    public static void sendMessageToClient(String message, Socket clientSocket) throws EndingGameException {
+    public void sendMessageToClient(String message) throws EndingGameException {
         Message m = new Message(1, message, "prova");
         ObjectOutputStream out;
         try {
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             out.writeObject(m);
             out.close();
+        } catch (IOException e) {
+            throw new EndingGameException();
+        }
+    }
+
+    public void sendMessageToClient(String message, int code) throws EndingGameException {
+        Message m = new Message(code, message, null);
+
+        try {
+            out.writeObject(m);
         } catch (IOException e) {
             throw new EndingGameException();
         }

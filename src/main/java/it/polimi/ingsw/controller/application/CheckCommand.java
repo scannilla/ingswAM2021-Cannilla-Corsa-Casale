@@ -13,7 +13,6 @@ public class CheckCommand {
     /**
      * This method checks if player has a Leader Card of Discount to use and asks player if he wants to activate this card
      * @param player Player
-     * @param clientSocket Socket
      * @param costArray Resource[]
      * @throws EndingGameException e
      */
@@ -65,7 +64,6 @@ public class CheckCommand {
 
     /**
      * This method checks if player inserted a valid number
-     * @param clientSocket Socket
      * @param string String
      * @return number (-1 error)
      */
@@ -92,7 +90,7 @@ public class CheckCommand {
      * @return givenCommand (correctCommand if error)
      * @throws EndingGameException e
      */
-    public static String commandChecker (String[] acceptedCommands, String givenCommand, Socket clientSocket) throws EndingGameException {
+    public static String commandChecker (String[] acceptedCommands, String givenCommand, MessageHandler mHandler) throws EndingGameException {
         String allCommands = "Please insert one of the following commands: ";
         for(String s : acceptedCommands) {
             if (givenCommand.equalsIgnoreCase(s.replace(" ", "")))

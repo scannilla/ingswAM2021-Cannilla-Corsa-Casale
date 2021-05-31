@@ -13,8 +13,8 @@ public class CheckConnection implements Runnable{
 
     private final MessageHandler mHandler;
 
-    public CheckConnection(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+    public CheckConnection(MessageHandler mHandler) {
+        this.mHandler = mHandler;
     }
 
     @Override

@@ -52,9 +52,9 @@ public class NewServerGameProtocol implements Callable<Integer> {
             checkConnection();
             String command;
             try {
-                command = MessageHandler.readClientMessage(clientSocket);
-                String response = handler.tryCommand(createCommand(command), clientSocket, player);
-                MessageHandler.sendMessageToClient(response, clientSocket);
+                command = mHandler.readClientMessage();
+                String response = handler.tryCommand(createCommand(command), player, mHandler);
+                mHandler.sendMessageToClient(response);
             } catch (EndingGameException e) {
                 break;
             }

@@ -109,12 +109,13 @@ public class ServerMain {
         } catch (EndingGameException e) {
             throw new EndingGameException();
         }
+
         Player player = new Player(nickname);
         mapAllPlayer.put(player, clientSocket);
-        return executor.submit(new NewServerGameProtocol(clientSocket, player, handler));
+        return executor.submit(new NewServerGameProtocol(clientSocket, player, handler, mHandler));
     }
 
-    private static String askForNickname(Socket clientSocket) throws EndingGameException {
+    private static String askForNickname(MessageHandler mHandler) throws EndingGameException {
         String nickname;
         do {
             try {

@@ -8,17 +8,34 @@ import java.net.Socket;
 
 public final class MessageHandler {
 
+    private final ObjectOutputStream out;
+
+    private final ObjectInputStream in;
+
     /**
-     * Reads a message from a file
+     * Constructor of this MessageHandler linked to this clientSocket
+     * @param clientSocket Socket
+     * @throws EndingGameException e
+     */
+    public MessageHandler(Socket clientSocket) throws EndingGameException {
+        try {
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
+        } catch (IOException e){
+            throw new EndingGameException();
+        }
+    }
+
+
+    /**
+     * Reads a message from Client
      * @return String message
      * @throws EndingGameException e
      */
-    public static String readClientMessage(Socket clientSocket) throws EndingGameException {
-        ObjectInputStream in;
-        try {
-            in = new ObjectInputStream(clientSocket.getInputStream());
+    public String readClientMessage() throws EndingGameException {
+
+        try{
             String message = ((Message)in.readObject()).getMessage();
-            in.close();
             return message;
         } catch (IOException | ClassNotFoundException e) {
             throw new EndingGameException();
@@ -33,11 +50,9 @@ public final class MessageHandler {
      */
     public void sendMessageToClient(String message) throws EndingGameException {
         Message m = new Message(1, message, "prova");
-        ObjectOutputStream out;
+
         try {
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
             out.writeObject(m);
-            out.close();
         } catch (IOException e) {
             throw new EndingGameException();
         }

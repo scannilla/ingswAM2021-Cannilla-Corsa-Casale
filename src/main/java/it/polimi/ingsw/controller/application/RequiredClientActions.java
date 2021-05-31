@@ -23,16 +23,20 @@ public class RequiredClientActions {
 
     private final String[] parameters;
 
+    private final MessageHandler mHandler;
+
 
     /**
      * constructor of RequiredClientActions
      * @param command Command
      * @param player Player
+     * @param mHandler MessageHandler
      */
     public RequiredClientActions(Command command, Player player, MessageHandler mHandler) {
 
         this.player = player;
         this.parameters = command.getParameters();
+        this.mHandler = mHandler;
     }
 
     /**
@@ -75,7 +79,7 @@ public class RequiredClientActions {
                         if (player.getPersonalBoard().getWarehouseDepot().checkResource(i).equals(resource)) {
                             player.getPersonalBoard().getWarehouseDepot().useResource(resource);
                             try {
-                                MessageHandler.sendMessageToClient("resource taken", clientSocket);
+                                mHandler.sendMessageToClient("resource taken");
                             } catch (EndingGameException e){
                                 throw new EndingGameException();
                             }
@@ -83,7 +87,7 @@ public class RequiredClientActions {
                         }
                     }
                     try {
-                        MessageHandler.sendMessageToClient("You don't have this resource in your warehouse depot, select a new resource and location", clientSocket);
+                        mHandler.sendMessageToClient("You don't have this resource in your warehouse depot, select a new resource and location");
                     } catch (EndingGameException e){
                         throw new EndingGameException();
                     }
@@ -93,14 +97,14 @@ public class RequiredClientActions {
                     int position = CheckCommand.leaderCardChecker("depot", player, resource);
                     if(position==0)
                         try {
-                            MessageHandler.sendMessageToClient("You don't have any active Leader of Depots card", clientSocket);
+                            mHandler.sendMessageToClient("You don't have any active Leader of Depots card");
                         } catch (EndingGameException e){
                             throw new EndingGameException();
                         }
                         else if ((position==1 || position ==2 ) && ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).getExtraDepot()[0]!=null) {
                         ((LeaderOfDepots)player.getActiveLeaderCards()[position-1]).useResource(resource);
                         try {
-                        MessageHandler.sendMessageToClient("resource taken", clientSocket);
+                        mHandler.sendMessageToClient("resource taken");
                         } catch (EndingGameException e){
                             throw new EndingGameException();
                         }
@@ -110,7 +114,7 @@ public class RequiredClientActions {
                         if(((LeaderOfDepots)player.getActiveLeaderCards()[0]).getExtraDepot()[0]!=null) {
                             ((LeaderOfDepots) player.getActiveLeaderCards()[0]).useResource(resource);
                             try {
-                                MessageHandler.sendMessageToClient("resource taken", clientSocket);
+                                mHandler.sendMessageToClient("resource taken");
                             } catch (EndingGameException e){
                                 throw new EndingGameException();
                             }
@@ -119,7 +123,7 @@ public class RequiredClientActions {
                         else if (((LeaderOfDepots)player.getActiveLeaderCards()[1]).getExtraDepot()[0]!=null){
                             ((LeaderOfDepots) player.getActiveLeaderCards()[1]).useResource(resource);
                             try {
-                                MessageHandler.sendMessageToClient("resource taken", clientSocket);
+                                mHandler.sendMessageToClient("resource taken");
                             } catch (EndingGameException e){
                                 throw new EndingGameException();
                             }
@@ -129,12 +133,12 @@ public class RequiredClientActions {
                     break;
             }
             try {
-                MessageHandler.sendMessageToClient("Insert a new resource and location", clientSocket);
+                mHandler.sendMessageToClient("Insert a new resource and location");
             } catch (EndingGameException e){
                 //
             }
             String newInput;
-            newInput = MessageHandler.readClientMessage(clientSocket);
+            newInput = mHandler.readClientMessage();
             depotType = newInput.split(" ")[1];
             resource =  new Resource(newInput.split(" ")[0]);
 
@@ -158,7 +162,7 @@ public class RequiredClientActions {
                             done = true;
                         } catch (IllegalArgumentException e){
                             try {
-                                MessageHandler.sendMessageToClient(e.getMessage(), clientSocket);
+                                mHandler.sendMessageToClient(e.getMessage());
                             } catch (EndingGameException endingGameException) {
                                 endingGameException.printStackTrace();
                             }
@@ -173,7 +177,7 @@ public class RequiredClientActions {
                             done = true;
                         } catch (IllegalArgumentException e){
                             try {
-                                MessageHandler.sendMessageToClient(e.getMessage(), clientSocket);
+                                mHandler.sendMessageToClient(e.getMessage());
                             } catch (EndingGameException endingGameException) {
                                 endingGameException.printStackTrace();
                             }
@@ -199,14 +203,14 @@ public class RequiredClientActions {
                     try {
                         player.getPersonalBoard().getWarehouseDepot().useResource(requiredRes[i]);
                         try {
-                            MessageHandler.sendMessageToClient("Resource used", clientSocket);
+                            mHandler.sendMessageToClient("Resource used");
                         } catch (EndingGameException e){
                             throw new EndingGameException();
                         }
                         requiredRes[i] = null;
                     } catch (IllegalArgumentException e) {
                         try {
-                            MessageHandler.sendMessageToClient("This resource isn't available in your warehouse depot", clientSocket);
+                            mHandler.sendMessageToClient("This resource isn't available in your warehouse depot");
                         } catch (EndingGameException ex){
                             throw new EndingGameException();
                         }
@@ -214,14 +218,14 @@ public class RequiredClientActions {
                     break;
                 }
                 try {
-                    MessageHandler.sendMessageToClient("This resource isn't required", clientSocket);
+                    mHandler.sendMessageToClient("This resource isn't required");
                 } catch (EndingGameException e){
                     throw new EndingGameException();
                 }
             }
         } catch (IllegalArgumentException | EndingGameException e) {
             try{
-                MessageHandler.sendMessageToClient("Select a valid resource (Coin, Stone, Servant or Shield)", clientSocket);
+                mHandler.sendMessageToClient("Select a valid resource (Coin, Stone, Servant or Shield)");
             } catch (EndingGameException ex){
                 throw new EndingGameException();
             }
@@ -249,31 +253,31 @@ public class RequiredClientActions {
     private void insertResource(Resource res) throws EndingGameException {
         try {
             do {
-                MessageHandler.sendMessageToClient("Select where you want to insert the new resource (warehouse depot or extra depot) or if you want to discard it", clientSocket);
-                String choice = MessageHandler.readClientMessage(clientSocket).toLowerCase().replace(" ", "");
-                choice = CheckCommand.commandChecker(new String[]{"warehousedepot","extradepot","discard"}, choice, clientSocket);
+                mHandler.sendMessageToClient("Select where you want to insert the new resource (warehouse depot or extra depot) or if you want to discard it");
+                String choice = mHandler.readClientMessage().toLowerCase().replace(" ", "");
+                choice = CheckCommand.commandChecker(new String[]{"warehousedepot","extradepot","discard"}, choice, mHandler);
                 switch (choice) {
                     case "warehousedepot":
-                        MessageHandler.sendMessageToClient("select a line to insert the resource into", clientSocket);
-                        String chosenColumn=MessageHandler.readClientMessage(clientSocket);
-                        int column = CheckCommand.checkNumber(clientSocket, chosenColumn);
+                        mHandler.sendMessageToClient("select a line to insert the resource into");
+                        String chosenColumn=mHandler.readClientMessage();
+                        int column = CheckCommand.checkNumber(mHandler.readClientMessage(),  mHandler);
                         try {
                             player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column);
                             return;
                         } catch (IllegalArgumentException e) {
-                            MessageHandler.sendMessageToClient(e.getMessage(), clientSocket);
-                            MessageHandler.sendMessageToClient("Choose if you want to move your resources (move resources -first line -second line) or discard this resource (discard resource) otherwise just press anything to try again", clientSocket);
-                            String[] action = MessageHandler.readClientMessage(clientSocket).toLowerCase().replace(" ", "").split("-");
+                            mHandler.sendMessageToClient(e.getMessage());
+                            mHandler.sendMessageToClient("Choose if you want to move your resources (move resources -first line -second line) or discard this resource (discard resource) otherwise just press anything to try again");
+                            String[] action = mHandler.readClientMessage().toLowerCase().replace(" ", "").split("-");
                             String commandMove = action[0];
                             switch (commandMove){
                                 case "moveresources":
-                                    int line1 = CheckCommand.checkNumber(clientSocket, action[1]);
-                                    int line2 = CheckCommand.checkNumber(clientSocket, action[2]);
+                                    int line1 = CheckCommand.checkNumber(mHandler.readClientMessage(),  mHandler);
+                                    int line2 = CheckCommand.checkNumber( mHandler.readClientMessage(),  mHandler);
                                     try {
                                         player.getPersonalBoard().getWarehouseDepot().moveResources(line1, line2);
-                                        MessageHandler.sendMessageToClient("The selected line have been correctly switched, now insert the command again", clientSocket);
+                                        mHandler.sendMessageToClient("The selected line have been correctly switched, now insert the command again");
                                     } catch (IllegalArgumentException exc) {
-                                        MessageHandler.sendMessageToClient(exc.getMessage(), clientSocket);
+                                        mHandler.sendMessageToClient(exc.getMessage());
                                     }
                                     break;
                                 case "discardresource":
@@ -285,20 +289,20 @@ public class RequiredClientActions {
                     case "extradepot":
                         int position = CheckCommand.leaderCardChecker("depot", player, res);
                         if (position==0)
-                            MessageHandler.sendMessageToClient("You don't have any leader card of depot", clientSocket);
+                            mHandler.sendMessageToClient("You don't have any leader card of depot");
                         else if (position==1 || position==2) {
                             try {
                                 ((LeaderOfDepots) player.getActiveLeaderCards()[position - 1]).addNewResource(res);
                             } catch (IllegalArgumentException fail) {
-                                MessageHandler.sendMessageToClient(fail.getMessage(), clientSocket);
+                                mHandler.sendMessageToClient(fail.getMessage());
                             }
                         }
                         else {
                             int chosenCard;
                             do {
-                                MessageHandler.sendMessageToClient("Choose if you want to insert this resource either in the first card or the second card", clientSocket);
-                                String select = MessageHandler.readClientMessage(clientSocket);
-                                chosenCard = CheckCommand.checkNumber(clientSocket, select);
+                                mHandler.sendMessageToClient("Choose if you want to insert this resource either in the first card or the second card");
+                                String select =  mHandler.readClientMessage();
+                                chosenCard = CheckCommand.checkNumber( mHandler.readClientMessage(),  mHandler);
                             } while (chosenCard != 1 && chosenCard!=2);
                             ((LeaderOfDepots) player.getActiveLeaderCards()[chosenCard-1]).addNewResource(res);
                         }
@@ -329,13 +333,13 @@ public class RequiredClientActions {
                 if(e.getMessage().equals("white")) {
                     if(player.getActiveLeaderCards()[0]!=null && player.getActiveLeaderCards()[1]!=null && (player.getActiveLeaderCards()[0].getAbility()==2 || player.getActiveLeaderCards()[1].getAbility()==2)) {
                         try {
-                            MessageHandler.sendMessageToClient("select if you want to transform or discard the white marble", clientSocket);
+                            mHandler.sendMessageToClient("select if you want to transform or discard the white marble");
                         } catch (EndingGameException ex){
                             throw new EndingGameException();
                         }
                         try {
-                            String transformChoice= MessageHandler.readClientMessage(clientSocket).toLowerCase();
-                            transformChoice = CheckCommand.commandChecker(new String[]{"transform", "discard"}, transformChoice, clientSocket);
+                            String transformChoice=  mHandler.readClientMessage().toLowerCase();
+                            transformChoice = CheckCommand.commandChecker(new String[]{"transform", "discard"}, transformChoice, mHandler);
                             switch (transformChoice) {
                                 case "transform": //transform marble
                                     int conversionPosition = CheckCommand.leaderCardChecker("conversion", player);
@@ -346,18 +350,18 @@ public class RequiredClientActions {
                                     else {
                                         String selectedResource;
                                         try{
-                                            MessageHandler.sendMessageToClient("You can only convert one resource at a time, select the one you prefer", clientSocket);
-                                            selectedResource = MessageHandler.readClientMessage(clientSocket);
+                                            mHandler.sendMessageToClient("You can only convert one resource at a time, select the one you prefer");
+                                            selectedResource =  mHandler.readClientMessage();
                                         } catch (EndingGameException ex){
                                             throw new EndingGameException();
                                         }
-                                        Resource chosenRes = new Resource(CheckCommand.commandChecker(new String[]{((LeaderOfConversions)player.getActiveLeaderCards()[0]).getConvertedResource().toString(), ((LeaderOfConversions)player.getActiveLeaderCards()[0]).getConvertedResource().toString()}, selectedResource, clientSocket));
+                                        Resource chosenRes = new Resource(CheckCommand.commandChecker(new String[]{((LeaderOfConversions)player.getActiveLeaderCards()[0]).getConvertedResource().toString(), ((LeaderOfConversions)player.getActiveLeaderCards()[0]).getConvertedResource().toString()}, selectedResource, mHandler));
                                         insertResource(chosenRes);
                                     }
                                     break;
                                 case "discard":
                                     try {
-                                        MessageHandler.sendMessageToClient("White marble discarded", clientSocket);
+                                        mHandler.sendMessageToClient("White marble discarded");
                                     }catch (EndingGameException ex){
                                         throw new EndingGameException();
                                     }
@@ -370,7 +374,7 @@ public class RequiredClientActions {
                 }
                 else {
                     try {
-                        MessageHandler.sendMessageToClient("faith increased", clientSocket);
+                        mHandler.sendMessageToClient("faith increased");
                     } catch (EndingGameException ex){
                         throw new EndingGameException();
                     }
@@ -385,11 +389,11 @@ public class RequiredClientActions {
 
     private void buyCard() throws EndingGameException {
         Resource[] costArray = player.getConnectedGame().getCardsMarket().getCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1])).getCostArray();
-        CheckCommand.checkDiscount(player, clientSocket, costArray);
-        MessageHandler.sendMessageToClient("you can buy the selected card, please choose the resources to use", clientSocket);
+        CheckCommand.checkDiscount(player, costArray, mHandler);
+        mHandler.sendMessageToClient("you can buy the selected card, please choose the resources to use");
         do {
             String chosenResource;
-            chosenResource = MessageHandler.readClientMessage(clientSocket);
+            chosenResource =  mHandler.readClientMessage();
             switch(chosenResource.split(" ")[1].toLowerCase()) {
                 case "warehousedepot":
                     useWarehouseResource(costArray, chosenResource);
@@ -408,33 +412,33 @@ public class RequiredClientActions {
                                 player.getPersonalBoard().getStrongbox().useResourceStrongbox(costArray[i]);
                                 costArray[i] = null;
                             } catch (IllegalArgumentException e) {
-                                MessageHandler.sendMessageToClient("This resource isn't available in your Strongbox", clientSocket);
+                                mHandler.sendMessageToClient("This resource isn't available in your Strongbox");
                             }
                             break; //break for each
                         }
-                        MessageHandler.sendMessageToClient("This resource isn't required", clientSocket);
+                        mHandler.sendMessageToClient("This resource isn't required");
                     }
                     break; //break case "strongbox"
                 default:
-                    MessageHandler.sendMessageToClient("select a valid resource location (Warehouse Depot, Extra Depot or Strongbox", clientSocket);
+                    mHandler.sendMessageToClient("select a valid resource location (Warehouse Depot, Extra Depot or Strongbox");
                     break;
             }
         }
         while (Arrays.equals(costArray, new Resource[costArray.length]));
         int position;
         do {
-            MessageHandler.sendMessageToClient("Select a position to insert the card in", clientSocket);
-            position = CheckCommand.checkNumber(clientSocket, MessageHandler.readClientMessage(clientSocket));
+            mHandler.sendMessageToClient("Select a position to insert the card in");
+            position = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
         } while (position<1 || position > 3);
         player.buyProductionCard(Integer.parseInt(parameters[0]),Integer.parseInt(parameters[1]), position);
-        MessageHandler.sendMessageToClient("Card inserted in the selected slot", clientSocket);
+        mHandler.sendMessageToClient("Card inserted in the selected slot");
     }
 
     private void activateProduction() throws EndingGameException {
-        MessageHandler.sendMessageToClient("You can activate this production, select where you want to take the resources from", clientSocket);
+        mHandler.sendMessageToClient("You can activate this production, select where you want to take the resources from");
         Resource[] requiredRes = player.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()[Integer.parseInt(parameters[0])].getRequiredRes();
         do {
-            String chosenResource = MessageHandler.readClientMessage(clientSocket);
+            String chosenResource =  mHandler.readClientMessage();
             switch (chosenResource.split(" ")[1].toLowerCase()) {
                 case "warehousedepot":
                     useWarehouseResource(requiredRes, chosenResource);
@@ -446,14 +450,14 @@ public class RequiredClientActions {
                     break;
 
                 default:
-                    MessageHandler.sendMessageToClient("Select a valid resource location (Warehouse Depot or Extra Depot)", clientSocket);
+                    mHandler.sendMessageToClient("Select a valid resource location (Warehouse Depot or Extra Depot)");
                     break;
             }
         } while(Arrays.equals(requiredRes, new Resource[requiredRes.length]));
         for (Resource r : player.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()[Integer.parseInt(parameters[0])].getGivenRes())
             player.getPersonalBoard().getStrongbox().insertNewResource(r);
         EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
-        MessageHandler.sendMessageToClient("Production activated and finished", clientSocket);
+        mHandler.sendMessageToClient("Production activated and finished");
     }
 
     private void buyFromMarket() throws EndingGameException {
@@ -461,15 +465,15 @@ public class RequiredClientActions {
         int chosenLine = Integer.parseInt(parameters[1])-1;
         marbles = player.buyResourceFromMarket(chosenLine-1, parameters[0]);
         readMarbles(marbles);
-        MessageHandler.sendMessageToClient("Resources bought", clientSocket);
+        mHandler.sendMessageToClient("Resources bought");
     }
 
     private void standardProduction() throws EndingGameException {
-        MessageHandler.sendMessageToClient("You can activate the standard production, select where you want tot take the resources from", clientSocket);
+        mHandler.sendMessageToClient("You can activate the standard production, select where you want tot take the resources from");
         int givenRes = 0;
         do {
 
-            String chosenResource = MessageHandler.readClientMessage(clientSocket);
+            String chosenResource =  mHandler.readClientMessage();
             switch (chosenResource.split(" ")[1].toLowerCase()) {
                 case "warehousedepot":
                     anyResource(new Resource(chosenResource.split(" ")[0].toLowerCase()), "warehouse");
@@ -483,23 +487,23 @@ public class RequiredClientActions {
                     break;
 
                 default:
-                    MessageHandler.sendMessageToClient("Select a valid resource location (Warehouse Depot or Extra Depot)", clientSocket);
+                    mHandler.sendMessageToClient("Select a valid resource location (Warehouse Depot or Extra Depot)");
                     break;
             }
         } while (givenRes<2);
-        MessageHandler.sendMessageToClient("Now choose a resource to get from the production", clientSocket);
+        mHandler.sendMessageToClient("Now choose a resource to get from the production");
         do {
-            String choice = MessageHandler.readClientMessage(clientSocket);
+            String choice =  mHandler.readClientMessage();
             try {
                 Resource res = new Resource(choice.toLowerCase());
                 insertResource(res);
                 break;
             } catch (IllegalArgumentException e) {
-                MessageHandler.sendMessageToClient("select a valid resource", clientSocket);
+                mHandler.sendMessageToClient("select a valid resource");
             }
         } while (true);
         EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
-        MessageHandler.sendMessageToClient("Standard production finished", clientSocket);
+        mHandler.sendMessageToClient("Standard production finished");
     }
 
 }

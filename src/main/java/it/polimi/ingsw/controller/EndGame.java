@@ -8,12 +8,12 @@ import java.net.Socket;
 public class EndGame {
     /**
      * This method print in this client that the game is over
-     * @param clientSocket Socket
+     * @param mHandler MessageHandler
      */
     public static void end (MessageHandler mHandler){
 
         try {
-            MessageHandler.sendMessageToClient("Game over, server shutting down", clientSocket);
+            mHandler.sendMessageToClient("Game over, server shutting down");
         } catch (EndingGameException e) {
             System.err.println("User already disconnected");
         }

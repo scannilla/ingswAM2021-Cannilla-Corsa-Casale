@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
@@ -16,14 +17,14 @@ public class CheckCommand {
      * @param costArray Resource[]
      * @throws EndingGameException e
      */
-    public static void checkDiscount(Player player, Socket clientSocket, Resource[] costArray) throws EndingGameException {
+    public static void checkDiscount(Player player, Resource[] costArray, MessageHandler mHandler) throws EndingGameException {
         Resource discountedRes ;
         String response = "";
         if (player.getActiveLeaderCards()[0] != null && player.getActiveLeaderCards()[0] instanceof LeaderOfDiscounts) {
             do {
                 try {
-                    MessageHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]", clientSocket);
-                    response = MessageHandler.readClientMessage(clientSocket);
+                    mHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]");
+                    response =  mHandler.readClientMessage();
                 } catch (EndingGameException e) {
                     throw new EndingGameException();
                 }
@@ -43,8 +44,8 @@ public class CheckCommand {
             if (player.getActiveLeaderCards()[1] != null && player.getActiveLeaderCards()[1] instanceof LeaderOfDiscounts) {
                 do{
                     try {
-                        MessageHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]", clientSocket);
-                        response = MessageHandler.readClientMessage(clientSocket);
+                        mHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]");
+                        response =  mHandler.readClientMessage();
                     } catch (EndingGameException e) {
                         throw new EndingGameException();
                     }
@@ -67,14 +68,14 @@ public class CheckCommand {
      * @param string String
      * @return number (-1 error)
      */
-    public static int checkNumber(Socket clientSocket, String string) {
+    public static int checkNumber(String string, MessageHandler mHandler) {
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
             try {
-                MessageHandler.sendMessageToClient("Insert a valid number",clientSocket);
-                String newNumber = MessageHandler.readClientMessage(clientSocket);
-                return checkNumber(clientSocket, newNumber);
+                mHandler.sendMessageToClient("Insert a valid number");
+                String newNumber =  mHandler.readClientMessage();
+                return checkNumber(newNumber, mHandler);
             } catch (EndingGameException ex) {
                 ex.printStackTrace();
             }
@@ -86,7 +87,7 @@ public class CheckCommand {
      * This methods shows all commands that player can insert and checks if this command is valid
      * @param acceptedCommands String[]
      * @param givenCommand String
-     * @param clientSocket Socket
+
      * @return givenCommand (correctCommand if error)
      * @throws EndingGameException e
      */
@@ -99,8 +100,8 @@ public class CheckCommand {
         }
         String correctCommand = null;
         try {
-            MessageHandler.sendMessageToClient(allCommands, clientSocket);
-            correctCommand = commandChecker(acceptedCommands, MessageHandler.readClientMessage(clientSocket), clientSocket);
+            mHandler.sendMessageToClient(allCommands);
+            correctCommand = commandChecker(acceptedCommands, mHandler.readClientMessage(), mHandler);
         } catch (EndingGameException e) {
             throw new EndingGameException();
         }

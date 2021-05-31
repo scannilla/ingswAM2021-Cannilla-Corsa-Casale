@@ -13,26 +13,35 @@ public class GameSetup {
 
     private final Player player;
 
-    public GameSetup(Socket clientSocket, Game game, Player player) {
-        this.clientSocket = clientSocket;
+    private final MessageHandler mHandler;
+
+    public GameSetup(Game game, Player player, MessageHandler mHandler) {
         this.game = game;
         this.player = player;
+        this.mHandler = mHandler;
     }
 
     public void gameSetUp(int index) throws EndingGameException{
         try {
             switch (index) {
                 case 0:
-                    MessageHandler.sendMessageToClient("You're the first player so you're not gonna receive any resource or faith point", clientSocket);
+                    mHandler.sendMessageToClient("You're the first player so you're not gonna receive any resource or faith point");
                     break;
                 case 1:
-                    MessageHandler.sendMessageToClient("You're the second player so you can choose a resource to add to your warehouse depot", clientSocket);
+                    mHandler.sendMessageToClient("You're the second player so you can choose a resource to add to your warehouse depot");
+                    insertResource();
                     break;
                 case 2:
-                    MessageHandler.sendMessageToClient("You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one", clientSocket);
+                    mHandler.sendMessageToClient("You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one");
+                    player.increaseFaith(1);
+                    insertResource();
                     break;
                 case 3:
-                    MessageHandler.sendMessageToClient("You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one", clientSocket);
+                    mHandler.sendMessageToClient("You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one");
+                    player.increaseFaith(1);
+                    for (int i = 0; i < 2; i++) {
+                        insertResource();
+                    }
                     break;
 
             }

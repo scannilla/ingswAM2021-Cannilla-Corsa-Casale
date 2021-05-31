@@ -66,7 +66,7 @@ public class CommandsHandler {
                 return "ko";
             case GAME_SETUP:
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
-                    new GameSetup(clientSocket, game, player).gameSetUp(game.getPlayers().indexOf(player));
+                    new GameSetup(game, player, mHandler).gameSetUp(game.getPlayers().indexOf(player));
                     return "ok";
                 }
                 return "ko";

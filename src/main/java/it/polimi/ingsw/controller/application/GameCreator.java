@@ -15,23 +15,19 @@ public class GameCreator {
 
     private int numberOfPlayers;
 
-    /**
-     * represents the client socket
-     */
-
-    private final Socket clientSocket;
+    private final MessageHandler mHandler;
 
     /**
      * this method starts the game setup and sets the number of players
-     *
      */
 
-    public GameCreator(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+    public GameCreator(MessageHandler mHandler) {
+        this.mHandler = mHandler;
     }
 
     /**
      * this method starts the game setup and sets the number of players
+     *
      * @return numberOfPlayers
      */
 
@@ -39,14 +35,13 @@ public class GameCreator {
 
         do {
             try {
-                numberOfPlayers = CheckCommand.checkNumber(clientSocket, MessageHandler.readClientMessage(clientSocket));
+                numberOfPlayers = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
             } catch (EndingGameException e) {
                 throw new EndingGameException();
             }
         }
-        while (numberOfPlayers!=1 && numberOfPlayers != 2 && numberOfPlayers !=3 && numberOfPlayers != 4);
+        while (numberOfPlayers != 1 && numberOfPlayers != 2 && numberOfPlayers != 3 && numberOfPlayers != 4);
         game.setNumberOfPlayers(numberOfPlayers);
         return numberOfPlayers;
     }
-
 }

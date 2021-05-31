@@ -2,7 +2,8 @@ package it.polimi.ingsw.cli;
 
 import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.leader.LeaderCard;
+import it.polimi.ingsw.leader.*;
+import it.polimi.ingsw.resources.Resource;
 
 public class ActiveLeaderCardsDraw {
     public static void drawActiveLeaderCards(Player player ){

@@ -14,7 +14,7 @@ public abstract class LeaderCard {
 
     private int[] requiredLevel;
 
-    private int ability;
+    private int ability; // Discards: 0, Depots: 1, Conversions: 2, Production: 3
     /**
      * represents this Leader Card win points
      */

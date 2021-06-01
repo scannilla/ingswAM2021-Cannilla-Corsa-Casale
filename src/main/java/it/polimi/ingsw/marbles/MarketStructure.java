@@ -4,11 +4,12 @@ import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.marbles.MarketMarble;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MarketStructure {
+public class MarketStructure implements Serializable {
     /**
      * matrix of Market Marble [4][3]
      */
@@ -57,7 +58,6 @@ public class MarketStructure {
         for(int i=1; i<4; i++)
             marketStructure[i][line] = marketStructure[i-1][line];
         marketStructure[0][line] = outMarble;
-        EventManager.notifyListener(EventType.MARKET, this);
         return marblesArray;
     }
 
@@ -73,7 +73,6 @@ public class MarketStructure {
         for (int i = 1; i < 3; i++)
             marketStructure[column][i] = marketStructure[column][i - 1];
         marketStructure[column][0] = outMarble;
-        EventManager.notifyListener(EventType.MARKET, this);
         return marblesArray;
     }
 

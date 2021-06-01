@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.networkserver;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.ObjectMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -35,8 +36,7 @@ public final class MessageHandler {
     public String readClientMessage() throws EndingGameException {
 
         try{
-            String message = ((Message)in.readObject()).getMessage();
-            return message;
+            return ((Message)in.readObject()).getMessage();
         } catch (IOException | ClassNotFoundException e) {
             throw new EndingGameException();
         }
@@ -63,6 +63,14 @@ public final class MessageHandler {
 
         try {
             out.writeObject(m);
+        } catch (IOException e) {
+            throw new EndingGameException();
+        }
+    }
+
+    public void sendObjectToClient(ObjectMessage obj) throws EndingGameException {
+        try {
+            out.writeObject(obj);
         } catch (IOException e) {
             throw new EndingGameException();
         }

@@ -79,7 +79,11 @@ public class CommandsHandler {
                 c.setCommandPlayer(player);
                 String returnValue = c.executeCommand();
                 if (returnValue.equals("end"))
-                    game.endTurn();
+                    try {
+                        game.endTurn();
+                    } catch (RuntimeException e) {
+                        fsm.evolveGamePhase();
+                    }
                 else if (returnValue.contains("$"))
                     new RequiredClientActions(c, player, mHandler).execute(returnValue.replace("$",""));
                 return "ko";

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.production;
 
+import it.polimi.ingsw.controller.EndingGameException;
+
 public class ProdCardSlot {
     /**
      * matrix representing slots where the player can insert Production Cards
@@ -10,7 +12,9 @@ public class ProdCardSlot {
      */
     private final ProductionCard[] topCards; //active Production Cards
 
-    private boolean[] productionActivated = new boolean[3];
+    private final boolean[] productionActivated = new boolean[3];
+
+    private int activatedCards = 0;
 
     /**
      * constructor of a new matrix of slots and a new vector of top cards
@@ -28,7 +32,7 @@ public class ProdCardSlot {
      * @param place int
      * @throws IllegalArgumentException e
      */
-    public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException {
+    public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException, EndingGameException {
         int level = card.getLevel();
         String s = "Place not empty";
         if(place<=0 || place>3)
@@ -56,6 +60,10 @@ public class ProdCardSlot {
             }
             else throw new IllegalArgumentException(s);
         }
+        activatedCards++;
+        if (activatedCards==7)
+            throw new EndingGameException();
+
     }
 
     /**

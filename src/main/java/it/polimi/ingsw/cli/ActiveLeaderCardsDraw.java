@@ -37,75 +37,19 @@ public class ActiveLeaderCardsDraw {
         switch (arrayCards[index].getAbility()) {
             case 0: {
                 Resource disc = ((LeaderOfDiscounts) arrayCards[index]).getDiscountedRes();
-                int resIndex = disc.getResType();
-                switch (resIndex) {
-                    case 0:
-                        System.out.print(Color.ANSI_YELLOW.escape() + "C" + resetEscape);
-                        break;
-                    case 1:
-                        System.out.print(Color.ANSI_GREY.escape() + "R" + resetEscape);
-                        break;
-                    case 2:
-                        System.out.print(Color.ANSI_PURPLE.escape() + "S" + resetEscape);
-                        break;
-                    case 3:
-                        System.out.print(Color.ANSI_BLUE.escape() + "H" + resetEscape);
-                        break;
-                }
+                switchCases(resetEscape, disc);
             }
             case 1: {
                 Resource dep = ((LeaderOfDepots) arrayCards[index]).getResource();
-                int depIndex = dep.getResType();
-                switch (depIndex) {
-                    case 0:
-                        System.out.print(Color.ANSI_YELLOW.escape() + "C" + resetEscape);
-                        break;
-                    case 1:
-                        System.out.print(Color.ANSI_GREY.escape() + "R" + resetEscape);
-                        break;
-                    case 2:
-                        System.out.print(Color.ANSI_PURPLE.escape() + "S" + resetEscape);
-                        break;
-                    case 3:
-                        System.out.print(Color.ANSI_BLUE.escape() + "H" + resetEscape);
-                        break;
-                }
+                switchCases(resetEscape, dep);
             }
             case 2: {
                 Resource conv = ((LeaderOfConversions) arrayCards[index]).getConvertedResource();
-                int convIndex = conv.getResType();
-                switch (convIndex) {
-                    case 0:
-                        System.out.print(Color.ANSI_YELLOW.escape() + "C" + resetEscape);
-                        break;
-                    case 1:
-                        System.out.print(Color.ANSI_GREY.escape() + "R" + resetEscape);
-                        break;
-                    case 2:
-                        System.out.print(Color.ANSI_PURPLE.escape() + "S" + resetEscape);
-                        break;
-                    case 3:
-                        System.out.print(Color.ANSI_BLUE.escape() + "H" + resetEscape);
-                        break;
-                }
+                switchCases(resetEscape, conv);
             }
             case 3: {
                 Resource prod = ((LeaderOfProductions) arrayCards[index]).getRequiredResource();
-                int prodIndex = prod.getResType();
-                switch (prodIndex) {
-                    case 0:
-                        System.out.print(Color.ANSI_YELLOW.escape() + "C" + resetEscape);
-                        break;
-                    case 1:
-                        System.out.print(Color.ANSI_GREY.escape() + "R" + resetEscape);
-                        break;
-                    case 2:
-                        System.out.print(Color.ANSI_PURPLE.escape() + "S" + resetEscape);
-                        break;
-                    case 3:
-                        System.out.print(Color.ANSI_BLUE.escape() + "H" + resetEscape);
-                        break;
-                }
+                switchCases(resetEscape, prod);
             }
         }
     }

@@ -1,11 +1,18 @@
 package it.polimi.ingsw.controller.virtualview;
 
 import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.ObjectMessage;
+import it.polimi.ingsw.controller.networkserver.MessageHandler;
 
 public class PersonalBoardListener extends Listener {
 
+    public PersonalBoardListener(MessageHandler mHandler) {
+        super(mHandler);
+    }
+
     @Override
-    public void notifyChange(Object update) {
-        PersonalBoard personalBoard = (PersonalBoard)update;
+    public void notifyChange(Object update) throws EndingGameException {
+        mHandler.sendObjectToClient(new ObjectMessage(update, 22, null));
     }
 }

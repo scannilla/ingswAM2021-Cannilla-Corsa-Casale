@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderOfDepots;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.resources.Resource;
@@ -50,7 +52,9 @@ public class Command{
                 break;
 
             case "moveresources":
-                return moveResources();
+                String result = moveResources();
+                EventManager.notifyListener(EventType.PERSONALBOARD, commandPlayer.getPersonalBoard());
+                return result;
 
             case "discardleadercard":
                 return discardLeaderCard();

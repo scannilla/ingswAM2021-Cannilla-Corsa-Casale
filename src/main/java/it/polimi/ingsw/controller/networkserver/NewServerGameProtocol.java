@@ -5,6 +5,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.application.*;
+import it.polimi.ingsw.controller.virtualview.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -46,7 +47,7 @@ public class NewServerGameProtocol implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-
+        createListeners();
         new Thread(new CheckConnection(mHandler));
         while (true) {
             checkConnection();
@@ -86,5 +87,12 @@ public class NewServerGameProtocol implements Callable<Integer> {
         } catch (SocketException e) {
             e.printStackTrace();
         }
+    }
+
+    private void createListeners() {
+        EventManager.subscribe(EventType.CARDMARKET, new CardMarketListener(mHandler));
+        EventManager.subscribe(EventType.MARKET, new MarketListener(mHandler));
+        EventManager.subscribe(EventType.PERSONALBOARD, new PersonalBoardListener(mHandler));
+        EventManager.subscribe(EventType.LEADERCARD, new LeaderCardListener(mHandler));
     }
 }

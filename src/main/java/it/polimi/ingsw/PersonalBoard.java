@@ -4,7 +4,9 @@ import it.polimi.ingsw.production.ProdCardSlot;
 import it.polimi.ingsw.resources.Strongbox;
 import it.polimi.ingsw.resources.WarehouseDepot;
 
-public class PersonalBoard {
+import java.io.Serializable;
+
+public class PersonalBoard implements Serializable {
     /**
      * This attribute represents the position of personal faith marker on faith track
      */

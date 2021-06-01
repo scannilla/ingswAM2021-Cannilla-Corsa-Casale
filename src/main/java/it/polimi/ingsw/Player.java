@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderCard;
@@ -128,44 +129,31 @@ public class Player {
      * @param columnIndex int
      * @throws IllegalArgumentException e
      */
-    public void buyProductionCard(int rowIndex, int columnIndex, int position){
+    public void buyProductionCard(int rowIndex, int columnIndex, int position) {
         try {
             ProductionCard card = this.getConnectedGame().getCardsMarket().buyCard(rowIndex, columnIndex);
             personalBoard.getProdCardSlot().insertNewCard(card, position);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
-        }
-        EventManager.notifyListener(EventType.PERSONALBOARD, this.personalBoard);
-    }
-    /**
-     * this method activated standard production power for the selected production card
-     * @param position int
-     * @throws IllegalArgumentException e
-     */
-    public void activateStandardProduction (int position) throws IllegalArgumentException{
-        ProductionCard card = personalBoard.getProdCardSlot().getTopCards()[position];
-        int[] required = ResourceCounter.resCount(card.getRequiredRes());
-        int[] total = personalBoard.getWarehouseDepot().getDepotResourceAmount();
-        for(int i=0; i<4; i++) {
-            if(total[i]-required[i]<=0)
-                throw new IllegalArgumentException();
-        }
-        if(card.getGivenFaithPoints()!=0) {
-            increaseFaith(card.getGivenFaithPoints());
+        } catch (EndingGameException e) {
+            connectedGame.previousPlayer(this).setLast();
         }
     }
     /**
      * this method increases faith for the selected faith points
      * @param faithPoints int
      */
-    public void increaseFaith(int faithPoints) {
+    public void increaseFaith(int faithPoints)  {
         personalBoard.setPosition(personalBoard.getPosition()+faithPoints);
         int i=0;
         while (connectedGame.getVaticanReport().getActivatedEvent()[i] && i<connectedGame.getVaticanReport().getNumberOfReports())
             i++;
         if(personalBoard.getPosition()+faithPoints>=connectedGame.getVaticanReport().getActivationPosition()[i])
             connectedGame.activateEvent(i);
-        EventManager.notifyListener(EventType.PERSONALBOARD, this.personalBoard);
+        for(Player p : connectedGame.getPlayers()) {
+            if (p.getPersonalBoard().getPosition()>=24)
+                connectedGame.previousPlayer(this).setLast();
+        }
 
     }
 
@@ -301,5 +289,9 @@ public class Player {
 
     public void setActionDone(boolean actionDone) {
         this.actionDone = actionDone;
+    }
+
+    public void setLast() {
+        this.isLast = true;
     }
 }

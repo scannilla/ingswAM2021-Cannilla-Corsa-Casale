@@ -1,10 +1,12 @@
 package it.polimi.ingsw;
 
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 import it.polimi.ingsw.production.ProductionCardsMarket;
+import it.polimi.ingsw.tokens.ActionToken;
 import it.polimi.ingsw.tokens.ActionTokenPile;
 import it.polimi.ingsw.leader.LeaderCard;
 
@@ -47,6 +49,8 @@ public class Game {
 
     private Player activePlayer;
 
+    private Player lorenzo;
+
 
 
     /**
@@ -58,6 +62,7 @@ public class Game {
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
         if (numberOfPlayers==1) {
             actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+            lorenzo = new Player("Lorenzo The Magnificent");
         }
         deck = GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
         leaderCardsDeck = GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
@@ -192,14 +197,23 @@ public class Game {
         throw new IllegalArgumentException();
     }
 
-    public void gameOver(Player player) {
-        previousPlayer(player).lastPlayer();
+
+    public void endTurn() throws EndingGameException, RuntimeException {
+        if(activePlayer.isLast())
+            throw new RuntimeException();
+        activePlayer.setActive(false);
+        if(numberOfPlayers==1) {
+            lorenzoTurn();
+        }
+        else {
+            activePlayer = nextPlayer(activePlayer);
+        }
+        activePlayer.setActive(true);
     }
 
-    public void endTurn() {
-        activePlayer.setActive(false);
-        activePlayer = nextPlayer(activePlayer);
-        activePlayer.setActive(true);
+    public void lorenzoTurn() throws EndingGameException {
+        ActionToken token = actionTokensPile.popToken();
+        token.activateAction(this, lorenzo);
     }
 
 }

@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.networkclient;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.ObjectMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -63,15 +64,30 @@ public final class ClientMessageHandler {
      */
     public String readMessage() throws EndingGameException {
         try {
-            Message received = (Message) in.readObject();
-            if(received.getCode()==5)
+            Object read = in.readObject();
+            Message received = (Message) read;
+            if (received.getCode()>20)
+                readObject((ObjectMessage) read);
+            if (received.getCode() == 5)
                 sendMessageToServer("pong", 6);
             else
                 return received.getMessage();
+
         } catch (IOException | ClassNotFoundException e) {
             throw new EndingGameException();
         }
         return null;
+    }
+
+    private void readObject(ObjectMessage obj) {
+        int code = obj.getCode();
+        switch(code) {
+            case 20: //draw
+            case 21:
+            case 22:
+            case 23:
+            default:
+        }
     }
 
 

@@ -1,6 +1,11 @@
 package it.polimi.ingsw.tokens;
 
 
+import it.polimi.ingsw.Game;
+import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 
 public class ActionToken {
 
@@ -22,5 +27,26 @@ public class ActionToken {
      */
     public int getAction() {
         return action;
+    }
+
+    public void activateAction(Game game, Player lorenzo) throws EndingGameException {
+        switch (this.action) {
+            case 0: game.getCardsMarket().deleteCards(0);
+                    break;
+            case 1: game.getCardsMarket().deleteCards(1);
+                    break;
+            case 2: game.getCardsMarket().deleteCards(2);
+                    break;
+            case 3: game.getCardsMarket().deleteCards(3);
+                    break;
+            case 4: lorenzo.increaseFaith(2);
+                    break;
+            case 5: lorenzo.increaseFaith(3);
+                    break;
+        }
+        if(action>3)
+            EventManager.notifyListener(EventType.LEADERCARD, lorenzo.getPersonalBoard());
+        else
+            EventManager.notifyListener(EventType.MARKET, game.getMarket());
     }
 }

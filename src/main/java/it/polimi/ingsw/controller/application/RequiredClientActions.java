@@ -49,16 +49,24 @@ public class RequiredClientActions {
             switch (cmd) {
                 case "buy": //this case is activated when the player is trying to buy a new dev card
                     buyCard();
+                    EventManager.notifyListener(EventType.CARDMARKET, player.getConnectedGame().getCardsMarket());
+                    EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
+
                 case "activateproduction": //this case is activated when the player has activated a development card production
                     activateProduction();
+                    EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
 
                 case "buyfrommarket": //this case is activated when the player is buying resources from the market
                     buyFromMarket();
+                    EventManager.notifyListener(EventType.MARKET, player.getConnectedGame().getMarket());
+                    EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
+
                 case "standardproduction": //this case is activated when the player has activated the standard production
                     standardProduction();
+                    EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
             }
         } catch (EndingGameException e) {

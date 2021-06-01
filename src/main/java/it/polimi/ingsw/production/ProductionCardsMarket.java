@@ -1,15 +1,17 @@
 package it.polimi.ingsw.production;
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.production.ProductionCardsDeck;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductionCardsMarket {
+public class ProductionCardsMarket implements Serializable {
 
     /**
      * Tensor that represents Production Cards Market
@@ -55,7 +57,6 @@ public class ProductionCardsMarket {
             if (productionCardsMarket[row][column][i] != null) {
                 card = productionCardsMarket[row][column][i];
                 productionCardsMarket[row][column][i] = null;
-                EventManager.notifyListener(EventType.CARDMARKET, this);
                 return card;
             }
         }
@@ -86,9 +87,32 @@ public class ProductionCardsMarket {
      * @throws IllegalArgumentException
      */
     public ProductionCard getCard(int x, int y) throws IllegalArgumentException{
+        if(productionCardsMarket[x][y][2]==null)
+            throw new IllegalArgumentException();
         int k=0;
         while(productionCardsMarket[x][y][k]!=null && k<3)
         k++;
         return productionCardsMarket[x][y][k];
+    }
+
+    public void deleteCards(int type) throws EndingGameException {
+        for (int i = 0; i < 2; i++) {
+            try {
+                getCard(0, type);
+                buyCard(0, type);
+            } catch (IllegalArgumentException e) {
+                try {
+                    getCard(1, type);
+                    buyCard(1, type);
+                } catch (IllegalArgumentException e1) {
+                    try {
+                        getCard(2, type);
+                        buyCard(2, type);
+                    } catch (IllegalArgumentException e2) {
+                        throw new EndingGameException();
+                    }
+                }
+            }
+        }
     }
 }

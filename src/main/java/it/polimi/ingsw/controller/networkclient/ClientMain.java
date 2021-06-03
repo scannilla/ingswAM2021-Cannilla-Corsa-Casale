@@ -9,20 +9,39 @@ import java.net.*;
 
 public class ClientMain {
 
+
     /**
      * this method sets the connection with the server
      */
     public static void main(String[] args) {
-        int portNumber;
-        String hostName;
+        int portNumber = 48745;
+        String hostName = "127.0.0.1";
+        boolean gui = false;
 
-        if (args.length != 2) {
-            portNumber = 48745;
-            hostName = "127.0.0.1";
-        }
-        else {
-            portNumber=Integer.parseInt(args[0]);
-            hostName = args[1];
+        for (int i = 0; i < args.length; i++) {
+            try {
+                switch (args[i]) {
+                    case "-h":
+                        hostName = args[i + 1];
+                        break;
+                    case "-p":
+                        try {
+                            portNumber = Integer.parseInt(args[i + 1]);
+                        } catch (NumberFormatException e) {
+                            System.out.println("not a number");
+                        }
+                        break;
+                    case "-c":
+                        gui = false;
+                        break;
+                    case "-g":
+                        gui = true;
+                        break;
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.err.println("Invalid arguments: -h hostname -p port number -c|-g for cli or gui, leave blank for default settings");
+                return;
+            }
         }
 
         Socket clientSocket;
@@ -31,7 +50,7 @@ public class ClientMain {
             clientSocket = new Socket(hostName, portNumber);
             ClientMessageHandler cmHandler = new ClientMessageHandler(clientSocket);
             stdIn = new BufferedReader(new InputStreamReader(System.in));
-            new Thread(new ClientListener(cmHandler)).start();
+            new Thread(new ClientListener(cmHandler, gui)).start();
             String input;
             while ((input = stdIn.readLine()) != null) {
                 cmHandler.sendMessageToServer(input);

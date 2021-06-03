@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.WarehouseDepot;
@@ -43,7 +44,7 @@ class PersonalBoardTest {
     }
 
     @Test
-    void getProdCardSlot() {
+    void getProdCardSlot() throws EndingGameException {
         personalBoardTest.getProdCardSlot().insertNewCard(testCard, 1);
         assertEquals(1, personalBoardTest.getProdCardSlot().getCard(0, 1).getLevel());
     }

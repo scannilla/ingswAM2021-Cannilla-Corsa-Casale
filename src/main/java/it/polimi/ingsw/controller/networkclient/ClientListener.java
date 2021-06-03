@@ -15,11 +15,14 @@ public class ClientListener implements Runnable{
      */
     private  final ClientMessageHandler cmHandler;
 
+    private final boolean gui;
+
     /**
      * constructor for ClientListener
      */
-    public ClientListener(ClientMessageHandler cmHandler) {
+    public ClientListener(ClientMessageHandler cmHandler, boolean gui) {
         this.cmHandler = cmHandler;
+        this.gui = gui;
     }
 
     /**
@@ -27,12 +30,14 @@ public class ClientListener implements Runnable{
      */
     @Override
     public void run() {
-        while (true) {
-            try {
-                String read = cmHandler.readMessage();
-                System.out.println(read);
-            } catch (EndingGameException e) {
-                break;
+        if(!gui) {
+            while (true) {
+                try {
+                    String read = cmHandler.readMessage();
+                    System.out.println(read);
+                } catch (EndingGameException e) {
+                    break;
+                }
             }
         }
     }

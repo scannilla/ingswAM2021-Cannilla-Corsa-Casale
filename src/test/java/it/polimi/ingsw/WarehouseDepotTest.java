@@ -93,7 +93,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.insertNewResource(shieldTest, 1);
         } catch (IllegalArgumentException e) {
 
-            String expectedMessage = "Unable to insert the resource";
+            String expectedMessage = "This line already has a different resource";
             String actualMessage = e.getMessage();
 
             assertTrue(actualMessage.contains(expectedMessage));
@@ -114,7 +114,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.insertNewResource(shieldTest, 0);
         } catch (IllegalArgumentException e) {
 
-            String expectedMessage = "Unable to insert the resource";
+            String expectedMessage = "This line already has a different resource";
             String actualMessage = e.getMessage();
 
             assertTrue(actualMessage.contains(expectedMessage));
@@ -136,7 +136,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.insertNewResource(shieldTest, 1);
         } catch (IllegalArgumentException e) {
 
-            String expectedMessage = "Unable to insert the resource";
+            String expectedMessage = "This line already has a different resource";
             String actualMessage = e.getMessage();
 
             assertTrue(actualMessage.contains(expectedMessage));
@@ -159,7 +159,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.insertNewResource(coinsTest, 2);
         } catch (IllegalArgumentException e) {
 
-            String expectedMessage = "Unable to insert the resource";
+            String expectedMessage = "This line is already full";
             String actualMessage = e.getMessage();
 
             assertTrue(actualMessage.contains(expectedMessage));
@@ -180,7 +180,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.insertNewResource(coinsTest, 0);
         } catch (IllegalArgumentException e) {
 
-            String expectedMessage = "Unable to insert the resource";
+            String expectedMessage = "This line is already full";
             String actualMessage = e.getMessage();
 
             assertTrue(actualMessage.contains(expectedMessage));
@@ -202,7 +202,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.insertNewResource(coinsTest, 1);
         } catch (IllegalArgumentException e) {
 
-            String expectedMessage = "Unable to insert the resource";
+            String expectedMessage = "This line is already full";
             String actualMessage = e.getMessage();
 
             assertTrue(actualMessage.contains(expectedMessage));

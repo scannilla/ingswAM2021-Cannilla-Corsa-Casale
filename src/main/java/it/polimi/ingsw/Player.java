@@ -13,7 +13,9 @@ import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 import it.polimi.ingsw.resources.WarehouseDepot;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     /**
      * This attribute represents this player's personal board
      */
@@ -188,7 +190,7 @@ public class Player {
      * @return MarketMarble[] marbles
      */
     public MarketMarble[] buyResourceFromMarket(int line, String sel) throws IllegalArgumentException{
-        MarketMarble[]marbles;
+        MarketMarble[] marbles;
         if(sel.equals("line"))
             marbles = connectedGame.getMarket().selectLine(line);
         else if (sel.equals("column"))

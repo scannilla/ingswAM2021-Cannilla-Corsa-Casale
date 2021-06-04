@@ -64,7 +64,7 @@ public enum GamePhase implements Comparable<GamePhase> {
             case WAITING_ROOM:
                 return new String[] {"start game"};
             case GAME_SETUP:
-                return new String[] {"Coin", "Stone", "Servant", "Shield"};
+                return new String[] {"setup game"};
             case GAME_PHASE:
                 return new String[] {"buy production card", "buy resource", "activate leader card", "card production", "standard production",
                 "move resources", "discard leader card", "end turn"};

@@ -2,7 +2,9 @@ package it.polimi.ingsw.production;
 
 import it.polimi.ingsw.controller.EndingGameException;
 
-public class ProdCardSlot {
+import java.io.Serializable;
+
+public class ProdCardSlot implements Serializable {
     /**
      * matrix representing slots where the player can insert Production Cards
      */

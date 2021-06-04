@@ -4,7 +4,9 @@ import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
-public class WarehouseDepot {
+import java.io.Serializable;
+
+public class WarehouseDepot implements Serializable {
     /**
      * This attribute represents the depot with all its resources
      * depot[0] = first row of depot (1 resource)

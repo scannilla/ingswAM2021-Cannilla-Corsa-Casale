@@ -1,8 +1,9 @@
 package it.polimi.ingsw.resources;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Resource {
+public class Resource implements Serializable {
     /**
      * This attribute represents type of this Resource
      * coin 0

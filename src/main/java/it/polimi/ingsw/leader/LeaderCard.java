@@ -2,7 +2,9 @@ package it.polimi.ingsw.leader;
 
 import it.polimi.ingsw.resources.Resource;
 
-public abstract class LeaderCard {
+import java.io.Serializable;
+
+public abstract class LeaderCard implements Serializable {
     /**
      * represents required resources to buy this Leader Card
      */

@@ -2,7 +2,9 @@ package it.polimi.ingsw.production;
 
 import it.polimi.ingsw.resources.Resource;
 
-public class ProductionCard {
+import java.io.Serializable;
+
+public class ProductionCard implements Serializable {
     /**
      * This attribute represents the type of this Production Card
      */
@@ -42,7 +44,7 @@ public class ProductionCard {
 
 
 
-    private final int givenFaithPoints;
+    private final int givenFaithPoint;
     /**
      * This method creates a new production card with this attribute
      * @param type int
@@ -52,14 +54,14 @@ public class ProductionCard {
      * @param requiredRes int[]
      * @param givenRes int[]
      */
-    public ProductionCard(int type, int level, int wp, Resource[] costArray, Resource[] requiredRes, Resource[] givenRes, int givenFaithPoints) {
+    public ProductionCard(int type, int level, int wp, Resource[] costArray, Resource[] requiredRes, Resource[] givenRes, int givenFaithPoint) {
         this.type = type;
         this.level = level;
         this.wp = wp;
         this.costArray = costArray;
         this.requiredRes = requiredRes;
         this.givenRes = givenRes;
-        this.givenFaithPoints = givenFaithPoints;
+        this.givenFaithPoint = givenFaithPoint;
     }
 
     /**
@@ -123,6 +125,6 @@ public class ProductionCard {
      * @return givenFaithPoints int
      */
     public int getGivenFaithPoints() {
-        return givenFaithPoints;
+        return givenFaithPoint;
     }
 }

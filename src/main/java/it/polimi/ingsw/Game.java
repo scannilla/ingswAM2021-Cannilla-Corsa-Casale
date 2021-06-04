@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable{
     /**
      * This attribute represents the number of player in the game (1<n<4)
      */

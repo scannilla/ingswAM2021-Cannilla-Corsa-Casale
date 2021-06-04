@@ -2,6 +2,7 @@ package it.polimi.ingsw.leader;
 
 import it.polimi.ingsw.resources.Resource;
 
+
 public class LeaderOfConversions extends LeaderCard {
     /**
      * White Marble = convertedResource

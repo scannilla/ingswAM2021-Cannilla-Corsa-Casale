@@ -71,6 +71,7 @@ public final class MessageHandler {
     public void sendObjectToClient(ObjectMessage obj) throws EndingGameException {
         try {
             out.writeObject(obj);
+            out.reset();
         } catch (IOException e) {
             throw new EndingGameException();
         }

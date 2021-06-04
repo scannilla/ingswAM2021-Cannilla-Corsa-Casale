@@ -2,7 +2,9 @@ package it.polimi.ingsw.marbles;
 
 import it.polimi.ingsw.resources.Resource;
 
-public class MarketMarble {
+import java.io.Serializable;
+
+public class MarketMarble implements Serializable {
     private final int color;
 
     /**

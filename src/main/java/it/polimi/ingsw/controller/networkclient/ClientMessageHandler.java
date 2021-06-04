@@ -62,32 +62,19 @@ public final class ClientMessageHandler {
      * @return receivedMessage || null
      * @throws EndingGameException e
      */
-    public String readMessage() throws EndingGameException {
+    public Message readMessage() throws EndingGameException {
         try {
             Object read = in.readObject();
             Message received = (Message) read;
-            if (received.getCode()>20)
-                readObject((ObjectMessage) read);
             if (received.getCode() == 5)
                 sendMessageToServer("pong", 6);
             else
-                return received.getMessage();
+                return received;
 
         } catch (IOException | ClassNotFoundException e) {
             throw new EndingGameException();
         }
         return null;
-    }
-
-    private void readObject(ObjectMessage obj) {
-        int code = obj.getCode();
-        switch(code) {
-            case 20: //draw
-            case 21:
-            case 22:
-            case 23:
-            default:
-        }
     }
 
 

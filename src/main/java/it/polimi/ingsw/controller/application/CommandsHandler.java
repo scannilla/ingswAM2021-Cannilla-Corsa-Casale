@@ -12,6 +12,7 @@ public class CommandsHandler {
     private static CommandsHandler instance;
     private static Automaton fsm;
     private static Game game;
+    private int setup=0;
 
     /**
      * Constructor of this CommandsHandler
@@ -54,7 +55,7 @@ public class CommandsHandler {
                 }
                 return "ko";
             case GAME_CREATOR:
-                int numbOfPlayers;
+                int numbOfPlayers=0;
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
                     numbOfPlayers = new GameCreator(mHandler).createGame(game);
                     new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
@@ -66,7 +67,10 @@ public class CommandsHandler {
                 return "ko";
             case GAME_SETUP:
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
+                    setup++;
                     new GameSetup(game, player, mHandler).gameSetUp(game.getPlayers().indexOf(player));
+                    if(setup==game.getNumberOfPlayers())
+                        fsm.evolveGamePhase();
                     return "ok";
                 }
                 return "ko";
@@ -84,8 +88,10 @@ public class CommandsHandler {
                     } catch (RuntimeException e) {
                         fsm.evolveGamePhase();
                     }
-                else if (returnValue.contains("$"))
-                    new RequiredClientActions(c, player, mHandler).execute(returnValue.replace("$",""));
+                else if (returnValue.contains("$")) {
+                    RequiredClientActions r = new RequiredClientActions(c, player, mHandler);
+                    r.execute(returnValue.replace("$",""));
+                }
                 return "ko";
             case END:
             case UNKNOWN:
@@ -118,18 +124,18 @@ class AutoCheckerWait implements Runnable {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             if (game.getPlayers().size() == numbOfPlayers && fsm.getPhase()==GamePhase.WAITING_ROOM) {
                 try {
                     game.initialSet();
+                    fsm.evolveGamePhase();
+                    return;
                 } catch (IOException e) {
                     return;
                 }
-                fsm.evolveGamePhase();
-                return;
             }
         }
     }

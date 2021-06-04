@@ -48,23 +48,26 @@ public class RequiredClientActions {
         try {
             switch (cmd) {
                 case "buy": //this case is activated when the player is trying to buy a new dev card
+                    player.setActionDone(true);
                     buyCard();
                     EventManager.notifyListener(EventType.CARDMARKET, player.getConnectedGame().getCardsMarket());
                     EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
 
-                case "activateproduction": //this case is activated when the player has activated a development card production
+                case "production": //this case is activated when the player has activated a development card production
                     activateProduction();
                     EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
 
-                case "buyfrommarket": //this case is activated when the player is buying resources from the market
+                case "market": //this case is activated when the player is buying resources from the market
+                    player.setActionDone(true);
                     buyFromMarket();
                     EventManager.notifyListener(EventType.MARKET, player.getConnectedGame().getMarket());
                     EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
 
-                case "standardproduction": //this case is activated when the player has activated the standard production
+                case "standard": //this case is activated when the player has activated the standard production
+                    player.setActionDone(true);
                     standardProduction();
                     EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
                     break;
@@ -471,7 +474,7 @@ public class RequiredClientActions {
     private void buyFromMarket() throws EndingGameException {
         MarketMarble[] marbles;
         int chosenLine = Integer.parseInt(parameters[1])-1;
-        marbles = player.buyResourceFromMarket(chosenLine-1, parameters[0]);
+        marbles = player.buyResourceFromMarket(chosenLine, parameters[0]);
         readMarbles(marbles);
         mHandler.sendMessageToClient("Resources bought");
     }

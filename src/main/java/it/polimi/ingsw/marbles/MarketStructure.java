@@ -54,10 +54,12 @@ public class MarketStructure implements Serializable {
         MarketMarble[] marblesArray = new MarketMarble[4];
         for(int i=0; i<4; i++)
             marblesArray[i] = marketStructure[i][line];
-        outMarble = marketStructure[3][line];
+        MarketMarble temp;
+        temp =  marketStructure[0][line];
         for(int i=1; i<4; i++)
-            marketStructure[i][line] = marketStructure[i-1][line];
-        marketStructure[0][line] = outMarble;
+            marketStructure[i-1][line] = marketStructure[i][line] ;
+        marketStructure[3][line] = outMarble;
+        outMarble = temp;
         return marblesArray;
     }
 

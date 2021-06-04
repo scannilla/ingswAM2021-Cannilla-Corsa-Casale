@@ -1,8 +1,13 @@
 package it.polimi.ingsw.controller.networkclient;
 
+import it.polimi.ingsw.cli.MarketDraw;
+import it.polimi.ingsw.cli.ProdCardsMarketDraw;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
+import it.polimi.ingsw.marbles.MarketStructure;
+import it.polimi.ingsw.production.ProductionCardsMarket;
 
 import java.io.*;
 import java.net.Socket;
@@ -33,12 +38,31 @@ public class ClientListener implements Runnable{
         if(!gui) {
             while (true) {
                 try {
-                    String read = cmHandler.readMessage();
-                    System.out.println(read);
+                    Message read = cmHandler.readMessage();
+                    if(read.getCode() >= 20)
+                        readObject(read);
+                    else
+                        System.out.println(read.getMessage());
                 } catch (EndingGameException e) {
                     break;
                 }
             }
+        }
+    }
+
+    private void readObject(Message m) {
+        ObjectMessage object = (ObjectMessage) m;
+        switch (object.getCode()) {
+            case 20:
+                MarketStructure structure = (MarketStructure) object.getObj();
+                MarketDraw.draw(structure);
+                break;
+            case 21:
+                ProductionCardsMarket prodMarket = (ProductionCardsMarket) object.getObj();
+                ProdCardsMarketDraw.drawProdCardsMarket(prodMarket);
+                break;
+            case 22:
+            case 23:
         }
     }
 }

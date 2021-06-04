@@ -185,9 +185,11 @@ public class Command{
             return "Action already done";
         int chosenLine;
         try{
-            chosenLine = parseInt(parameters[0]);
+            chosenLine = parseInt(parameters[1]);
         } catch (NumberFormatException e) {
             return "Not a number";
+        } catch (NullPointerException e1) {
+            return "No parameters";
         }
         if(parameters[0].equals("column")) {
             if (chosenLine<1 || chosenLine>4)

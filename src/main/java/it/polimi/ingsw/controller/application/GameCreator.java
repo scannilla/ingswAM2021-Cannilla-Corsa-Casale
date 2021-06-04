@@ -35,6 +35,7 @@ public class GameCreator {
 
         do {
             try {
+                mHandler.sendMessageToClient("Insert the number of players");
                 numberOfPlayers = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
             } catch (EndingGameException e) {
                 throw new EndingGameException();

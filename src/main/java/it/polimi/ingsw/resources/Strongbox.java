@@ -2,7 +2,9 @@ package it.polimi.ingsw.resources;
 
 import it.polimi.ingsw.resources.Resource;
 
-public class Strongbox {
+import java.io.Serializable;
+
+public class Strongbox implements Serializable {
     /**
      * This attribute represents strongbox's content,
      * int[0] = number of coins

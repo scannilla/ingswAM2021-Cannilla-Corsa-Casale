@@ -1,10 +1,11 @@
 package it.polimi.ingsw.leader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class LeaderCardsDeck {
+public class LeaderCardsDeck implements Serializable {
 
     /**
      * Array that represents all Leader Cards

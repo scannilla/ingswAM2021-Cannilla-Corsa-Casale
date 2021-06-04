@@ -2,11 +2,12 @@ package it.polimi.ingsw.cli;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.production.ProductionCard;
+import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.resources.Resource;
 
 public class ProdCardsMarketDraw {
-    public static void drawProdCardsMarket(Game game){
-        ProductionCard[][] prodCardTensor= game.getCardsMarket().getTopCards();
+    public static void drawProdCardsMarket(ProductionCardsMarket prodCards){
+        ProductionCard[][] prodCardTensor= prodCards.getTopCards();
         String resetEscape = Color.ANSI_RESET.escape();
         //System.out.print(resetEscape + "-------------------------------------------------------------------");
         //System.out.print(resetEscape + "|Level: 3      WP: 3  |                     |                     |");

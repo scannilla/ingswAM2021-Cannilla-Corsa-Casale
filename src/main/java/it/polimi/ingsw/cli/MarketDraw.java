@@ -6,6 +6,7 @@ import it.polimi.ingsw.marbles.MarketStructure;
 public class MarketDraw {
     public static void drawMarket(int market[][], int outMarble){
         String whiteEscape = Color.ANSI_BRIGHTWHITE.escape();
+        System.out.print("\n");
         System.out.print(Color.ANSI_CYAN.escape() + "-----------------------------------------" + whiteEscape);
         System.out.print("\n");
         System.out.print(Color.ANSI_CYAN.escape() + "|         |         |         |         |");
@@ -43,7 +44,7 @@ public class MarketDraw {
         drawEmptyLine();
         drawBall(market[3][1]);
         System.out.print("    ");
-        System.out.print(Color.ANSI_CYAN.escape() + "!");
+        System.out.print(Color.ANSI_CYAN.escape() + "|");
         drawFrecciaOriz();
         System.out.print("\n");
         drawVoidLine();

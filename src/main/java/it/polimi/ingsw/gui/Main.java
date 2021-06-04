@@ -1,14 +1,20 @@
 package it.polimi.ingsw.gui;
 
 import javax.swing.*;
-import it.polimi.ingsw.gui.StartingWindow;
-public class Main {
+import java.awt.*;
 
-    public static void main(String[] args) {
+public class Main{
+    public static JFrame frame;
 
-        JFrame window = new CustomFrameInit();
+    public static void main(String[] args){
+
+        JPanel currentPanel = new Intro();
+        frame = new JFrame();
+        frame.setSize(800, 800);
+        frame.add(currentPanel);
+        frame.setVisible(true);
+        frame.setLayout(null);
 
 
     }
-
 }

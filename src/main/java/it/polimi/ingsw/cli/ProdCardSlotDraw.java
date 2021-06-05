@@ -1,11 +1,13 @@
 package it.polimi.ingsw.cli;
 
+import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.production.ProdCardSlot;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.resources.Resource;
 
 public class ProdCardSlotDraw {
-    public static void drawActiveProdCards(ProdCardSlot activeProdCard){
+    public static void drawActiveProdCards(PersonalBoard personalBoard){
+        ProdCardSlot activeProdCard = personalBoard.getProdCardSlot();
         String resetEscape = Color.ANSI_RESET.escape();
         ProductionCard[] activeCards = activeProdCard.getTopCards();
         System.out.print(resetEscape + "\n");

@@ -269,9 +269,6 @@ public class Player implements Serializable {
         }
     }
 
-    public void lastPlayer() {
-        this.isLast = true;
-    }
 
     public boolean isLast() {
         return isLast;

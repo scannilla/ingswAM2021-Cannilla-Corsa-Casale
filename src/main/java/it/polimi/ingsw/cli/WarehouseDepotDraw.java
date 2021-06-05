@@ -1,5 +1,6 @@
 package it.polimi.ingsw.cli;
 
+import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.WarehouseDepot;
 
@@ -76,9 +77,10 @@ public class WarehouseDepotDraw {
     /**
      * This method draws Warehouse Depot using drawWarehouseDepot(Resource[] firstLine, Resource[] secondLine, Resource[] thirdLine)
      *
-     * @param depot WarehouseDepot
+     * @param personalBoard PersonalBoard
      */
-    public static void drawWarehouseDepot(WarehouseDepot depot) {
+    public static void drawWarehouseDepot(PersonalBoard personalBoard) {
+        WarehouseDepot depot = personalBoard.getWarehouseDepot();
         drawWarehouseDepot(depot.getDepot()[0], depot.getDepot()[1], depot.getDepot()[2]);
     }
 

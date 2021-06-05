@@ -43,27 +43,39 @@ public class ClientMain {
                 return;
             }
         }
-
-        Socket clientSocket;
-        BufferedReader stdIn;
-        try {
-            clientSocket = new Socket(hostName, portNumber);
-            ClientMessageHandler cmHandler = new ClientMessageHandler(clientSocket);
-            stdIn = new BufferedReader(new InputStreamReader(System.in));
-            new Thread(new ClientListener(cmHandler, gui)).start();
-            String input;
-            while ((input = stdIn.readLine()) != null) {
-                cmHandler.sendMessageToServer(input);
+        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+        String read = "";
+        do {
+            System.out.println("Select if you want to play in local (single player only) or online (1-4 players)");
+            try {
+                read = stdIn.readLine().toLowerCase().replace(" ","");
+            } catch (IOException e) {
+                System.err.println("Unable to read input");
             }
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get the I/O for the current host");
-            System.exit(1);
-        } catch (EndingGameException e) {
-            System.err.println("Game over, disconnecting");
-            System.exit(1);
+        } while (!read.equals("sp") && !read.equals("mp") && !read.equals("singleplayer") && !read.equals("multiplayer"));
+
+        if(read.equals("sp") || read.equals("singleplayer"))
+            System.out.println("ciao");
+        else {
+            Socket clientSocket;
+            try {
+                clientSocket = new Socket(hostName, portNumber);
+                ClientMessageHandler cmHandler = new ClientMessageHandler(clientSocket);
+                new Thread(new ClientListener(cmHandler, gui)).start();
+                String input;
+                while ((input = stdIn.readLine()) != null) {
+                    cmHandler.sendMessageToServer(input);
+                }
+            } catch (UnknownHostException e) {
+                System.err.println("Don't know about host " + hostName);
+                System.exit(1);
+            } catch (IOException e) {
+                System.err.println("Couldn't get the I/O for the current host");
+                System.exit(1);
+            } catch (EndingGameException e) {
+                System.err.println("Game over, disconnecting");
+                System.exit(1);
+            }
         }
     }
 }

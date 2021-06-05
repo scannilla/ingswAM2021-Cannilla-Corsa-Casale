@@ -13,6 +13,8 @@ public final class MessageHandler {
 
     private final ObjectInputStream in;
 
+    private final boolean local;
+
     /**
      * Constructor of this MessageHandler linked to this clientSocket
      * @param clientSocket Socket
@@ -22,9 +24,16 @@ public final class MessageHandler {
         try {
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             in = new ObjectInputStream(clientSocket.getInputStream());
+            local = false;
         } catch (IOException e){
             throw new EndingGameException();
         }
+    }
+
+    public MessageHandler() {
+        local = true;
+        out = null;
+        in = null;
     }
 
 

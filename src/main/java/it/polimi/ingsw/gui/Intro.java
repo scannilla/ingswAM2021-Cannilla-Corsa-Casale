@@ -36,7 +36,7 @@ public class Intro extends JPanel implements ActionListener {
 
     private void myDrawImagePNG(Graphics g){
         ClassLoader cl = this.getClass().getClassLoader();
-        InputStream url = cl.getResourceAsStream("homepage.jpg");
+        InputStream url = cl.getResourceAsStream("homepage.jpeg");
         BufferedImage img;
         try {
             img = ImageIO.read(url);

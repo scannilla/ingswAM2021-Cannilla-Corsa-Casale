@@ -11,23 +11,27 @@ import java.io.InputStream;
 public class PreGameRes extends JPanel implements ActionListener {
 
 
-    private JButton coinButton, stoneButton, servantButton, shieldButton;
+    private JButton coinButton, stoneButton, servantButton, shieldButton, goAhead;
 
 public PreGameRes(){
-    int player = 0;
+    int player = 3;
     if(player != 1) {
             coinButton = new JButton("Select");
             stoneButton = new JButton("Select");
             servantButton = new JButton("Select");
             shieldButton = new JButton("Select");
-            coinButton.setBounds(100, 550, 100, 50);
-            stoneButton.setBounds(250, 550, 100, 50);
-            servantButton.setBounds(400, 550, 100, 50);
-            shieldButton.setBounds(550, 550, 100, 50);
+            goAhead = new JButton("Continue");
+            coinButton.setBounds(100, 560, 100, 50);
+            stoneButton.setBounds(250, 560, 100, 50);
+            servantButton.setBounds(400, 560, 100, 50);
+            shieldButton.setBounds(550, 560, 100, 50);
+            goAhead.setBounds(350, 620, 100, 50);
             coinButton.addActionListener(this);
             stoneButton.addActionListener(this);
             servantButton.addActionListener(this);
             shieldButton.addActionListener(this);
+            goAhead.addActionListener(this);
+            this.add(goAhead);
             this.add(coinButton);
             this.add(stoneButton);
             this.add(servantButton);
@@ -41,24 +45,27 @@ public PreGameRes(){
 
 
     public void paint(Graphics g){
-        int player=0;
+        int player=3;
         switch(player) {
             case 1:
                 g.drawString("You are the first player", 100, 50);
                 g.drawString("Please wait for other players", 100, 100);
+                break;
             case 2:
                 g.drawString("You are the second player", 100, 50);
-                g.drawString("You can chose one resource", 100, 100);
+                g.drawString("You can chose one resource", 100, 200);
                 myDrawImagePNG(g);
+                break;
             case 3:
                 g.drawString("You are the third player", 100, 50);
-                g.drawString("You can chose one resource and your receive one faith point", 100, 100);
+                g.drawString("You can chose one resource and you receive one faith point", 100, 100);
                 myDrawImagePNG(g);
+                break;
             case 4:
                 g.drawString("You are the fourth player", 100, 50);
-                g.drawString("You can chose two resources and your receive one faith point", 100, 100);
+                g.drawString("You can chose two resources and you receive one faith point", 100, 100);
                 myDrawImagePNG(g);
-
+                break;
 
         }
 
@@ -81,15 +88,24 @@ public PreGameRes(){
             e.printStackTrace();
             return;
         }
-        g.drawImage(imgCoin, 100,500, 100,100, null);
-        g.drawImage(imgStone, 250,500, 100,100, null);
-        g.drawImage(imgServant, 400,500, 100,100, null);
-        g.drawImage(imgShield, 550,500, 100,100, null);
+        g.drawImage(imgCoin, 100,450, 100,100, null);
+        g.drawImage(imgStone, 250,450, 100,100, null);
+        g.drawImage(imgServant, 400,450, 100,100, null);
+        g.drawImage(imgShield, 550,450, 100,100, null);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        Object source = e.getSource();
+        if (coinButton.equals(source)) {//add a coin resource
+        } else if (stoneButton.equals(source)) {//add a stone resource
+        } else if (servantButton.equals(source)) {//add a servant resource
+        } else if (shieldButton.equals(source)) {//add a shield resource
+        } else if (goAhead.equals(source)){
+            Main.frame.remove(this);
+            Main.frame.add(new PreGameLeader());
+            Main.frame.revalidate();
+        }
     }
 }

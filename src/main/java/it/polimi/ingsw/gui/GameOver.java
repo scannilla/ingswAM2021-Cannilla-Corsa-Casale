@@ -1,0 +1,62 @@
+package it.polimi.ingsw.gui;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class GameOver extends JPanel implements ActionListener {
+
+    private int players = 3;
+    private final JButton exit;
+        public GameOver(int players){
+            //this.players = players;
+            exit = new JButton("exit");
+            exit.setBounds(650, 650, 100, 50);
+            exit.addActionListener(this);
+            this.add(exit);
+            this.setLayout(null);
+            this.setVisible(true);
+            this.setBackground(Color.white);
+            this.setSize(800,800);
+        }
+
+
+    public void paint(Graphics g){
+        g.drawString("GAME OVER", 350, 50);
+        g.drawString("You are this position", 350, 100);
+        switch (players){
+
+                case 1:
+                    g.drawString("1st nickname - total winpoints", 350, 110);
+                    g.drawString("2nd nickname - total winpoints", 350, 120);
+                case 2:
+                    g.drawString("1st nickname - total winpoints", 350, 110);
+                    g.drawString("2nd nickname - total winpoints", 350, 120);
+                case 3:
+                    g.drawString("1st nickname - total winpoints", 350, 110);
+                    g.drawString("2nd nickname - total winpoints", 350, 120);
+                    g.drawString("3rd nickname - total winpoints", 350, 130);
+                case 4:
+                    g.drawString("1st nickname - total winpoints", 350, 110);
+                    g.drawString("2nd nickname - total winpoints", 350, 120);
+                    g.drawString("3rd nickname - total winpoints", 350, 130);
+                    g.drawString("4th nickname - total winpoints", 350, 140);
+        }
+    }
+
+
+
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+            if(e.getSource() == exit){
+                Main.frame.remove(this);
+                Main.frame.add(new Intro());
+                Main.frame.revalidate();
+            }
+    }
+}

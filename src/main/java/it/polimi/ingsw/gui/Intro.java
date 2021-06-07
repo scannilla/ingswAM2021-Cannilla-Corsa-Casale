@@ -16,8 +16,8 @@ public class Intro extends JPanel implements ActionListener {
     public Intro(){
         local = new JButton("Play Local");
         multi = new JButton("Play Multi");
-        local.setBounds(50, 300, 100, 50);
-        multi.setBounds(260, 300, 100, 50);
+        local.setBounds(50, 320, 100, 50);
+        multi.setBounds(260, 320, 100, 50);
         multi.addActionListener(this);
         local.addActionListener(this);
         this.add(local);

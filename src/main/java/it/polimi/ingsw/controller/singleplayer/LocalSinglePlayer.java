@@ -1,7 +1,9 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.controller.singleplayer;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkserver.NewServerGameProtocol;
 
 import java.io.BufferedReader;
 import java.io.IOException;

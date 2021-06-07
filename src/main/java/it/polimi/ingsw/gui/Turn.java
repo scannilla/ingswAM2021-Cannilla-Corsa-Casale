@@ -89,25 +89,41 @@ public class Turn extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buyMarble) {
-            //show Market Marble and buy
+            Main.frame.remove(this);
+            Main.frame.add(new BuyMarble());
+            Main.frame.revalidate();
         } else if (e.getSource() == buyProd) {
-            //show Production Card Market and buy
+            Main.frame.remove(this);
+            Main.frame.add(new BuyProductionCard());
+            Main.frame.revalidate();
         } else if (e.getSource() == activeLeader) {
-            //show your Leader Card and activate
+            Main.frame.remove(this);
+            Main.frame.add(new ActiveLeader());
+            Main.frame.revalidate();
         } else if (e.getSource() == activeProd) {
-            //show your Production Card and activate
+            Main.frame.remove(this);
+            Main.frame.add(new ActiveProduction());
+            Main.frame.revalidate();
         } else if (e.getSource() == viewMyPB) {
-            //show my Personal Board
+            Main.frame.remove(this);
+            Main.frame.add(new PersonalBoard());
+            Main.frame.revalidate();
         } else if (e.getSource() == viewMarketMarble) {
             //show Market Marble
         } else if (e.getSource() == viewProdMarket) {
             //show Production Card market
         } else if (e.getSource() == viewPB1) {
-            //show first Personal Board
+            Main.frame.remove(this);
+            Main.frame.add(new PersonalBoard());
+            Main.frame.revalidate();
         } else if (e.getSource() == viewPB2) {
-            //show second personal board
+            Main.frame.remove(this);
+            Main.frame.add(new PersonalBoard());
+            Main.frame.revalidate();
         } else if (e.getSource() == viewPB3) {
-            //show third personal board
+            Main.frame.remove(this);
+            Main.frame.add(new PersonalBoard());
+            Main.frame.revalidate();
         } else if (e.getSource() == endTurn) {
             Main.frame.remove(this);
             Main.frame.add(new GameOver(3));

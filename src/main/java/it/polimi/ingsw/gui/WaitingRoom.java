@@ -3,14 +3,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import it.polimi.ingsw.Game;
+import it.polimi.ingsw.Player;
 
 public class WaitingRoom extends JPanel implements ActionListener {
 
 private final JProgressBar progressBar;
 private final JButton prova;
-private final int player;
-    public WaitingRoom(int player){
-        this.player = player;
+
+
+    public WaitingRoom(){
         prova = new JButton("prova");
         prova.setBounds(200, 500, 100, 50);
         progressBar = new JProgressBar();
@@ -25,20 +27,20 @@ private final int player;
     }
 
     public void paint(Graphics g){
-        g.drawString("Waiting for other players (/"+ player + ")", 100, 50);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == prova){
+        /*if(TODO change){
             Main.frame.remove(this);
             Main.frame.add(new PreGameRes());
             Main.frame.revalidate();
-        }
+        }*/
 
         if(progressBar.getValue() == 100){
             Main.frame.remove(this);
-            Main.frame.add(new PreGameRes());
+            //Main.frame.add(new PreGameRes());
             Main.frame.revalidate();
         }
     }

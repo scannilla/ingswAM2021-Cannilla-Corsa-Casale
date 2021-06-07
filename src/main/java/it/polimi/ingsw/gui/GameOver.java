@@ -4,13 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import it.polimi.ingsw.Game;
 
 public class GameOver extends JPanel implements ActionListener {
 
-    private int players = 3;
+    private int players;
     private final JButton exit;
-        public GameOver(int players){
-            //this.players = players;
+    private Game game;
+        public GameOver(int players, Game game){
+            this.players = game.getNumberOfPlayers();
             exit = new JButton("exit");
             exit.setBounds(650, 650, 100, 50);
             exit.addActionListener(this);

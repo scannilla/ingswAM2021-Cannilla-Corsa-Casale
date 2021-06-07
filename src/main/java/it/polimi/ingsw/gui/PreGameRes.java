@@ -7,15 +7,25 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
+import it.polimi.ingsw.Game;
+import it.polimi.ingsw.Player;
+import it.polimi.ingsw.resources.Resource;
 
 public class PreGameRes extends JPanel implements ActionListener {
 
 
     private JButton coinButton, stoneButton, servantButton, shieldButton, goAhead;
+    private Game game;
+    private Player thisPlayer;
+    int currentPlayer = game.getPlayers().indexOf(thisPlayer);
+    int numOfPlayer = game.getNumberOfPlayers();
 
-public PreGameRes(){
-    int player = 3;
-    if(player != 1) {
+public PreGameRes(Game game, Player player){
+    this.game = game;
+    this.thisPlayer = player;
+    if(numOfPlayer != 1 && currentPlayer != 0) {
             coinButton = new JButton("Select");
             stoneButton = new JButton("Select");
             servantButton = new JButton("Select");
@@ -45,8 +55,8 @@ public PreGameRes(){
 
 
     public void paint(Graphics g){
-        int player=3;
-        switch(player) {
+        int currentPlayer = game.getPlayers().indexOf(thisPlayer);
+        switch(currentPlayer) {
             case 1:
                 g.drawString("You are the first player", 100, 50);
                 g.drawString("Please wait for other players", 100, 100);
@@ -98,14 +108,33 @@ public PreGameRes(){
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (coinButton.equals(source)) {//add a coin resource
-        } else if (stoneButton.equals(source)) {//add a stone resource
-        } else if (servantButton.equals(source)) {//add a servant resource
-        } else if (shieldButton.equals(source)) {//add a shield resource
+        int numAction = 0;
+
+        if (coinButton.equals(source)) {
+
+        } else if (stoneButton.equals(source)) {
+                thisPlayer.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(1), 0);
+            if ((currentPlayer == 1 && numAction == 1) || (currentPlayer == 2 && numAction == 1) || (currentPlayer == 3 && numAction == 2)){
+                stoneButton.setEnabled(false);
+            }
+        } else if (servantButton.equals(source)) {
+            thisPlayer.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(2),0);
+            if ((currentPlayer == 1 && numAction == 1) || (currentPlayer == 2 && numAction == 1) || (currentPlayer == 3 && numAction == 2)){
+                servantButton.setEnabled(false);
+            }
+        } else if (shieldButton.equals(source)) {
+            thisPlayer.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(3), 0);
+            if ((currentPlayer == 1 && numAction == 1) || (currentPlayer == 2 && numAction == 1) || (currentPlayer == 3 && numAction == 2)){
+                shieldButton.setEnabled(false);
+            }
         } else if (goAhead.equals(source)){
             Main.frame.remove(this);
             Main.frame.add(new PreGameLeader());
             Main.frame.revalidate();
         }
     }
+
+
+
+
 }

@@ -55,6 +55,7 @@ public class Multi extends JPanel implements ActionListener {
             Main.frame.add(new WaitingRoom(3));
             Main.frame.revalidate();
         } else if (e.getSource() == four){
+
             Main.frame.remove(this);
             Main.frame.add(new WaitingRoom(4));
             Main.frame.revalidate();

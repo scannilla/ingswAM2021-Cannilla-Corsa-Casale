@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import it.polimi.ingsw.Game;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
 public class Intro extends JPanel implements ActionListener {
 

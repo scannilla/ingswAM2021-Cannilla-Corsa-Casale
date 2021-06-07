@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.networkserver;
 
+import it.polimi.ingsw.cli.Color;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;

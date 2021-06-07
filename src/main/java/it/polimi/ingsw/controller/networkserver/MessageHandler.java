@@ -7,13 +7,11 @@ import it.polimi.ingsw.controller.ObjectMessage;
 import java.io.*;
 import java.net.Socket;
 
-public final class MessageHandler {
+public class MessageHandler {
 
     private final ObjectOutputStream out;
 
     private final ObjectInputStream in;
-
-    private final boolean local;
 
     /**
      * Constructor of this MessageHandler linked to this clientSocket
@@ -21,19 +19,18 @@ public final class MessageHandler {
      * @throws EndingGameException e
      */
     public MessageHandler(Socket clientSocket) throws EndingGameException {
-        try {
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
-            in = new ObjectInputStream(clientSocket.getInputStream());
-            local = false;
-        } catch (IOException e){
-            throw new EndingGameException();
+        if(clientSocket==null) {
+            in = null;
+            out = null;
         }
-    }
-
-    public MessageHandler() {
-        local = true;
-        out = null;
-        in = null;
+        else {
+            try {
+                out = new ObjectOutputStream(clientSocket.getOutputStream());
+                in = new ObjectInputStream(clientSocket.getInputStream());
+            } catch (IOException e) {
+                throw new EndingGameException();
+            }
+        }
     }
 
 

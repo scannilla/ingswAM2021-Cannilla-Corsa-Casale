@@ -29,6 +29,8 @@ public class NewServerGameProtocol implements Callable<Integer> {
 
     private final MessageHandler mHandler;
 
+    private final boolean local;
+
 
 
     /**
@@ -37,20 +39,23 @@ public class NewServerGameProtocol implements Callable<Integer> {
      * @param player Player
      * @param handler CommandsHandler
      */
-    public NewServerGameProtocol(Socket clientSocket, Player player, CommandsHandler handler, MessageHandler mHandler) {
+    public NewServerGameProtocol(Socket clientSocket, Player player, CommandsHandler handler, MessageHandler mHandler, boolean local) {
         this.clientSocket = clientSocket;
         this.player = player;
         playerNumber++;
         NewServerGameProtocol.handler = handler;
         this.mHandler = mHandler;
+        this.local = local;
     }
 
     @Override
     public Integer call() throws Exception {
         createListeners();
-        //new Thread(new CheckConnection(mHandler));
+        if (!local)
+            new Thread(new CheckConnection(mHandler));
         while (true) {
-            //checkConnection();
+            if(!local)
+                checkConnection();
             String command;
             try {
                 command = mHandler.readClientMessage();

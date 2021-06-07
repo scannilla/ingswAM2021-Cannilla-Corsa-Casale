@@ -112,7 +112,7 @@ public class ServerMain {
 
         Player player = new Player(nickname);
         mapAllPlayer.put(player, clientSocket);
-        return executor.submit(new NewServerGameProtocol(clientSocket, player, handler, mHandler));
+        return executor.submit(new NewServerGameProtocol(clientSocket, player, handler, mHandler, false));
     }
 
     private static String askForNickname(MessageHandler mHandler) throws EndingGameException {

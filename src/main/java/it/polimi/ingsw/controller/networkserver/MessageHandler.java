@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller.networkserver;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
+import it.polimi.ingsw.resources.Resource;
 
 import java.io.*;
 import java.net.Socket;
@@ -69,6 +70,7 @@ public class MessageHandler {
 
         try {
             out.writeObject(m);
+            out.reset();
         } catch (IOException e) {
             throw new EndingGameException();
         }
@@ -77,6 +79,32 @@ public class MessageHandler {
     public void sendObjectToClient(ObjectMessage obj) throws EndingGameException {
         try {
             out.writeObject(obj);
+            out.reset();
+        } catch (IOException e) {
+            throw new EndingGameException();
+        }
+    }
+
+    public void drawResource(Resource res) throws EndingGameException {
+        String reset = Color.ANSI_RESET.escape();
+        String resource = "";
+        switch (res.toString()) {
+            case "coin":
+                resource = Color.ANSI_YELLOW + "C" + reset;
+                break;
+            case "stone":
+                resource = Color.ANSI_GREY + "R" + reset;
+                break;
+            case "servant":
+                resource = Color.ANSI_PURPLE + "S" + reset;
+                break;
+            case "shield":
+                resource = Color.ANSI_BLUE + "H" + reset;
+                break;
+        }
+        Message m = new Message(19, resource, null);
+        try {
+            out.writeObject(m);
             out.reset();
         } catch (IOException e) {
             throw new EndingGameException();

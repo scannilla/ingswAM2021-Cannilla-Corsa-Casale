@@ -2,7 +2,6 @@ package it.polimi.ingsw.marbles;
 
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
-import it.polimi.ingsw.marbles.MarketMarble;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -69,12 +68,14 @@ public class MarketStructure implements Serializable {
      * @return marblesArray
      */
     public MarketMarble[] selectColumn(int column) {
+        MarketMarble temp;
         MarketMarble[] marblesArray = new MarketMarble[3];
         System.arraycopy(marketStructure[column], 0, marblesArray, 0, 3);
-        outMarble = marketStructure[column][2];
+        temp = marketStructure[column][0];
         for (int i = 1; i < 3; i++)
-            marketStructure[column][i] = marketStructure[column][i - 1];
-        marketStructure[column][0] = outMarble;
+            marketStructure[column][i-1] = marketStructure[column][i];
+        marketStructure[column][2] = outMarble;
+        outMarble = temp;
         return marblesArray;
     }
 

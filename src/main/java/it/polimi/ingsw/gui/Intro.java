@@ -13,7 +13,9 @@ public class Intro extends JPanel implements ActionListener {
 
     private final JButton local;
     private final JButton multi;
-    public Intro(){
+    private final ClientMessageHandler handler;
+    public Intro(ClientMessageHandler handler){
+
         local = new JButton("Play Local");
         multi = new JButton("Play Multi");
         local.setBounds(50, 320, 100, 50);
@@ -26,6 +28,7 @@ public class Intro extends JPanel implements ActionListener {
         this.setSize(800, 800);
         this.setVisible(true);
         this.setBackground(Color.white);
+        this.handler = handler;
 
     }
 
@@ -49,14 +52,33 @@ public class Intro extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Message received = null;
         if(e.getSource() == multi) {
-            Main.frame.remove(this);
-            Main.frame.add(new Multi());
-            Main.frame.revalidate();
+
+            try {
+                handler.sendMessageToServer("create game");
+            } catch (EndingGameException endingGameException) {
+                endingGameException.printStackTrace();
+            }
+            try {
+                received = handler.readMessage();
+            } catch (EndingGameException endingGameException) {
+                endingGameException.printStackTrace();
+            }
+            if (received.equals("ok")){
+                Main.frame.remove(this);
+                Main.frame.add(new Multi(handler));
+                Main.frame.revalidate();
+            }
+            if (received.equals("ko")){
+
+            }
+
         } else if (e.getSource() == local){
             Main.frame.remove(this);
             Main.frame.add(new Local());
             Main.frame.revalidate();
+
         }
     }
 }

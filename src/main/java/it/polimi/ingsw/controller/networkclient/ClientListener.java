@@ -1,17 +1,17 @@
 package it.polimi.ingsw.controller.networkclient;
 
+import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.Player;
+import it.polimi.ingsw.cli.ActiveLeaderCardsDraw;
 import it.polimi.ingsw.cli.MarketDraw;
+import it.polimi.ingsw.cli.PersonalBoardDraw;
 import it.polimi.ingsw.cli.ProdCardsMarketDraw;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
-import it.polimi.ingsw.controller.networkserver.MessageHandler;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
 
-import java.io.*;
-import java.net.Socket;
-import java.sql.SQLOutput;
 
 public class ClientListener implements Runnable{
 
@@ -48,21 +48,33 @@ public class ClientListener implements Runnable{
                 }
             }
         }
+        else {
+            //call GUI methods
+        }
     }
 
     private void readObject(Message m) {
         ObjectMessage object = (ObjectMessage) m;
-        switch (object.getCode()) {
+        printObj(object);
+    }
+
+    public static void printObj(ObjectMessage obj) {
+        switch (obj.getCode()) {
             case 20:
-                MarketStructure structure = (MarketStructure) object.getObj();
+                MarketStructure structure = (MarketStructure) obj.getObj();
                 MarketDraw.draw(structure);
                 break;
             case 21:
-                ProductionCardsMarket prodMarket = (ProductionCardsMarket) object.getObj();
+                ProductionCardsMarket prodMarket = (ProductionCardsMarket) obj.getObj();
                 ProdCardsMarketDraw.drawProdCardsMarket(prodMarket);
                 break;
             case 22:
+                PersonalBoard personalBoard = (PersonalBoard) obj.getObj();
+                PersonalBoardDraw.drawPB(personalBoard);
+                break;
             case 23:
+                ActiveLeaderCardsDraw.drawActiveLeaderCards((Player)obj.getObj());
+                break;
         }
     }
 }

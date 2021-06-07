@@ -40,9 +40,9 @@ public class Multi extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent e){
         if(e.getSource() == back){
+
             Main.frame.remove(this);
             Main.frame.add(new Intro());
             Main.frame.revalidate();

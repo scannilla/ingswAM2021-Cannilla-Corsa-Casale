@@ -126,7 +126,7 @@ public class Turn extends JPanel implements ActionListener {
             Main.frame.revalidate();
         } else if (e.getSource() == endTurn) {
             Main.frame.remove(this);
-            Main.frame.add(new GameOver(3));
+            //Main.frame.add(new GameOver(3));
             Main.frame.revalidate();
         }
 

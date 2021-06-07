@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller.networkclient;
 
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
 
 import java.io.*;
 import java.net.*;
@@ -54,8 +54,9 @@ public class ClientMain {
             }
         } while (!read.equals("sp") && !read.equals("mp") && !read.equals("singleplayer") && !read.equals("multiplayer"));
 
-        if(read.equals("sp") || read.equals("singleplayer"))
-            System.out.println("ciao");
+        if(read.equals("sp") || read.equals("singleplayer")) {
+            new LocalSinglePlayer().singlePlayer();
+        }
         else {
             Socket clientSocket;
             try {

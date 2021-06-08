@@ -1,7 +1,5 @@
 package it.polimi.ingsw.cli;
 
-import it.polimi.ingsw.PersonalBoard;
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
 
@@ -151,9 +149,8 @@ public class ActiveLeaderCardsDraw {
         }
     }
 
-    public static void abilityPrinter(Player player, int index){
-        LeaderCard[] arrayCards = player.getActiveLeaderCards();
-        switch (arrayCards[index].getAbility()){
+    public static void abilityPrinter(LeaderCard[] cardsArray, int index){
+        switch (cardsArray[index].getAbility()){
             case 0: System.out.print(Color.ANSI_BLUE.escape() + "Leader of discounts");
                 break;
             case 1: System.out.print(Color.ANSI_BLUE.escape() + "Leader of depots");
@@ -166,10 +163,9 @@ public class ActiveLeaderCardsDraw {
 
     }
 
-    public static void drawRes(Player player, int index) {
+    public static void drawRes(LeaderCard[] cardsArray, int index) {
         String resetEscape = Color.ANSI_RESET.escape();
-        LeaderCard[] arrayCards = player.getActiveLeaderCards();
-        switch (arrayCards[index].getAbility()) {
+        switch (cardsArray[index].getAbility()) {
             case 0: {
                 Resource disc = ((LeaderOfDiscounts) cardsArray[index]).getDiscountedRes();
                 switchCases(resetEscape, disc);
@@ -208,7 +204,7 @@ public class ActiveLeaderCardsDraw {
     }
 
 
-    public static void drawReqRes(Player player, int index){
+    public static void drawReqRes(LeaderCard[] cardsArray, int index){
         String resetEscape = Color.ANSI_RESET.escape();
         Resource[] reqRes = cardsArray[index].getRequiredRes();
         int[] reqRess = new int[10];
@@ -247,7 +243,7 @@ public class ActiveLeaderCardsDraw {
             System.out.print(Color.ANSI_BLUE.escape() + "H" + resetEscape);}
     }
 
-    public static void drawReqCards(Player player, int index){
+    public static void drawReqCards(LeaderCard[] cardsArray, int index){
         String resetEscape = Color.ANSI_RESET.escape();
         int[] reqType = cardsArray[index].getRequiredType();
         int[] reqLevel = cardsArray[index].getRequiredLevel();

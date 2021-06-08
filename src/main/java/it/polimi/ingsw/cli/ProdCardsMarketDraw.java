@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cli;
 
-import it.polimi.ingsw.Game;
+
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.resources.Resource;
@@ -9,13 +9,6 @@ public class ProdCardsMarketDraw {
     public static void drawProdCardsMarket(ProductionCardsMarket prodCards){
         ProductionCard[][] prodCardTensor= prodCards.getTopCards();
         String resetEscape = Color.ANSI_RESET.escape();
-        //System.out.print(resetEscape + "-------------------------------------------------------------------");
-        //System.out.print(resetEscape + "|Level: 3      WP: 3  |                     |                     |");
-        //System.out.print(resetEscape + "|Type: 2              |                     |                     |");
-        //System.out.print(resetEscape + "|Cost: A1 B1 C1 D1    |                     |                     |");
-        //System.out.print(resetEscape + "|Req Res: 4C 3B 2H 1B |                     |                     |");
-        //System.out.print(resetEscape + "|Given:               |                     |                     |");
-        //System.out.print(resetEscape + "|Given FP: 3          |                     |                     |");
         System.out.print("\n");
         System.out.print(resetEscape + "-------------------------------------------------------------------");
         System.out.print("\n");

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +11,9 @@ import java.awt.event.ActionListener;
 public class ActiveProduction extends JPanel implements ActionListener{
 
     private final JButton selectStand, selectSlot1, selectSlot2, selectSlot3, back;
-
-    public ActiveProduction(){
+    private ClientMessageHandler handler;
+    public ActiveProduction(ClientMessageHandler handler){
+        this.handler = handler;
         back = new JButton("Go Back");
         selectStand = new JButton("select");
         selectSlot1 = new JButton("select");
@@ -39,16 +43,32 @@ public class ActiveProduction extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == selectStand){
-            //active standard production
+            try{
+                handler.sendMessageToServer("activate standard production", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == selectSlot1){
-            //active production slot 1
+            try{
+                handler.sendMessageToServer("activate production 1", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == selectSlot2){
-            //active production slot 2
+            try{
+                handler.sendMessageToServer("activate production 2", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == selectSlot3){
-            //active production slot 3
+            try{
+                handler.sendMessageToServer("activate production 3", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == back){
             Main.frame.remove(this);
-            Main.frame.add(new Turn());
+            Main.frame.add(new Turn(handler));
             Main.frame.revalidate();
         }
 

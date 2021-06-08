@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
 
@@ -18,7 +19,7 @@ public class Multi extends JPanel implements ActionListener {
     private final JButton back;
     private final ClientMessageHandler handler;
 
-    public Multi(ClientMessageHandler handler){
+    public Multi(ClientMessageHandler handler) {
         this.handler = handler;
         one = new JButton("1");
         two = new JButton("2");
@@ -46,44 +47,88 @@ public class Multi extends JPanel implements ActionListener {
         this.setBackground(Color.white);
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         g.drawString("Insert number of player (1-4)", 200, 100);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource() == back){
-
+    public void actionPerformed(ActionEvent e) {
+        Message received = null;
+        Main.frame.revalidate();
+        if (e.getSource() == back) {
             Main.frame.remove(this);
             Main.frame.add(new Intro(handler));
             Main.frame.revalidate();
-        } else if (e.getSource() == two){
+            Main.frame.repaint();
+        } else if (e.getSource() == two) {
             try {
                 handler.sendMessageToServer("two", 1);
             } catch (EndingGameException endingGameException) {
-                endingGameException.printStackTrace();
+                //TODO disconnect
+            }
+            try {
+                received = handler.readMessage();
+            } catch (EndingGameException ex) {
+                //TODO disconnect
+            }
+            if (received.getMessage().equals("ok")) {
+                Main.frame.remove(this);
+                Main.frame.add(new WaitingRoom(2, handler));
+                Main.frame.revalidate();
+                Main.frame.repaint();
+            }
+        } else if (e.getSource() == three) {
+            try {
+                handler.sendMessageToServer("three", 1);
+            } catch (EndingGameException endingGameException) {
+                //TODO disconnect
+            }
+            try {
+                received = handler.readMessage();
+            } catch (EndingGameException endingGameException) {
+                //TODO disconnect
+            }
+            if (received.getMessage().equals("ok")) {
+                Main.frame.remove(this);
+                Main.frame.add(new WaitingRoom(3, handler));
+                Main.frame.revalidate();
+            }
+        } else if (e.getSource() == four) {
+
+            try {
+                handler.sendMessageToServer("four", 1);
+            } catch (EndingGameException endingGameException) {
+                //TODO disconnect
+            }
+            try {
+                received = handler.readMessage();
+            } catch (EndingGameException endingGameException) {
+                //TODO disconnect
+            }
+            if (received.getMessage().equals("ok")) {
+                Main.frame.remove(this);
+                Main.frame.add(new WaitingRoom(4, handler));
+                Main.frame.revalidate();
+            }
+        } else if (e.getSource() == one) {
+            try {
+                handler.sendMessageToServer("one", 1);
+            } catch (EndingGameException endingGameException) {
+                //TODO disconnect
+            }
+            try {
+                received = handler.readMessage();
+            } catch (EndingGameException endingGameException) {
+                //TODO disconnect
+            }
+            if (received.getMessage().equals("ok")) {
+                Main.frame.remove(this);
+                Main.frame.add(new WaitingRoom(1, handler));
+                Main.frame.revalidate();
+                Main.frame.repaint();
             }
 
-            Main.frame.remove(this);
-            Main.frame.add(new WaitingRoom());
-            Main.frame.revalidate();
-        } else if (e.getSource() == three){
 
-            Main.frame.remove(this);
-            Main.frame.add(new WaitingRoom());
-            Main.frame.revalidate();
-        } else if (e.getSource() == four){
-
-            Main.frame.remove(this);
-            Main.frame.add(new WaitingRoom());
-            Main.frame.revalidate();
-        } else if(e.getSource() == one){
-
-            Main.frame.remove(this);
-            Main.frame.add(new PreGameLeader());
-            Main.frame.revalidate();
         }
-
-
     }
 }

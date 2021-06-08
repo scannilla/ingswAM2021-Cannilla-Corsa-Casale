@@ -1,5 +1,8 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,8 +10,9 @@ import java.awt.event.ActionListener;
 
 public class Turn extends JPanel implements ActionListener {
     private JButton buyMarble, buyProd, activeLeader, activeProd, viewMyPB, viewPB1, viewPB2, viewPB3, viewMarketMarble, viewProdMarket, endTurn;
-
-    public Turn(){
+    private ClientMessageHandler handler;
+    public Turn(ClientMessageHandler handler){
+        this.handler = handler;
         int players = 3;
 
         buyMarble = new JButton ("Buy marble");
@@ -88,48 +92,77 @@ public class Turn extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buyMarble) {
-            Main.frame.remove(this);
-            Main.frame.add(new BuyMarble());
-            Main.frame.revalidate();
-        } else if (e.getSource() == buyProd) {
-            Main.frame.remove(this);
-            Main.frame.add(new BuyProductionCard());
-            Main.frame.revalidate();
-        } else if (e.getSource() == activeLeader) {
-            Main.frame.remove(this);
-            Main.frame.add(new ActiveLeader());
-            Main.frame.revalidate();
-        } else if (e.getSource() == activeProd) {
-            Main.frame.remove(this);
-            Main.frame.add(new ActiveProduction());
-            Main.frame.revalidate();
-        } else if (e.getSource() == viewMyPB) {
-            Main.frame.remove(this);
-            Main.frame.add(new PersonalBoard());
-            Main.frame.revalidate();
-        } else if (e.getSource() == viewMarketMarble) {
-            //show Market Marble
-        } else if (e.getSource() == viewProdMarket) {
-            //show Production Card market
-        } else if (e.getSource() == viewPB1) {
-            Main.frame.remove(this);
-            Main.frame.add(new PersonalBoard());
-            Main.frame.revalidate();
-        } else if (e.getSource() == viewPB2) {
-            Main.frame.remove(this);
-            Main.frame.add(new PersonalBoard());
-            Main.frame.revalidate();
-        } else if (e.getSource() == viewPB3) {
-            Main.frame.remove(this);
-            Main.frame.add(new PersonalBoard());
-            Main.frame.revalidate();
-        } else if (e.getSource() == endTurn) {
-            Main.frame.remove(this);
-            //Main.frame.add(new GameOver(3));
-            Main.frame.revalidate();
-        }
+       chooseAction(e);
+    }
 
+    public void chooseAction(ActionEvent e){
+        if (e.getSource() == buyMarble){
+            try {
+                handler.sendMessageToServer("buy marble", 1);
+            } catch(EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == buyProd){
+            try{
+                handler.sendMessageToServer("buy production card", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == activeLeader){
+            try{
+                handler.sendMessageToServer("activate leader card", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == activeProd){
+            try{
+                handler.sendMessageToServer("activate production", 1);
+            } catch(EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == viewMarketMarble){
+            try{
+                handler.sendMessageToServer("show market marble", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == viewProdMarket){
+            try{
+                handler.sendMessageToServer("show production card market", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == viewMyPB){
+            try{
+                handler.sendMessageToServer("show my personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if (e.getSource() == viewPB1){
+            try{
+                handler.sendMessageToServer("show nickname personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == viewPB2){
+            try{
+                handler.sendMessageToServer("show production nickname personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == viewPB3){
+            try{
+                handler.sendMessageToServer("show production personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        } else if(e.getSource() == endTurn){
+            try{
+                handler.sendMessageToServer("end turn", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
+        }
     }
 
 }

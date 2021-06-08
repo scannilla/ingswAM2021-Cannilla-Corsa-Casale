@@ -1,5 +1,8 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +11,9 @@ import java.awt.event.ActionListener;
 public class BuyMarble extends JPanel implements ActionListener {
 
     private final JButton column1, column2, column3, column4, line1, line2, line3, back;
-
-    public BuyMarble(){
+    private ClientMessageHandler handler;
+    public BuyMarble(ClientMessageHandler handler){
+        this.handler = handler;
         column1 = new JButton("Buy");
         column2 = new JButton("Buy");
         column3 = new JButton("Buy");
@@ -62,22 +66,50 @@ public class BuyMarble extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == line1){
-            //buymarblefrommarket(line1, line)
+            try{
+                handler.sendMessageToServer("buy marble 1, line", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == line2){
-            //buymarblefrommarket(line2, line)
+            try{
+                handler.sendMessageToServer("buy marble 2, line", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if (e.getSource() == line3){
-            //buyfrommarket(line3, line)
+            try{
+                handler.sendMessageToServer("buy marble 3, line", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if (e.getSource() == column1){
-            //buyfrommarket(column1, column)
+            try{
+                handler.sendMessageToServer("buy marble 1, column", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if (e.getSource() == column2){
-            //buyfrommarket(column2, column)
+            try{
+                handler.sendMessageToServer("buy marble 2, column", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == column3){
-            //buyfrommarket(column3, column)
+            try{
+                handler.sendMessageToServer("buy marble 3, column", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == column4){
-            //buyfrommarket(column4, column)
+            try{
+                handler.sendMessageToServer("buy marble 4, column", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == back){
             Main.frame.remove(this);
-            Main.frame.add(new Turn());
+            Main.frame.add(new Turn(handler));
             Main.frame.revalidate();
         }
     }

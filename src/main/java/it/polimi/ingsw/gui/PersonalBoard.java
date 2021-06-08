@@ -4,11 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import it.polimi.ingsw.Player;
+
 
 public class PersonalBoard extends JPanel implements ActionListener {
 
-    public PersonalBoard(){
+    ArrayList<Player> player;
+    String nickname;
 
+    public PersonalBoard(String nickname){
+        this.nickname = nickname;
     }
 
     public void paint(Graphics g){

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +11,10 @@ import java.awt.event.ActionListener;
 public class PreGameLeader extends JPanel implements ActionListener {
 
     private JButton leaderOne, leaderTwo, leaderThree, leaderFour, goAhead;
+    private ClientMessageHandler handler;
 
-   public PreGameLeader(){
+   public PreGameLeader(ClientMessageHandler handler){
+       this.handler = handler;
        leaderOne = new JButton("Select");
        leaderTwo = new JButton("Select");
        leaderThree = new JButton("Select");
@@ -49,10 +54,45 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==goAhead){
-            Main.frame.remove(this);
-            Main.frame.add(new WaitingTurn());
-            Main.frame.revalidate();
-        }
+        chooseLeader(e);
+        Main.frame.remove(this);
+        Main.frame.add(new WaitingTurn(handler));
+        Main.frame.revalidate();
     }
+
+public void chooseLeader(ActionEvent e){
+       int numAction = 0;
+
+       while(numAction!=2){
+           if (e.getSource() == leaderOne){
+               try {
+                   handler.sendMessageToServer("1", 1);
+               } catch(EndingGameException ex){
+                   //TODO disconnect
+               }
+           } else if(e.getSource() == leaderTwo){
+               try {
+                   handler.sendMessageToServer("2", 1);
+               } catch(EndingGameException ex){
+                   //TODO disconnect
+               }
+           } else if(e.getSource() == leaderThree){
+               try {
+                   handler.sendMessageToServer("3", 1);
+               } catch(EndingGameException ex){
+                   //TODO disconnect
+               }
+           } else if(e.getSource() == leaderFour){
+               try {
+                   handler.sendMessageToServer("4", 1);
+               } catch(EndingGameException ex){
+                   //TODO disconnect
+               }
+           }
+       numAction++;
+       }
+
+}
+
+
 }

@@ -12,7 +12,8 @@ import java.io.InputStream;
 import it.polimi.ingsw.Game;
 
 public class ShowMarketMarble extends JPanel{
-    private final Game game;
+
+    private Game game;
 
     public ShowMarketMarble(Game game) {
         this.game = game;

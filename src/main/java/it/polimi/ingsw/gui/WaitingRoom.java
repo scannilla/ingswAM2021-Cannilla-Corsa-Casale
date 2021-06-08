@@ -5,19 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
 public class WaitingRoom extends JPanel implements ActionListener {
 
-private final JProgressBar progressBar;
+
 private final JButton prova;
+private final int numOfPlayer;
+private final ClientMessageHandler handler;
 
-
-    public WaitingRoom(){
+    public WaitingRoom(int numOfPlayer, ClientMessageHandler handler){
+        this.numOfPlayer = numOfPlayer;
+        this.handler = handler;
         prova = new JButton("prova");
-        prova.setBounds(200, 500, 100, 50);
-        progressBar = new JProgressBar();
-        progressBar.setBounds(100, 100, 200, 50);
-        this.add(progressBar);
+        prova.setBounds(200, 500, 10, 10);
         this.add(prova);
         prova.addActionListener(this);
         this.setLayout(null);
@@ -27,21 +30,28 @@ private final JButton prova;
     }
 
     public void paint(Graphics g){
-
+            g.drawString("Waiting for other players", 350, 100);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*if(TODO change){
+        Message received = null;
+        try {
+            handler.sendMessageToServer("setup game", 1);
+        } catch (EndingGameException endingGameException) {
+            //TODO disconnect
+        }
+        try {
+            received = handler.readMessage();
+        } catch (EndingGameException endingGameException) {
+            //TODO disconnect
+        }
+        if(received.getMessage().equals("ok")){
             Main.frame.remove(this);
-            Main.frame.add(new PreGameRes());
-            Main.frame.revalidate();
-        }*/
-
-        if(progressBar.getValue() == 100){
-            Main.frame.remove(this);
-            //Main.frame.add(new PreGameRes());
+            Main.frame.add(new PreGameRes(handler));
             Main.frame.revalidate();
         }
+
+
     }
 }

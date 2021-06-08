@@ -1,5 +1,8 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.singleplayer.SPMessageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +14,7 @@ public class Local extends JPanel implements ActionListener {
     private final JButton goBack;
 
     public Local(){
+
         startGame = new JButton("Start Game");
         goBack = new JButton("Go Back");
         startGame.setBounds(50, 300, 200, 50);
@@ -38,7 +42,7 @@ public class Local extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startGame){
-
+            //TODO
         } else if (e.getSource() == goBack){
             Main.frame.remove(this);
             Main.frame.add(new Intro());

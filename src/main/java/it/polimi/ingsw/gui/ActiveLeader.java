@@ -1,5 +1,8 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,9 +11,10 @@ import java.awt.event.ActionListener;
 public class ActiveLeader extends JPanel implements ActionListener {
 
     private final JButton active1, active2, back;
+    private ClientMessageHandler handler;
 
-
-    public ActiveLeader(){
+    public ActiveLeader(ClientMessageHandler handler){
+        this.handler = handler;
         active1 = new JButton("Active");
         active2 = new JButton("Active");
         back = new JButton("Go Back");
@@ -37,12 +41,20 @@ public class ActiveLeader extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == active1){
-            //activateLeaderCard
+            try{
+                handler.sendMessageToServer("activate leader card 2", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == active2){
-            //activateLeaderCard
+            try{
+                handler.sendMessageToServer("activate leader card 1", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == back){
             Main.frame.remove(this);
-            Main.frame.add(new Turn());
+            Main.frame.add(new Turn(handler));
             Main.frame.revalidate();
         }
     }

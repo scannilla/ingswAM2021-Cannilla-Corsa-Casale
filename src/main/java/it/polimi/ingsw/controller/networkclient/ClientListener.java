@@ -49,7 +49,7 @@ public class ClientListener implements Runnable{
             }
         }
         else {
-            //call GUI methods
+            //gui
         }
     }
 

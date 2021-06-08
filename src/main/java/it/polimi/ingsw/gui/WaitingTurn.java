@@ -1,6 +1,8 @@
 package it.polimi.ingsw.gui;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +12,11 @@ import java.awt.event.ActionListener;
 public class WaitingTurn extends JPanel implements ActionListener {
 
     private JButton prodCardMarket, marketMarble, myPP, ppOne, ppTwo, ppThree, goAhead;
+    private ClientMessageHandler handler;
 
-    public WaitingTurn() {
-        int player = 3;
-        createLayout(player);
+    public WaitingTurn(ClientMessageHandler handler) {
+        this.handler = handler;
+
     }
 
 
@@ -139,20 +142,44 @@ public class WaitingTurn extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == prodCardMarket){
-            //show production card market
+            try{
+                handler.sendMessageToServer("show production card market", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if (e.getSource() == marketMarble){
-            //show market marble
+            try{
+                handler.sendMessageToServer("show market marble", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == myPP){
-            //show my personal board
+            try{
+                handler.sendMessageToServer("show production my personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == ppOne){
-            //show first personal board
+            try{
+                handler.sendMessageToServer("show nickname personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == ppTwo){
-            //show second personal board
+            try{
+                handler.sendMessageToServer("show nickname personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == ppThree){
-            //show third personal board
+            try{
+                handler.sendMessageToServer("show nickname personal board", 1);
+            } catch (EndingGameException ex){
+                //TODO disconnect
+            }
         } else if(e.getSource() == goAhead){
             Main.frame.remove(this);
-            Main.frame.add(new Turn());
+            Main.frame.add(new Turn(handler));
             Main.frame.revalidate();
         }
 

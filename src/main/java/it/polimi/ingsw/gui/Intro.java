@@ -12,14 +12,17 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.controller.singleplayer.SPMessageHandler;
 
 public class Intro extends JPanel implements ActionListener {
 
     private final JButton local;
     private final JButton multi;
     private final ClientMessageHandler handler;
-    public Intro(ClientMessageHandler handler){
 
+
+    public Intro(ClientMessageHandler handler){
+        this.handler = handler;
         local = new JButton("Play Local");
         multi = new JButton("Play Multi");
         local.setBounds(50, 320, 100, 50);
@@ -32,9 +35,11 @@ public class Intro extends JPanel implements ActionListener {
         this.setSize(800, 800);
         this.setVisible(true);
         this.setBackground(Color.white);
-        this.handler = handler;
+
 
     }
+
+
 
     public void paint(Graphics g){
         g.drawString("Welcome to Master of Renaissance", 100, 50);
@@ -58,7 +63,6 @@ public class Intro extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Message received = null;
         if(e.getSource() == multi) {
-
             try {
                 handler.sendMessageToServer("create game");
             } catch (EndingGameException endingGameException) {
@@ -69,12 +73,12 @@ public class Intro extends JPanel implements ActionListener {
             } catch (EndingGameException endingGameException) {
                 endingGameException.printStackTrace();
             }
-            if (received.equals("ok")){
+            if (received.getMessage().equals("ok")){
                 Main.frame.remove(this);
                 Main.frame.add(new Multi(handler));
                 Main.frame.revalidate();
             }
-            if (received.equals("ko")){
+            if (received.getMessage().equals("ko")){
 
             }
 

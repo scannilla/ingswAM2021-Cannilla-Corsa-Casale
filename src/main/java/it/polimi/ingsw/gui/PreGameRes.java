@@ -7,25 +7,27 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
-import it.polimi.ingsw.Game;
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.controller.Message;
+
 
 public class PreGameRes extends JPanel implements ActionListener {
 
 
     private JButton coinButton, stoneButton, servantButton, shieldButton, goAhead;
-    private Game game;
-    private Player thisPlayer;
-    int currentPlayer = game.getPlayers().indexOf(thisPlayer);
-    int numOfPlayer = game.getNumberOfPlayers();
+    private ClientMessageHandler handler;
+    private Message received;
 
-public PreGameRes(Game game, Player player){
-    this.game = game;
-    this.thisPlayer = player;
-    if(numOfPlayer != 1 && currentPlayer != 0) {
+    public PreGameRes(ClientMessageHandler handler) {
+        this.handler = handler;
+        try {
+            received = handler.readMessage();
+        } catch (EndingGameException ex) {
+            //TODO disconnect
+        }
+        if (!(received.getMessage().equals("You're the first player so you're not gonna receive any resource or faith point"))) {
             coinButton = new JButton("Select");
             stoneButton = new JButton("Select");
             servantButton = new JButton("Select");
@@ -50,30 +52,20 @@ public PreGameRes(Game game, Player player){
             this.setSize(800, 800);
             this.setVisible(true);
             this.setBackground(Color.WHITE);
+        }
     }
-}
 
 
-    public void paint(Graphics g){
-        int currentPlayer = game.getPlayers().indexOf(thisPlayer);
-        switch(currentPlayer) {
-            case 1:
-                g.drawString("You are the first player", 100, 50);
+    public void paint(Graphics g) {
+        switch (received.getMessage()) {
+            case "You're the first player so you're not gonna receive any resource or faith point":
+                g.drawString(received.getMessage(), 100, 50);
                 g.drawString("Please wait for other players", 100, 100);
                 break;
-            case 2:
-                g.drawString("You are the second player", 100, 50);
-                g.drawString("You can chose one resource", 100, 200);
-                myDrawImagePNG(g);
-                break;
-            case 3:
-                g.drawString("You are the third player", 100, 50);
-                g.drawString("You can chose one resource and you receive one faith point", 100, 100);
-                myDrawImagePNG(g);
-                break;
-            case 4:
-                g.drawString("You are the fourth player", 100, 50);
-                g.drawString("You can chose two resources and you receive one faith point", 100, 100);
+            case "You're the second player so you can choose a resource to add to your warehouse depot":
+            case "You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one":
+            case "You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one":
+                g.drawString(received.getMessage(), 100, 50);
                 myDrawImagePNG(g);
                 break;
 
@@ -81,7 +73,7 @@ public PreGameRes(Game game, Player player){
 
     }
 
-    private void myDrawImagePNG(Graphics g){
+    private void myDrawImagePNG(Graphics g) {
         ClassLoader cl = this.getClass().getClassLoader();
         InputStream urlCoin = cl.getResourceAsStream("coin2.png");
         InputStream urlStone = cl.getResourceAsStream("stone2.png");
@@ -98,43 +90,91 @@ public PreGameRes(Game game, Player player){
             e.printStackTrace();
             return;
         }
-        g.drawImage(imgCoin, 100,450, 100,100, null);
-        g.drawImage(imgStone, 250,450, 100,100, null);
-        g.drawImage(imgServant, 400,450, 100,100, null);
-        g.drawImage(imgShield, 550,450, 100,100, null);
+        g.drawImage(imgCoin, 100, 450, 100, 100, null);
+        g.drawImage(imgStone, 250, 450, 100, 100, null);
+        g.drawImage(imgServant, 400, 450, 100, 100, null);
+        g.drawImage(imgShield, 550, 450, 100, 100, null);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
+        chooseResource(e);
+        Main.frame.remove(this);
+        Main.frame.add(new PreGameLeader(handler));
+        Main.frame.revalidate();
+    }
+
+    public void chooseResource(ActionEvent e){
         int numAction = 0;
-
-        if (coinButton.equals(source)) {
-
-        } else if (stoneButton.equals(source)) {
-                thisPlayer.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(1), 0);
-            if ((currentPlayer == 1 && numAction == 1) || (currentPlayer == 2 && numAction == 1) || (currentPlayer == 3 && numAction == 2)){
-                stoneButton.setEnabled(false);
-            }
-        } else if (servantButton.equals(source)) {
-            thisPlayer.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(2),0);
-            if ((currentPlayer == 1 && numAction == 1) || (currentPlayer == 2 && numAction == 1) || (currentPlayer == 3 && numAction == 2)){
-                servantButton.setEnabled(false);
-            }
-        } else if (shieldButton.equals(source)) {
-            thisPlayer.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(3), 0);
-            if ((currentPlayer == 1 && numAction == 1) || (currentPlayer == 2 && numAction == 1) || (currentPlayer == 3 && numAction == 2)){
-                shieldButton.setEnabled(false);
-            }
-        } else if (goAhead.equals(source)){
-            Main.frame.remove(this);
-            Main.frame.add(new PreGameLeader());
-            Main.frame.revalidate();
+        switch(received.getMessage()){
+            case "You're the second player so you can choose a resource to add to your warehouse depot":
+            case "You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one":
+                while(numAction!=1){
+                    if(e.getSource()==coinButton){
+                        try {
+                            handler.sendMessageToServer("coin", 1);
+                        } catch(EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    } else if(e.getSource()==stoneButton){
+                        try{
+                            handler.sendMessageToServer("stone", 1);
+                        } catch(EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    } else if(e.getSource()==servantButton){
+                        try{
+                            handler.sendMessageToServer("servant", 1);
+                        } catch (EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    } else if(e.getSource() == shieldButton){
+                        try{
+                            handler.sendMessageToServer("shield", 1);
+                        } catch(EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    }
+                numAction++;
+                }
+            case "You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one":
+                while(numAction!=2){
+                    if(e.getSource()==coinButton){
+                        try {
+                            handler.sendMessageToServer("coin", 1);
+                        } catch(EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    } else if(e.getSource()==stoneButton){
+                        try{
+                            handler.sendMessageToServer("stone", 1);
+                        } catch(EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    } else if(e.getSource()==servantButton){
+                        try{
+                            handler.sendMessageToServer("servant", 1);
+                        } catch (EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    } else if(e.getSource() == shieldButton){
+                        try{
+                            handler.sendMessageToServer("shield", 1);
+                        } catch(EndingGameException ex){
+                            //TODO disconnect
+                        }
+                    }
+                    numAction++;
+                }
         }
+
     }
 
 
 
 
 }
+
+
+

@@ -30,6 +30,8 @@ public class Player implements Serializable {
     private LeaderCard[] leaderCards = new LeaderCard[2];
 
     private final LeaderCard[] activeLeaderCards = new LeaderCard[2];
+
+    private final boolean[] leaderProductionActivated = new boolean[2];
     /**
      * This attribute represents player's nickname
      */
@@ -292,5 +294,25 @@ public class Player implements Serializable {
 
     public void setLast() {
         this.isLast = true;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public boolean[] getLeaderProductionActivated() {
+        return leaderProductionActivated;
+    }
+
+    public void setLeaderProductionActivated(int i) {
+        leaderProductionActivated[i] = true;
+    }
+
+    public void endTurn() {
+        actionDone = false;
+        leaderProductionActivated[0] = false;
+        leaderProductionActivated[1] = false;
+        productionsActivated = 0;
+        personalBoard.getProdCardSlot().resetProductions();
     }
 }

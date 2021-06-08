@@ -6,44 +6,149 @@ import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
 
 public class ActiveLeaderCardsDraw {
-    public static void drawActiveLeaderCards(Player player ){
+    public static void drawActiveLeaderCards(LeaderCard[] cardsArray){
         String resetEscape = Color.ANSI_RESET.escape();
-        LeaderCard[] cardsArray = new LeaderCard[2];
-        cardsArray=player.getActiveLeaderCards();
-        System.out.print(resetEscape + "FIRST CARD");
-        System.out.print("\n");
-        System.out.print(resetEscape + "Required Resources: ");
-        drawReqRes(player, 0);
-        System.out.print("\n");
-        System.out.print(resetEscape + "Required Cards: ");
-        drawReqCards(player, 0);
-        System.out.print("\n");
-        System.out.print(resetEscape + "Ability: ");
-        abilityPrinter(player, 0);
-        System.out.print("\n");
-        System.out.print(resetEscape + "Leader Resource: ");
-        drawRes(player, 0);
-        System.out.print("\n");
-        int WP = player.getActiveLeaderCards()[0].getWp();
-        System.out.print(resetEscape + "Win Points: " + WP);
-        System.out.print("\n");
-        System.out.print(resetEscape + "SECOND CARD");
-        System.out.print("\n");
-        System.out.print(resetEscape + "Required Resources: ");
-        drawReqRes(player, 1);
-        System.out.print("\n");
-        System.out.print(resetEscape + "Required Cards: ");
-        drawReqCards(player, 1);
-        System.out.print("\n");
-        System.out.print(resetEscape + "Ability: ");
-        abilityPrinter(player, 1);
-        System.out.print("\n");
-        System.out.print(resetEscape + "Leader Resource: ");
-        drawRes(player, 1);
-        System.out.print("\n");
-        int WP2 = player.getActiveLeaderCards()[1].getWp();
-        System.out.print(resetEscape + "Win Points: " + WP2);
-        System.out.print("\n");
+        if (cardsArray.length==2) {
+            if (cardsArray[0] == null) {
+                System.out.print(resetEscape + "NO LEADER CARDS TO DISPLAY");
+                System.out.print("\n");
+                return;
+            }
+            if (cardsArray[1] == null) {
+                System.out.print("\n");
+                System.out.print(resetEscape + "FIRST CARD");
+                System.out.print("\n");
+                System.out.print(resetEscape + "Required Resources: ");
+                drawReqRes(cardsArray, 0);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Required Cards: ");
+                drawReqCards(cardsArray, 0);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Ability: ");
+                abilityPrinter(cardsArray, 0);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Leader Resource: ");
+                drawRes(cardsArray, 0);
+                System.out.print("\n");
+                int WP = cardsArray[0].getWp();
+                System.out.print(resetEscape + "Win Points: " + WP);
+                System.out.print("\n");
+                return;
+            }
+            else {
+                System.out.print("\n");
+                System.out.print(resetEscape + "FIRST CARD");
+                System.out.print("\n");
+                System.out.print(resetEscape + "Required Resources: ");
+                drawReqRes(cardsArray, 0);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Required Cards: ");
+                drawReqCards(cardsArray, 0);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Ability: ");
+                abilityPrinter(cardsArray, 0);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Leader Resource: ");
+                drawRes(cardsArray, 0);
+                System.out.print("\n");
+                int WP = cardsArray[0].getWp();
+                System.out.print(resetEscape + "Win Points: " + WP);
+                System.out.print("\n");
+                System.out.print("\n");
+                System.out.print(resetEscape + "SECOND CARD");
+                System.out.print("\n");
+                System.out.print(resetEscape + "Required Resources: ");
+                drawReqRes(cardsArray, 1);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Required Cards: ");
+                drawReqCards(cardsArray, 1);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Ability: ");
+                abilityPrinter(cardsArray, 1);
+                System.out.print("\n");
+                System.out.print(resetEscape + "Leader Resource: ");
+                drawRes(cardsArray, 1);
+                System.out.print("\n");
+                int WP2 = cardsArray[1].getWp();
+                System.out.print(resetEscape + "Win Points: " + WP2);
+                System.out.print("\n");
+            }
+        }
+
+        if (cardsArray.length==4){
+            System.out.print("\n");
+            System.out.print(resetEscape + "FIRST CARD");
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Resources: ");
+            drawReqRes(cardsArray, 0);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Cards: ");
+            drawReqCards(cardsArray, 0);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Ability: ");
+            abilityPrinter(cardsArray, 0);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Leader Resource: ");
+            drawRes(cardsArray, 0);
+            System.out.print("\n");
+            int WP = cardsArray[0].getWp();
+            System.out.print(resetEscape + "Win Points: " + WP);
+            System.out.print("\n");
+            System.out.print("\n");
+            System.out.print(resetEscape + "SECOND CARD");
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Resources: ");
+            drawReqRes(cardsArray, 1);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Cards: ");
+            drawReqCards(cardsArray, 1);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Ability: ");
+            abilityPrinter(cardsArray, 1);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Leader Resource: ");
+            drawRes(cardsArray, 1);
+            System.out.print("\n");
+            int WP2 = cardsArray[1].getWp();
+            System.out.print(resetEscape + "Win Points: " + WP2);
+            System.out.print("\n");
+            System.out.print("\n");
+            System.out.print(resetEscape + "THIRD CARD");
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Resources: ");
+            drawReqRes(cardsArray, 2);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Cards: ");
+            drawReqCards(cardsArray, 2);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Ability: ");
+            abilityPrinter(cardsArray, 2);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Leader Resource: ");
+            drawRes(cardsArray, 2);
+            System.out.print("\n");
+            int WP3 = cardsArray[2].getWp();
+            System.out.print(resetEscape + "Win Points: " + WP3);
+            System.out.print("\n");
+            System.out.print("\n");
+            System.out.print(resetEscape + "FOURTH CARD");
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Resources: ");
+            drawReqRes(cardsArray, 3);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Required Cards: ");
+            drawReqCards(cardsArray, 3);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Ability: ");
+            abilityPrinter(cardsArray, 3);
+            System.out.print("\n");
+            System.out.print(resetEscape + "Leader Resource: ");
+            drawRes(cardsArray, 3);
+            System.out.print("\n");
+            int WP4 = cardsArray[3].getWp();
+            System.out.print(resetEscape + "Win Points: " + WP4);
+            System.out.print("\n");
+        }
     }
 
     public static void abilityPrinter(Player player, int index){
@@ -66,19 +171,19 @@ public class ActiveLeaderCardsDraw {
         LeaderCard[] arrayCards = player.getActiveLeaderCards();
         switch (arrayCards[index].getAbility()) {
             case 0: {
-                Resource disc = ((LeaderOfDiscounts) arrayCards[index]).getDiscountedRes();
+                Resource disc = ((LeaderOfDiscounts) cardsArray[index]).getDiscountedRes();
                 switchCases(resetEscape, disc);
             }
             case 1: {
-                Resource dep = ((LeaderOfDepots) arrayCards[index]).getResource();
+                Resource dep = ((LeaderOfDepots) cardsArray[index]).getResource();
                 switchCases(resetEscape, dep);
             }
             case 2: {
-                Resource conv = ((LeaderOfConversions) arrayCards[index]).getConvertedResource();
+                Resource conv = ((LeaderOfConversions) cardsArray[index]).getConvertedResource();
                 switchCases(resetEscape, conv);
             }
             case 3: {
-                Resource prod = ((LeaderOfProductions) arrayCards[index]).getRequiredResource();
+                Resource prod = ((LeaderOfProductions) cardsArray[index]).getRequiredResource();
                 switchCases(resetEscape, prod);
             }
         }
@@ -105,8 +210,8 @@ public class ActiveLeaderCardsDraw {
 
     public static void drawReqRes(Player player, int index){
         String resetEscape = Color.ANSI_RESET.escape();
-        Resource reqRes[] = player.getActiveLeaderCards()[index].getRequiredRes();
-        int reqRess[] = new int[10];
+        Resource[] reqRes = cardsArray[index].getRequiredRes();
+        int[] reqRess = new int[10];
         int coins = 0;
         int stones = 0;
         int servants = 0;
@@ -144,8 +249,8 @@ public class ActiveLeaderCardsDraw {
 
     public static void drawReqCards(Player player, int index){
         String resetEscape = Color.ANSI_RESET.escape();
-        int reqType[] = player.getActiveLeaderCards()[index].getRequiredType();
-        int reqLevel[] = player.getActiveLeaderCards()[index].getRequiredLevel();
+        int[] reqType = cardsArray[index].getRequiredType();
+        int[] reqLevel = cardsArray[index].getRequiredLevel();
         for (int i: reqType){
             System.out.print(Color.ANSI_CYAN.escape() + "t" + reqType[i] + "l" + reqLevel[i] + ", " + resetEscape);
         }

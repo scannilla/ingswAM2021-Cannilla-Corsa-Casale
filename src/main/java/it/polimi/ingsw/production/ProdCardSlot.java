@@ -118,4 +118,10 @@ public class ProdCardSlot implements Serializable {
             throw new IllegalArgumentException();
         productionActivated[position-1] = true;
     }
+
+    public void resetProductions() {
+        for (int i = 0; i < 3; i++) {
+            productionActivated[i] = false;
+        }
+    }
 }

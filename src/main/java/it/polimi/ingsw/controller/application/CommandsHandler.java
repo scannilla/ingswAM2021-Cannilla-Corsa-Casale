@@ -75,8 +75,8 @@ public class CommandsHandler {
                 }
                 return "ko";
             case GAME_PHASE:
-                if(!player.isActive()) {
-                    mHandler.sendMessageToClient("Wait for you turn");
+                if(!player.isActive() && !cmd[0].equals("view")) {
+                    mHandler.sendMessageToClient("Wait for you turn, in the meanwhile you can call only view methods");
                     return "ok";
                 }
                 Command c = GSON.commandParser(cmd[1]);
@@ -91,7 +91,8 @@ public class CommandsHandler {
                 else if (returnValue.contains("$")) {
                     RequiredClientActions r = new RequiredClientActions(c, player, mHandler);
                     r.execute(returnValue.replace("$",""));
-                }
+                } else
+                    return returnValue;
                 return "ko";
             case END:
             case UNKNOWN:

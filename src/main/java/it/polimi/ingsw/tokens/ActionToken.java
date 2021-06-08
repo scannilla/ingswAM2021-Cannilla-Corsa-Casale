@@ -41,7 +41,7 @@ public class ActionToken {
                     break;
             case 4: lorenzo.increaseFaith(2);
                     break;
-            case 5: lorenzo.increaseFaith(3);
+            case 5: lorenzo.increaseFaith(1);
                     break;
         }
         if(action>3)

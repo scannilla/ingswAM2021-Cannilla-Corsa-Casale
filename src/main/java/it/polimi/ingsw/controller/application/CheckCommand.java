@@ -93,6 +93,7 @@ public class CheckCommand {
      */
     public static String commandChecker (String[] acceptedCommands, String givenCommand, MessageHandler mHandler) throws EndingGameException {
         String allCommands = "Please insert one of the following commands: ";
+        givenCommand = givenCommand.replace(" ","");
         for(String s : acceptedCommands) {
             if (givenCommand.equalsIgnoreCase(s.replace(" ", "")))
                 return givenCommand;

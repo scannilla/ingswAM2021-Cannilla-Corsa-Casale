@@ -7,6 +7,7 @@ import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderOfConversions;
 import it.polimi.ingsw.leader.LeaderOfDepots;
+import it.polimi.ingsw.leader.LeaderOfProductions;
 import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.resources.Resource;
 
@@ -70,6 +71,10 @@ public class RequiredClientActions {
                     player.setActionDone(true);
                     standardProduction();
                     EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
+                    break;
+
+                case "leaderprod":
+                    leaderProduction();
                     break;
             }
         } catch (EndingGameException e) {
@@ -169,7 +174,7 @@ public class RequiredClientActions {
                     if(((LeaderOfDepots)player.getActiveLeaderCards()[0]).getResource().equals(costArray[i])) {
                         try {
                             ((LeaderOfDepots) player.getActiveLeaderCards()[0]).useResource(costArray[i]);
-                           costArray[i] = null;
+                            costArray[i] = null;
                             done = true;
                         } catch (IllegalArgumentException e){
                             try {
@@ -178,7 +183,7 @@ public class RequiredClientActions {
                                 endingGameException.printStackTrace();
                             }
                         }
-                        }
+                    }
                 }
                 if (player.getActiveLeaderCards()[1] != null && player.getActiveLeaderCards()[1].getAbility() == 1 && !done) {
                     if(((LeaderOfDepots)player.getActiveLeaderCards()[1]).getResource().equals(costArray[i])) {
@@ -271,7 +276,7 @@ public class RequiredClientActions {
                     case "warehousedepot":
                         mHandler.sendMessageToClient("select a line to insert the resource into");
                         String chosenColumn=mHandler.readClientMessage();
-                        int column = CheckCommand.checkNumber(mHandler.readClientMessage(),  mHandler);
+                        int column = CheckCommand.checkNumber(chosenColumn,  mHandler);
                         try {
                             player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column);
                             return;
@@ -313,7 +318,7 @@ public class RequiredClientActions {
                             do {
                                 mHandler.sendMessageToClient("Choose if you want to insert this resource either in the first card or the second card");
                                 String select =  mHandler.readClientMessage();
-                                chosenCard = CheckCommand.checkNumber( mHandler.readClientMessage(),  mHandler);
+                                chosenCard = CheckCommand.checkNumber(select,  mHandler);
                             } while (chosenCard != 1 && chosenCard!=2);
                             ((LeaderOfDepots) player.getActiveLeaderCards()[chosenCard-1]).addNewResource(res);
                         }
@@ -480,7 +485,7 @@ public class RequiredClientActions {
     }
 
     private void standardProduction() throws EndingGameException {
-        mHandler.sendMessageToClient("You can activate the standard production, select where you want tot take the resources from");
+        mHandler.sendMessageToClient("You can activate the standard production, select where you want to take the resources from");
         int givenRes = 0;
         do {
 
@@ -515,6 +520,30 @@ public class RequiredClientActions {
         } while (true);
         EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
         mHandler.sendMessageToClient("Standard production finished");
+    }
+
+    private void leaderProduction() throws EndingGameException{
+        LeaderOfProductions chosenCard = (LeaderOfProductions)player.getActiveLeaderCards()[Integer.parseInt(parameters[0])];
+        mHandler.sendMessageToClient("You can activate this production");
+        Resource[] requiredRes = new Resource[1];
+        requiredRes[0] = chosenCard.getRequiredResource();
+        do {
+            mHandler.sendMessageToClient("Select where you want to take the required resource from");
+            String selectedDepot = mHandler.readClientMessage();
+            selectedDepot = CheckCommand.commandChecker(new String[]{"warehouse depot", "extra depot"}, selectedDepot, mHandler);
+            if (selectedDepot.equals("warehousedepot")) {
+                useWarehouseResource(requiredRes, chosenCard.getRequiredResource().toString());
+            }
+            else
+                useExtraDepotResource(requiredRes, chosenCard.getRequiredResource());
+        } while (requiredRes[0]!=null);
+        mHandler.sendMessageToClient("Faith increased, select now the resource you want");
+        player.increaseFaith(1);
+        String chosenResource = CheckCommand.commandChecker(new String[] {"Coin", "Stone", "Servant", "Shield"}, mHandler.readClientMessage(), mHandler);
+        Resource resource = new Resource(chosenResource);
+        player.getPersonalBoard().getStrongbox().insertNewResource(resource);
+        mHandler.sendMessageToClient("Production activated!");
+        EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
     }
 
 }

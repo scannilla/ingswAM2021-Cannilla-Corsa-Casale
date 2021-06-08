@@ -27,7 +27,7 @@ public class SPGameProtocol implements Runnable{
         String command;
         String jsonString;
         String returnValue;
-
+        createListeners();
         while(true) {
             command = handler.readClientMessage();
             jsonString = createCommand(command);

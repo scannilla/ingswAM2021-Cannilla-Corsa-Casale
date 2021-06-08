@@ -4,6 +4,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderOfDepots;
+import it.polimi.ingsw.leader.LeaderOfProductions;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
@@ -61,8 +62,15 @@ public class Command{
 
             case "standardproduction":
                 return standardProduction();
+
             case "endturn":
                 return "end";
+
+            case "leaderproduction":
+                return leaderProduction();
+
+            case "view":
+                return view();
 
             default:
                 return "no such command";
@@ -326,6 +334,86 @@ public class Command{
         return "Not enough resources to activate standard production";
     }
 
+    private String leaderProduction() {
+        boolean found = false;
+        int chosenCard;
+        try {
+            chosenCard = parseInt(parameters[0]);
+        } catch (NumberFormatException e) {
+            return "Not a number";
+        }
+        if(chosenCard!=1 && chosenCard!=2)
+            return "Index out of bounds";
+        if(commandPlayer.getActiveLeaderCards()[chosenCard-1]==null || commandPlayer.getActiveLeaderCards()[chosenCard-1].getAbility()!=3)
+            return "Not a valid leader of productions card";
+        if(commandPlayer.getLeaderProductionActivated()[chosenCard-1])
+            return "You have already activated this production during this turn";
+        Resource requested = ((LeaderOfProductions)commandPlayer.getActiveLeaderCards()[chosenCard-1]).getRequiredResource();
+        for (int i = 0; i < 3; i++) {
+            if(requested.equals(commandPlayer.getPersonalBoard().getWarehouseDepot().checkResource(i)))
+                found = true;
+        }
+        if(!found) {
+            int depot = CheckCommand.leaderCardChecker("depot", commandPlayer);
+            if(depot!=0)
+                if(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[depot-1]).getResource().equals(requested) &&
+                        ((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[depot-1]).getExtraDepot()[0]!=null)
+                    found=true;
+        }
+        if(found) {
+            commandPlayer.setLeaderProductionActivated(chosenCard-1);
+            return "$leaderprod";
 
+        }
+        else
+            return "You don't have the required resource to activate this production";
+    }
+
+    private String view() {
+        String[] viewMethods = {"card market", "market", "personal board", "leader cards"};
+        if(!CheckCommand.commandChecker(viewMethods, parameters[0]))
+            return "not a valid parameter";
+        switch (parameters[0]) {
+            case "card market":
+            case "cardmarket":
+                EventManager.notifyListener(EventType.CARDMARKET, commandPlayer.getConnectedGame().getCardsMarket(), commandPlayer.getNickname());
+                break;
+            case "market":
+                EventManager.notifyListener(EventType.MARKET, commandPlayer.getConnectedGame().getMarket(), commandPlayer.getNickname());
+                break;
+            case "personal board":
+            case "personalboard":
+                int player;
+                try {
+                    player = parseInt(parameters[1]);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    EventManager.notifyListener(EventType.PERSONALBOARD, commandPlayer.getPersonalBoard(), commandPlayer.getNickname());
+                    break;
+                }
+                if(player<1 || player>4)
+                    return "Not a valid player";
+                EventManager.notifyListener(EventType.PERSONALBOARD, commandPlayer.getConnectedGame().getPlayers().get(player-1).getPersonalBoard(), commandPlayer.getNickname());
+                break;
+            case "leader cards":
+            case "leadercards":
+                int pl;
+                try {
+                    pl = parseInt(parameters[1]);
+                } catch (NumberFormatException | IndexOutOfBoundsException e1) {
+                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getActiveLeaderCards(), commandPlayer.getNickname());
+                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getLeaderCards(), commandPlayer.getNickname());
+                    break;
+                }
+                if(pl == commandPlayer.getConnectedGame().getPlayers().indexOf(commandPlayer)) {
+                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getActiveLeaderCards(), commandPlayer.getNickname());
+                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getLeaderCards(), commandPlayer.getNickname());
+                } else if(pl>0 && pl <4) {
+                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getConnectedGame().getPlayers().get(pl).getActiveLeaderCards());
+                } else
+                    return "Not a valid player";
+
+        }
+        return "printed";
+    }
 
 }

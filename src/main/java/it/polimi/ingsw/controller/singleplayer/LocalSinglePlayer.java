@@ -53,8 +53,4 @@ public class LocalSinglePlayer {
             }
         } while (nickname.isBlank() || nickname.isEmpty() || nickname.equals("lorenzothemagnificent"));
     }
-
-    private static void gameProtocol() {
-
-    }
 }

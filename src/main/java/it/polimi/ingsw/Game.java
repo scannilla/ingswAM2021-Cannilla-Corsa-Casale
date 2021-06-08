@@ -202,6 +202,7 @@ public class Game implements Serializable{
         if(activePlayer.isLast())
             throw new RuntimeException();
         activePlayer.setActive(false);
+        activePlayer.endTurn();
         if(numberOfPlayers==1) {
             lorenzoTurn();
         }
@@ -215,5 +216,7 @@ public class Game implements Serializable{
         ActionToken token = actionTokensPile.popToken();
         token.activateAction(this, lorenzo);
     }
+
+
 
 }

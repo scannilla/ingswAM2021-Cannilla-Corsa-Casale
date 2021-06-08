@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller.networkclient;
 
 import it.polimi.ingsw.PersonalBoard;
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cli.ActiveLeaderCardsDraw;
 import it.polimi.ingsw.cli.MarketDraw;
 import it.polimi.ingsw.cli.PersonalBoardDraw;
@@ -9,6 +8,7 @@ import it.polimi.ingsw.cli.ProdCardsMarketDraw;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
+import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
 
@@ -73,7 +73,7 @@ public class ClientListener implements Runnable{
                 PersonalBoardDraw.drawPB(personalBoard);
                 break;
             case 23:
-                ActiveLeaderCardsDraw.drawActiveLeaderCards((Player)obj.getObj());
+                ActiveLeaderCardsDraw.drawActiveLeaderCards((LeaderCard[]) obj.getObj());
                 break;
         }
     }

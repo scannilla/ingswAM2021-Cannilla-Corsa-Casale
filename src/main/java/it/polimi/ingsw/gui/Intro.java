@@ -12,13 +12,14 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.controller.singleplayer.SPGameProtocol;
 import it.polimi.ingsw.controller.singleplayer.SPMessageHandler;
 
 public class Intro extends JPanel implements ActionListener {
 
     private final JButton local;
     private final JButton multi;
-    private final ClientMessageHandler handler;
+    private ClientMessageHandler handler;
 
 
     public Intro(ClientMessageHandler handler){
@@ -74,15 +75,28 @@ public class Intro extends JPanel implements ActionListener {
                 endingGameException.printStackTrace();
             }
             if (received.getMessage().equals("ok")){
+                try{
+                    handler.sendMessageToServer("choose players");
+                } catch (EndingGameException ex){
+                    //TODO disconnect
+                }
+            if(received.getMessage().equals("ok")){
                 Main.frame.remove(this);
                 Main.frame.add(new Multi(handler));
                 Main.frame.revalidate();
+            } else if (received.getMessage().equals("ko")) {
+                String error = received.getMessage();
+                Main.frame.add(new Error(error));
+                Main.frame.revalidate();
+                Main.frame.repaint();
+            }
             }
 
 
         } else if (e.getSource() == local){
+
             Main.frame.remove(this);
-            Main.frame.add(new Local());
+            //Main.frame.add(new Local());
             Main.frame.revalidate();
 
         }

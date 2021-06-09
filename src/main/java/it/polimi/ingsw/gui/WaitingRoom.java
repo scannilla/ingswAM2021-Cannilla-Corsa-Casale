@@ -12,17 +12,13 @@ import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 public class WaitingRoom extends JPanel implements ActionListener {
 
 
-private final JButton prova;
+
 private final int numOfPlayer;
 private final ClientMessageHandler handler;
 
     public WaitingRoom(int numOfPlayer, ClientMessageHandler handler){
         this.numOfPlayer = numOfPlayer;
         this.handler = handler;
-        prova = new JButton("prova");
-        prova.setBounds(200, 500, 10, 10);
-        this.add(prova);
-        prova.addActionListener(this);
         this.setLayout(null);
         this.setSize(800, 800);
         this.setVisible(true);
@@ -38,7 +34,7 @@ private final ClientMessageHandler handler;
     public void actionPerformed(ActionEvent e) {
         Message received = null;
         try {
-            handler.sendMessageToServer("setup game", 1);
+            handler.sendMessageToServer("setup game");
         } catch (EndingGameException endingGameException) {
             //TODO disconnect
         }
@@ -55,4 +51,9 @@ private final ClientMessageHandler handler;
 
 
     }
+
+    private void setProgressBar(){
+
+    }
+
 }

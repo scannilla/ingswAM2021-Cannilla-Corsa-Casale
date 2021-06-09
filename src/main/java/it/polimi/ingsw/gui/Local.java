@@ -12,9 +12,10 @@ public class Local extends JPanel implements ActionListener {
 
     private final JButton startGame;
     private final JButton goBack;
+    private final SPMessageHandler spHandler;
 
-    public Local(){
-
+    public Local(SPMessageHandler spHandler){
+        this.spHandler = spHandler;
         startGame = new JButton("Start Game");
         goBack = new JButton("Go Back");
         startGame.setBounds(50, 300, 200, 50);
@@ -45,7 +46,7 @@ public class Local extends JPanel implements ActionListener {
             //TODO
         } else if (e.getSource() == goBack){
             Main.frame.remove(this);
-            Main.frame.add(new Intro());
+            //Main.frame.add(new Intro());
             Main.frame.revalidate();
         }
     }

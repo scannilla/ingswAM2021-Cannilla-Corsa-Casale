@@ -10,7 +10,7 @@ import java.net.Socket;
 public class Main{
     public static JFrame frame;
 
-    public static void main(String[] args){
+    public static void main(){
 
         /*
         JPanel currentPanel = new Intro();

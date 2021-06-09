@@ -1,8 +1,8 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -178,9 +178,9 @@ public class WaitingTurn extends JPanel implements ActionListener {
                 //TODO disconnect
             }
         } else if(e.getSource() == goAhead){
-            Main.frame.remove(this);
-            Main.frame.add(new Turn(handler));
-            Main.frame.revalidate();
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Turn(handler));
+            MainGUI.frame.revalidate();
         }
 
     }

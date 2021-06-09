@@ -1,10 +1,11 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import it.polimi.ingsw.Game;
+import it.polimi.ingsw.gui.MainGUI;
 
 public class GameOver extends JPanel implements ActionListener {
 
@@ -56,9 +57,9 @@ public class GameOver extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
             if(e.getSource() == exit){
-                Main.frame.remove(this);
+                MainGUI.frame.remove(this);
                 //Main.frame.add(new Intro());
-                Main.frame.revalidate();
+                MainGUI.frame.revalidate();
             }
     }
 }

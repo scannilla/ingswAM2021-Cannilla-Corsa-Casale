@@ -16,17 +16,19 @@ public class LocalSinglePlayer {
     private final static Game game = new Game();
 
 
-    public void singlePlayer() {
-        System.out.println("Local mode: single player only, you will play against Lorenzo the Magnificent himself");
-        try {
-            askForNickname();
-        } catch (EndingGameException e) {
-            return;
-        }
-        try {
-            gameCreator();
-        } catch (EndingGameException e) {
-            return;
+    public void singlePlayer(boolean gui) {
+        if(!gui) {
+            System.out.println("Local mode: single player only, you will play against Lorenzo the Magnificent himself");
+            try {
+                askForNickname();
+            } catch (EndingGameException e) {
+                return;
+            }
+            try {
+                gameCreator();
+            } catch (EndingGameException e) {
+                return;
+            }
         }
         new Thread(new SPGameProtocol(game.getPlayers().get(0))).start();
     }

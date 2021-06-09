@@ -1,7 +1,8 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,9 +56,9 @@ public class PreGameLeader extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         chooseLeader(e);
-        Main.frame.remove(this);
-        Main.frame.add(new WaitingTurn(handler));
-        Main.frame.revalidate();
+        MainGUI.frame.remove(this);
+        MainGUI.frame.add(new WaitingTurn(handler));
+        MainGUI.frame.revalidate();
     }
 
 public void chooseLeader(ActionEvent e){

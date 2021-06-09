@@ -1,14 +1,14 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.charset.StandardCharsets;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
 
 
 public class Multi extends JPanel implements ActionListener {
@@ -62,13 +62,13 @@ public class Multi extends JPanel implements ActionListener {
                 //TODO disconnect
             }
             if (received.getMessage().equals("ok")) {
-                Main.frame.remove(this);
-                Main.frame.add(new WaitingRoom(2, handler));
-                Main.frame.revalidate();
-                Main.frame.repaint();
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new WaitingRoom(2, handler));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             } else if (received.getMessage().equals("ko")){
                 String error = received.getMessage();
-                Main.frame.add(new Error(error));
+                MainGUI.frame.add(new Error(error));
             }
         } else if (e.getSource() == three) {
             try {
@@ -82,12 +82,12 @@ public class Multi extends JPanel implements ActionListener {
                 //TODO disconnect
             }
             if (received.getMessage().equals("ok")) {
-                Main.frame.remove(this);
-                Main.frame.add(new WaitingRoom(3, handler));
-                Main.frame.revalidate();
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new WaitingRoom(3, handler));
+                MainGUI.frame.revalidate();
             } else if (received.getMessage().equals("ko")){
                 String error = received.getMessage();
-                Main.frame.add(new Error(error));
+                MainGUI.frame.add(new Error(error));
             }
         } else if (e.getSource() == four) {
 
@@ -102,12 +102,12 @@ public class Multi extends JPanel implements ActionListener {
                 //TODO disconnect
             }
             if (received.getMessage().equals("ok")) {
-                Main.frame.remove(this);
-                Main.frame.add(new WaitingRoom(4, handler));
-                Main.frame.revalidate();
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new WaitingRoom(4, handler));
+                MainGUI.frame.revalidate();
             } else if (received.getMessage().equals("ko")) {
                 String error = received.getMessage();
-                Main.frame.add(new Error(error));
+                MainGUI.frame.add(new Error(error));
             }
         } else if (e.getSource() == one) {
             try {
@@ -121,10 +121,10 @@ public class Multi extends JPanel implements ActionListener {
                 //TODO disconnect
             }
             if (received.getMessage().equals("ok")) {
-                Main.frame.remove(this);
-                Main.frame.add(new WaitingRoom(1, handler));
-                Main.frame.revalidate();
-                Main.frame.repaint();
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new WaitingRoom(1, handler));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
 
 

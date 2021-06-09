@@ -1,4 +1,4 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,7 @@ import java.io.InputStream;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.gui.MainGUI;
 
 
 public class PreGameRes extends JPanel implements ActionListener {
@@ -100,9 +101,9 @@ public class PreGameRes extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         chooseResource(e);
-        Main.frame.remove(this);
-        Main.frame.add(new PreGameLeader(handler));
-        Main.frame.revalidate();
+        MainGUI.frame.remove(this);
+        MainGUI.frame.add(new PreGameLeader(handler));
+        MainGUI.frame.revalidate();
     }
 
     public void chooseResource(ActionEvent e){

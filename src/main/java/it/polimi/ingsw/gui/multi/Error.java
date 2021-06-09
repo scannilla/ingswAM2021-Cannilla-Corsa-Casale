@@ -1,4 +1,4 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

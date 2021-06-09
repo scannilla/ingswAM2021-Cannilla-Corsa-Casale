@@ -1,13 +1,13 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import it.polimi.ingsw.Game;
-import it.polimi.ingsw.Player;
+
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
 
 public class WaitingRoom extends JPanel implements ActionListener {
 
@@ -15,6 +15,7 @@ public class WaitingRoom extends JPanel implements ActionListener {
 
 private final int numOfPlayer;
 private final ClientMessageHandler handler;
+
 
     public WaitingRoom(int numOfPlayer, ClientMessageHandler handler){
         this.numOfPlayer = numOfPlayer;
@@ -32,28 +33,27 @@ private final ClientMessageHandler handler;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Message received = null;
+        ObjectMessage receivedMarket = null;
+        ObjectMessage receivedProdMarket = null;
         try {
             handler.sendMessageToServer("setup game");
         } catch (EndingGameException endingGameException) {
             //TODO disconnect
         }
         try {
-            received = handler.readMessage();
+            receivedMarket = (ObjectMessage) handler.readMessage();
+            receivedProdMarket = (ObjectMessage) handler.readMessage();
         } catch (EndingGameException endingGameException) {
             //TODO disconnect
         }
-        if(received.getMessage().equals("ok")){
-            Main.frame.remove(this);
-            Main.frame.add(new PreGameRes(handler));
-            Main.frame.revalidate();
+        if(receivedMarket.getMessage().equals("object")){
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new PreGameRes(handler));
+            MainGUI.frame.revalidate();
         }
 
 
     }
 
-    private void setProgressBar(){
-
-    }
 
 }

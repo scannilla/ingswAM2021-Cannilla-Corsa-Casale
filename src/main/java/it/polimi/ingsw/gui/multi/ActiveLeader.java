@@ -1,7 +1,8 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,20 +43,21 @@ public class ActiveLeader extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == active1){
             try{
-                handler.sendMessageToServer("activate leader card 2", 1);
+                handler.sendMessageToServer("activate leader card 1", 1);
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
         } else if(e.getSource() == active2){
             try{
-                handler.sendMessageToServer("activate leader card 1", 1);
+                handler.sendMessageToServer("activate leader card 2", 1);
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
         } else if(e.getSource() == back){
-            Main.frame.remove(this);
-            Main.frame.add(new Turn(handler));
-            Main.frame.revalidate();
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Turn(handler));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
     }
 }

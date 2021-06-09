@@ -11,10 +11,12 @@ public class SPGameProtocol implements Runnable{
 
     private SPMessageHandler handler;
 
+
     private final Player player;
 
     public SPGameProtocol(Player player) {
         this.player = player;
+
         try {
             this.handler = new SPMessageHandler();
         } catch (EndingGameException e) {
@@ -29,28 +31,29 @@ public class SPGameProtocol implements Runnable{
         String returnValue;
         createListeners();
         while(true) {
-            command = handler.readClientMessage();
-            jsonString = createCommand(command);
-            Command c = GSON.commandParser(jsonString);
-            c.setCommandPlayer(player);
-            returnValue = c.executeCommand();
-            if(returnValue.equals("end")) {
-                try {
-                    player.getConnectedGame().endTurn();
-                } catch (RuntimeException | EndingGameException e) {
-                    System.out.println("Game Over");
+                command = handler.readClientMessage();
+                jsonString = createCommand(command);
+                Command c = GSON.commandParser(jsonString);
+                c.setCommandPlayer(player);
+                returnValue = c.executeCommand();
+                if (returnValue.equals("end")) {
+                    try {
+                        player.getConnectedGame().endTurn();
+                    } catch (RuntimeException | EndingGameException e) {
+                        System.out.println("Game Over");
+                    }
                 }
-            }
-            if(returnValue.contains("$")) {
-                try {
-                    new RequiredClientActions(c, player, handler).execute(returnValue.replace("$",""));
-                } catch (EndingGameException e) {
-                    e.printStackTrace();
-                    break;
-                    //change notification method
+                if (returnValue.contains("$")) {
+                    try {
+                        new RequiredClientActions(c, player, handler).execute(returnValue.replace("$", ""));
+                    } catch (EndingGameException e) {
+                        e.printStackTrace();
+                        break;
+                        //change notification method
+                    }
                 }
+
             }
-        }
     }
 
     private void createListeners() {

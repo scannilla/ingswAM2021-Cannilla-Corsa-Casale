@@ -1,7 +1,8 @@
-package it.polimi.ingsw.gui;
+package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,10 @@ import java.awt.event.ActionListener;
 public class Turn extends JPanel implements ActionListener {
     private JButton buyMarble, buyProd, activeLeader, activeProd, viewMyPB, viewPB1, viewPB2, viewPB3, viewMarketMarble, viewProdMarket, endTurn;
     private ClientMessageHandler handler;
+    private int numPlayer;
     public Turn(ClientMessageHandler handler){
         this.handler = handler;
-        int players = 3;
-
+        //TODO trovare come ottenere l'indice del player che si trova in Turn
         buyMarble = new JButton ("Buy marble");
         buyMarble.setBounds(10, 110, 180, 180);
         buyProd = new JButton("Buy production card");
@@ -31,7 +32,7 @@ public class Turn extends JPanel implements ActionListener {
         viewProdMarket.setBounds(410, 310, 380, 180);
         endTurn = new JButton("End turn");
         endTurn.setBounds(660, 710, 130, 80);
-        switch(players){
+        switch(numPlayer){
             case 1:  viewPB1 = new JButton("View Lorenzo's personal board");
                 viewPB1.setBounds(210, 510, 180, 180);
                 viewPB1.addActionListener(this);
@@ -97,65 +98,79 @@ public class Turn extends JPanel implements ActionListener {
 
     public void chooseAction(ActionEvent e){
         if (e.getSource() == buyMarble){
-            try {
-                handler.sendMessageToServer("buy marble", 1);
-            } catch(EndingGameException ex){
-                //TODO disconnect
-            }
+            MainGUI.frame.add(new BuyMarble(handler));
+            MainGUI.frame.remove(this);
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if(e.getSource() == buyProd){
-            try{
-                handler.sendMessageToServer("buy production card", 1);
-            } catch (EndingGameException ex){
-                //TODO disconnect
-            }
+            MainGUI.frame.add(new BuyProductionCard(handler));
+            MainGUI.frame.remove(this);
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if(e.getSource() == activeLeader){
-            try{
-                handler.sendMessageToServer("activate leader card", 1);
-            } catch (EndingGameException ex){
-                //TODO disconnect
-            }
+            MainGUI.frame.add(new ActiveLeader(handler));
+            MainGUI.frame.remove(this);
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if(e.getSource() == activeProd){
-            try{
-                handler.sendMessageToServer("activate production", 1);
-            } catch(EndingGameException ex){
-                //TODO disconnect
-            }
+            MainGUI.frame.add(new ActiveProduction(handler));
+            MainGUI.frame.remove(this);
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if(e.getSource() == viewMarketMarble){
             try{
-                handler.sendMessageToServer("show market marble", 1);
+                handler.sendMessageToServer("view market");
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new ShowMarketMarble(handler, true));
+            MainGUI.frame.revalidate();
         } else if(e.getSource() == viewProdMarket){
             try{
-                handler.sendMessageToServer("show production card market", 1);
+                handler.sendMessageToServer("view card market");
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new ShowProductionMarket(handler, true));
+            MainGUI.frame.revalidate();
         } else if(e.getSource() == viewMyPB){
             try{
-                handler.sendMessageToServer("show my personal board", 1);
+                handler.sendMessageToServer("view personal board");
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
+            MainGUI.frame.revalidate();
         } else if (e.getSource() == viewPB1){
             try{
-                handler.sendMessageToServer("show nickname personal board", 1);
+                handler.sendMessageToServer("show nickname personal board");
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
+            MainGUI.frame.revalidate();
         } else if(e.getSource() == viewPB2){
             try{
-                handler.sendMessageToServer("show production nickname personal board", 1);
+                handler.sendMessageToServer("view nickname personal board");
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
+            MainGUI.frame.revalidate();
         } else if(e.getSource() == viewPB3){
             try{
-                handler.sendMessageToServer("show production personal board", 1);
+                handler.sendMessageToServer("view nickname personal board");
             } catch (EndingGameException ex){
                 //TODO disconnect
             }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
+            MainGUI.frame.revalidate();
         } else if(e.getSource() == endTurn){
             try{
                 handler.sendMessageToServer("end turn", 1);

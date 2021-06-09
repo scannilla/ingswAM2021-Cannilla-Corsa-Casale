@@ -8,24 +8,34 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import it.polimi.ingsw.Game;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.networkclient.ClientListener;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
-import it.polimi.ingsw.controller.singleplayer.SPGameProtocol;
+import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
+import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.controller.singleplayer.SPMessageHandler;
+import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.gui.local.Local;
+import it.polimi.ingsw.gui.multi.Multi;
 
 public class Intro extends JPanel implements ActionListener {
 
     private final JButton local;
     private final JButton multi;
-    private ClientMessageHandler handler;
+    private final String hostName;
+    private final int portNumber;
+    private Socket clientSocket;
+    private SPClientMessageHandler spHandler;
 
 
-    public Intro(ClientMessageHandler handler){
-        this.handler = handler;
+    public Intro(String hostName, int portNumber) {
+        this.hostName = hostName;
+        this.portNumber = portNumber;
         local = new JButton("Play Local");
-        multi = new JButton("Play Multi");
+        multi = new JButton("Play Online");
         local.setBounds(50, 320, 100, 50);
         multi.setBounds(260, 320, 100, 50);
         multi.addActionListener(this);
@@ -41,13 +51,12 @@ public class Intro extends JPanel implements ActionListener {
     }
 
 
-
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         g.drawString("Welcome to Master of Renaissance", 100, 50);
         myDrawImagePNG(g);
     }
 
-    private void myDrawImagePNG(Graphics g){
+    private void myDrawImagePNG(Graphics g) {
         ClassLoader cl = this.getClass().getClassLoader();
         InputStream url = cl.getResourceAsStream("homepage.jpeg");
         BufferedImage img;
@@ -57,49 +66,46 @@ public class Intro extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 100,100, 200,200, null);
+        g.drawImage(img, 100, 100, 200, 200, null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Message received = null;
-        if(e.getSource() == multi) {
+        ClientMessageHandler cmHandler = null;
+        if (e.getSource() == multi) {
             try {
-                handler.sendMessageToServer("create game");
+                clientSocket = new Socket(hostName, portNumber);
+                cmHandler = new ClientMessageHandler(clientSocket);
+                new Thread(new ClientListener(cmHandler, true)).start();
+            } catch (UnknownHostException ex) {
+                System.err.println("Don't know about host " + hostName);
+                System.exit(1);
+            } catch (IOException ex) {
+                System.err.println("Couldn't get the I/O for the current host");
+                System.exit(1);
+            } catch (EndingGameException ex) {
+                System.err.println("Game over, disconnecting");
+                System.exit(1);
+            }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Multi(cmHandler));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
+
+        } else if(e.getSource()==local) {
+            new LocalSinglePlayer().singlePlayer(true);
+            try {
+                spHandler = new SPClientMessageHandler(new SPMessageHandler());
             } catch (EndingGameException endingGameException) {
                 endingGameException.printStackTrace();
             }
-            try {
-                received = handler.readMessage();
-            } catch (EndingGameException endingGameException) {
-                endingGameException.printStackTrace();
-            }
-            if (received.getMessage().equals("ok")){
-                try{
-                    handler.sendMessageToServer("choose players");
-                } catch (EndingGameException ex){
-                    //TODO disconnect
-                }
-            if(received.getMessage().equals("ok")){
-                Main.frame.remove(this);
-                Main.frame.add(new Multi(handler));
-                Main.frame.revalidate();
-            } else if (received.getMessage().equals("ko")) {
-                String error = received.getMessage();
-                Main.frame.add(new Error(error));
-                Main.frame.revalidate();
-                Main.frame.repaint();
-            }
-            }
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Local(spHandler));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
 
-
-        } else if (e.getSource() == local){
-
-            Main.frame.remove(this);
-            //Main.frame.add(new Local());
-            Main.frame.revalidate();
-
-        }
     }
+
+}
 }
 

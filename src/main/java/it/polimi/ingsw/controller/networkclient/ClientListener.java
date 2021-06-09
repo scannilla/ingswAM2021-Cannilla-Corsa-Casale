@@ -11,7 +11,6 @@ import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
-import it.polimi.ingsw.gui.Main;
 
 
 public class ClientListener implements Runnable{

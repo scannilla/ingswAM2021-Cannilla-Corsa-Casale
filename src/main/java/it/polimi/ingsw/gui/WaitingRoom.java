@@ -27,6 +27,7 @@ private final ClientMessageHandler handler;
         this.setSize(800, 800);
         this.setVisible(true);
         this.setBackground(Color.WHITE);
+
     }
 
     public void paint(Graphics g){

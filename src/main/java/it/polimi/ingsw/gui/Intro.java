@@ -78,9 +78,7 @@ public class Intro extends JPanel implements ActionListener {
                 Main.frame.add(new Multi(handler));
                 Main.frame.revalidate();
             }
-            if (received.getMessage().equals("ko")){
 
-            }
 
         } else if (e.getSource() == local){
             Main.frame.remove(this);

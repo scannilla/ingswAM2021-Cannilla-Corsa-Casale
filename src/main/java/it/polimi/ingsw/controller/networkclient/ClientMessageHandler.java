@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public final class ClientMessageHandler {
+public class ClientMessageHandler {
 
     private final ObjectInputStream in;
 
@@ -21,6 +21,11 @@ public final class ClientMessageHandler {
      * @throws EndingGameException e
      */
     public ClientMessageHandler(Socket clientSocket) throws EndingGameException {
+        if(clientSocket==null) {
+            in = null;
+            out = null;
+            return;
+        }
         try {
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             in = new ObjectInputStream(clientSocket.getInputStream());

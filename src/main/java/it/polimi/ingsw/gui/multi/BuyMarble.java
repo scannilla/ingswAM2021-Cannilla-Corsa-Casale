@@ -2,7 +2,10 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.marbles.MarketStructure;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,6 +18,7 @@ import java.io.InputStream;
 
 public class BuyMarble extends JPanel implements ActionListener {
 
+    private MarketStructure marketStructure;
     private final JButton column1, column2, column3, column4, line1, line2, line3, back;
     private ClientMessageHandler handler;
     public BuyMarble(ClientMessageHandler handler){
@@ -58,12 +62,81 @@ public class BuyMarble extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g){
-        for (int x = 100; x<400; x = x + 100){ //market marble
-            for (int j = 100; j < 300; j = j + 100){
+        marketStructure = Data.instanceCreator().getMarketStructure();
+        for (int x = 100; x<500; x = x + 100){ //market marble
+            for (int j = 100; j < 400; j = j + 100){
                 g.drawRect(x, j, 100, 100);
             }
         }
-    g.drawRect(550, 100, 100, 100); //out marble
+
+        for (int x=0; x<4; x++){
+            for (int j=0; j<4; j++){
+                myDrawImagePNG(g, x, j);
+            }
+        }
+        g.drawRect(550, 100, 100, 100); //out marble
+        myDrawImagePNG(g, 18, 0);
+    }
+
+    private void myDrawImagePNG(Graphics g, int x, int y) {
+        ClassLoader cl = this.getClass().getClassLoader();
+        int color = marketStructure.getMarketStructure()[x][y].getColor();
+        InputStream url = null;
+        if (x!=18) {
+            switch (color) {
+                case 0:  url = cl.getResourceAsStream("BigliaBianca.png");
+                    break;
+                case 1:  url = cl.getResourceAsStream("BigliaNera.png");
+                    break;
+                case 2:  url = cl.getResourceAsStream("BigliaAzzurra.png");
+                    break;
+                case 3:  url = cl.getResourceAsStream("BigliaGialla.png");
+                    break;
+                case 4:  url = cl.getResourceAsStream("BigliaViola.png");
+                    break;
+                case 5:  url = cl.getResourceAsStream("BigliaRossa.png");
+                    break;
+            }
+            BufferedImage img;
+            try {
+                img = ImageIO.read(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            g.drawImage(img, 100+(x*100), 100+(y*100), 100, 100, null);}
+
+        if (x==18){
+            int colorOut = marketStructure.getOutMarble().getColor();
+            switch (colorOut) {
+                case 0:
+                    url = cl.getResourceAsStream("BigliaBianca.png");
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("BigliaNera.png");
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("BigliaAzzurra.png");
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("BigliaGialla.png");
+                    break;
+                case 4:
+                    url = cl.getResourceAsStream("BigliaViola.png");
+                    break;
+                case 5:
+                    url = cl.getResourceAsStream("BigliaRossa.png");
+                    break;
+            }
+            BufferedImage img1;
+            try {
+                img1 = ImageIO.read(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            g.drawImage(img1, 550, 100, 100, 100, null);
+        }
     }
 
 
@@ -72,50 +145,72 @@ public class BuyMarble extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == line1){
             try{
-                handler.sendMessageToServer("buy marble line, 1");
+                handler.sendMessageToServer("buy marble -line -1", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == line2){
             try{
-                handler.sendMessageToServer("buy marble line, 2");
+                handler.sendMessageToServer("buy marble -line -2", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == line3){
             try{
-                handler.sendMessageToServer("buy marble line, 3");
+                handler.sendMessageToServer("buy marble -line -3", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == column1){
             try{
-                handler.sendMessageToServer("buy marble column, 1");
+                handler.sendMessageToServer("buy marble -column -1", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == column2){
             try{
-                handler.sendMessageToServer("buy marble column, 2");
+                handler.sendMessageToServer("buy marble -column -2", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == column3){
             try{
-                handler.sendMessageToServer("buy marble column, 3");
+                handler.sendMessageToServer("buy marble -column -3", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == column4){
             try{
-                handler.sendMessageToServer("buy marble column, 4");
+                handler.sendMessageToServer("buy marble -column -4", 166);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == back){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Turn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
     }
 }

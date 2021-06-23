@@ -1,8 +1,9 @@
 package it.polimi.ingsw.gui.local;
 
+import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
-import it.polimi.ingsw.controller.singleplayer.SPMessageHandler;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.gui.Intro;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,19 +13,15 @@ import java.awt.event.ActionListener;
 public class Local extends JPanel implements ActionListener {
 
     private final JButton startGame;
-    private final JButton goBack;
-    private final SPClientMessageHandler spHandler;
+    private final SPClientMessageHandler handler;
 
-    public Local(SPClientMessageHandler spHandler){
-        this.spHandler = spHandler;
+    public Local(SPClientMessageHandler handler){
+        this.handler = handler;
         startGame = new JButton("Start Game");
-        goBack = new JButton("Go Back");
-        startGame.setBounds(50, 300, 200, 50);
-        goBack.setBounds(400, 300, 200, 50);
+        startGame.setBounds(50, 300, 100, 50);
         startGame.addActionListener(this);
-        goBack.addActionListener(this);
         this.add(startGame);
-        this.add(goBack);
+
         this.setLayout(null);
         this.setSize(800, 800);
         this.setVisible(true);
@@ -43,12 +40,11 @@ public class Local extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == startGame){
-            //TODO
-        } else if (e.getSource() == goBack){
+        if(e.getSource() == startGame) {
             MainGUI.frame.remove(this);
-            //Main.frame.add(new Intro());
+            MainGUI.frame.add(new AskNickname(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
     }
 }

@@ -18,7 +18,9 @@ import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.controller.singleplayer.SPMessageHandler;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.gui.local.AskNickname;
 import it.polimi.ingsw.gui.local.Local;
+import it.polimi.ingsw.gui.multi.AskNicknameMulti;
 import it.polimi.ingsw.gui.multi.Multi;
 
 public class Intro extends JPanel implements ActionListener {
@@ -29,6 +31,7 @@ public class Intro extends JPanel implements ActionListener {
     private final int portNumber;
     private Socket clientSocket;
     private SPClientMessageHandler spHandler;
+
 
 
     public Intro(String hostName, int portNumber) {
@@ -46,8 +49,6 @@ public class Intro extends JPanel implements ActionListener {
         this.setSize(800, 800);
         this.setVisible(true);
         this.setBackground(Color.white);
-
-
     }
 
 
@@ -88,22 +89,14 @@ public class Intro extends JPanel implements ActionListener {
                 System.exit(1);
             }
             MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Multi(cmHandler));
+            MainGUI.frame.add(new AskNicknameMulti(cmHandler));
             MainGUI.frame.revalidate();
             MainGUI.frame.repaint();
-
         } else if(e.getSource()==local) {
-            new LocalSinglePlayer().singlePlayer(true);
-            try {
-                spHandler = new SPClientMessageHandler(new SPMessageHandler());
-            } catch (EndingGameException endingGameException) {
-                endingGameException.printStackTrace();
-            }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Local(spHandler));
             MainGUI.frame.revalidate();
             MainGUI.frame.repaint();
-
     }
 
 }

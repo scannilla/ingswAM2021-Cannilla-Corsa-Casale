@@ -43,9 +43,11 @@ public class ClientMain {
                 return;
             }
         }
+        if (!gui){ //if is CLI
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String read = "";
-        do {
+
+            do {
             System.out.println("Select if you want to play in local (single player only) or online (1-4 players)");
             try {
                 read = stdIn.readLine().toLowerCase().replace(" ","");
@@ -76,6 +78,7 @@ public class ClientMain {
                 System.err.println("Game over, disconnecting");
                 System.exit(1);
             }
+        }
         }
     }
 }

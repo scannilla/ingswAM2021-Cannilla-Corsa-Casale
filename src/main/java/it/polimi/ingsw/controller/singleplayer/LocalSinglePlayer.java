@@ -49,15 +49,16 @@ public class LocalSinglePlayer {
     }
 
     private static void askForNickname() throws EndingGameException {
-        System.out.println("Select a nickname");
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        do {
-            try {
-                nickname = stdIn.readLine().toLowerCase();
-            } catch (IOException e) {
-                System.err.println("Unable to read input");
-                throw new EndingGameException();
-            }
-        } while (nickname.isBlank() || nickname.isEmpty() || nickname.equals("lorenzothemagnificent"));
+            System.out.println("Select a nickname");
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+            do {
+                try {
+                    nickname = stdIn.readLine().toLowerCase();
+                } catch (IOException e) {
+                    System.err.println("Unable to read input");
+                    throw new EndingGameException();
+                }
+            } while (nickname.isBlank() || nickname.isEmpty() || nickname.equals("lorenzothemagnificent"));
+
     }
-}
+    }

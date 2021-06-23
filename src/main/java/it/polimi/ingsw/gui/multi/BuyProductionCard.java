@@ -2,7 +2,10 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.production.ProductionCardsMarket;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +14,7 @@ import java.awt.event.ActionListener;
 
 public class BuyProductionCard extends JPanel implements ActionListener {
 
+    private ProductionCardsMarket productionCardsMarket;
     private final JButton buy1, buy2, buy3, buy4, buy5, buy6, buy7, buy8, buy9, back;
     private ClientMessageHandler handler;
     public BuyProductionCard(ClientMessageHandler handler){
@@ -61,6 +65,7 @@ public class BuyProductionCard extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g){
+        productionCardsMarket = Data.instanceCreator().getProductionCardsMarket();
         for(int x = 50; x < 400; x = x + 150){
             for (int y = 50; y < 750; y = y + 250){
                 g.drawRect(x, y, 100, 200);
@@ -74,57 +79,84 @@ public class BuyProductionCard extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buy1){
             try{
-                handler.sendMessageToServer("buy production card 1, 1", 1);
+                handler.sendMessageToServer("buy production card -1 -1", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == buy2){
             try{
-                handler.sendMessageToServer("buy production card 1, 2", 1);
+                handler.sendMessageToServer("buy production card -1 -2", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy3){
             try{
-                handler.sendMessageToServer("buy production card 1, 3", 1);
+                handler.sendMessageToServer("buy production card -1 -3", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy4){
             try{
-                handler.sendMessageToServer("buy production card 2, 1", 1);
+                handler.sendMessageToServer("buy production card -2 -1", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy5){
             try{
-                handler.sendMessageToServer("buy production card 2, 2", 1);
+                handler.sendMessageToServer("buy production card -2 -2", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy6){
             try{
-                handler.sendMessageToServer("buy production card 2, 3", 1);
+                handler.sendMessageToServer("buy production card -2 -3", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy7){
             try{
-                handler.sendMessageToServer("buy production card 3, 1", 1);
+                handler.sendMessageToServer("buy production card -3 -1", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy8){
             try{
-                handler.sendMessageToServer("buy production card 3, 2", 1);
+                handler.sendMessageToServer("buy production card -3 -2", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }  else if(e.getSource() == buy9){
             try{
-                handler.sendMessageToServer("buy production card 3, 3", 1);
+                handler.sendMessageToServer("buy production card -3 -3", 167);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == back){
             MainGUI.frame.remove(this);

@@ -11,6 +11,7 @@ import java.io.InputStream;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
 
@@ -26,7 +27,10 @@ public class PreGameRes extends JPanel implements ActionListener {
         try {
             received = handler.readMessage();
         } catch (EndingGameException ex) {
-            //TODO disconnect
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Intro("error", 1));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
         if (!(received.getMessage().equals("You're the first player so you're not gonna receive any resource or faith point"))) {
             coinButton = new JButton("Select");
@@ -104,6 +108,7 @@ public class PreGameRes extends JPanel implements ActionListener {
         MainGUI.frame.remove(this);
         MainGUI.frame.add(new PreGameLeader(handler));
         MainGUI.frame.revalidate();
+        MainGUI.frame.repaint();
     }
 
     public void chooseResource(ActionEvent e){
@@ -114,27 +119,39 @@ public class PreGameRes extends JPanel implements ActionListener {
                 while(numAction!=1){
                     if(e.getSource()==coinButton){
                         try {
-                            handler.sendMessageToServer("coin", 1);
+                            handler.sendMessageToServer("coin", 160);
                         } catch(EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     } else if(e.getSource()==stoneButton){
                         try{
-                            handler.sendMessageToServer("stone", 1);
+                            handler.sendMessageToServer("stone", 160);
                         } catch(EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     } else if(e.getSource()==servantButton){
                         try{
-                            handler.sendMessageToServer("servant", 1);
+                            handler.sendMessageToServer("servant", 160);
                         } catch (EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     } else if(e.getSource() == shieldButton){
                         try{
-                            handler.sendMessageToServer("shield", 1);
+                            handler.sendMessageToServer("shield", 160);
                         } catch(EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     }
                 numAction++;
@@ -143,27 +160,39 @@ public class PreGameRes extends JPanel implements ActionListener {
                 while(numAction!=2){
                     if(e.getSource()==coinButton){
                         try {
-                            handler.sendMessageToServer("coin", 1);
+                            handler.sendMessageToServer("coin", 160);
                         } catch(EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     } else if(e.getSource()==stoneButton){
                         try{
-                            handler.sendMessageToServer("stone", 1);
+                            handler.sendMessageToServer("stone", 160);
                         } catch(EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     } else if(e.getSource()==servantButton){
                         try{
-                            handler.sendMessageToServer("servant", 1);
+                            handler.sendMessageToServer("servant", 160);
                         } catch (EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     } else if(e.getSource() == shieldButton){
                         try{
-                            handler.sendMessageToServer("shield", 1);
+                            handler.sendMessageToServer("shield", 160);
                         } catch(EndingGameException ex){
-                            //TODO disconnect
+                            MainGUI.frame.remove(this);
+                            MainGUI.frame.add(new Intro("error", 1));
+                            MainGUI.frame.revalidate();
+                            MainGUI.frame.repaint();
                         }
                     }
                     numAction++;

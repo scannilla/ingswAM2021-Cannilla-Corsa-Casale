@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.networkclient;
 
+import com.sun.tools.javac.Main;
 import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.cli.ActiveLeaderCardsDraw;
 import it.polimi.ingsw.cli.MarketDraw;
@@ -8,9 +9,13 @@ import it.polimi.ingsw.cli.ProdCardsMarketDraw;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
+import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.gui.local.BuyMarble;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
+
 
 
 public class ClientListener implements Runnable{
@@ -21,6 +26,10 @@ public class ClientListener implements Runnable{
     private  final ClientMessageHandler cmHandler;
 
     private final boolean gui;
+    
+    private Data instance = Data.instanceCreator();
+
+    private String nickname ="";
 
     /**
      * constructor for ClientListener
@@ -53,7 +62,17 @@ public class ClientListener implements Runnable{
             }
         }
         else {
-            //gui
+            while (true) {
+                try {
+                    Message readGui = cmHandler.readMessage();
+                    if (600<readGui.getCode() && readGui.getCode()<699){
+                        readObjectGui(readGui, instance);
+                    }
+                } catch (EndingGameException e) {
+                    e.printStackTrace();
+                }
+                
+            }
         }
     }
 
@@ -81,4 +100,25 @@ public class ClientListener implements Runnable{
                 break;
         }
     }
+
+    private void readObjectGui(Message m, Data instance){
+        ObjectMessage object = (ObjectMessage) m;
+        switch(m.getCode()){
+            case 601:
+                instance.setMarketStructure((MarketStructure) object.getObj());
+                break;
+            case 602:
+                instance.setProductionCardsMarket((ProductionCardsMarket) object.getObj());
+                break;
+            case 603:
+                instance.setPersonalBoard((PersonalBoard) object.getObj());
+                break;
+            case 653:
+                instance.setLeaderCards((LeaderCard[]) object.getObj());
+                break;
+
+        }
+        
+    }
+    
 }

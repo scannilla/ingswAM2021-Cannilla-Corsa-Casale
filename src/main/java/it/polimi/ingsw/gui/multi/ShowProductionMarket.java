@@ -1,7 +1,9 @@
 package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.production.ProductionCardsMarket;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 
 public class ShowProductionMarket extends JPanel implements ActionListener {
 
+    private ProductionCardsMarket productionCardsMarket;
     private boolean fromTurn;
     private final JButton back;
     private final ClientMessageHandler handler;
@@ -28,6 +31,7 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g) {
+        productionCardsMarket = Data.instanceCreator().getProductionCardsMarket();
         for (int x = 50; x < 400; x = x + 150) {
             for (int y = 50; y < 750; y = y + 250) {
                 g.drawRect(x, y, 100, 200);

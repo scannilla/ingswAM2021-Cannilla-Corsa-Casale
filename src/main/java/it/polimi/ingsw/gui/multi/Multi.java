@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
 
@@ -52,14 +53,20 @@ public class Multi extends JPanel implements ActionListener {
         Message received = null;
         if (e.getSource() == two) {
             try {
-                handler.sendMessageToServer("two");
+                handler.sendMessageToServer("2", 140 );
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             try {
                 received = handler.readMessage();
             } catch (EndingGameException ex) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
@@ -67,58 +74,73 @@ public class Multi extends JPanel implements ActionListener {
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             } else if (received.getMessage().equals("ko")){
-                String error = received.getMessage();
-                MainGUI.frame.add(new Error(error));
+
             }
         } else if (e.getSource() == three) {
             try {
-                handler.sendMessageToServer("three");
+                handler.sendMessageToServer("3", 140);
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             try {
                 received = handler.readMessage();
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new WaitingRoom(3, handler));
                 MainGUI.frame.revalidate();
             } else if (received.getMessage().equals("ko")){
-                String error = received.getMessage();
-                MainGUI.frame.add(new Error(error));
+
             }
         } else if (e.getSource() == four) {
 
             try {
-                handler.sendMessageToServer("four");
+                handler.sendMessageToServer("4", 140);
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             try {
                 received = handler.readMessage();
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new WaitingRoom(4, handler));
                 MainGUI.frame.revalidate();
             } else if (received.getMessage().equals("ko")) {
-                String error = received.getMessage();
-                MainGUI.frame.add(new Error(error));
+
             }
         } else if (e.getSource() == one) {
             try {
-                handler.sendMessageToServer("one");
+                handler.sendMessageToServer("1", 140);
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             try {
                 received = handler.readMessage();
             } catch (EndingGameException endingGameException) {
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);

@@ -4,17 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.MainGUI;
 
 
 public class ShowPersonalBoard extends JPanel implements ActionListener {
 
-    ArrayList<Player> player;
-    String nickname;
+    private PersonalBoard personalBoard;
     private boolean fromTurn;
     private final ClientMessageHandler handler;
     private final JButton back;
@@ -32,6 +30,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g){
+        personalBoard = Data.instanceCreator().getPersonalBoard();
         for(int x = 50; x<1200; x = x + 50){ //percorso fede
             g.drawRect(x, 100, 50, 50);
         }

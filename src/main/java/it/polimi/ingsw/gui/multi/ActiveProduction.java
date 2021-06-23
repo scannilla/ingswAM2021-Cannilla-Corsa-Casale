@@ -1,8 +1,12 @@
 package it.polimi.ingsw.gui.multi;
 
+import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.production.ProdCardSlot;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +15,8 @@ import java.awt.event.ActionListener;
 
 public class ActiveProduction extends JPanel implements ActionListener{
 
+    private PersonalBoard personalBoard;
+    private ProdCardSlot prodCardSlot;
     private final JButton selectStand, selectSlot1, selectSlot2, selectSlot3, back;
     private ClientMessageHandler handler;
     public ActiveProduction(ClientMessageHandler handler){
@@ -37,6 +43,7 @@ public class ActiveProduction extends JPanel implements ActionListener{
     }
 
     public void paint(Graphics g){
+        prodCardSlot = Data.instanceCreator().getPersonalBoard().getProdCardSlot();
         g.drawString("Select a production power to activate", 300, 50);
     }
 
@@ -45,32 +52,45 @@ public class ActiveProduction extends JPanel implements ActionListener{
 
         if(e.getSource() == selectStand){
             try{
-                handler.sendMessageToServer("standard production", 1);
+                handler.sendMessageToServer("standard production", 169);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == selectSlot1){
             try{
-                handler.sendMessageToServer("card production 1", 1);
+                handler.sendMessageToServer("card production 1", 170);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == selectSlot2){
             try{
-                handler.sendMessageToServer("card production 2", 1);
+                handler.sendMessageToServer("card production 2", 170);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == selectSlot3){
             try{
-                handler.sendMessageToServer("card production 3", 1);
+                handler.sendMessageToServer("card production 3", 170);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == back){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Turn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
 
 

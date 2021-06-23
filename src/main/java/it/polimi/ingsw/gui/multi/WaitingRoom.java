@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
 public class WaitingRoom extends JPanel implements ActionListener {
@@ -33,25 +34,28 @@ private final ClientMessageHandler handler;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ObjectMessage receivedMarket = null;
-        ObjectMessage receivedProdMarket = null;
+        ObjectMessage confirmation = null;
         try {
-            handler.sendMessageToServer("setup game");
+            handler.sendMessageToServer("setup game", 150);
         } catch (EndingGameException endingGameException) {
-            //TODO disconnect
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Intro("error", 1));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
         try {
-            receivedMarket = (ObjectMessage) handler.readMessage();
-            receivedProdMarket = (ObjectMessage) handler.readMessage();
+            confirmation = (ObjectMessage) handler.readMessage();
         } catch (EndingGameException endingGameException) {
-            //TODO disconnect
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Intro("error", 1));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
-        if(receivedMarket.getMessage().equals("object")){
+        if(600<confirmation.getCode() && confirmation.getCode()<699){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new PreGameRes(handler));
             MainGUI.frame.revalidate();
         }
-
 
     }
 

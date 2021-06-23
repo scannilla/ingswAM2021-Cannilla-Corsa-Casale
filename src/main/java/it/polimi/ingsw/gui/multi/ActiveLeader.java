@@ -2,7 +2,10 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.leader.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +14,7 @@ import java.awt.event.ActionListener;
 
 public class ActiveLeader extends JPanel implements ActionListener {
 
+   private LeaderCard[] leaderCards;
     private final JButton active1, active2, back;
     private ClientMessageHandler handler;
 
@@ -35,6 +39,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g){
+        leaderCards = Data.instanceCreator().getLeaderCards();
         g.drawRect(200, 200, 100, 200);
         g.drawRect(350, 200, 100, 200);
     }
@@ -43,15 +48,21 @@ public class ActiveLeader extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == active1){
             try{
-                handler.sendMessageToServer("activate leader card 1", 1);
+                handler.sendMessageToServer("activate leader card -1", 168);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == active2){
             try{
-                handler.sendMessageToServer("activate leader card 2", 1);
+                handler.sendMessageToServer("activate leader card -2", 168);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == back){
             MainGUI.frame.remove(this);

@@ -2,6 +2,7 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
 import javax.swing.*;
@@ -10,8 +11,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Turn extends JPanel implements ActionListener {
-    private JButton buyMarble, buyProd, activeLeader, activeProd, viewMyPB, viewPB1, viewPB2, viewPB3, viewMarketMarble, viewProdMarket, endTurn;
-    private ClientMessageHandler handler;
+    private final JButton buyMarble;
+    private final JButton buyProd;
+    private final JButton activeLeader;
+    private final JButton activeProd;
+    private final JButton viewMyPB;
+    private JButton viewPB1;
+    private JButton viewPB2;
+    private JButton viewPB3;
+    private final JButton viewMarketMarble;
+    private final JButton viewProdMarket;
+    private final JButton endTurn;
+    private final JButton viewLeaderCard;
+    private final ClientMessageHandler handler;
     private int numPlayer;
     public Turn(ClientMessageHandler handler){
         this.handler = handler;
@@ -30,6 +42,8 @@ public class Turn extends JPanel implements ActionListener {
         viewMarketMarble.setBounds(10, 310, 380, 180);
         viewProdMarket = new JButton("View production cards market");
         viewProdMarket.setBounds(410, 310, 380, 180);
+        viewLeaderCard = new JButton("View Leader Cards");
+        viewLeaderCard.setBounds(610, 310, 180, 180);
         endTurn = new JButton("End turn");
         endTurn.setBounds(660, 710, 130, 80);
         switch(numPlayer){
@@ -53,11 +67,9 @@ public class Turn extends JPanel implements ActionListener {
             case 4: viewPB3 = new JButton("View nickname personal board");
                 viewPB1 = new JButton("View nickname personal board");
                 viewPB2 = new JButton("View nickname personal board");
-            viewPB1.setBounds(210, 510, 180, 180);
+                viewPB1.setBounds(210, 510, 180, 180);
                 viewPB2.setBounds(410, 510, 180, 180);
                 viewPB3.setBounds(610, 510, 180, 180);
-
-
                 this.add(viewPB1);
                 this.add(viewPB2);
                 this.add(viewPB3);
@@ -71,6 +83,7 @@ public class Turn extends JPanel implements ActionListener {
         this.add(viewMarketMarble);
         this.add(viewProdMarket);
         this.add(endTurn);
+        this.add(viewLeaderCard);
         buyMarble.addActionListener(this);
         buyProd.addActionListener(this);
         activeLeader.addActionListener(this);
@@ -79,6 +92,7 @@ public class Turn extends JPanel implements ActionListener {
         viewMarketMarble.addActionListener(this);
         viewProdMarket.addActionListener(this);
         endTurn.addActionListener(this);
+        viewLeaderCard.addActionListener(this);
         this.setLayout(null);
         this.setSize(800, 800);
         this.setVisible(true);
@@ -112,70 +126,96 @@ public class Turn extends JPanel implements ActionListener {
             MainGUI.frame.remove(this);
             MainGUI.frame.revalidate();
             MainGUI.frame.repaint();
-        } else if(e.getSource() == activeProd){
+        } else if(e.getSource() == activeProd) {
             MainGUI.frame.add(new ActiveProduction(handler));
+            MainGUI.frame.remove(this);
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
+        } else if(e.getSource() == viewLeaderCard){
+            MainGUI.frame.add(new ShowLeaderCard(handler, true));
             MainGUI.frame.remove(this);
             MainGUI.frame.revalidate();
             MainGUI.frame.repaint();
         } else if(e.getSource() == viewMarketMarble){
             try{
-                handler.sendMessageToServer("view market");
+                handler.sendMessageToServer("view market", 163);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowMarketMarble(handler, true));
             MainGUI.frame.revalidate();
         } else if(e.getSource() == viewProdMarket){
             try{
-                handler.sendMessageToServer("view card market");
+                handler.sendMessageToServer("view card market", 162);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowProductionMarket(handler, true));
             MainGUI.frame.revalidate();
         } else if(e.getSource() == viewMyPB){
             try{
-                handler.sendMessageToServer("view personal board");
+                handler.sendMessageToServer("view -personalboard -1", 164);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
             MainGUI.frame.revalidate();
         } else if (e.getSource() == viewPB1){
             try{
-                handler.sendMessageToServer("show nickname personal board");
+                handler.sendMessageToServer("view -personalboard -2", 164);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
             MainGUI.frame.revalidate();
         } else if(e.getSource() == viewPB2){
             try{
-                handler.sendMessageToServer("view nickname personal board");
+                handler.sendMessageToServer("view -personalboard -3", 164);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
             MainGUI.frame.revalidate();
         } else if(e.getSource() == viewPB3){
             try{
-                handler.sendMessageToServer("view nickname personal board");
+                handler.sendMessageToServer("view -personalboard -4", 164);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
             MainGUI.frame.revalidate();
         } else if(e.getSource() == endTurn){
             try{
-                handler.sendMessageToServer("end turn", 1);
+                handler.sendMessageToServer("endturn", 165);
             } catch (EndingGameException ex){
-                //TODO disconnect
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }
     }

@@ -2,6 +2,7 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
 import javax.swing.*;
@@ -67,27 +68,39 @@ public void chooseLeader(ActionEvent e){
        while(numAction!=2){
            if (e.getSource() == leaderOne){
                try {
-                   handler.sendMessageToServer("1", 1);
+                   handler.sendMessageToServer("1", 161);
                } catch(EndingGameException ex){
-                   //TODO disconnect
+                   MainGUI.frame.remove(this);
+                   MainGUI.frame.add(new Intro("error", 1));
+                   MainGUI.frame.revalidate();
+                   MainGUI.frame.repaint();
                }
            } else if(e.getSource() == leaderTwo){
                try {
-                   handler.sendMessageToServer("2", 1);
+                   handler.sendMessageToServer("2", 161);
                } catch(EndingGameException ex){
-                   //TODO disconnect
+                   MainGUI.frame.remove(this);
+                   MainGUI.frame.add(new Intro("error", 1));
+                   MainGUI.frame.revalidate();
+                   MainGUI.frame.repaint();
                }
            } else if(e.getSource() == leaderThree){
                try {
-                   handler.sendMessageToServer("3", 1);
+                   handler.sendMessageToServer("3", 161);
                } catch(EndingGameException ex){
-                   //TODO disconnect
+                   MainGUI.frame.remove(this);
+                   MainGUI.frame.add(new Intro("error", 1));
+                   MainGUI.frame.revalidate();
+                   MainGUI.frame.repaint();
                }
            } else if(e.getSource() == leaderFour){
                try {
-                   handler.sendMessageToServer("4", 1);
+                   handler.sendMessageToServer("4", 161);
                } catch(EndingGameException ex){
-                   //TODO disconnect
+                   MainGUI.frame.remove(this);
+                   MainGUI.frame.add(new Intro("error", 1));
+                   MainGUI.frame.revalidate();
+                   MainGUI.frame.repaint();
                }
            }
        numAction++;

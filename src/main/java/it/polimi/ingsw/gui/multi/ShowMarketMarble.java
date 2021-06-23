@@ -1,6 +1,7 @@
 package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.marbles.MarketStructure;
@@ -21,7 +22,7 @@ public class ShowMarketMarble extends JPanel implements ActionListener {
     private ClientMessageHandler handler;
     private MarketMarble outMarble;
     private final JButton back;
-    private boolean fromTurn;
+    private final boolean fromTurn;
 
     public ShowMarketMarble(ClientMessageHandler handler, boolean fromTurn){
         this.handler = handler;
@@ -37,6 +38,7 @@ public class ShowMarketMarble extends JPanel implements ActionListener {
     }
 
     private void myDrawImagePNG(Graphics g){
+        marketStructure = Data.instanceCreator().getMarketStructure();
         ClassLoader cl = this.getClass().getClassLoader();
         InputStream url = cl.getResourceAsStream("plancia portabiglie.png");
         BufferedImage img;

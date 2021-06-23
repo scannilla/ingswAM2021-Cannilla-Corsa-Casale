@@ -5,6 +5,7 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
+import it.polimi.ingsw.controller.networkserver.Response;
 
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public class CommandsHandler {
      * @return ok or ko
      * @throws EndingGameException e
      */
-    public String tryCommand(String[] cmd, Player player, MessageHandler mHandler) throws EndingGameException {
+    public Response tryCommand(String[] cmd, Player player, MessageHandler mHandler) throws EndingGameException {
         GamePhase phase = fsm.getPhase();
         if(!game.getPlayers().contains(player))
             game.addPlayer(player);
@@ -51,54 +52,55 @@ public class CommandsHandler {
             case ACCEPTANCE:
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
                     fsm.evolveGamePhase();
-                    return "ok";
+                    return new Response("ok", 201);
                 }
-                return "ko";
+                return new Response("Incorrect command", 401);
             case GAME_CREATOR:
                 int numbOfPlayers=0;
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
                     numbOfPlayers = new GameCreator(mHandler).createGame(game);
-                    new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
+                    if(game.getPlayers().indexOf(player)==0)
+                        new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
                     fsm.evolveGamePhase();
-                    return "ok";
+                    return new Response("ok", 201);
                 }
-                return "ko";
+                return new Response("Incorrect command", 401);
             case WAITING_ROOM:
-                return "ko";
+                return new Response("Nothing to do here, wait for the game to start", 402);
             case GAME_SETUP:
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
                     setup++;
                     new GameSetup(game, player, mHandler).gameSetUp(game.getPlayers().indexOf(player));
                     if(setup==game.getNumberOfPlayers())
                         fsm.evolveGamePhase();
-                    return "ok";
+                    return new Response("ok", 201);
                 }
-                return "ko";
+                return new Response("Incorrect command", 401);
             case GAME_PHASE:
                 if(!player.isActive() && !cmd[0].equals("view")) {
                     mHandler.sendMessageToClient("Wait for you turn, in the meanwhile you can call only view methods");
-                    return "ok";
+                    return new Response("ok", 201);
                 }
                 Command c = GSON.commandParser(cmd[1]);
                 c.setCommandPlayer(player);
-                String returnValue = c.executeCommand();
-                if (returnValue.equals("end"))
+                Response returnValue = c.executeCommand();
+                if (returnValue.getMessage().equals("end"))
                     try {
                         game.endTurn();
                     } catch (RuntimeException e) {
                         fsm.evolveGamePhase();
                     }
-                else if (returnValue.contains("$")) {
+                else if (returnValue.getMessage().contains("$")) {
                     RequiredClientActions r = new RequiredClientActions(c, player, mHandler);
-                    r.execute(returnValue.replace("$",""));
+                    r.execute(returnValue.getMessage().replace("$",""));
                 } else
                     return returnValue;
-                return "ko";
+                return new Response("Incorrect command", 401);
             case END:
             case UNKNOWN:
             default:
         }
-        return "ko";
+        return new Response("Incorrect command", 401);
     }
 
 }
@@ -119,6 +121,7 @@ class AutoCheckerWait implements Runnable {
         this.game = game;
         this.fsm = fsm;
         this.numbOfPlayers = numbOfPlayers;
+
     }
 
     @Override

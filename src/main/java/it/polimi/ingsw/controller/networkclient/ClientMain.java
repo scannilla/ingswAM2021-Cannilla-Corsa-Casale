@@ -54,10 +54,9 @@ public class ClientMain {
             }
         } while (!read.equals("sp") && !read.equals("mp") && !read.equals("singleplayer") && !read.equals("multiplayer"));
 
-        if(read.equals("sp") || read.equals("singleplayer")) {
-            new LocalSinglePlayer().singlePlayer();
-        }
-        else {
+        if(read.equals("sp") || read.equals("singleplayer")) { //if is CLI and singleplayer
+            new LocalSinglePlayer().singlePlayer(gui);
+        } else { //if is CLI and multiplayer
             Socket clientSocket;
             try {
                 clientSocket = new Socket(hostName, portNumber);

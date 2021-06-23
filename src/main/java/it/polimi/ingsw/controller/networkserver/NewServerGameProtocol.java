@@ -3,11 +3,10 @@ package it.polimi.ingsw.controller.networkserver;
 
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.application.*;
 import it.polimi.ingsw.controller.virtualview.*;
 
-import java.io.*;
+
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.Callable;
@@ -59,7 +58,7 @@ public class NewServerGameProtocol implements Callable<Integer> {
             String command;
             try {
                 command = mHandler.readClientMessage();
-                String response = handler.tryCommand(createCommand(command), player, mHandler);
+                Response response = handler.tryCommand(createCommand(command), player, mHandler);
                 mHandler.sendMessageToClient(response);
             } catch (EndingGameException e) {
                 break;

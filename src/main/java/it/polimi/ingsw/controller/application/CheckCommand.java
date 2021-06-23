@@ -23,7 +23,7 @@ public class CheckCommand {
         if (player.getActiveLeaderCards()[0] != null && player.getActiveLeaderCards()[0] instanceof LeaderOfDiscounts) {
             do {
                 try {
-                    mHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]");
+                    mHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]", 150);
                     response =  mHandler.readClientMessage();
                 } catch (EndingGameException e) {
                     throw new EndingGameException();
@@ -44,7 +44,7 @@ public class CheckCommand {
             if (player.getActiveLeaderCards()[1] != null && player.getActiveLeaderCards()[1] instanceof LeaderOfDiscounts) {
                 do{
                     try {
-                        mHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]");
+                        mHandler.sendMessageToClient("Do you want to use Discount ability? [yes/no]", 150);
                         response =  mHandler.readClientMessage();
                     } catch (EndingGameException e) {
                         throw new EndingGameException();
@@ -73,7 +73,7 @@ public class CheckCommand {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
             try {
-                mHandler.sendMessageToClient("Insert a valid number");
+                mHandler.sendMessageToClient("Insert a valid number", 406);
                 String newNumber =  mHandler.readClientMessage();
                 return checkNumber(newNumber, mHandler);
             } catch (EndingGameException ex) {
@@ -101,7 +101,7 @@ public class CheckCommand {
         }
         String correctCommand = null;
         try {
-            mHandler.sendMessageToClient(allCommands);
+            mHandler.sendMessageToClient(allCommands, 151);
             correctCommand = commandChecker(acceptedCommands, mHandler.readClientMessage(), mHandler);
         } catch (EndingGameException e) {
             throw new EndingGameException();

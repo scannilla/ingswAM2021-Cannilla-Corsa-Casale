@@ -71,8 +71,8 @@ public class ClientMessageHandler {
         try {
             Object read = in.readObject();
             Message received = (Message) read;
-            if (received.getCode() == 5)
-                sendMessageToServer("pong", 6);
+            if (received.getCode() == 350)
+                sendMessageToServer("pong", 351);
             else
                 return received;
 

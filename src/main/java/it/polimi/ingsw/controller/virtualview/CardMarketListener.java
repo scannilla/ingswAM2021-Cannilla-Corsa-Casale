@@ -13,11 +13,11 @@ public class CardMarketListener extends Listener {
 
     @Override
     public void notifyChange(Object update) throws EndingGameException {
-        mHandler.sendObjectToClient(new ObjectMessage(update, 21, null));
+        mHandler.sendObjectToClient(new ObjectMessage(update, 651, null));
     }
 
     @Override
     public void notifyChange(Object update, String nickname) throws EndingGameException {
-        mHandler.sendObjectToClient(new ObjectMessage(update, 21, nickname));
+        mHandler.sendObjectToClient(new ObjectMessage(update, 651, nickname));
     }
 }

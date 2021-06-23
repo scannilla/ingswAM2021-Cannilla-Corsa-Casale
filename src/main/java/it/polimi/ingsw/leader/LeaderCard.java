@@ -16,7 +16,7 @@ public abstract class LeaderCard implements Serializable {
 
     private int[] requiredLevel;
 
-    private int ability; // Discards: 0, Depots: 1, Conversions: 2, Production: 3
+    private int ability; // Discounts: 0, Depots: 1, Conversions: 2, Production: 3
     /**
      * represents this Leader Card win points
      */

@@ -4,6 +4,7 @@ import it.polimi.ingsw.cli.Color;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
+import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.resources.Resource;
 
 import java.io.*;
@@ -77,6 +78,17 @@ public class MessageHandler {
         }
     }
 
+    public void sendMessageToClient(Response response) throws EndingGameException {
+        Message m = new Message(response.getCode(), response.getMessage(), null);
+
+        try {
+            out.writeObject(m);
+            out.reset();
+        } catch (IOException e) {
+            throw new EndingGameException();
+        }
+    }
+
     public void sendObjectToClient(ObjectMessage obj) throws EndingGameException {
         try {
             out.writeObject(obj);
@@ -86,7 +98,7 @@ public class MessageHandler {
         }
     }
 
-    public void drawResource(Resource res) throws EndingGameException {
+    public void drawResource(Resource res, String nickname) throws EndingGameException {
         String reset = Color.ANSI_RESET.escape();
         String resource = "";
         switch (res.toString()) {
@@ -103,7 +115,7 @@ public class MessageHandler {
                 resource = Color.ANSI_BLUE + "H" + reset;
                 break;
         }
-        Message m = new Message(19, resource, null);
+        Message m = new Message(600, resource, nickname);
         try {
             out.writeObject(m);
             out.reset();
@@ -111,6 +123,41 @@ public class MessageHandler {
             throw new EndingGameException();
         }
     }
+
+    public void drawMarble(MarketMarble marble, String nickname) throws EndingGameException {
+        String reset = Color.ANSI_RESET.escape();
+        String mar = "";
+        switch (marble.getColor()) {
+            case 0:
+                mar = Color.ANSI_BRIGHTWHITE + "O" + reset;
+                break;
+            case 1:
+                mar = Color.ANSI_GREY + "O" + reset;
+                break;
+            case 2:
+                mar = Color.ANSI_BLUE + "O" + reset;
+                break;
+            case 3:
+                mar = Color.ANSI_YELLOW + "0" + reset;
+                break;
+            case 4:
+                mar = Color.ANSI_PURPLE + "O" + reset;
+                break;
+            case 5:
+                mar = Color.ANSI_RED + "0" + reset;
+                break;
+        }
+        Message m = new Message(601, mar, nickname);
+        try {
+            out.writeObject(m);
+            out.reset();
+            drawResource(marble.returnAbility(), nickname);
+        } catch (IOException e) {
+            throw new EndingGameException();
+        } catch (Exception ignored) {
+        }
+    }
+
 
 
 }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.application.Command;
 import it.polimi.ingsw.controller.application.RequiredClientActions;
+import it.polimi.ingsw.controller.networkserver.Response;
 import it.polimi.ingsw.controller.virtualview.*;
 
 public class SPGameProtocol implements Runnable{
@@ -28,7 +29,7 @@ public class SPGameProtocol implements Runnable{
     public void run() {
         String command;
         String jsonString;
-        String returnValue;
+        Response returnValue;
         createListeners();
         while(true) {
                 command = handler.readClientMessage();
@@ -36,16 +37,16 @@ public class SPGameProtocol implements Runnable{
                 Command c = GSON.commandParser(jsonString);
                 c.setCommandPlayer(player);
                 returnValue = c.executeCommand();
-                if (returnValue.equals("end")) {
+                if (returnValue.getMessage().equals("end")) {
                     try {
                         player.getConnectedGame().endTurn();
                     } catch (RuntimeException | EndingGameException e) {
                         System.out.println("Game Over");
                     }
                 }
-                if (returnValue.contains("$")) {
+                if (returnValue.getMessage().contains("$")) {
                     try {
-                        new RequiredClientActions(c, player, handler).execute(returnValue.replace("$", ""));
+                        new RequiredClientActions(c, player, handler).execute(returnValue.getMessage().replace("$", ""));
                     } catch (EndingGameException e) {
                         e.printStackTrace();
                         break;

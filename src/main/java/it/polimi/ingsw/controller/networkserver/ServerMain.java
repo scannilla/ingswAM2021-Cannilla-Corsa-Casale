@@ -125,6 +125,7 @@ public class ServerMain {
                 throw new EndingGameException();
             }
         } while (nickname.isBlank() || nickname.isEmpty());
+        mHandler.sendMessageToClient(nickname, 310);
         return nickname;
     }
 

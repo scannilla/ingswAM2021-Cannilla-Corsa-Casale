@@ -34,4 +34,8 @@ public class SPClientMessageHandler extends ClientMessageHandler {
     public Message readMessage() throws EndingGameException {
         return super.readMessage();
     }
+
+    public void readClientMessage(String message) {
+        System.out.println(message);
+    }
 }

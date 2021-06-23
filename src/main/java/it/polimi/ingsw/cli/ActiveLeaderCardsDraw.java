@@ -146,6 +146,7 @@ public class ActiveLeaderCardsDraw {
             int WP4 = cardsArray[3].getWp();
             System.out.print(resetEscape + "Win Points: " + WP4);
             System.out.print("\n");
+            drawExtraDepot(cardsArray[3]);
         }
     }
 

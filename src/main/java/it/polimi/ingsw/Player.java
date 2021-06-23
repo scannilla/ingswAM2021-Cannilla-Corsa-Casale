@@ -47,6 +47,8 @@ public class Player implements Serializable {
 
     private boolean actionDone = false;
 
+    private boolean productionActivated = false;
+
     private int productionsActivated = 0;
 
     private boolean isLast = false;
@@ -314,5 +316,14 @@ public class Player implements Serializable {
         leaderProductionActivated[1] = false;
         productionsActivated = 0;
         personalBoard.getProdCardSlot().resetProductions();
+        productionActivated = false;
+    }
+
+    public boolean isProductionActivated() {
+        return productionActivated;
+    }
+
+    public void setProductionActivated() {
+        this.productionActivated = true;
     }
 }

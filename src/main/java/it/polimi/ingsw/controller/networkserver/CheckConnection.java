@@ -26,7 +26,7 @@ public class CheckConnection implements Runnable{
                 return;
             }
             try {
-                mHandler.sendMessageToClient("ping", 5);
+                mHandler.sendMessageToClient("ping", 350);
             } catch (EndingGameException e) {
                 return;
             }

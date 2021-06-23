@@ -13,6 +13,11 @@ public class PersonalBoardListener extends Listener {
 
     @Override
     public void notifyChange(Object update) throws EndingGameException {
-        mHandler.sendObjectToClient(new ObjectMessage(update, 22, null));
+        mHandler.sendObjectToClient(new ObjectMessage(update, 652, null));
+    }
+
+    @Override
+    public void notifyChange(Object update, String nickname) throws EndingGameException {
+        mHandler.sendObjectToClient(new ObjectMessage(update, 652, nickname));
     }
 }

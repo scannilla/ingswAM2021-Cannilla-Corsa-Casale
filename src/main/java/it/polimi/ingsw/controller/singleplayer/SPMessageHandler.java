@@ -15,6 +15,7 @@ public class SPMessageHandler extends MessageHandler {
 
     private final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
+
     public SPMessageHandler() throws EndingGameException {
         super(null);
     }
@@ -40,7 +41,7 @@ public class SPMessageHandler extends MessageHandler {
     }
 
     @Override
-    public void drawResource(Resource res) {
+    public void drawResource(Resource res, String nickname) {
         String reset = Color.ANSI_RESET.escape();
         String resource = "";
         switch (res.toString()) {

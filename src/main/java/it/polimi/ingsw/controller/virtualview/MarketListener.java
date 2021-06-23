@@ -14,6 +14,6 @@ public class MarketListener extends Listener{
 
     @Override
     public void notifyChange(Object update) throws EndingGameException {
-        mHandler.sendObjectToClient(new ObjectMessage(update, 20, null));
+        mHandler.sendObjectToClient(new ObjectMessage(update, 650, null));
     }
 }

@@ -31,6 +31,7 @@ public class ActiveLeaderCardsDraw {
                 int WP = cardsArray[0].getWp();
                 System.out.print(resetEscape + "Win Points: " + WP);
                 System.out.print("\n");
+                drawExtraDepot(cardsArray[0]);
                 return;
             }
             else {
@@ -52,6 +53,7 @@ public class ActiveLeaderCardsDraw {
                 int WP = cardsArray[0].getWp();
                 System.out.print(resetEscape + "Win Points: " + WP);
                 System.out.print("\n");
+                drawExtraDepot(cardsArray[0]);
                 System.out.print("\n");
                 System.out.print(resetEscape + "SECOND CARD");
                 System.out.print("\n");
@@ -70,6 +72,7 @@ public class ActiveLeaderCardsDraw {
                 int WP2 = cardsArray[1].getWp();
                 System.out.print(resetEscape + "Win Points: " + WP2);
                 System.out.print("\n");
+                drawExtraDepot(cardsArray[1]);
             }
         }
 
@@ -92,6 +95,7 @@ public class ActiveLeaderCardsDraw {
             int WP = cardsArray[0].getWp();
             System.out.print(resetEscape + "Win Points: " + WP);
             System.out.print("\n");
+            drawExtraDepot(cardsArray[0]);
             System.out.print("\n");
             System.out.print(resetEscape + "SECOND CARD");
             System.out.print("\n");
@@ -110,6 +114,7 @@ public class ActiveLeaderCardsDraw {
             int WP2 = cardsArray[1].getWp();
             System.out.print(resetEscape + "Win Points: " + WP2);
             System.out.print("\n");
+            drawExtraDepot(cardsArray[1]);
             System.out.print("\n");
             System.out.print(resetEscape + "THIRD CARD");
             System.out.print("\n");
@@ -128,6 +133,7 @@ public class ActiveLeaderCardsDraw {
             int WP3 = cardsArray[2].getWp();
             System.out.print(resetEscape + "Win Points: " + WP3);
             System.out.print("\n");
+            drawExtraDepot(cardsArray[2]);
             System.out.print("\n");
             System.out.print(resetEscape + "FOURTH CARD");
             System.out.print("\n");
@@ -250,6 +256,57 @@ public class ActiveLeaderCardsDraw {
         int[] reqLevel = cardsArray[index].getRequiredLevel();
         for (int i: reqType){
             System.out.print(Color.ANSI_CYAN.escape() + "t" + reqType[i] + "l" + reqLevel[i] + ", " + resetEscape);
+        }
+    }
+
+    public static void drawExtraDepot(LeaderCard card){
+        String reset = Color.ANSI_RESET.escape();
+        if (card.getAbility()==1) {
+            Resource res = ((LeaderOfDepots) card).getResource();
+            int ress = res.getResType();
+            int length = ((LeaderOfDepots) card).getExtraDepot().length;
+            System.out.print("\n");
+            System.out.print(reset + "Extra Depot: ");
+            System.out.print(reset + "\n");
+            if (length == 0){
+                System.out.print(reset + "---------");
+                System.out.print(reset + "\n");
+                System.out.print(reset + "|   |   |");
+                System.out.print(reset + "\n");
+                System.out.print(reset + "---------");
+                System.out.print(reset + "\n");
+            }
+            if (length == 1){
+                System.out.print(reset + "---------");
+                System.out.print(reset + "\n");
+                if (ress == 0){
+                    System.out.print(reset + "| " + Color.ANSI_YELLOW.escape() + "C" + reset + " |   |");}
+                if (ress == 1){
+                    System.out.print(reset + "| " + Color.ANSI_GREY.escape() + "R" + reset + " |   |");}
+                if (ress == 2){
+                    System.out.print(reset + "| " + Color.ANSI_PURPLE.escape() + "S" + reset + " |   |");}
+                if (ress == 3){
+                    System.out.print(reset + "| " + Color.ANSI_BLUE.escape() + "H" + reset + " |   |");}
+                System.out.print(reset + "\n");
+                System.out.print(reset + "---------");
+                System.out.print(reset + "\n");
+            }
+            if (length == 2){
+                System.out.print(reset + "---------");
+                System.out.print(reset + "\n");
+                if (ress==0){
+                    System.out.print(reset + "| " + Color.ANSI_YELLOW.escape() + "C" + reset + " | " + Color.ANSI_YELLOW.escape() + "C" + reset + " |");}
+                if (ress==1){
+                    System.out.print(reset + "| " + Color.ANSI_GREY.escape() + "R" + reset + " | " + Color.ANSI_GREY.escape() + "R" + reset + " |");}
+                if (ress==2){
+                    System.out.print(reset + "| " + Color.ANSI_PURPLE.escape() + "S" + reset + " | " + Color.ANSI_PURPLE.escape() + "S" + reset + " |");}
+                if (ress==3){
+                    System.out.print(reset + "| " + Color.ANSI_BLUE.escape() + "H" + reset + " | " + Color.ANSI_BLUE.escape() + "H" + reset + " |");}
+                System.out.print(reset + "\n");
+                System.out.print(reset + "---------");
+                System.out.print(reset + "\n");
+            }
+
         }
     }
 }

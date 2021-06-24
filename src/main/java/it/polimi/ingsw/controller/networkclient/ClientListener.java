@@ -83,19 +83,19 @@ public class ClientListener implements Runnable{
 
     public static void printObj(ObjectMessage obj) {
         switch (obj.getCode()) {
-            case 20:
+            case 650:
                 MarketStructure structure = (MarketStructure) obj.getObj();
                 MarketDraw.draw(structure);
                 break;
-            case 21:
+            case 651:
                 ProductionCardsMarket prodMarket = (ProductionCardsMarket) obj.getObj();
                 ProdCardsMarketDraw.drawProdCardsMarket(prodMarket);
                 break;
-            case 22:
+            case 652:
                 PersonalBoard personalBoard = (PersonalBoard) obj.getObj();
                 PersonalBoardDraw.drawPB(personalBoard);
                 break;
-            case 23:
+            case 653:
                 ActiveLeaderCardsDraw.drawActiveLeaderCards((LeaderCard[]) obj.getObj());
                 break;
         }
@@ -104,13 +104,13 @@ public class ClientListener implements Runnable{
     private void readObjectGui(Message m, Data instance){
         ObjectMessage object = (ObjectMessage) m;
         switch(m.getCode()){
-            case 601:
+            case 650:
                 instance.setMarketStructure((MarketStructure) object.getObj());
                 break;
-            case 602:
+            case 651:
                 instance.setProductionCardsMarket((ProductionCardsMarket) object.getObj());
                 break;
-            case 603:
+            case 652:
                 instance.setPersonalBoard((PersonalBoard) object.getObj());
                 break;
             case 653:

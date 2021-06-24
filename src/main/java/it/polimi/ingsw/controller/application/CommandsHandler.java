@@ -14,6 +14,7 @@ public class CommandsHandler {
     private static Automaton fsm;
     private static Game game;
     private int setup=0;
+    private static boolean first = true;
 
     /**
      * Constructor of this CommandsHandler
@@ -56,15 +57,22 @@ public class CommandsHandler {
                 }
                 return new Response("Incorrect command", 401);
             case GAME_CREATOR:
-                int numbOfPlayers=0;
-                if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
-                    numbOfPlayers = new GameCreator(mHandler).createGame(game);
-                    if(game.getPlayers().indexOf(player)==0)
-                        new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
-                    fsm.evolveGamePhase();
-                    return new Response("ok", 201);
+                if(first) {
+                    first = false;
+                    int numbOfPlayers = 0;
+                    if (CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
+                        numbOfPlayers = new GameCreator(mHandler).createGame(game);
+                        if (game.getPlayers().indexOf(player) == 0)
+                            new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
+                        fsm.evolveGamePhase();
+                        return new Response("ok", 201);
+                    }
+                    else
+                        return new Response("Incorrect command", 401);
                 }
-                return new Response("Incorrect command", 401);
+                else
+                    return new Response("Wait for the host to pick the number of players", 112);
+
             case WAITING_ROOM:
                 return new Response("Nothing to do here, wait for the game to start", 402);
             case GAME_SETUP:

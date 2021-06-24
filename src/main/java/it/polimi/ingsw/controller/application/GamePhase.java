@@ -58,7 +58,7 @@ public enum GamePhase implements Comparable<GamePhase> {
     public String[] validCommands () {
         switch (this) {
             case ACCEPTANCE:
-                return new String[] {"create game"};
+                return new String[] {"join game"};
             case GAME_CREATOR:
                 return new String[] {"choose players"};
             case WAITING_ROOM:

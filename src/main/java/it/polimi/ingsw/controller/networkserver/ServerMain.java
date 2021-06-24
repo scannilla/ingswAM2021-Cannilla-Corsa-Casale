@@ -119,7 +119,7 @@ public class ServerMain {
         String nickname;
         do {
             try {
-                mHandler.sendMessageToClient("Insert a valid nickname");
+                mHandler.sendMessageToClient("Insert a valid nickname", 110);
                 nickname = mHandler.readClientMessage();
             } catch (EndingGameException e) {
                 throw new EndingGameException();

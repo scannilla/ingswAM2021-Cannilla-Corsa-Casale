@@ -59,7 +59,7 @@ public class AskNicknameMulti extends JPanel implements ActionListener {
             if(received.getCode() == 310) {
                 Data.instanceCreator().setNickname(received.getNickname());
                 MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Multi(handler));
+                MainGUI.frame.add(new JoinGame(handler));
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             }

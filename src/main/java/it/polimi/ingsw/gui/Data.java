@@ -1,5 +1,6 @@
 package it.polimi.ingsw.gui;
 
+import com.sun.tools.javac.Main;
 import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.gui.multi.BuyMarble;
 import it.polimi.ingsw.marbles.MarketStructure;
@@ -81,8 +82,8 @@ public class Data {
         return personalBoard;
     }
 
-    public LeaderCard[] getLeaderCards(){
-        return this.leaderCards;
+    public LeaderCard[] getActiveLeaderCards(){
+        return activeLeaderCards;
     }
 
     public LeaderCard[] getLeaderCards(){

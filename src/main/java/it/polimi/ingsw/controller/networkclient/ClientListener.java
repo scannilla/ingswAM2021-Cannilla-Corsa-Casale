@@ -119,6 +119,12 @@ public class ClientListener implements Runnable{
             case 653:
                 instance.setLeaderCards((LeaderCard[]) object.getObj());
                 break;
+            case 654:
+                instance.setActiveLeaderCards((LeaderCard[]) object.getObj());
+                break;
+            case 655:
+                instance.setToChooseLeaderCards((LeaderCard[]) object.getObj());
+                break;
 
         }
         

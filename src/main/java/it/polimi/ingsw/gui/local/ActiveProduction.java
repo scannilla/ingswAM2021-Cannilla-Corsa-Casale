@@ -14,7 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ActiveProduction extends JPanel implements ActionListener{
+public class    ActiveProduction extends JPanel implements ActionListener{
 
     private PersonalBoard personalBoard;
     private ProdCardSlot prodCardSlot;
@@ -47,6 +47,7 @@ public class ActiveProduction extends JPanel implements ActionListener{
 
         prodCardSlot = Data.instanceCreator().getPersonalBoard().getProdCardSlot();
         g.drawString("Select a production power to activate", 300, 50);
+
     }
 
     @Override

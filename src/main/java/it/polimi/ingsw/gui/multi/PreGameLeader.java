@@ -2,8 +2,11 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.leader.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.awt.event.ActionListener;
 
 public class PreGameLeader extends JPanel implements ActionListener {
 
+    private LeaderCard[] toChooseLeaderCards;
     private JButton leaderOne, leaderTwo, leaderThree, leaderFour, goAhead;
     private ClientMessageHandler handler;
 
@@ -49,17 +53,34 @@ public class PreGameLeader extends JPanel implements ActionListener {
    }
 
    private void myDrawImagePNG(Graphics g){
-
+    toChooseLeaderCards = Data.instanceCreator().getToChooseLeaderCards();
    }
 
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Message confirm = null;
         chooseLeader(e);
-        MainGUI.frame.remove(this);
-        MainGUI.frame.add(new WaitingTurn(handler));
-        MainGUI.frame.revalidate();
+        try {
+            confirm = handler.readMessage();
+        } catch (EndingGameException ex) {
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Intro("error", 1));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
+        }
+        if (confirm.getCode() == 310) {
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new Turn(handler));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
+        } else {
+            MainGUI.frame.remove(this);
+            MainGUI.frame.add(new WaitingTurn(handler));
+            MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
+        }
     }
 
 public void chooseLeader(ActionEvent e){

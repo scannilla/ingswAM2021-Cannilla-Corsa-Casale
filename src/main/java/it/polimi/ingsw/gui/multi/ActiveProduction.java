@@ -7,19 +7,25 @@ import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.production.ProdCardSlot;
+import it.polimi.ingsw.production.ProductionCard;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
-public class ActiveProduction extends JPanel implements ActionListener{
+public class ActiveProduction extends JPanel implements ActionListener {
 
     private PersonalBoard personalBoard;
     private ProdCardSlot prodCardSlot;
     private final JButton selectStand, selectSlot1, selectSlot2, selectSlot3, back;
     private ClientMessageHandler handler;
-    public ActiveProduction(ClientMessageHandler handler){
+
+    public ActiveProduction(ClientMessageHandler handler) {
         this.handler = handler;
         back = new JButton("Go Back");
         selectStand = new JButton("select");
@@ -42,10 +48,100 @@ public class ActiveProduction extends JPanel implements ActionListener{
         this.setBackground(Color.white);
     }
 
-    public void paint(Graphics g){
-        prodCardSlot = Data.instanceCreator().getPersonalBoard().getProdCardSlot();
+    public void paint(Graphics g) {
         g.drawString("Select a production power to activate", 300, 50);
+
+        g.drawRect(50, 400, 200, 300);
+        g.drawRect(280, 400, 200, 300);
+        g.drawRect(510, 400, 200, 300);
+        g.drawRect(740, 400, 200, 300);
+
+
     }
+
+    private void myDrawImagePNG(Graphics g) {
+        prodCardSlot = Data.instanceCreator().getPersonalBoard().getProdCardSlot();
+        ProductionCard[] topCard = prodCardSlot.getTopCards();
+        ClassLoader cl = this.getClass().getClassLoader();
+        InputStream url;
+        BufferedImage img;
+        int[] type = new int[3];
+        int[] level = new int[3];
+        int[] winPoints = new int[3];
+        int x = 0;
+        int y = 0;
+        int j = 0;
+        for (int i = 0; i < 3; i++) {
+            level[i] = topCard[i].getLevel();
+        }
+        for (int i = 0; i < 3; i++) {
+            type[i] = topCard[i].getType();
+        }
+        for (int i = 0; i<3; i++) {
+            winPoints[i] = topCard[i].getWp();
+        }
+
+        for (int i = 0; i < 3; i++) {
+            switch (type[i]) {
+                case 1:
+                    url = cl.getResourceAsStream("type 1.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280 + x, 420, null);
+                    x = x + 230;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("type 2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280 + x, 420, null);
+                    x = x + 230;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("type 3.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280 + x, 420, null);
+                    x = x + 230;
+                    break;
+                case 4:
+                    url = cl.getResourceAsStream("type 4.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280 + x, 420, null);
+                    x = x + 230;
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            g.drawString("Level:" + level[i], 280 + y, 450);
+            y = y + 230;
+        }
+
+        for (int i = 0; i < 3; i++) {
+            g.drawString("Win Points:" + winPoints[i], 280 + j, 470);
+            j = j + 230;
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -56,15 +56,16 @@ private final ClientMessageHandler handler;
                     MainGUI.frame.revalidate();
                     MainGUI.frame.repaint();
                 }
-                if (600 < confirmation.getCode() && confirmation.getCode() < 699) {
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new PreGameRes(handler));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
-                }
-            }while(confirmation.getCode() == 402);
-        }
+
+            } while (confirmation.getCode() == 402);
+
+            if (600 < confirmation.getCode() && confirmation.getCode() < 699) {
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new PreGameRes(handler));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
+            }
         }
 
-
-}
+    }
+    }

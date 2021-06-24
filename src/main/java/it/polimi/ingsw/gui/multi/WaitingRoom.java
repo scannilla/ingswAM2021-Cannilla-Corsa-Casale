@@ -14,12 +14,15 @@ public class WaitingRoom extends JPanel implements ActionListener {
 
 
 
-private final int numOfPlayer;
+private final JButton setupGame;
 private final ClientMessageHandler handler;
 
 
-    public WaitingRoom(int numOfPlayer, ClientMessageHandler handler){
-        this.numOfPlayer = numOfPlayer;
+    public WaitingRoom(ClientMessageHandler handler){
+        setupGame = new JButton("Setup Game");
+        setupGame.setBounds(550, 600, 150, 50);
+        setupGame.addActionListener(this);
+        this.add(setupGame);
         this.handler = handler;
         this.setLayout(null);
         this.setSize(800, 800);
@@ -34,30 +37,34 @@ private final ClientMessageHandler handler;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ObjectMessage confirmation = null;
-        try {
-            handler.sendMessageToServer("setup game", 150);
-        } catch (EndingGameException endingGameException) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Intro("error", 1));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+        if (e.getSource() == setupGame) {
+            ObjectMessage confirmation = null;
+            do {
+                try {
+                    handler.sendMessageToServer("setup game", 150);
+                } catch (EndingGameException endingGameException) {
+                    MainGUI.frame.remove(this);
+                    MainGUI.frame.add(new Intro("error", 1));
+                    MainGUI.frame.revalidate();
+                    MainGUI.frame.repaint();
+                }
+                try {
+                    confirmation = (ObjectMessage) handler.readMessage();
+                } catch (EndingGameException endingGameException) {
+                    MainGUI.frame.remove(this);
+                    MainGUI.frame.add(new Intro("error", 1));
+                    MainGUI.frame.revalidate();
+                    MainGUI.frame.repaint();
+                }
+                if (600 < confirmation.getCode() && confirmation.getCode() < 699) {
+                    MainGUI.frame.remove(this);
+                    MainGUI.frame.add(new PreGameRes(handler));
+                    MainGUI.frame.revalidate();
+                    MainGUI.frame.repaint();
+                }
+            }while(confirmation.getCode() == 402);
         }
-        try {
-            confirmation = (ObjectMessage) handler.readMessage();
-        } catch (EndingGameException endingGameException) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Intro("error", 1));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
         }
-        if(600<confirmation.getCode() && confirmation.getCode()<699){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new PreGameRes(handler));
-            MainGUI.frame.revalidate();
-        }
-
-    }
 
 
 }

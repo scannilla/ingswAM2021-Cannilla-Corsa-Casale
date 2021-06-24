@@ -2,71 +2,67 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
-import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.controller.Message;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AskNicknameMulti extends JPanel implements ActionListener {
+public class JoinGame extends JPanel implements ActionListener {
 
-    private final JTextField nickname;
+    private final JButton joinGame;
     private final ClientMessageHandler handler;
-
-
-    public AskNicknameMulti(ClientMessageHandler handler){
+    public JoinGame(ClientMessageHandler handler){
         this.handler = handler;
-        nickname = new JTextField("Insert nickname here");
-        nickname.setBounds(300, 300, 200, 50);
-        nickname.setEditable(true);
-        nickname.addActionListener(this);
-        this.add(nickname);
+        joinGame = new JButton("Join Game");
+        joinGame.addActionListener(this);
+        joinGame.setBounds(350, 350, 100, 100);
+        this.add(joinGame);
         this.setSize(800, 800);
         this.setVisible(true);
         this.setLayout(null);
-        this.setBackground(Color.WHITE);
-    }
-
-    public void paint(Graphics g){
-        g.drawString("Insert a nickname (max 16 chars)", 300, 100);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e){
-        if(e.getSource() == nickname){
+        if(e.getSource() == joinGame){
+
             try {
-                handler.sendMessageToServer(nickname.getText(), 171);
+                handler.sendMessageToServer("join game");
             } catch (EndingGameException endingGameException) {
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new Intro("error", 1));
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             }
-            Message received = null;
+            Message confirm = null;
             try{
-                received = handler.readMessage();
+                confirm = handler.readMessage();
             } catch (EndingGameException ex){
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new Intro("error", 1));
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             }
-            if(received.getCode() == 310) {
-                Data.instanceCreator().setNickname(received.getNickname());
+            if (confirm.getCode() == 112){
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new WaitingRoom(handler));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
+            } else if (confirm.getCode() == 201){
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new Multi(handler));
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             }
+
+
         }
-
     }
+
+
+
 }
-
-
-

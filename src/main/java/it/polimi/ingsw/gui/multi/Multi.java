@@ -70,7 +70,7 @@ public class Multi extends JPanel implements ActionListener {
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(2, handler));
+                MainGUI.frame.add(new WaitingRoom(handler));
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             } else if (received.getMessage().equals("ko")){
@@ -95,7 +95,7 @@ public class Multi extends JPanel implements ActionListener {
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(3, handler));
+                MainGUI.frame.add(new WaitingRoom(handler));
                 MainGUI.frame.revalidate();
             } else if (received.getMessage().equals("ko")){
 
@@ -120,7 +120,7 @@ public class Multi extends JPanel implements ActionListener {
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(4, handler));
+                MainGUI.frame.add(new WaitingRoom(handler));
                 MainGUI.frame.revalidate();
             } else if (received.getMessage().equals("ko")) {
 
@@ -144,7 +144,7 @@ public class Multi extends JPanel implements ActionListener {
             }
             if (received.getMessage().equals("ok")) {
                 MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(1, handler));
+                MainGUI.frame.add(new WaitingRoom(handler));
                 MainGUI.frame.revalidate();
                 MainGUI.frame.repaint();
             }

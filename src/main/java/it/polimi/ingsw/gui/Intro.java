@@ -12,6 +12,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkclient.ClientListener;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
@@ -78,6 +80,7 @@ public class Intro extends JPanel implements ActionListener {
                 clientSocket = new Socket(hostName, portNumber);
                 cmHandler = new ClientMessageHandler(clientSocket);
                 new Thread(new ClientListener(cmHandler, true)).start();
+                cmHandler.sendMessageToServer("create game", 111);
             } catch (UnknownHostException ex) {
                 System.err.println("Don't know about host " + hostName);
                 System.exit(1);
@@ -88,10 +91,21 @@ public class Intro extends JPanel implements ActionListener {
                 System.err.println("Game over, disconnecting");
                 System.exit(1);
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new AskNicknameMulti(cmHandler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            Message confirm = null;
+            try {
+                confirm = cmHandler.readMessage();
+            } catch (EndingGameException endingGameException) {
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
+            }
+            if (confirm.getCode() == 201 || confirm.getCode() == 112) {
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new AskNicknameMulti(cmHandler));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
+            }
         } else if(e.getSource()==local) {
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Local(spHandler));

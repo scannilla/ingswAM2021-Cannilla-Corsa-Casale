@@ -10,6 +10,7 @@ import it.polimi.ingsw.leader.LeaderCard;
 
 public class Data {
 
+    private static String nickname;
 private static MarketStructure marketStructure;
 private static ProductionCardsMarket productionCardsMarket;
 private static PersonalBoard personalBoard;
@@ -50,6 +51,10 @@ private static Data instance;
         MainGUI.frame.getContentPane().repaint();
     }
 
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+
     public MarketStructure getMarketStructure(){
         return this.marketStructure;
     }
@@ -64,6 +69,10 @@ private static Data instance;
 
     public LeaderCard[] getLeaderCards(){
         return this.leaderCards;
+    }
+
+    public String getNickname(){
+        return this.nickname;
     }
 
 

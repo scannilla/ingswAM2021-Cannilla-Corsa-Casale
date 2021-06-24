@@ -11,12 +11,14 @@ import it.polimi.ingsw.leader.LeaderCard;
 public class Data {
 
     private static String nickname;
-private static MarketStructure marketStructure;
-private static ProductionCardsMarket productionCardsMarket;
-private static PersonalBoard personalBoard;
-private static LeaderCard[] leaderCards;
-private static ActionTokenPile tokenPile;
-private static Data instance;
+    private static MarketStructure marketStructure;
+    private static ProductionCardsMarket productionCardsMarket;
+    private static PersonalBoard personalBoard;
+    private static LeaderCard[] leaderCards;
+    private static LeaderCard[] activeLeaderCards;
+    private static LeaderCard[] toChooseLeaderCards;
+    private static ActionTokenPile tokenPile;
+    private static Data instance;
 
     private Data(){ }
 
@@ -28,7 +30,7 @@ private static Data instance;
     }
 
     public void setMarketStructure(MarketStructure marketStructure) {
-        this.marketStructure = marketStructure;
+        Data.marketStructure = marketStructure;
         MainGUI.frame.getContentPane().repaint();
     }
 
@@ -37,34 +39,35 @@ private static Data instance;
     }
 
     public void setProductionCardsMarket(ProductionCardsMarket productionCardsMarket) {
-        this.productionCardsMarket = productionCardsMarket;
+        Data.productionCardsMarket = productionCardsMarket;
         MainGUI.frame.getContentPane().repaint();
     }
 
     public void setTokenPile(ActionTokenPile tokenPile){
-        this.tokenPile = tokenPile;
+        Data.tokenPile = tokenPile;
         MainGUI.frame.getContentPane().repaint();
     }
 
     public void setPersonalBoard(PersonalBoard personalBoard) {
-        this.personalBoard = personalBoard;
+        Data.personalBoard = personalBoard;
         MainGUI.frame.getContentPane().repaint();
     }
 
     public void setNickname(String nickname){
-        this.nickname = nickname;
+        Data.nickname = nickname;
     }
 
+
     public MarketStructure getMarketStructure(){
-        return this.marketStructure;
+        return marketStructure;
     }
 
     public ProductionCardsMarket getProductionCardsMarket(){
-        return this.productionCardsMarket;
+        return productionCardsMarket;
     }
 
     public PersonalBoard getPersonalBoard(){
-        return this.personalBoard;
+        return personalBoard;
     }
 
     public LeaderCard[] getLeaderCards(){
@@ -72,7 +75,7 @@ private static Data instance;
     }
 
     public String getNickname(){
-        return this.nickname;
+        return nickname;
     }
 
 

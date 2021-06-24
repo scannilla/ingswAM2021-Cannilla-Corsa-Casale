@@ -41,8 +41,15 @@ public class ActiveLeader extends JPanel implements ActionListener {
 
     public void paint(Graphics g){
         leaderCards = Data.instanceCreator().getLeaderCards();
-        g.drawRect(200, 200, 100, 200);
-        g.drawRect(350, 200, 100, 200);
+        g.drawRect(100, 100, 300, 100);
+        g.drawRect(400, 100, 300, 100);
+        g.drawRect(100, 200, 300, 100);
+        g.drawRect(400, 200, 300, 100);
+        g.drawRect(100, 300, 300, 100);
+        g.drawRect(400, 300, 300, 100);
+        g.drawRect(100, 400, 300, 100);
+        g.drawRect(400, 400, 300, 100);
+        myDrawImagePNG(g);
     }
 
     @Override

@@ -17,4 +17,8 @@ public abstract class Listener {
     public void notifyChange(Object update, String nickname) throws EndingGameException {
     }
 
+    public void notifyChange(Object update, String nickname, int code) throws EndingGameException {
+
+    }
+
 }

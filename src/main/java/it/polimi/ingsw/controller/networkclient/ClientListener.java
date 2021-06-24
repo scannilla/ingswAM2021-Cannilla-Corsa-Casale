@@ -97,6 +97,8 @@ public class ClientListener implements Runnable{
                 PersonalBoardDraw.drawPB(personalBoard);
                 break;
             case 653:
+            case 654:
+            case 655:
                 ActiveLeaderCardsDraw.drawActiveLeaderCards((LeaderCard[]) obj.getObj());
                 break;
         }

@@ -23,4 +23,9 @@ public class LeaderCardListener extends Listener {
     public void notifyChange(Object update, String nickname) throws EndingGameException {
         mHandler.sendObjectToClient(new ObjectMessage(update, 653, nickname));
     }
+
+    @Override
+    public void notifyChange(Object update, String nickname, int code) throws EndingGameException {
+        mHandler.sendObjectToClient(new ObjectMessage(update, code, nickname));
+    }
 }

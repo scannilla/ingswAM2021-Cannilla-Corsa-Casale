@@ -5,6 +5,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
+import it.polimi.ingsw.controller.networkserver.Response;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.resources.Resource;
@@ -30,19 +31,19 @@ public class GameSetup {
         try {
             switch (index) {
                 case 0:
-                    mHandler.sendMessageToClient("You're the first player so you're not gonna receive any resource or faith point");
+                    mHandler.sendMessageToClient("You're the first player so you're not gonna receive any resource or faith point", 180);
                     break;
                 case 1:
-                    mHandler.sendMessageToClient("You're the second player so you can choose a resource to add to your warehouse depot");
+                    mHandler.sendMessageToClient("You're the second player so you can choose a resource to add to your warehouse depot", 180);
                     insertResource();
                     break;
                 case 2:
-                    mHandler.sendMessageToClient("You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one");
+                    mHandler.sendMessageToClient("You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one", 180);
                     player.increaseFaith(1);
                     insertResource();
                     break;
                 case 3:
-                    mHandler.sendMessageToClient("You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one");
+                    mHandler.sendMessageToClient("You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one", 180);
                     player.increaseFaith(1);
                     for (int i = 0; i < 2; i++) {
                         insertResource();
@@ -51,6 +52,8 @@ public class GameSetup {
 
             }
             selectLeaderCards();
+            Response r = new Response("Setup complete", 320 + index);
+            mHandler.sendMessageToClient(r);
         } catch (EndingGameException e) {
             throw new EndingGameException();
         }
@@ -58,11 +61,11 @@ public class GameSetup {
     }
 
     private void insertResource() throws EndingGameException {
-        mHandler.sendMessageToClient("select now the resource: coin, stone, servant or shield");
+        mHandler.sendMessageToClient("select now the resource: coin, stone, servant or shield", 181);
         String chosenResource = CheckCommand.commandChecker(new String[] {"coin", "stone", "servant", "shield"}, mHandler.readClientMessage(), mHandler);
         int chosenLine;
         do {
-            mHandler.sendMessageToClient("Select where to insert the chosen resource");
+            mHandler.sendMessageToClient("Select where to insert the chosen resource", 182);
             chosenLine = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
         } while (chosenLine<1 || chosenLine>3);
         player.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(chosenResource),chosenLine);
@@ -72,15 +75,15 @@ public class GameSetup {
         LeaderCardsDeck deck = game.getLeaderCardsDeck();
         ArrayList<LeaderCard> cards = deck.pick4cards();
         ArrayList<LeaderCard> chosenCards = new ArrayList<>();
-        mHandler.sendMessageToClient("Select 2 of these 4 cards");
-        mHandler.sendObjectToClient(new ObjectMessage(cards, 23, player.getNickname()));
-        mHandler.sendMessageToClient("Send the number of the first card");
+        mHandler.sendMessageToClient("Select 2 of these 4 cards",183 );
+        mHandler.sendObjectToClient(new ObjectMessage(cards, 655, player.getNickname()));
+        mHandler.sendMessageToClient("Send the number of the first card", 184);
         String chosen = mHandler.readClientMessage();
         int card = CheckCommand.checkNumber(chosen, mHandler);
         chosenCards.add(cards.get(card-1));
         int card2 = 0;
         do {
-            mHandler.sendMessageToClient("Send the number of the second card");
+            mHandler.sendMessageToClient("Send the number of the second card", 185);
             chosen = mHandler.readClientMessage();
             card2 = CheckCommand.checkNumber(chosen, mHandler);
         } while (card == card2);

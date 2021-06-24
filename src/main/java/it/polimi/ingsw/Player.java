@@ -88,6 +88,8 @@ public class Player implements Serializable {
     public void activateLeaderCard(LeaderCard leaderCard) throws IllegalArgumentException{
         if(leaderCards[0]!=leaderCard && leaderCards[1]!=leaderCard)
             throw new IllegalArgumentException("Card not found");
+        if(activeLeaderCards[0]==leaderCard || activeLeaderCards==leaderCards)
+            throw new IllegalArgumentException("Card already activated");
         if(leaderCard.getRequiredRes()[0]!=null) {
             int[] counter = ResourceCounter.resCount(leaderCard.getRequiredRes());
             int[] depotCounter = personalBoard.getWarehouseDepot().getDepotResourceAmount();
@@ -125,6 +127,8 @@ public class Player implements Serializable {
                         activeLeaderCards[1] = leaderCard;
                     else activeLeaderCards[0] = leaderCard;
                 }
+                else
+                    throw new IllegalArgumentException("Not enough production cards");
             }
         }
         this.setWp(this.getWp()+leaderCard.getWp());

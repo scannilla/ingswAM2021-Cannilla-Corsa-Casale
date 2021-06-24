@@ -39,4 +39,16 @@ public class EventManager {
         }
     }
 
+    public static void notifyListener(EventType type, Object update, String nickname, int code) {
+        for (Map.Entry<Listener, EventType> entry : listeners.entrySet()) {
+            if (entry.getValue().equals(type)) {
+                try {
+                    entry.getKey().notifyChange(update, nickname, code);
+                } catch (EndingGameException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

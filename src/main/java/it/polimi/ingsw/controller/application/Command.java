@@ -180,9 +180,10 @@ public class Command{
         if(chosenCard>=1 && chosenCard<=2) {
             try {
                 commandPlayer.activateLeaderCard(commandPlayer.getLeaderCards()[chosenCard - 1]);
+                EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getActiveLeaderCards());
                 return new Response("Card activated", 210);
             } catch (IllegalArgumentException e) {
-                return new Response("Unable to activate this card", 415);
+                return new Response(e.getMessage(), 415);
             }
         }
         else
@@ -432,7 +433,7 @@ public class Command{
                 }
                 if(pl == commandPlayer.getConnectedGame().getPlayers().indexOf(commandPlayer)) {
                     EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getActiveLeaderCards(), commandPlayer.getNickname());
-                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getLeaderCards(), commandPlayer.getNickname());
+                    EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getLeaderCards(), commandPlayer.getNickname(), 654);
                 } else if(pl>0 && pl <4) {
                     EventManager.notifyListener(EventType.LEADERCARD, commandPlayer.getConnectedGame().getPlayers().get(pl).getActiveLeaderCards());
                 } else

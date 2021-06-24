@@ -8,6 +8,8 @@ import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.production.ProdCardSlot;
 import it.polimi.ingsw.production.ProductionCard;
+import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.resources.ResourceCounter;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -68,9 +70,25 @@ public class ActiveProduction extends JPanel implements ActionListener {
         int[] type = new int[3];
         int[] level = new int[3];
         int[] winPoints = new int[3];
+        Resource[] reqRes1 = topCard[0].getRequiredRes();
+        Resource[] reqRes2 = topCard[1].getRequiredRes();
+        Resource[] reqRes3 = topCard[2].getRequiredRes();
+        int[] requiredResType1 = ResourceCounter.resCount(reqRes1);
+        int[] requiredResType2 = ResourceCounter.resCount(reqRes2);
+        int[] requiredResType3 = ResourceCounter.resCount(reqRes3);
+        Resource[] givenRes1 = topCard[0].getGivenRes();
+        Resource[] givenRes2 = topCard[1].getGivenRes();
+        Resource[] givenRes3 = topCard[2].getGivenRes();
+        int[] totGivenRes1 = ResourceCounter.resCount(givenRes1);
+        int[] totGivenRes2 = ResourceCounter.resCount(givenRes2);
+        int[] totGivenRes3 = ResourceCounter.resCount(givenRes3);
         int x = 0;
         int y = 0;
         int j = 0;
+        int k = 0;
+        int r = 0;
+        int p = 0;
+        int q = 0;
         for (int i = 0; i < 3; i++) {
             level[i] = topCard[i].getLevel();
         }
@@ -80,7 +98,6 @@ public class ActiveProduction extends JPanel implements ActionListener {
         for (int i = 0; i<3; i++) {
             winPoints[i] = topCard[i].getWp();
         }
-
         for (int i = 0; i < 3; i++) {
             switch (type[i]) {
                 case 1:
@@ -139,6 +156,338 @@ public class ActiveProduction extends JPanel implements ActionListener {
         for (int i = 0; i < 3; i++) {
             g.drawString("Win Points:" + winPoints[i], 280 + j, 470);
             j = j + 230;
+        }
+        for (int i = 0; i < 3; i++) {
+            g.drawString("Required:", 280 + k, 490);
+            k = k + 230;
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (i){
+                case 0:
+                    url = cl.getResourceAsStream("coin2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280, 500 + r, null);
+                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                    r = r + 20;
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("stone2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280, 500 + r, null);
+                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                    r = r + 20;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("servant2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280, 500 + r, null);
+                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                    r = r +20;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("shield2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 280, 500 + r, null);
+                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                    r = r + 20;
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (i){
+                case 0:
+                    url = cl.getResourceAsStream("coin2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 510, 500 + r, null);
+                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                    p = p + 20;
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("stone2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 510, 500 + r, null);
+                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                    p = p +20;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("servant2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 510, 500 + r, null);
+                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                    p = p + 20;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("shield2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 510, 500 + r, null);
+                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                    p = p + 20;
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (i){
+                case 0:
+                    url = cl.getResourceAsStream("coin2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                    q = q + 20;
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("stone2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                    q = q + 20;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("servant2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                    q = q + 20;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("shield2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                    q = q + 20;
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            g.drawString("Given:", 280 + k, 580);
+            k = k + 230;
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (i){
+                case 0:
+                    url = cl.getResourceAsStream("coin2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("stone2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("servant2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("shield2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (i){
+                case 0:
+                    url = cl.getResourceAsStream("coin2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes2[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("stone2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" +  givenRes2[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("servant2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" +  givenRes2[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("shield2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" +  givenRes2[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (i){
+                case 0:
+                    url = cl.getResourceAsStream("coin2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" +  givenRes3[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 1:
+                    url = cl.getResourceAsStream("stone2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + requiredResType3[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("servant2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes3[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("shield2.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 740, 500 + r, null);
+                    g.drawString("x" + givenRes3[i], 320, 590 + q);
+                    q = q + 20;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

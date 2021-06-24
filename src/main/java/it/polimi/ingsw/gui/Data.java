@@ -34,8 +34,19 @@ public class Data {
         MainGUI.frame.getContentPane().repaint();
     }
 
+    public void setActiveLeaderCards(LeaderCard[] activeLeaderCards){
+        Data.activeLeaderCards = activeLeaderCards;
+        MainGUI.frame.getContentPane().repaint();
+    }
+
+    public void setToChooseLeaderCards(LeaderCard[] toChooseLeaderCards){
+        Data.toChooseLeaderCards = toChooseLeaderCards;
+        MainGUI.frame.getContentPane().repaint();
+    }
+
     public void setLeaderCards(LeaderCard[] leaderCards){
-        this.leaderCards = leaderCards;
+        Data.leaderCards = leaderCards;
+        MainGUI.frame.getContentPane().repaint();
     }
 
     public void setProductionCardsMarket(ProductionCardsMarket productionCardsMarket) {
@@ -72,6 +83,14 @@ public class Data {
 
     public LeaderCard[] getLeaderCards(){
         return this.leaderCards;
+    }
+
+    public LeaderCard[] getLeaderCards(){
+        return leaderCards;
+    }
+
+    public LeaderCard[] getToChooseLeaderCards(){
+        return toChooseLeaderCards;
     }
 
     public String getNickname(){

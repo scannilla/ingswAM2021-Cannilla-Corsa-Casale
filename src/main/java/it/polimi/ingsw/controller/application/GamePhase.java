@@ -67,7 +67,7 @@ public enum GamePhase implements Comparable<GamePhase> {
                 return new String[] {"setup game"};
             case GAME_PHASE:
                 return new String[] {"buy production card", "buy resource", "activate leader card", "card production", "standard production",
-                "move resources", "discard leader card", "end turn"};
+                "move resources", "leader production", "discard leader card", "view", "end turn"};
 
         }
         return null;

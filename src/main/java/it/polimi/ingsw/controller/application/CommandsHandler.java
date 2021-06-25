@@ -6,8 +6,12 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
 import it.polimi.ingsw.controller.networkserver.Response;
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
+import it.polimi.ingsw.controller.virtualview.TokenListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CommandsHandler {
     private static CommandsHandler instance;
@@ -64,6 +68,8 @@ public class CommandsHandler {
                         numbOfPlayers = new GameCreator(mHandler).createGame(game);
                         if (game.getPlayers().indexOf(player) == 0)
                             new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
+                        if(numbOfPlayers==1)
+                            EventManager.subscribe(EventType.TOKEN, new TokenListener(mHandler));
                         fsm.evolveGamePhase();
                         return new Response("ok", 201);
                     }
@@ -96,7 +102,7 @@ public class CommandsHandler {
                     try {
                         game.endTurn();
                     } catch (RuntimeException e) {
-                        fsm.evolveGamePhase();
+                        createLeaderboard();
                     }
                 else if (returnValue.getMessage().contains("$")) {
                     RequiredClientActions r = new RequiredClientActions(c, player, mHandler);
@@ -109,6 +115,46 @@ public class CommandsHandler {
             default:
         }
         return new Response("Incorrect command", 401);
+    }
+
+    public Response getValidCommands() {
+        String validCommand = "You inserted a wrong command. These are the valid commands: ";
+        for(String s : fsm.validCommands())
+            validCommand = validCommand.concat(s + ", ");
+        return new Response(validCommand, 113);
+    }
+
+    private void createLeaderboard() {
+        ArrayList<Player> leaderBoard = new ArrayList<>();
+        if(game.getPlayers().size()>1) {
+            for (Player p : game.getPlayers()) {
+                if (leaderBoard.isEmpty())
+                    leaderBoard.add(p);
+                else {
+                    for (Player p1 : leaderBoard) {
+                        if (p.getWp() > p1.getWp()) {
+                            leaderBoard.add(leaderBoard.indexOf(p1), p);
+                            break;
+                        } else if (p.getWp() <= leaderBoard.get(leaderBoard.size() - 1).getWp()) {
+                            leaderBoard.add(p);
+                        }
+                    }
+                }
+            }
+            EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard);
+        }
+        else {
+            if(game.getPlayers().get(0).getWp() > game.getLorenzo().getWp()) {
+                leaderBoard.add(game.getPlayers().get(0));
+                leaderBoard.add(game.getLorenzo());
+                EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 658);
+            }
+            else {
+                leaderBoard.add(game.getLorenzo());
+                leaderBoard.add(game.getPlayers().get(0));
+                EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 659);
+            }
+        }
     }
 
 }

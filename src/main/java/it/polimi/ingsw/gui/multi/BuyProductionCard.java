@@ -164,4 +164,191 @@ public class BuyProductionCard extends JPanel implements ActionListener {
             MainGUI.frame.revalidate();
         }
     }
+
+    private void drawCostArray(Graphics g, int[][] costArrays) {
+        ClassLoader cl = this.getClass().getClassLoader();
+        InputStream url;
+        BufferedImage img = null;
+        int x = 0,y = 0;
+        for (int i = 0; i < 9; i++) {
+            for(int j = 0; j<4; j++) {
+                switch (j){
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                g.drawImage(img, 55 + x, 440 + y, null);
+                g.drawString("x" + costArrays[i][j], 55 + x, 460 + y);
+                x += 150;
+                if(i%3==0 && i!=0) {
+                    x = 0;
+                    y += 250;
+                }
+            }
+        }
+    }
+
+        private void drawRequiredRes(Graphics g, int[][] requiredRes) {
+        int x = 0;
+        int y = 0;
+        ClassLoader cl = this.getClass().getClassLoader();
+            BufferedImage img;
+            InputStream url;
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 4; j++) {
+                    switch (j) {
+                        case 0:
+                            url = cl.getResourceAsStream("coin2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x, 440 + y, null);
+                            g.drawString("x" + requiredRes[i][j], 55 + x + 20, 500 + y);
+                            x += 150;
+                            break;
+                        case 1:
+                            url = cl.getResourceAsStream("stone2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x, 500 + y, null);
+                            g.drawString("x" + requiredRes[i][j], 55 + x + 20, 500 + y);
+                            break;
+                        case 2:
+                            url = cl.getResourceAsStream("servant2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x + 20, 500 + y, null);
+                            g.drawString("x" + requiredRes[i][j], 55 + x + 20 , 500 + y);
+                            break;
+                        case 3:
+                            url = cl.getResourceAsStream("shield2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x + 20, 500 + y, null);
+                            g.drawString("x" + requiredRes[i][j], 55 + x + 20, 500 + y);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if(i%3==0 && i!=0) {
+                    x = 0;
+                    y = y + 250;
+                }
+            }
+        }
+        private void drawGivenRes(Graphics g, int[][] givenRes){
+            int x = 0;
+            int y = 0;
+            ClassLoader cl = this.getClass().getClassLoader();
+            BufferedImage img;
+            InputStream url;
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 4; j++) {
+                    switch (j) {
+                        case 0:
+                            url = cl.getResourceAsStream("coin2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x, 440 + y, null);
+                            g.drawString("x" + givenRes[i][j], 55 + x + 20, 540 + y);
+                            x += 150;
+                            break;
+                        case 1:
+                            url = cl.getResourceAsStream("stone2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x, 500 + y, null);
+                            g.drawString("x" + givenRes[i][j], 55 + x + 20, 540 + y);
+                            break;
+                        case 2:
+                            url = cl.getResourceAsStream("servant2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x + 20, 500 + y, null);
+                            g.drawString("x" + givenRes[i][j], 55 + x + 20 , 540 + y);
+                            break;
+                        case 3:
+                            url = cl.getResourceAsStream("shield2.png");
+                            try {
+                                img = ImageIO.read(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+                            g.drawImage(img, 55 + x + 20, 500 + y, null);
+                            g.drawString("x" + givenRes[i][j], 55 + x + 20, 540 + y);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if(i%3==0 && i!=0) {
+                    x = 0;
+                    y = y + 250;
+                }
+            }
+        }
 }

@@ -1,5 +1,4 @@
 {
-  "numberOfReports": 3,
   "reportsLength": [
     4,
     4,
@@ -10,12 +9,7 @@
     16,
     24
     ],
-  "popeFavourTile": [
-    2,
-    3,
-    4
-  ],
-  "popeWinPoints": [
+  "winPoints": [
     1,
     2,
     3,

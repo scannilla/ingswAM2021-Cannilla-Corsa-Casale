@@ -59,6 +59,8 @@ public class NewServerGameProtocol implements Callable<Integer> {
             try {
                 command = mHandler.readClientMessage();
                 Response response = handler.tryCommand(createCommand(command), player, mHandler);
+                if(response.getCode() == 401)
+                    response = handler.getValidCommands();
                 mHandler.sendMessageToClient(response);
             } catch (EndingGameException e) {
                 break;
@@ -98,5 +100,6 @@ public class NewServerGameProtocol implements Callable<Integer> {
         EventManager.subscribe(EventType.MARKET, new MarketListener(mHandler));
         EventManager.subscribe(EventType.PERSONALBOARD, new PersonalBoardListener(mHandler));
         EventManager.subscribe(EventType.LEADERCARD, new LeaderCardListener(mHandler));
+        EventManager.subscribe(EventType.LEADERBOARD, new LeaderboardListener(mHandler));
     }
 }

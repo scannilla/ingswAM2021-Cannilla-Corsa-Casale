@@ -41,7 +41,7 @@ public class ClientListener implements Runnable{
     }
 
     /**
-     * this method makes the client listen to the server
+     * Parallel thread to always keep listening
      */
     @Override
     public void run() {
@@ -51,7 +51,7 @@ public class ClientListener implements Runnable{
                     Message read = cmHandler.readMessage();
                     if (read.getCode()==310)
                         nickname = read.getMessage();
-                    if(read.getNickname()== null || nickname.equals(read.getNickname())) {
+                    else if(read.getNickname()== null || nickname.equals(read.getNickname())) {
                         if (read.getCode() >= 600)
                             readObject(read);
                         else
@@ -82,6 +82,11 @@ public class ClientListener implements Runnable{
         printObj(object);
     }
 
+    /**
+     * Method used to call Cli view methods on objects
+     * @param obj ObjectMessage
+     */
+
     public static void printObj(ObjectMessage obj) {
         switch (obj.getCode()) {
             case 650:
@@ -100,6 +105,9 @@ public class ClientListener implements Runnable{
             case 654:
             case 655:
                 ActiveLeaderCardsDraw.drawActiveLeaderCards((LeaderCard[]) obj.getObj());
+                break;
+            case 656:
+                //token draw
                 break;
         }
     }

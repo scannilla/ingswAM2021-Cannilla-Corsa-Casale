@@ -31,9 +31,53 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
 
     public void paint(Graphics g){
         personalBoard = Data.instanceCreator().getPersonalBoard();
-        for(int x = 50; x<1200; x = x + 50){ //percorso fede
-            g.drawRect(x, 100, 50, 50);
+        vatReport = Data.instanceCreator().getVatReport();
+        int[] activationPos = vatReport.getActivationPosition();
+        int[] winPoints = vatReport.getWinPoints();
+        int[] length = vatReport.getReportsLength();
+        Font f = new Font("Times New Roman", Font.BOLD, 10);
+        g.setFont(f);
+
+        for (int j = 0; j <= activationPos[0] - length[0]; j++) {
+            g.setColor(Color.white);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
         }
+        for (int j = activationPos[0] - length[0] + 1; j <= activationPos[0]; j++) {
+            g.setColor(Color.yellow);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
+        }
+        for (int j = activationPos[0] + 1; j <= activationPos[61] - length[1]; j++) {
+            g.setColor(Color.white);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
+        }
+        for (int j = activationPos[1] - length[1] + 1; j <= activationPos[1]; j++) {
+            g.setColor(Color.yellow);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
+        }
+        for (int j = activationPos[1] + 1; j <= activationPos[2] - length[2]; j++) {
+            g.setColor(Color.white);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
+        }
+        for (int j = activationPos[2] - length[2] + 1; j <= activationPos[2]; j++) {
+            g.setColor(Color.yellow);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
+        }
+        for (int j = activationPos[2] + 1; j < 25; j++) {
+            g.setColor(Color.white);
+            g.drawRect(j * 32, 50, 32, 32);
+            g.drawString("P" + j, 1 + 32 * j, 51);
+        }
+
+        g.setColor(Color.yellow);
+        drawPosition(g, personalBoard.getPosition());
+
+
         g.drawRect(50, 600, 200, 100); //strongbox
         for (int j = 300; j<600; j = j + 150){ //prodcard slot
             g.drawRect(j, 600, 100, 200);

@@ -1,7 +1,10 @@
 package it.polimi.ingsw;
 
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderCardsDeck;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsDeck;
@@ -41,7 +44,7 @@ public class Game implements Serializable{
      */
     private MarketStructure market;
 
-    private final VaticanReport vaticanReport = new VaticanReport();
+    private VaticanReport vaticanReport;
 
     private final ProductionCardsMarket cardsMarket = new ProductionCardsMarket();
 
@@ -50,6 +53,7 @@ public class Game implements Serializable{
     private Player activePlayer;
 
     private Player lorenzo;
+
 
 
 
@@ -72,6 +76,7 @@ public class Game implements Serializable{
         leaderCardsDeck.shuffleDeck();
         players.get(0).setActive(true);
         activePlayer = players.get(0);
+        vaticanReport = GSON.vaticanReportParser(new File("src/main/java/it/polimi/ingsw/vatReport.json"));
     }
 
     /**
@@ -174,14 +179,27 @@ public class Game implements Serializable{
         throw new IllegalArgumentException();
     }
 
+    /**
+     * When a player connects to the game is added to the list
+     * @param player Player
+     */
     public void addPlayer(Player player) {
         this.players.add(player);
     }
 
+    /**
+     * Sets the number of players for the current game after the host choice
+     * @param numberOfPlayers int
+     */
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
 
+    /**
+     * Informs about the previous player, useless in case of single player
+     * @param player Player
+     * @return player Player
+     */
     public Player previousPlayer(Player player) {
         for (Player p : players) {
             if (p==player) {
@@ -197,7 +215,11 @@ public class Game implements Serializable{
         throw new IllegalArgumentException();
     }
 
-
+    /**
+     * End the turn for the active player, checks if any of the conditions for the game to end has been met
+     * @throws EndingGameException e1
+     * @throws RuntimeException e2
+     */
     public void endTurn() throws EndingGameException, RuntimeException {
         if(activePlayer.isLast())
             throw new RuntimeException();
@@ -212,11 +234,17 @@ public class Game implements Serializable{
         activePlayer.setActive(true);
     }
 
+    /**
+     * Handler for single player's Lorenzo's turn
+     * @throws EndingGameException e
+     */
     public void lorenzoTurn() throws EndingGameException {
         ActionToken token = actionTokensPile.popToken();
+        EventManager.notifyListener(EventType.TOKEN, token);
         token.activateAction(this, lorenzo);
     }
 
-
-
+    public Player getLorenzo() {
+        return lorenzo;
+    }
 }

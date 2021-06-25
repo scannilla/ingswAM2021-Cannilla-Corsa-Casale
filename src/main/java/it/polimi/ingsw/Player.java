@@ -156,7 +156,7 @@ public class Player implements Serializable {
     public void increaseFaith(int faithPoints)  {
         personalBoard.setPosition(personalBoard.getPosition()+faithPoints);
         int i=0;
-        while (connectedGame.getVaticanReport().getActivatedEvent()[i] && i<connectedGame.getVaticanReport().getNumberOfReports())
+        while (connectedGame.getVaticanReport().getActivatedEvent()[i] && i<3)
             i++;
         if(personalBoard.getPosition()+faithPoints>=connectedGame.getVaticanReport().getActivationPosition()[i])
             connectedGame.activateEvent(i);

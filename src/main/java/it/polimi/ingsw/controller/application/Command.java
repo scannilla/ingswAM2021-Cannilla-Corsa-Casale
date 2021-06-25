@@ -49,10 +49,6 @@ public class Command{
             case "cardproduction":
                 return cardProduction();
 
-            case "activateleaderability":
-                //only certain abilities can be activated
-                break;
-
             case "moveresources":
                 Response result = moveResources();
                 EventManager.notifyListener(EventType.PERSONALBOARD, commandPlayer.getPersonalBoard());
@@ -76,7 +72,6 @@ public class Command{
             default:
                 return new Response("No such command", 401);
         }
-        return new Response("Unknown error", 403);
     }
 
 

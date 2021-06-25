@@ -5,34 +5,22 @@ import java.util.LinkedHashMap;
 public final class VaticanReport {
 
     /**
-     * This attribute represents the number of this Vatican Report
-     */
-
-    private  int numberOfReports;
-
-    /**
      * This attribute represents the length of each report
      */
 
-    private final int[] reportsLength = new int[numberOfReports];
+    private final int[] reportsLength = new int[3];
 
     /**
      * This attribute represents the activation position for this Vatican Report
      */
 
-    private final int[] activationPosition = new int[numberOfReports];
-
-    /**
-     * This attribute represents how many Win Points each Vatican Report gives
-     */
-
-    private final int[] popeFavourTile = new int[numberOfReports];
+    private final int[] activationPosition = new int[3];
 
     /**
      * This attribute represents if a report has already been activated for each report
      */
 
-    private final boolean[] activatedEvent = new boolean[numberOfReports];
+    private final boolean[] activatedEvent = new boolean[3];
 
     LinkedHashMap<Integer, Integer> winPoints = new LinkedHashMap<>();
 
@@ -63,15 +51,6 @@ public final class VaticanReport {
     }
 
     /**
-     * Return vector of pope favours tile of this Vatican Report
-     * @return popeFavourTile int[]
-     */
-
-    public int[] getPopeFavourTile() {
-        return popeFavourTile;
-    }
-
-    /**
      * Return vector of activated events of this Vatican Report
      * @return activatedEvent boolean[]
      */
@@ -80,12 +59,11 @@ public final class VaticanReport {
         return activatedEvent;
     }
 
-    /**
-     * Return number of reports of this Vatican Report
-     * @return numberOfReports
-     */
+    public int[] getPopeFavourTile() {
+        return popeFavourTile;
+    }
 
-    public int getNumberOfReports() {
-        return numberOfReports;
+    public int[] getWinPoints() {
+        return winPoints;
     }
 }

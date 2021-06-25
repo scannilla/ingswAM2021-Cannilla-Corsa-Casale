@@ -7,7 +7,9 @@ import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
 
-public class ActionToken {
+import java.io.Serializable;
+
+public class ActionToken implements Serializable {
 
     /**
      * This attribute represents the type of action that the player can activate

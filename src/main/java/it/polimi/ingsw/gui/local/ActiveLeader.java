@@ -105,6 +105,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
             return;
         }
         g.drawImage(img, 125, 125, 50, 50, null);
+        g.drawImage(img, 125, 425, 50, 50, null);
         url = cl.getResourceAsStream("stone2.png");
         try {
             img = ImageIO.read(url);
@@ -113,6 +114,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
             return;
         }
         g.drawImage(img, 200, 125, 50, 50, null);
+        g.drawImage(img, 125, 425, 50, 50, null);
         url = cl.getResourceAsStream("servant2.png");
         try {
             img = ImageIO.read(url);
@@ -121,6 +123,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
             return;
         }
         g.drawImage(img, 275, 125, 50, 50, null);
+        g.drawImage(img, 125, 425, 50, 50, null);
         url = cl.getResourceAsStream("shield2.png");
         try {
             img = ImageIO.read(url);
@@ -129,6 +132,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
             return;
         }
         g.drawImage(img, 350, 125, 50, 50, null);
+        g.drawImage(img, 125, 425, 50, 50, null);
         switch (switchRes(ability1, leaderCards[0])) {
             case 1: url = cl.getResourceAsStream("conv coin.png");
                 try {

@@ -12,7 +12,7 @@ public class VaticanBoardDraw {
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] activationPosition = vaticanReport.getActivationPosition();
         int[] vaticanLength = vaticanReport.getReportsLength();
-        int[] winPoints = vaticanReport.getPopeFavourTile();// TODO parse winPoints
+        int[] winPoints = vaticanReport.getWinPoints();// TODO parse winPoints
         int pos = personalBoard.getPosition();
         drawColouredLine(activationPosition, vaticanLength);
         drawSecondLine(winPoints, activationPosition, vaticanLength);

@@ -22,7 +22,9 @@ public final class VaticanReport {
 
     private final boolean[] activatedEvent = new boolean[3];
 
-    LinkedHashMap<Integer, Integer> winPoints = new LinkedHashMap<>();
+    private final int[] winPoints = new int[8];
+
+    private final int[] popeFavourTile = {2,3,4};
 
     /**
      * activates an event

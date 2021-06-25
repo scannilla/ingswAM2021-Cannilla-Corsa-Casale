@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.VaticanReport;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.MainGUI;
@@ -13,6 +14,7 @@ import it.polimi.ingsw.gui.MainGUI;
 public class ShowPersonalBoard extends JPanel implements ActionListener {
 
     private PersonalBoard personalBoard;
+    private VaticanReport vatReport;
     private boolean fromTurn;
     private final ClientMessageHandler handler;
     private final JButton back;

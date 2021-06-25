@@ -2,6 +2,7 @@ package it.polimi.ingsw.gui;
 
 import com.sun.tools.javac.Main;
 import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.VaticanReport;
 import it.polimi.ingsw.gui.multi.BuyMarble;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProdCardSlot;
@@ -19,6 +20,7 @@ public class Data {
     private static LeaderCard[] activeLeaderCards;
     private static LeaderCard[] toChooseLeaderCards;
     private static ActionTokenPile tokenPile;
+    private static VaticanReport vatReport;
     private static Data instance;
 
     private Data(){ }

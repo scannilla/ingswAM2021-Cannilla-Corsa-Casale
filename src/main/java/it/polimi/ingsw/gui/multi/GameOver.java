@@ -11,7 +11,6 @@ public class GameOver extends JPanel implements ActionListener {
 
     private int players;
     private final JButton exit;
-    private Game game;
         public GameOver(int players, Game game){
             this.players = game.getNumberOfPlayers();
             exit = new JButton("exit");

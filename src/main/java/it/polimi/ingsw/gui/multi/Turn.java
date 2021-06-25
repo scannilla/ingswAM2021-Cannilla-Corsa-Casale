@@ -162,7 +162,7 @@ public class Turn extends JPanel implements ActionListener {
             MainGUI.frame.revalidate();
         } else if(e.getSource() == viewMyPB){
             try{
-                handler.sendMessageToServer("view -personalboard -1", 164);
+                handler.sendMessageToServer("view -personalboard", 164);
             } catch (EndingGameException ex){
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new Intro("error", 1));

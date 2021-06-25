@@ -71,6 +71,9 @@ public class Data {
         Data.nickname = nickname;
     }
 
+    public void setVatReport(VaticanReport vatReport){
+        Data.vatReport = vatReport;
+    }
 
     public MarketStructure getMarketStructure(){
         return marketStructure;
@@ -98,6 +101,10 @@ public class Data {
 
     public String getNickname(){
         return nickname;
+    }
+
+    public VaticanReport getVatReport(){
+        return vatReport;
     }
 
 

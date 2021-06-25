@@ -1,9 +1,14 @@
 package it.polimi.ingsw.gui.multi;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
 import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.VaticanReport;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
@@ -19,7 +24,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
     private final ClientMessageHandler handler;
     private final JButton back;
 
-    public ShowPersonalBoard(ClientMessageHandler handler, boolean fromTurn){
+    public ShowPersonalBoard(ClientMessageHandler handler, boolean fromTurn) {
         this.fromTurn = fromTurn;
         this.handler = handler;
         back = new JButton("Go Back");
@@ -31,7 +36,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
         this.setBackground(Color.white);
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         personalBoard = Data.instanceCreator().getPersonalBoard();
         vatReport = Data.instanceCreator().getVatReport();
         int[] activationPos = vatReport.getActivationPosition();
@@ -81,15 +86,20 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
 
 
         g.drawRect(50, 600, 200, 100); //strongbox
-        for (int j = 300; j<600; j = j + 150){ //prodcard slot
+        for (int j = 300; j < 600; j = j + 150) { //prodcard slot
             g.drawRect(j, 600, 100, 200);
         }
+        int index = 0;
+        for (int i = 0; i<25;i++){
+            if((i+1) % 3 == 0){
+                g.drawString("WP" + winPoints[index], 25+i*32, 51);
+            index++;
+            }
+
+        }
+
 
     }
-
-
-
-
 
 
 
@@ -106,5 +116,18 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                 MainGUI.frame.revalidate();
             }
         }
+    }
+    private void drawPosition(Graphics g, int position){
+        ClassLoader cl = this.getClass().getClassLoader();
+        BufferedImage img;
+        InputStream url;
+        url = cl.getResourceAsStream("crocerossa.png");
+        try {
+            img = ImageIO.read(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        g.drawImage(img, 10 + 32*position, 60, 12, 12, null);
     }
 }

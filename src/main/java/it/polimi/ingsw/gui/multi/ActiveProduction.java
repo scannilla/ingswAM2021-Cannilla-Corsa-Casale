@@ -58,6 +58,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
         g.drawRect(510, 400, 200, 300);
         g.drawRect(740, 400, 200, 300);
 
+        myDrawImagePNG(g);
 
     }
 
@@ -338,7 +339,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 1:
@@ -362,7 +363,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 3:
@@ -374,7 +375,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 default:
@@ -392,7 +393,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes2[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes2[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 1:
@@ -404,7 +405,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  givenRes2[i], 320, 590 + q);
+                    g.drawString("x" +  totGivenRes2[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 2:
@@ -416,7 +417,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  givenRes2[i], 320, 590 + q);
+                    g.drawString("x" +  totGivenRes2[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 3:
@@ -428,7 +429,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  givenRes2[i], 320, 590 + q);
+                    g.drawString("x" +  totGivenRes2[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 default:
@@ -446,7 +447,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  givenRes3[i], 320, 590 + q);
+                    g.drawString("x" +  totGivenRes3[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 1:
@@ -458,7 +459,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + requiredResType3[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes3[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 2:
@@ -470,7 +471,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes3[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes3[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 3:
@@ -482,7 +483,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes3[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes3[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 default:

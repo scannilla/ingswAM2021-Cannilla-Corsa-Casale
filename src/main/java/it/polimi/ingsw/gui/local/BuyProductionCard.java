@@ -72,6 +72,8 @@ public class BuyProductionCard extends JPanel implements ActionListener {
                 g.drawRect(x, y, 100, 200);
             }
         }
+
+
     }
 
 

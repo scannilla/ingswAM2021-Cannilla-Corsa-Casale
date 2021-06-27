@@ -213,12 +213,12 @@ class WarehouseDepotTest {
     @Test
     void moveResourceTest(){
 
-        Resource cointTest = new Resource(0);
+        Resource coinTest = new Resource(0);
         Resource stonesTest = new Resource(1);
         Resource servantsTest = new Resource(2);
 
         WarehouseDepot warehouseDepotTest = new WarehouseDepot();
-        warehouseDepotTest.insertNewResource(cointTest, 0);
+        warehouseDepotTest.insertNewResource(coinTest, 0);
 
         warehouseDepotTest.insertNewResource(stonesTest, 1);
         warehouseDepotTest.insertNewResource(stonesTest, 1);
@@ -235,7 +235,29 @@ class WarehouseDepotTest {
     }
 
     @Test
-    void moveResourceTestException1(){
+    void moveResourceTest1() {
+        WarehouseDepot warehouseDepotTest = new WarehouseDepot();
+        warehouseDepotTest.insertNewResource(new Resource("coin"),0);
+        warehouseDepotTest.insertNewResource(new Resource("shield"), 1);
+
+        warehouseDepotTest.moveResources(0,1);
+        assertEquals("coin", warehouseDepotTest.checkResource(1).toString());
+        assertEquals("shield", warehouseDepotTest.checkResource(0).toString());
+
+    }
+
+    @Test
+    void moveResourceTestNull() {
+        WarehouseDepot warehouseDepotTest = new WarehouseDepot();
+        warehouseDepotTest.insertNewResource(new Resource("coin"),1);
+
+        warehouseDepotTest.moveResources(1, 2);
+        assertNull(warehouseDepotTest.checkResource(1));
+        assertEquals("coin", warehouseDepotTest.checkResource(2).toString());
+    }
+
+    @Test
+    void moveResourceTestException1() {
         WarehouseDepot warehouseDepotTest = new WarehouseDepot();
         Resource coinTest = new Resource(0);
         Resource stonesTest = new Resource(1);
@@ -268,6 +290,37 @@ class WarehouseDepotTest {
             String actualMessage = e.getMessage();
             assertTrue(actualMessage.contains("Unable to move resource"));
         }
+    }
+
+    @Test
+    void getDepotResourceAmountTest() {
+        WarehouseDepot test = new WarehouseDepot();
+
+        test.insertNewResource(new Resource("Coin"),0);
+        test.insertNewResource(new Resource("Shield"), 1);
+        test.insertNewResource(new Resource("Servant"), 2);
+        test.insertNewResource(new Resource("Servant"), 2);
+        test.insertNewResource(new Resource("Servant"), 2);
+        int[] values = test.getDepotResourceAmount();
+        assertEquals(1, values[0]);
+        assertEquals(1, values[3]);
+        assertEquals(3, values[2]);
+    }
+
+    @Test
+    void isEnoughTest() {
+        WarehouseDepot test = new WarehouseDepot();
+
+        test.insertNewResource(new Resource("Coin"),0);
+        test.insertNewResource(new Resource("Shield"), 1);
+        test.insertNewResource(new Resource("Servant"), 2);
+        test.insertNewResource(new Resource("Servant"), 2);
+        test.insertNewResource(new Resource("Servant"), 2);
+
+        assertEquals(test.isEnoughWarehouse(new Resource("coin"),1),0);
+        assertEquals(1, test.isEnoughWarehouse(new Resource("servant"),2));
+        assertEquals(-1, test.isEnoughWarehouse(new Resource("stone"), 1));
+
     }
 
 }

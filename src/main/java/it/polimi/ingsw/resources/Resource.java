@@ -1,6 +1,7 @@
 package it.polimi.ingsw.resources;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Resource implements Serializable {
@@ -32,7 +33,7 @@ public class Resource implements Serializable {
      * @param string String
      */
     public Resource(String string) {
-        switch (string) {
+        switch (string.toLowerCase()) {
             case "coin":
                 this.resType=0;
                 break;

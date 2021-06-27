@@ -9,6 +9,9 @@
         2
         ],
         "requiredLevel": [
+          1,
+          1,
+          1
         ],
         "wp": 5,
         "convertedResource": 2
@@ -22,6 +25,9 @@
         4
         ],
         "requiredLevel": [
+          1,
+          1,
+          1
         ],
         "wp": 5,
         "convertedResource": 4
@@ -35,6 +41,9 @@
         3
         ],
         "requiredLevel": [
+          1,
+          1,
+          1
         ],
         "wp": 5,
         "convertedResource": 1
@@ -48,6 +57,10 @@
         1
         ],
         "requiredLevel": [
+          1,
+          1,
+          1,
+          1
         ],
         "wp": 5,
         "convertedResource": 0

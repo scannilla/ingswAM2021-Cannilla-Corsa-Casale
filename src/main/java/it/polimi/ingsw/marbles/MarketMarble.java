@@ -58,6 +58,12 @@ public class MarketMarble implements Serializable {
             throw new Exception("white");
         if (color==5)
             throw new Exception("red");
-        else return (new Resource(color));
+        switch (color) {
+            case 1: return new Resource("stone");
+            case 2: return new Resource("shield");
+            case 3: return new Resource("coin");
+            case 4: return new Resource("servant");
+        }
+        return null;
     }
 }

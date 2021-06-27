@@ -8,11 +8,11 @@ public class VaticanBoardDraw {
 
     public int pos;
 
-    public void drawVaticanRoad( VaticanReport vaticanReport, PersonalBoard personalBoard) {
+    public void drawVaticanRoad(VaticanReport vaticanReport, PersonalBoard personalBoard) {
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] activationPosition = vaticanReport.getActivationPosition();
         int[] vaticanLength = vaticanReport.getReportsLength();
-        int[] winPoints = vaticanReport.getWinPoints();// TODO parse winPoints
+        int[] winPoints = vaticanReport.getWinPoints();
         int pos = personalBoard.getPosition();
         drawColouredLine(activationPosition, vaticanLength);
         drawSecondLine(winPoints, activationPosition, vaticanLength);
@@ -22,15 +22,9 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    /**
-     * this method draws the second line
-     * @param winPoints
-     * @param vatican
-     * @param vaticanLength
-     */
-    public void drawSecondLine(int winPoints[], int vatican[], int vaticanLength[]){
+    public void drawSecondLine(int[] winPoints, int[] vatican, int[] vaticanLength){
         String blueEscape = Color.ANSI_BLUE.escape();
-        int slotStart[] = new int[3];
+        int[] slotStart = new int[3];
         int wp=0;
         for (int i=0; i < 3; i++){
             slotStart[i]=vatican[i]-vaticanLength[i]+1;
@@ -311,12 +305,7 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    /**
-     * this method draws a slot of the third line
-     * @param posThere
-     * @param blueZeroYellowOne
-     * @param lastSlot
-     */
+
     public void drawThirdLineSlot(boolean posThere, boolean blueZeroYellowOne, boolean lastSlot){
         String blueEscape = Color.ANSI_BLUE.escape();
         if (!blueZeroYellowOne){
@@ -343,15 +332,10 @@ public class VaticanBoardDraw {
         }
     }
 
-    /**
-     * this method draws the third line
-     * @param vatican
-     * @param vaticanLength
-     * @param pos
-     */
-    public void drawThirdLine(int vatican[], int vaticanLength[], int pos){
+
+    public void drawThirdLine(int[] vatican, int[] vaticanLength, int pos){
         String blueEscape = Color.ANSI_BLUE.escape();
-        int slotStart[] = new int[3];
+        int[] slotStart = new int[3];
         int counter=0;
         for (int i=0; i < 3; i++){
             slotStart[i]=vatican[i]-vaticanLength[i]+1;
@@ -409,12 +393,7 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    /**
-     * this method draws a slot of the fourth line
-     * @param posThere
-     * @param blueZeroYellowOne
-     * @param lastSlot
-     */
+
     public void drawFourthLineSlot(boolean posThere, boolean blueZeroYellowOne, boolean lastSlot){
         String blueEscape = Color.ANSI_BLUE.escape();
         if (!blueZeroYellowOne){
@@ -439,9 +418,9 @@ public class VaticanBoardDraw {
         }
     }
 
-    public void drawFourthLine(int vatican[], int vaticanLength[]){
+    public void drawFourthLine(int[] vatican, int[] vaticanLength){
         String blueEscape = Color.ANSI_BLUE.escape();
-        int slotStart[] = new int[3];
+        int[] slotStart = new int[3];
         for (int i=0; i < 3; i++){
             slotStart[i]=vatican[i]-vaticanLength[i]+1;
         }
@@ -499,14 +478,9 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    /**
-     * this method draws the first or the last line
-     * @param vatican
-     * @param vaticanLength
-     */
-    public void drawColouredLine(int vatican[], int vaticanLength[]) {
+    public void drawColouredLine(int[] vatican, int[] vaticanLength) {
         String blueEscape = Color.ANSI_BLUE.escape();
-        int slotStart[] = new int[3];
+        int[] slotStart = new int[3];
         for (int i=0; i < 3; i++){
             slotStart[i]=vatican[i]-vaticanLength[i]+1;
         }
@@ -549,11 +523,6 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    /**
-     * this method draws a slot part of the first/last line
-     * @param blueZeroYellowOne
-     * @param endOfReport
-     */
     private void drawLineSlot( boolean blueZeroYellowOne, boolean endOfReport){
         String blueEscape = Color.ANSI_BLUE.escape();
         if (!blueZeroYellowOne ){

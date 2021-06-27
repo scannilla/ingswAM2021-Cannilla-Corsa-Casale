@@ -1,8 +1,10 @@
 package it.polimi.ingsw.cli;
 
+import it.polimi.ingsw.tokens.ActionToken;
+
 public class TokenDraw {
-      public void drawToken (int action){
-            switch (action){
+      public static void drawToken (ActionToken token){
+            switch (token.getAction()){
                   case 0:
                       System.out.print(Color.ANSI_GREEN.escape() + "  ----  " + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_GREEN.escape() + " /    \\" + Color.ANSI_RESET.escape());

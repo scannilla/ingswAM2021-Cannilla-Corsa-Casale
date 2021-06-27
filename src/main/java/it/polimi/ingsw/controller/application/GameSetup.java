@@ -68,15 +68,16 @@ public class GameSetup {
             mHandler.sendMessageToClient("Select where to insert the chosen resource", 182);
             chosenLine = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
         } while (chosenLine<1 || chosenLine>3);
-        player.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(chosenResource),chosenLine);
+        player.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(chosenResource),chosenLine-1);
     }
 
     private void selectLeaderCards() throws EndingGameException {
         LeaderCardsDeck deck = game.getLeaderCardsDeck();
         ArrayList<LeaderCard> cards = deck.pick4cards();
         ArrayList<LeaderCard> chosenCards = new ArrayList<>();
+        LeaderCard[] cardsAsArray = cards.toArray(new LeaderCard[0]);
         mHandler.sendMessageToClient("Select 2 of these 4 cards",183 );
-        mHandler.sendObjectToClient(new ObjectMessage(cards, 655, player.getNickname()));
+        mHandler.sendObjectToClient(new ObjectMessage(cardsAsArray, 655, player.getNickname()));
         mHandler.sendMessageToClient("Send the number of the first card", 184);
         String chosen = mHandler.readClientMessage();
         int card = CheckCommand.checkNumber(chosen, mHandler);

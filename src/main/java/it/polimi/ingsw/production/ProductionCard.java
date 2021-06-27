@@ -18,11 +18,7 @@ public class ProductionCard implements Serializable {
      */
     private final int wp; //WinPoints
     /**
-     * This attribute represents needed resources to buy card
-     * costArray[0] = number of needed coins
-     * costArray[1] = number of needed stones
-     * costArray[2] = number of needed servants
-     * costArray[3] = number of needed shields
+     * This attribute represents needed resources to buy a card
      */
     private final Resource[] costArray; //Needed resources to buy card
     /**

@@ -6,7 +6,10 @@
         1,
         3
      ],
-      "requiredLevel" : [],
+      "requiredLevel" : [
+        1,
+        1
+      ],
       "wp" : 2,
       "discountedRes" : {"resType" :2}
     },
@@ -17,7 +20,10 @@
         2,
         4
       ],
-      "requiredLevel" : [],
+      "requiredLevel" : [
+        1,
+        1
+      ],
       "wp" : 2,
       "discountedRes" : {"resType" :3}
 },
@@ -28,7 +34,10 @@
         1,
         2
       ],
-      "requiredLevel" : [],
+      "requiredLevel" : [
+        1,
+        1
+      ],
       "wp" : 2,
       "discountedRes" : {"resType" :1}
 },
@@ -39,7 +48,10 @@
         3,
         4
       ],
-      "requiredLevel" : [],
+      "requiredLevel" : [
+        1,
+        1
+      ],
       "wp" : 2,
       "discountedRes" : {"resType" :0}
 }

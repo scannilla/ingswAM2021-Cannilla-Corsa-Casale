@@ -100,19 +100,19 @@ public class MessageHandler {
 
     public void drawResource(Resource res, String nickname) throws EndingGameException {
         String reset = Color.ANSI_RESET.escape();
-        String resource = "";
+        String resource = "Current resource: ";
         switch (res.toString()) {
             case "coin":
-                resource = Color.ANSI_YELLOW + "C" + reset;
+                resource = resource.concat(Color.ANSI_YELLOW.escape() + "C" + reset);
                 break;
             case "stone":
-                resource = Color.ANSI_GREY + "R" + reset;
+                resource = resource.concat(Color.ANSI_GREY.escape() + "R" + reset);
                 break;
             case "servant":
-                resource = Color.ANSI_PURPLE + "S" + reset;
+                resource = resource.concat(Color.ANSI_PURPLE.escape() + "S" + reset);
                 break;
             case "shield":
-                resource = Color.ANSI_BLUE + "H" + reset;
+                resource = resource.concat(Color.ANSI_BLUE.escape() + "H" + reset);
                 break;
         }
         Message m = new Message(600, resource, nickname);
@@ -126,35 +126,33 @@ public class MessageHandler {
 
     public void drawMarble(MarketMarble marble, String nickname) throws EndingGameException {
         String reset = Color.ANSI_RESET.escape();
-        String mar = "";
+        String mar = "Current marble: ";
         switch (marble.getColor()) {
             case 0:
-                mar = Color.ANSI_BRIGHTWHITE + "O" + reset;
+                mar = mar.concat(Color.ANSI_BRIGHTWHITE.escape() + "O" + reset);
                 break;
             case 1:
-                mar = Color.ANSI_GREY + "O" + reset;
+                mar = mar.concat(Color.ANSI_GREY.escape() + "O" + reset);
                 break;
             case 2:
-                mar = Color.ANSI_BLUE + "O" + reset;
+                mar = mar.concat(Color.ANSI_BLUE.escape() + "O" + reset);
                 break;
             case 3:
-                mar = Color.ANSI_YELLOW + "0" + reset;
+                mar = mar.concat(Color.ANSI_YELLOW.escape() + "O" + reset);
                 break;
             case 4:
-                mar = Color.ANSI_PURPLE + "O" + reset;
+                mar = mar.concat(Color.ANSI_PURPLE.escape() + "O" + reset);
                 break;
             case 5:
-                mar = Color.ANSI_RED + "0" + reset;
+                mar = mar.concat(Color.ANSI_RED.escape() + "O" + reset);
                 break;
         }
         Message m = new Message(601, mar, nickname);
         try {
             out.writeObject(m);
             out.reset();
-            drawResource(marble.returnAbility(), nickname);
         } catch (IOException e) {
             throw new EndingGameException();
-        } catch (Exception ignored) {
         }
     }
 

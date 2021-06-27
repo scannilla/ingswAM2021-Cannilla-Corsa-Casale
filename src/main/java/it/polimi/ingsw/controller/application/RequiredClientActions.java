@@ -12,7 +12,6 @@ import it.polimi.ingsw.leader.LeaderOfProductions;
 import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.resources.Resource;
 
-import java.net.Socket;
 import java.util.Arrays;
 
 public class RequiredClientActions {
@@ -149,12 +148,10 @@ public class RequiredClientActions {
                     }
                     break;
             }
-            sendResponse("Insert a new Resource and location", 130);
-            String newInput;
-            newInput = mHandler.readClientMessage();
-            depotType = newInput.split(" ")[1];
-            resource =  new Resource(newInput.split(" ")[0]);
-
+            sendResponse("Insert a new location", 130);
+            depotType = CheckCommand.commandChecker(new String[] {"warehouse depot", "extra depot"}, mHandler.readClientMessage(), mHandler);
+            sendResponse("Insert now the new resource", 130);
+            resource = new Resource(CheckCommand.commandChecker(new String[] {"Coin", "Stone", "Servant", "Shield"}, mHandler.readClientMessage(), mHandler));
         } while(true);
     }
 
@@ -262,7 +259,7 @@ public class RequiredClientActions {
                         String chosenColumn=mHandler.readClientMessage();
                         int column = CheckCommand.checkNumber(chosenColumn,  mHandler);
                         try {
-                            player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column);
+                            player.getPersonalBoard().getWarehouseDepot().insertNewResource(res, column-1);
                             EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard(), player.getNickname());
                             return;
                         } catch (IllegalArgumentException e) {
@@ -377,7 +374,7 @@ public class RequiredClientActions {
                 }
                 else {
                     try {
-                        mHandler.sendMessageToClient("faith increased");
+                        mHandler.sendMessageToClient("faith increased", 149);
                     } catch (EndingGameException ex){
                         throw new EndingGameException();
                     }
@@ -472,26 +469,16 @@ public class RequiredClientActions {
     }
 
     private void standardProduction() throws EndingGameException {
-        sendResponse("You can activate the standard production, select where you want to take the resources from", 125);
+        sendResponse("You can activate the standard production, select where you want to take the resources from (warehouse depot or extra depot)", 125);
         int givenRes = 0;
         do {
-            String chosenResource =  mHandler.readClientMessage();
-            switch (chosenResource.split(" ")[1].toLowerCase()) {
-                case "warehousedepot":
-                    anyResource(new Resource(chosenResource.split(" ")[0].toLowerCase()), "warehouse");
-                    givenRes++;
-                    break;
-
-                case "extradepot":
-                    Resource resExtra = checkResource(chosenResource.split(" ")[0].toLowerCase()); //resExtra is the resource chosen by the client
-                    anyResource(resExtra, "extra");
-                    givenRes++;
-                    break;
-
-                default:
-                    sendResponse("Select a valid resource location (Warehouse Depot or Extra Depot)", 430);
-                    break;
-            }
+            String chosenLocation =  mHandler.readClientMessage();
+            chosenLocation = CheckCommand.commandChecker(new String[] {"warehouse depot", "extra depot"}, chosenLocation, mHandler);
+            sendResponse("Now choose which resource to take", 125);
+            String chosenResource = mHandler.readClientMessage();
+            chosenResource = CheckCommand.commandChecker(new String[] {"Coin", "Stone", "Servant", "Shield"}, chosenResource, mHandler);
+            anyResource(new Resource(chosenResource), chosenLocation);
+            givenRes++;
         } while (givenRes<2);
         sendResponse("Now choose a resource to get from the production", 126);
         String choice = mHandler.readClientMessage();

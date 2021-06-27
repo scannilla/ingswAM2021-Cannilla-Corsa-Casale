@@ -40,7 +40,7 @@ public class SPGameProtocol implements Runnable{
                 if (returnValue.getMessage().equals("end")) {
                     try {
                         player.getConnectedGame().endTurn();
-                    } catch (RuntimeException | EndingGameException e) {
+                    } catch (RuntimeException | Error e) {
                         System.out.println("Game Over");
                     }
                 }

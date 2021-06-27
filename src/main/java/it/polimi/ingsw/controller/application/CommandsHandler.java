@@ -62,9 +62,9 @@ public class CommandsHandler {
                 return new Response("Incorrect command", 401);
             case GAME_CREATOR:
                 if(first) {
-                    first = false;
-                    int numbOfPlayers = 0;
+                    int numbOfPlayers;
                     if (CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
+                        first = false;
                         numbOfPlayers = new GameCreator(mHandler).createGame(game);
                         if (game.getPlayers().indexOf(player) == 0)
                             new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
@@ -92,24 +92,31 @@ public class CommandsHandler {
                 return new Response("Incorrect command", 401);
             case GAME_PHASE:
                 if(!player.isActive() && !cmd[0].equals("view")) {
-                    mHandler.sendMessageToClient("Wait for you turn, in the meanwhile you can call only view methods");
+                    mHandler.sendMessageToClient("Wait for you turn, in the meanwhile you can call only view methods", 190);
                     return new Response("ok", 201);
                 }
                 Command c = GSON.commandParser(cmd[1]);
                 c.setCommandPlayer(player);
                 Response returnValue = c.executeCommand();
-                if (returnValue.getMessage().equals("end"))
+                if(!CheckCommand.commandChecker(fsm.validCommands(), cmd[0]))
+                    return new Response("Incorrect command", 401);
+                if (returnValue.getMessage().equals("end")) {
                     try {
                         game.endTurn();
                     } catch (RuntimeException e) {
-                        createLeaderboard();
+                        createLeaderboard(true);
+                    } catch (Error e) {
+                        createLeaderboard(false);
                     }
+                    return new Response("Turn ended", 191);
+                }
                 else if (returnValue.getMessage().contains("$")) {
                     RequiredClientActions r = new RequiredClientActions(c, player, mHandler);
                     r.execute(returnValue.getMessage().replace("$",""));
-                } else
+                    return new Response("ok", 201);
+                }
+                else
                     return returnValue;
-                return new Response("Incorrect command", 401);
             case END:
             case UNKNOWN:
             default:
@@ -119,12 +126,13 @@ public class CommandsHandler {
 
     public Response getValidCommands() {
         String validCommand = "You inserted a wrong command. These are the valid commands: ";
-        for(String s : fsm.validCommands())
-            validCommand = validCommand.concat(s + ", ");
+        for(int i=0; i<fsm.validCommands().length-1; i++)
+            validCommand = validCommand.concat(fsm.validCommands()[i]+ ", ");
+        validCommand = validCommand.concat(fsm.validCommands()[fsm.validCommands().length-1] + ".");
         return new Response(validCommand, 113);
     }
 
-    private void createLeaderboard() {
+    private void createLeaderboard(boolean win) {
         ArrayList<Player> leaderBoard = new ArrayList<>();
         if(game.getPlayers().size()>1) {
             for (Player p : game.getPlayers()) {
@@ -144,15 +152,15 @@ public class CommandsHandler {
             EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard);
         }
         else {
-            if(game.getPlayers().get(0).getWp() > game.getLorenzo().getWp()) {
-                leaderBoard.add(game.getPlayers().get(0));
-                leaderBoard.add(game.getLorenzo());
-                EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 658);
-            }
-            else {
+            if(!win) {
                 leaderBoard.add(game.getLorenzo());
                 leaderBoard.add(game.getPlayers().get(0));
                 EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 659);
+            }
+            else {
+                leaderBoard.add(game.getPlayers().get(0));
+                leaderBoard.add(game.getLorenzo());
+                EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 658);
             }
         }
     }

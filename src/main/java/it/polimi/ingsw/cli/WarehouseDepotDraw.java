@@ -71,7 +71,7 @@ public class WarehouseDepotDraw {
         System.out.print("\n");
 
 
-        System.out.print(Color.ANSI_BRIGHTWHITE.escape() + "  /_____________\\" + whiteEscape);
+        System.out.print(Color.ANSI_BRIGHTWHITE.escape() + "  /_____________\\\n\n" + whiteEscape);
     }
 
     /**

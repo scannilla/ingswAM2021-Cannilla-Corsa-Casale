@@ -115,11 +115,11 @@ public class Command{
         } catch (IndexOutOfBoundsException e) {
             return new Response("Missing parameters", 408);
         }
-        if(row<0 || row>3 || column<0 || column>2)
+        if(row<1 || row>4 || column<1 || column>3)
             return new Response("Index out of bounds", 407);
-        if(commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row][column]==null)
+        if(commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row-1][column-1]==null)
             return new Response("there are no cards left on the selected pile", 410);
-        int level = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row][column].getLevel();
+        int level = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row-1][column-1].getLevel();
         if (level==1 || level ==2){
             int count = 0;
             for(int i=0; i<3; i++) {
@@ -129,12 +129,12 @@ public class Command{
             if (count == 3)
                 return new Response("No more space", 411);
         }
-        ProductionCard productionCardSold = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row][column];
+        ProductionCard productionCardSold = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row-1][column-1]; //row is type and column is level
         Resource[] priceResources = productionCardSold.getCostArray();
         int[] price = ResourceCounter.resCount(priceResources);
         for (int i=0; i<4; i++) {
-            if (price[i] > commandPlayer.getPersonalBoard().getWarehouseDepot().isEnoughWarehouse(priceResources[i], price[i]) +
-                    commandPlayer.getPersonalBoard().getStrongbox().isEnough(priceResources[i], price[i])) {
+            if (price[i] + commandPlayer.getPersonalBoard().getWarehouseDepot().isEnoughWarehouse(new Resource(i), price[i]) +
+                    commandPlayer.getPersonalBoard().getStrongbox().isEnough(new Resource(i), price[i]) < 0) {
                 return new Response("Not able to buy this Production Card", 412);
             }
         }
@@ -203,7 +203,7 @@ public class Command{
         if(parameters[0].equals("column")) {
             if (chosenLine<1 || chosenLine>4)
                 return new Response("Index out of bounds", 407);
-            else new Response("$market", 251);
+            else return new Response("$market", 251);
         }
         else if(parameters[0].equals("line")) {
             if (chosenLine < 1 || chosenLine > 3)

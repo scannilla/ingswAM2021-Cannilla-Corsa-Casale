@@ -117,14 +117,22 @@ public class ServerMain {
 
     private static String askForNickname(MessageHandler mHandler) throws EndingGameException {
         String nickname;
+        boolean used;
         do {
+            used = false;
             try {
                 mHandler.sendMessageToClient("Insert a valid nickname", 110);
                 nickname = mHandler.readClientMessage();
             } catch (EndingGameException e) {
                 throw new EndingGameException();
             }
-        } while (nickname.isBlank() || nickname.isEmpty());
+            for(Player p : mapAllPlayer.keySet()) {
+                if (nickname.equals(p.getNickname())) {
+                    used = true;
+                    break;
+                }
+            }
+        } while (nickname.isBlank() || nickname.isEmpty() || used);
         mHandler.sendMessageToClient(nickname, 310);
         return nickname;
     }

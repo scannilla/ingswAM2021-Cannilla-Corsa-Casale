@@ -2,10 +2,7 @@ package it.polimi.ingsw.controller.networkclient;
 
 import com.sun.tools.javac.Main;
 import it.polimi.ingsw.PersonalBoard;
-import it.polimi.ingsw.cli.ActiveLeaderCardsDraw;
-import it.polimi.ingsw.cli.MarketDraw;
-import it.polimi.ingsw.cli.PersonalBoardDraw;
-import it.polimi.ingsw.cli.ProdCardsMarketDraw;
+import it.polimi.ingsw.cli.*;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
@@ -16,7 +13,8 @@ import it.polimi.ingsw.gui.multi.Multi;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
-
+import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.tokens.ActionToken;
 
 
 public class ClientListener implements Runnable{
@@ -52,7 +50,7 @@ public class ClientListener implements Runnable{
                     if (read.getCode()==310)
                         nickname = read.getMessage();
                     else if(read.getNickname()== null || nickname.equals(read.getNickname())) {
-                        if (read.getCode() >= 600)
+                        if (read.getCode() >= 650)
                             readObject(read);
                         else
                             System.out.println(read.getMessage());
@@ -107,8 +105,14 @@ public class ClientListener implements Runnable{
                 ActiveLeaderCardsDraw.drawActiveLeaderCards((LeaderCard[]) obj.getObj());
                 break;
             case 656:
-                //token draw
+                TokenDraw.drawToken((ActionToken) obj.getObj());
                 break;
+            case 657:
+                //leaderboard draw
+            case 658:
+                //single player leaderboard draw (player win)
+            case 659:
+                //single player leaderboard draw (lorenzo win)
         }
     }
 

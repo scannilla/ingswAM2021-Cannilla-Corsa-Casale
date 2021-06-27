@@ -1,5 +1,7 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.gui.multi.AskNicknameMulti;
+
 import javax.swing.*;
 
 public class MainGUI {
@@ -21,4 +23,5 @@ public class MainGUI {
         frame.setVisible(true);
         frame.setLayout(null);
     }
+
 }

@@ -176,18 +176,22 @@ public class ActiveLeaderCardsDraw {
             case 0: {
                 Resource disc = ((LeaderOfDiscounts) cardsArray[index]).getDiscountedRes();
                 switchCases(resetEscape, disc);
+                break;
             }
             case 1: {
                 Resource dep = ((LeaderOfDepots) cardsArray[index]).getResource();
                 switchCases(resetEscape, dep);
+                break;
             }
             case 2: {
                 Resource conv = ((LeaderOfConversions) cardsArray[index]).getConvertedResource();
                 switchCases(resetEscape, conv);
+                break;
             }
             case 3: {
                 Resource prod = ((LeaderOfProductions) cardsArray[index]).getRequiredResource();
                 switchCases(resetEscape, prod);
+                break;
             }
         }
     }
@@ -254,8 +258,10 @@ public class ActiveLeaderCardsDraw {
         String resetEscape = Color.ANSI_RESET.escape();
         int[] reqType = cardsArray[index].getRequiredType();
         int[] reqLevel = cardsArray[index].getRequiredLevel();
-        for (int i: reqType){
-            System.out.print(Color.ANSI_CYAN.escape() + "t" + reqType[i] + "l" + reqLevel[i] + ", " + resetEscape);
+        if(reqType.length>0) {
+            for (int i = 0; i < reqType.length; i++) {
+                System.out.print(Color.ANSI_CYAN.escape() + "t" + reqType[i] + "l" + reqLevel[i] + ", " + resetEscape);
+            }
         }
     }
 

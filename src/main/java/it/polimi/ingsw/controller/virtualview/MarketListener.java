@@ -16,4 +16,9 @@ public class MarketListener extends Listener{
     public void notifyChange(Object update) throws EndingGameException {
         mHandler.sendObjectToClient(new ObjectMessage(update, 650, null));
     }
+
+    @Override
+    public void notifyChange(Object update, String nickname) throws EndingGameException {
+        mHandler.sendObjectToClient(new ObjectMessage(update, 650, nickname));
+    }
 }

@@ -50,11 +50,11 @@ public class NewServerGameProtocol implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         createListeners();
-        if (!local)
-            new Thread(new CheckConnection(mHandler));
+        //if (!local)
+            //new Thread(new CheckConnection(mHandler));
         while (true) {
-            if(!local)
-                checkConnection();
+            //if(!local)
+                //checkConnection();
             String command;
             try {
                 command = mHandler.readClientMessage();

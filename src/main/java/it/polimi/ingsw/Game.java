@@ -208,8 +208,7 @@ public class Game implements Serializable{
                 else if (numberOfPlayers != 1)
                     return players.get(players.indexOf(p) - 1);
                 else
-                    //TODO lorenzo's turn
-                    return null;
+                    return players.get(0);
             }
         }
         throw new IllegalArgumentException();
@@ -220,7 +219,7 @@ public class Game implements Serializable{
      * @throws EndingGameException e1
      * @throws RuntimeException e2
      */
-    public void endTurn() throws EndingGameException, RuntimeException {
+    public void endTurn() throws Error, RuntimeException {
         if(activePlayer.isLast())
             throw new RuntimeException();
         activePlayer.setActive(false);
@@ -238,10 +237,14 @@ public class Game implements Serializable{
      * Handler for single player's Lorenzo's turn
      * @throws EndingGameException e
      */
-    public void lorenzoTurn() throws EndingGameException {
+    public void lorenzoTurn() throws Error {
         ActionToken token = actionTokensPile.popToken();
         EventManager.notifyListener(EventType.TOKEN, token);
-        token.activateAction(this, lorenzo);
+        try {
+            token.activateAction(this, lorenzo);
+        } catch (EndingGameException e) {
+            throw new Error();
+        }
     }
 
     public Player getLorenzo() {

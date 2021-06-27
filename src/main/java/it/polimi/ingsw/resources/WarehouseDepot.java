@@ -5,6 +5,7 @@ import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 
 public class WarehouseDepot implements Serializable {
     /**
@@ -30,16 +31,16 @@ public class WarehouseDepot implements Serializable {
      */
     public void insertNewResource(Resource resource, int column) throws IllegalArgumentException {
 
-        String outOfBounds = "Unable to insert the resource.";
+        String otherLine = "This resource has already been inserted in another line";
         String full = "This line is already full";
         String wrong = "This line already has a different resource";
 
         for(int i=0; i<3; i++)
             if (i!=column)
-                if(checkResource(i)==resource)
-                    throw new IllegalArgumentException(outOfBounds);
+                if(resource.equals(checkResource(i)))
+                    throw new IllegalArgumentException(otherLine);
 
-        if (depot[column][0] != null && depot[column][0] != resource){
+        if (depot[column][0] != null && !depot[column][0].equals(resource)){
             throw new IllegalArgumentException(wrong);
         }
 
@@ -52,10 +53,10 @@ public class WarehouseDepot implements Serializable {
         }
 
         if (column == 1){
-            if (depot[1][0] == resource && depot[1][1] == null){
-                depot[1][1] = resource;
-            } else if (depot[1][0] == null){
+            if(depot[1][0] == null)
                 depot[1][0] = resource;
+            else if (depot[1][0].equals(resource) && depot[1][1] == null){
+                depot[1][1] = resource;
             } else {
                 throw new IllegalArgumentException(full);
             }
@@ -83,13 +84,6 @@ public class WarehouseDepot implements Serializable {
             return depot[column][0];
         else return null;
     }
-
-    /**
-     * modify Warehouse Depot to optimize slots
-     * @param column int
-     * @return changed
-     * @throws IllegalArgumentException
-     */
 
     /**
      * use a resource from depot

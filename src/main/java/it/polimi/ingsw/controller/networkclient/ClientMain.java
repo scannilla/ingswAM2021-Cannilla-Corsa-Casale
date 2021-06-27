@@ -54,10 +54,11 @@ public class ClientMain {
                 } catch (IOException e) {
                     System.err.println("Unable to read input");
                 }
-            } while (!read.equals("sp") && !read.equals("mp") && !read.equals("singleplayer") && !read.equals("multiplayer"));
+            } while (!read.equals("sp") && !read.equals("mp") && !read.equals("singleplayer") && !read.equals("multiplayer")
+                    && !read.equals("local") && !read.equals("online"));
 
 
-            if (read.equals("sp") || read.equals("singleplayer")) { //if is CLI and single player
+            if (read.equals("sp") || read.equals("singleplayer") || read.equals("local")) { //if is CLI and single player
                 LocalSinglePlayer.singlePlayer(gui);
             } else { //if is CLI and multiplayer
                 Socket clientSocket;

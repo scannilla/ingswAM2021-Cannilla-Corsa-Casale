@@ -143,31 +143,18 @@ public class WarehouseDepot implements Serializable {
      * @throws IllegalArgumentException e
      */
     public void moveResources(int line1, int line2) throws IllegalArgumentException {
-
-        Resource[] swapResource = new Resource[3];
-        int[] resourceAmount = getDepotResourceAmount();
-        int typeResourceLine1 = depot[line1][0].getResType();
-        int typeResourceLine2 = depot[line2][0].getResType();
-
-
-        if (line1>line2) {
-            if (resourceAmount[typeResourceLine1] > resourceAmount[typeResourceLine2])
-                throw new IllegalArgumentException("Unable to move resource");
-            for (int i=0; i<line2; i++) {
-                swapResource[i] = depot[line1][i];
-                depot[line1][i] = depot[line2][i];
-                depot[line2][i] = swapResource[i];
-            }
-        } else if (line1<line2){
-            if(resourceAmount[typeResourceLine1]<resourceAmount[typeResourceLine2]){
-                throw new IllegalArgumentException("Unable to move resource");
-            }
-            for (int i=0; i<line1; i++){
-                swapResource[i] = depot[line1][i];
-                depot[line1][i] = depot[line2][i];
-                depot[line2][i] = swapResource[i];
-            }
+        if(line1>line2) { //big brain time to reduce code lines
+            int temp = line1;
+            line1 = line2;
+            line2 = temp;
         }
+        //check if it's possible to move resources
+        if(depot[line2][line1+1]!=null)
+            throw new IllegalArgumentException("Unable to move these two lines");
+        Resource[] tempResources = new Resource[3];
+        System.arraycopy(depot[line2], 0, tempResources, 0, line2+1);
+        System.arraycopy(depot[line1], 0, depot[line2], 0, line1+1);
+        System.arraycopy(tempResources, 0, depot[line1], 0, line1+1);
     }
 
     /**

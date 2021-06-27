@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.networkclient;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
+import it.polimi.ingsw.gui.MainGUI;
 
 import java.io.*;
 import java.net.*;
@@ -36,6 +37,7 @@ public class ClientMain {
                         break;
                     case "-g":
                         gui = true;
+                        MainGUI.mainGUI(hostName, portNumber);
                         break;
                 }
             } catch (IndexOutOfBoundsException e) {

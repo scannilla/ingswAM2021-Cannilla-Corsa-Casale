@@ -1,8 +1,8 @@
 package it.polimi.ingsw.gui.local;
 
-import it.polimi.ingsw.Player;
+
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Intro;
@@ -23,7 +23,7 @@ import java.io.InputStream;
 
 public class PreGameLeaderCard extends JPanel implements ActionListener {
 
-    private final JButton leaderOne, leaderTwo, leaderThree, leaderFour, goAhead;
+    private final JButton leaderOne, leaderTwo, leaderThree, leaderFour;
     private final SPClientMessageHandler handler;
 
     public PreGameLeaderCard(SPClientMessageHandler handler){
@@ -40,12 +40,10 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
         leaderTwo.addActionListener(this);
         leaderThree.addActionListener(this);
         leaderFour.addActionListener(this);
-        goAhead.addActionListener(this);
         this.add(leaderOne);
         this.add(leaderTwo);
         this.add(leaderThree);
         this.add(leaderFour);
-        this.add(goAhead);
         this.setLayout(null);
         this.setSize(800, 800);
         this.setVisible(true);

@@ -17,6 +17,9 @@ public class StrongboxDraw {
         int numberOfRes = numberOfRows[0]+numberOfRows[1]+numberOfRows[2]+numberOfRows[3];
         int numberOfRow = numberOfRes/15;
         numberOfRow++;
+        System.out.print("\n");
+        System.out.print(resetEscape + "STRONGBOX");
+        System.out.print("\n");
         System.out.print(resetEscape + "-------------------------------------------------------------");
         while (numberOfRow != 0){
             int counter = 15;

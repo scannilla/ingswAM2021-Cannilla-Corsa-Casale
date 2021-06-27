@@ -14,7 +14,10 @@ public class WarehouseDepotDraw {
      * @param thirdLine  Resource[]
      */
     public static void drawWarehouseDepot(Resource[] firstLine, Resource[] secondLine, Resource[] thirdLine) {
-        String whiteEscape = Color.ANSI_BRIGHTWHITE.escape();
+        String whiteEscape = Color.ANSI_RESET.escape();
+        System.out.print("\n");
+        System.out.print(whiteEscape + "WAREHOUSE DEPOT");
+        System.out.print("\n");
         System.out.print(Color.ANSI_BRIGHTWHITE.escape() + "         ^" + whiteEscape);
         System.out.print("\n");
 
@@ -90,7 +93,7 @@ public class WarehouseDepotDraw {
      * @param resource Resource
      */
     private static void draw(Resource resource) {
-        String whiteEscape = Color.ANSI_BRIGHTWHITE.escape();
+        String whiteEscape = Color.ANSI_RESET.escape();
         switch (resource.toString()) {
             case "coin":
                 System.out.print(Color.ANSI_YELLOW.escape() + "C" + whiteEscape);
@@ -99,10 +102,10 @@ public class WarehouseDepotDraw {
                 System.out.print(Color.ANSI_GREY.escape() + "R" + whiteEscape);
                 break;
             case "servant":
-                System.out.print(Color.ANSI_BLUE.escape() + "S" + whiteEscape);
+                System.out.print(Color.ANSI_PURPLE.escape() + "S" + whiteEscape);
                 break;
             case "shield":
-                System.out.print(Color.ANSI_CYAN.escape() + "H" + whiteEscape);
+                System.out.print(Color.ANSI_BLUE.escape() + "H" + whiteEscape);
                 break;
         }
     }

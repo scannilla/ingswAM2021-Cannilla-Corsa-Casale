@@ -5,11 +5,11 @@ import it.polimi.ingsw.marbles.MarketStructure;
 
 public class MarketDraw {
     public static void drawMarket(int market[][], int outMarble){
-        String whiteEscape = Color.ANSI_BRIGHTWHITE.escape();
+        String whiteEscape = Color.ANSI_RESET.escape();
         System.out.print("\n");
         System.out.print(Color.ANSI_CYAN.escape() + "-----------------------------------------" + whiteEscape);
         System.out.print("\n");
-        System.out.print(Color.ANSI_CYAN.escape() + "|         |         |         |         |");
+        System.out.print(Color.ANSI_CYAN.escape() + "|         |         |         |         |" + Color.ANSI_RESET.escape());
         System.out.print(whiteEscape + "     OUT: " + whiteEscape);
         drawBall(outMarble);
         System.out.print("\n");
@@ -25,7 +25,7 @@ public class MarketDraw {
         drawEmptyLine();
         drawBall(market[3][0]);
         System.out.print("    ");
-        System.out.print(Color.ANSI_CYAN.escape() + "!");
+        System.out.print(Color.ANSI_CYAN.escape() + "|");
         drawFrecciaOriz();
         System.out.print("\n");
         drawVoidLine();
@@ -63,15 +63,15 @@ public class MarketDraw {
         drawEmptyLine();
         drawBall(market[3][2]);
         System.out.print("    ");
-        System.out.print(Color.ANSI_CYAN.escape() + "!");
+        System.out.print(Color.ANSI_CYAN.escape() + "|" + Color.ANSI_RESET.escape());
         drawFrecciaOriz();
         System.out.print("\n");
         drawVoidLine();
         System.out.print(Color.ANSI_CYAN.escape() + "-----------------------------------------" + whiteEscape);
         System.out.print("\n");
-        System.out.print(Color.ANSI_CYAN.escape() + "     ^         ^         ^         ^");
+        System.out.print(Color.ANSI_CYAN.escape() + "     ^         ^         ^         ^" + Color.ANSI_RESET.escape());
         System.out.print("\n");
-        System.out.print(Color.ANSI_CYAN.escape() + "     |         |         |         |");
+        System.out.print(Color.ANSI_CYAN.escape() + "     |         |         |         |" + Color.ANSI_RESET.escape());
         System.out.print("\n");
     }
 
@@ -89,7 +89,7 @@ public class MarketDraw {
     }
 
     public static void drawBall(int resource){
-        String whiteEscape = Color.ANSI_BRIGHTWHITE.escape();
+        String whiteEscape = Color.ANSI_RESET.escape();
         switch (resource){
             case 0: System.out.print(Color.ANSI_RESET.escape() + "O" + whiteEscape);
                 break;
@@ -108,15 +108,15 @@ public class MarketDraw {
     }
 
     private static void drawVoidLine(){
-        System.out.print(Color.ANSI_CYAN.escape() + "|         |         |         |         |");
+        System.out.print(Color.ANSI_CYAN.escape() + "|         |         |         |         |" + Color.ANSI_RESET.escape());
         System.out.print("\n");
     }
 
     private static void drawEmptyLine(){
-        System.out.print(Color.ANSI_CYAN.escape() + "|    ");
+        System.out.print(Color.ANSI_CYAN.escape() + "|    " + Color.ANSI_RESET.escape());
     }
 
     private static void drawFrecciaOriz(){
-        System.out.print(Color.ANSI_CYAN.escape() + " <--");
+        System.out.print(Color.ANSI_CYAN.escape() + " <--" + Color.ANSI_RESET.escape());
     }
 }

@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class MainGUI {
 
+    private static JPanel currentPanel;
+
     public static JFrame frame;
 
 
@@ -22,6 +24,14 @@ public class MainGUI {
         frame.add(currentPanel);
         frame.setVisible(true);
         frame.setLayout(null);
+    }
+
+    public static void changePanel(JPanel newPanel) {
+        frame.remove(currentPanel);
+        frame.add(newPanel);
+        frame.revalidate();
+        frame.repaint();
+        currentPanel = newPanel;
     }
 
 }

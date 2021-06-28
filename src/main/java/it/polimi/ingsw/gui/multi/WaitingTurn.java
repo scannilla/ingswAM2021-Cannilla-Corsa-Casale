@@ -2,6 +2,7 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.gui.Intro;
 
@@ -162,64 +163,48 @@ public class WaitingTurn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view card market", 162);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if (e.getSource() == marketMarble){
             try{
                 handler.sendMessageToServer("view market", 163);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == myPP){
             try{
                 handler.sendMessageToServer("view -personalboard", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == ppOne){
             try{
                 handler.sendMessageToServer("view -personalboard -2", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == ppTwo){
             try{
                 handler.sendMessageToServer("view  -personalboard -3", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == ppThree){
             try{
                 handler.sendMessageToServer("view -personalboard -4", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == goAhead){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Turn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if(e.getSource() == leaderCard){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowLeaderCard(handler, false));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
 
     }

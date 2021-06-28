@@ -1,8 +1,10 @@
 package it.polimi.ingsw.gui.multi;
 
+import com.sun.tools.javac.Main;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.production.ProductionCard;
@@ -214,87 +216,61 @@ public class BuyProductionCard extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("buy production card -1 -1", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == buy2){
             try{
                 handler.sendMessageToServer("buy production card -1 -2", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy3){
             try{
                 handler.sendMessageToServer("buy production card -1 -3", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy4){
             try{
                 handler.sendMessageToServer("buy production card -2 -1", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy5){
             try{
                 handler.sendMessageToServer("buy production card -2 -2", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy6){
             try{
                 handler.sendMessageToServer("buy production card -2 -3", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy7){
             try{
                 handler.sendMessageToServer("buy production card -3 -1", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy8){
             try{
                 handler.sendMessageToServer("buy production card -3 -2", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }  else if(e.getSource() == buy9){
             try{
                 handler.sendMessageToServer("buy production card -3 -3", 167);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if (e.getSource() == back){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Turn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
     }
 

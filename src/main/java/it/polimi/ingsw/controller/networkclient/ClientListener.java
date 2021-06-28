@@ -7,6 +7,8 @@ import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
+import it.polimi.ingsw.gui.GuiMessageHandler;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.gui.local.BuyMarble;
@@ -62,7 +64,15 @@ public class ClientListener implements Runnable{
             }
         }
         else {
-            //gui controller
+            while (true) {
+
+                try {
+                    GuiMessageHandler.readMessage(cmHandler);
+                } catch (EndingGameException e) {
+                    MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
+                    break;
+                }
+            }
         }
     }
 

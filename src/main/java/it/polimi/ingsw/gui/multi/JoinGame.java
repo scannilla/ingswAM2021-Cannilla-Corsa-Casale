@@ -2,6 +2,7 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.controller.Message;
@@ -33,32 +34,8 @@ public class JoinGame extends JPanel implements ActionListener {
             try {
                 handler.sendMessageToServer("join game");
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            Message confirm = null;
-            try{
-                confirm = handler.readMessage();
-            } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if (confirm.getCode() == 112){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            } else if (confirm.getCode() == 201){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Multi(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-
 
         }
     }

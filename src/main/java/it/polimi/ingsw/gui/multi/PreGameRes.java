@@ -11,6 +11,7 @@ import java.io.InputStream;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
@@ -121,37 +122,25 @@ public class PreGameRes extends JPanel implements ActionListener {
                         try {
                             handler.sendMessageToServer("coin", 160);
                         } catch(EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     } else if(e.getSource()==stoneButton){
                         try{
                             handler.sendMessageToServer("stone", 160);
                         } catch(EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     } else if(e.getSource()==servantButton){
                         try{
                             handler.sendMessageToServer("servant", 160);
                         } catch (EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     } else if(e.getSource() == shieldButton){
                         try{
                             handler.sendMessageToServer("shield", 160);
                         } catch(EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     }
                 numAction++;
@@ -162,37 +151,25 @@ public class PreGameRes extends JPanel implements ActionListener {
                         try {
                             handler.sendMessageToServer("coin", 160);
                         } catch(EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     } else if(e.getSource()==stoneButton){
                         try{
                             handler.sendMessageToServer("stone", 160);
                         } catch(EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     } else if(e.getSource()==servantButton){
                         try{
                             handler.sendMessageToServer("servant", 160);
                         } catch (EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     } else if(e.getSource() == shieldButton){
                         try{
                             handler.sendMessageToServer("shield", 160);
                         } catch(EndingGameException ex){
-                            MainGUI.frame.remove(this);
-                            MainGUI.frame.add(new Intro("error", 1));
-                            MainGUI.frame.revalidate();
-                            MainGUI.frame.repaint();
+                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     }
                     numAction++;

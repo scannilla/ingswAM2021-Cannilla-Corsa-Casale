@@ -3,6 +3,7 @@ package it.polimi.ingsw.gui.multi;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.controller.Message;
@@ -42,26 +43,7 @@ public class AskNicknameMulti extends JPanel implements ActionListener {
             try {
                 handler.sendMessageToServer(nickname.getText(), 171);
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            Message received = null;
-            try{
-                received = handler.readMessage();
-            } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if(received.getCode() == 310) {
-                Data.instanceCreator().setNickname(received.getNickname());
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new JoinGame(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }
 

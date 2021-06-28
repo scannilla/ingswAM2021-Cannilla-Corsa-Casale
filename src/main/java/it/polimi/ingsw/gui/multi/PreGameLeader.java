@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.controller.Message;
@@ -917,27 +918,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Message confirm = null;
-        chooseLeader(e);
-        try {
-            confirm = handler.readMessage();
-        } catch (EndingGameException ex) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Intro("error", 1));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
-        }
-        if (confirm.getCode() == 310) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Turn(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
-        } else {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new WaitingTurn(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
-        }
+    chooseLeader(e);
     }
 
 public void chooseLeader(ActionEvent e){
@@ -948,37 +929,25 @@ public void chooseLeader(ActionEvent e){
                try {
                    handler.sendMessageToServer("1", 161);
                } catch(EndingGameException ex){
-                   MainGUI.frame.remove(this);
-                   MainGUI.frame.add(new Intro("error", 1));
-                   MainGUI.frame.revalidate();
-                   MainGUI.frame.repaint();
+                   MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                }
            } else if(e.getSource() == leaderTwo){
                try {
                    handler.sendMessageToServer("2", 161);
                } catch(EndingGameException ex){
-                   MainGUI.frame.remove(this);
-                   MainGUI.frame.add(new Intro("error", 1));
-                   MainGUI.frame.revalidate();
-                   MainGUI.frame.repaint();
+                   MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                }
            } else if(e.getSource() == leaderThree){
                try {
                    handler.sendMessageToServer("3", 161);
                } catch(EndingGameException ex){
-                   MainGUI.frame.remove(this);
-                   MainGUI.frame.add(new Intro("error", 1));
-                   MainGUI.frame.revalidate();
-                   MainGUI.frame.repaint();
+                   MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                }
            } else if(e.getSource() == leaderFour){
                try {
                    handler.sendMessageToServer("4", 161);
                } catch(EndingGameException ex){
-                   MainGUI.frame.remove(this);
-                   MainGUI.frame.add(new Intro("error", 1));
-                   MainGUI.frame.revalidate();
-                   MainGUI.frame.repaint();
+                   MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                }
            }
        numAction++;

@@ -2,6 +2,7 @@ package it.polimi.ingsw.gui.multi;
 
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
@@ -140,10 +141,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view market", 163);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowMarketMarble(handler, true));
@@ -152,10 +150,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view card market", 162);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowProductionMarket(handler, true));
@@ -164,10 +159,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view -personalboard", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
@@ -176,10 +168,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view -personalboard -2", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
@@ -188,10 +177,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view -personalboard -3", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
@@ -200,10 +186,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("view -personalboard -4", 164);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new ShowPersonalBoard(handler, true));
@@ -212,10 +195,7 @@ public class Turn extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("endturn", 165);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         }
     }

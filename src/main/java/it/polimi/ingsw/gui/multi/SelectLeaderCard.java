@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Error;
-import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
@@ -20,46 +19,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-public class ActiveLeader extends JPanel implements ActionListener {
+public class SelectLeaderCard extends JPanel implements ActionListener {
 
-   private LeaderCard[] leaderCards;
-    private final JButton active1, active2, back;
-    private ClientMessageHandler handler;
+    private LeaderCard[] leaderCards;
+    private final JButton one, two;
+    private final ClientMessageHandler cmHandler;
 
-    public ActiveLeader(ClientMessageHandler handler){
-        this.handler = handler;
-        active1 = new JButton("Active");
-        active2 = new JButton("Active");
-        back = new JButton("Go Back");
-        active1.setBounds(200, 250, 100, 50);
-        active2.setBounds(350, 250, 100, 50);
-        back.setBounds(650, 650, 100, 50);
-        active1.addActionListener(this);
-        active2.addActionListener(this);
-        back.addActionListener(this);
-        this.add(active1);
-        this.add(active2);
-        this.add(back);
-        this.setLayout(null);
+    public SelectLeaderCard(ClientMessageHandler cmHandler){
+        this.cmHandler = cmHandler;
+        one = new JButton("Select");
+        two = new JButton("Select");
+        one.setBounds(100, 600, 100, 50);
+        two.setBounds(400,600, 100, 50);
+        one.addActionListener(this);
+        two.addActionListener(this);
+        this.add(one);
+        this.add(two);
+        this.setSize(800, 800);
         this.setVisible(true);
-        this.setBackground(Color.WHITE);
-
+        this.setLayout(null);
+        this.setBackground(Color.white);
     }
 
     public void paint(Graphics g){
         leaderCards = Data.instanceCreator().getLeaderCards();
         g.drawRect(100, 100, 300, 100);
         g.drawRect(400, 100, 300, 100);
-        g.drawRect(100, 200, 300, 100);
-        g.drawRect(400, 200, 300, 100);
-        g.drawRect(100, 300, 300, 100);
-        g.drawRect(400, 300, 300, 100);
-        g.drawRect(100, 400, 300, 100);
-        g.drawRect(400, 400, 300, 100);
         myDrawImagePNG(g);
     }
 
+
     private void myDrawImagePNG(Graphics g) {
+        leaderCards = Data.instanceCreator().getActiveLeaderCards();
         ClassLoader cl = this.getClass().getClassLoader();
         int wp1 = leaderCards[0].getWp();
         int wp2 = leaderCards[1].getWp();
@@ -620,25 +611,21 @@ public class ActiveLeader extends JPanel implements ActionListener {
         return reqCards;
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == active1){
+        if (e.getSource() == one){
             try{
-                handler.sendMessageToServer("activate leader card -1", 168);
+                cmHandler.sendMessageToServer("1");
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
             }
-        } else if(e.getSource() == active2){
+        } else if(e.getSource() == two){
             try{
-                handler.sendMessageToServer("activate leader card -2", 168);
+                cmHandler.sendMessageToServer("2");
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
             }
-        } else if(e.getSource() == back){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Turn(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
         }
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.gui.multi;
 
+import com.sun.tools.javac.Main;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.MainGUI;
@@ -109,10 +110,12 @@ public class ShowMarketMarble extends JPanel implements ActionListener {
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Turn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if (e.getSource() == back && !fromTurn){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new WaitingTurn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
     }
 }

@@ -53,10 +53,12 @@ public class ShowLeaderCard extends JPanel implements ActionListener {
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new Turn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         } else if (e.getSource() == back && !fromTurn){
             MainGUI.frame.remove(this);
             MainGUI.frame.add(new WaitingTurn(handler));
             MainGUI.frame.revalidate();
+            MainGUI.frame.repaint();
         }
     }
 

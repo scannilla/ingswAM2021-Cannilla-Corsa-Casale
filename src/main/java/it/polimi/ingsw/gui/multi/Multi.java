@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
@@ -55,100 +56,29 @@ public class Multi extends JPanel implements ActionListener {
             try {
                 handler.sendMessageToServer("2", 140 );
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            try {
-                received = handler.readMessage();
-            } catch (EndingGameException ex) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if (received.getMessage().equals("ok")) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            } else if (received.getMessage().equals("ko")){
 
-            }
         } else if (e.getSource() == three) {
             try {
                 handler.sendMessageToServer("3", 140);
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            try {
-                received = handler.readMessage();
-            } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if (received.getMessage().equals("ok")) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(handler));
-                MainGUI.frame.revalidate();
-            } else if (received.getMessage().equals("ko")){
-
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if (e.getSource() == four) {
 
             try {
                 handler.sendMessageToServer("4", 140);
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            try {
-                received = handler.readMessage();
-            } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if (received.getMessage().equals("ok")) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(handler));
-                MainGUI.frame.revalidate();
-            } else if (received.getMessage().equals("ko")) {
 
-            }
         } else if (e.getSource() == one) {
             try {
                 handler.sendMessageToServer("1", 140);
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            try {
-                received = handler.readMessage();
-            } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if (received.getMessage().equals("ok")) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingRoom(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-
 
         }
     }

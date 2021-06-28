@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
@@ -38,34 +39,13 @@ private final ClientMessageHandler handler;
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == setupGame) {
-            ObjectMessage confirmation = null;
-            do {
                 try {
                     handler.sendMessageToServer("setup game", 150);
                 } catch (EndingGameException endingGameException) {
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new Intro("error", 1));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
+                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                 }
-                try {
-                    confirmation = (ObjectMessage) handler.readMessage();
-                } catch (EndingGameException endingGameException) {
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new Intro("error", 1));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
-                }
-
-            } while (confirmation.getCode() == 402);
-
-            if (600 < confirmation.getCode() && confirmation.getCode() < 699) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new PreGameRes(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
             }
         }
 
     }
-    }
+

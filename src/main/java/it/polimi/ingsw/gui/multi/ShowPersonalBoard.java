@@ -217,7 +217,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
         }
         int k = 0;
         for (int i = 0; i < 2; i++) {
-            switch(depot[1][i].getResType()){
+            switch (depot[1][i].getResType()) {
                 case 0:
                     url = cl.getResourceAsStream("coin2.png");
                     try {
@@ -226,7 +226,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                         e.printStackTrace();
                         return;
                     }
-                    g.drawImage(img, 32+k, 452, 40, 40, null);
+                    g.drawImage(img, 32 + k, 452, 40, 40, null);
                     k += 50;
                     break;
                 case 1:
@@ -237,7 +237,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                         e.printStackTrace();
                         return;
                     }
-                    g.drawImage(img, 32+k, 452, 40, 40, null);
+                    g.drawImage(img, 32 + k, 452, 40, 40, null);
                     k += 50;
                     break;
                 case 2:
@@ -248,7 +248,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                         e.printStackTrace();
                         return;
                     }
-                    g.drawImage(img, 32+k, 452, 40, 40, null);
+                    g.drawImage(img, 32 + k, 452, 40, 40, null);
                     k += 50;
                     break;
                 case 3:
@@ -259,13 +259,14 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                         e.printStackTrace();
                         return;
                     }
-                    g.drawImage(img, 32+k, 452, 40, 40, null);
+                    g.drawImage(img, 32 + k, 452, 40, 40, null);
                     k += 50;
                     break;
                 default:
                     k += 50;
                     break;
             }
+        }
         k = 0;
             for (int j = 0; j < 3; j++) {
                 switch(depot[2][j].getResType()){
@@ -318,7 +319,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                         break;
                 }
             }
-        }
+
 
         //PROD CARD SLOT
         for (int j = 300; j < 600; j = j + 150) {
@@ -699,10 +700,12 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new Turn(handler));
                 MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             } else if (e.getSource() == back && !fromTurn){
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new WaitingTurn(handler));
                 MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         }
     }

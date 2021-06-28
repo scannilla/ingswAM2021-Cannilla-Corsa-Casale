@@ -2,13 +2,10 @@ package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
 
-
-import java.net.Socket;
 
 public class CheckCommand {
     /**
@@ -19,7 +16,7 @@ public class CheckCommand {
      */
     public static void checkDiscount(Player player, Resource[] costArray, MessageHandler mHandler) throws EndingGameException {
         Resource discountedRes ;
-        String response = "";
+        String response;
         if (player.getActiveLeaderCards()[0] != null && player.getActiveLeaderCards()[0] instanceof LeaderOfDiscounts) {
             do {
                 try {
@@ -61,7 +58,29 @@ public class CheckCommand {
                 } while (!response.equalsIgnoreCase("yes") && !response.equalsIgnoreCase("no"));
             }
         }
+    }
+
+    public static void checkDiscount(Player player, Resource[] costArray) {
+        Resource discountedRes ;
+        if (player.getActiveLeaderCards()[0] != null && player.getActiveLeaderCards()[0] instanceof LeaderOfDiscounts) {
+            discountedRes = ((LeaderOfDiscounts) player.getActiveLeaderCards()[0]).getDiscountedRes();
+            for (int i = 0; i < costArray.length; i++) {
+                if (discountedRes.equals(costArray[i])) {
+                    costArray[i] = null;
+                    break;
+                }
+            }
         }
+        if (player.getActiveLeaderCards()[1] != null && player.getActiveLeaderCards()[1] instanceof LeaderOfDiscounts) {
+            discountedRes = ((LeaderOfDiscounts) player.getActiveLeaderCards()[1]).getDiscountedRes();
+            for (int i = 0; i < costArray.length; i++) {
+                if (discountedRes.equals(costArray[i])) {
+                    costArray[i] = null;
+                    break;
+                }
+            }
+        }
+    }
 
     /**
      * This method checks if player inserted a valid number
@@ -96,17 +115,17 @@ public class CheckCommand {
         givenCommand = givenCommand.replace(" ","");
         for(String s : acceptedCommands) {
             if (givenCommand.equalsIgnoreCase(s.replace(" ", "")))
-                return givenCommand;
+                return givenCommand.toLowerCase();
             allCommands = allCommands.concat(" " + s + ",");
         }
-        String correctCommand = null;
+        String correctCommand;
         try {
             mHandler.sendMessageToClient(allCommands, 151);
             correctCommand = commandChecker(acceptedCommands, mHandler.readClientMessage(), mHandler);
         } catch (EndingGameException e) {
             throw new EndingGameException();
         }
-        return correctCommand;
+        return correctCommand.toLowerCase();
     }
 
     /**

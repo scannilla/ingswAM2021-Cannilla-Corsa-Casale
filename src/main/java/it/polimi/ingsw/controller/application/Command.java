@@ -131,12 +131,24 @@ public class Command{
         }
         ProductionCard productionCardSold = commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row-1][column-1]; //row is type and column is level
         Resource[] priceResources = productionCardSold.getCostArray();
+        CheckCommand.checkDiscount(commandPlayer, priceResources);
+        int extraDepots = CheckCommand.leaderCardChecker("depot", commandPlayer);
+        int[] extraDepotRes1 = new int[4];
+        int[] extraDepotRes2;
+        if(extraDepots==1 || extraDepots==2)
+            extraDepotRes1 = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[extraDepots-1]).getExtraDepot());
+        else if(extraDepots == 3){
+            extraDepotRes1 = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[0]).getExtraDepot());
+            extraDepotRes2 = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[1]).getExtraDepot());
+            for (int i = 0; i < 4; i++) {
+                extraDepotRes1[i] += extraDepotRes2[i];
+            }
+        }
         int[] price = ResourceCounter.resCount(priceResources);
         for (int i=0; i<4; i++) {
-            if (price[i] + commandPlayer.getPersonalBoard().getWarehouseDepot().isEnoughWarehouse(new Resource(i), price[i]) +
-                    commandPlayer.getPersonalBoard().getStrongbox().isEnough(new Resource(i), price[i]) < 0) {
-                return new Response("Not able to buy this Production Card", 412);
-            }
+            if(commandPlayer.getPersonalBoard().getWarehouseDepot().getDepotResourceAmount()[i]+commandPlayer.getPersonalBoard().getStrongbox().getStrongboxResourcesAmount()[i]+
+            extraDepotRes1[i] < price[i])
+                return new Response("Not enough resources", 412);
         }
 
         if(level > 1) {
@@ -242,6 +254,7 @@ public class Command{
         int[] resExtraAmount = {0, 0, 0, 0};
         int[] resWarehouseAmount = commandPlayer.getPersonalBoard().getWarehouseDepot().getDepotResourceAmount();
         int[] resAllAmount = {0, 0, 0, 0};
+        int[] resStrongbox = commandPlayer.getPersonalBoard().getStrongbox().getStrongboxResourcesAmount();
         int numberOfDepotCards;
         for (int j=0; j<costArray.length; j++){
             numberOfDepotCards = CheckCommand.leaderCardChecker("depot", commandPlayer, costArray[j]);
@@ -251,7 +264,7 @@ public class Command{
                 resExtraAmount[j] = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[0]).getExtraDepot())[j] +
                         ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[1]).getExtraDepot())[j];
             }
-            resAllAmount[j] = resExtraAmount[j] + resWarehouseAmount[j];
+            resAllAmount[j] = resExtraAmount[j] + resWarehouseAmount[j] + resStrongbox[j];
         }
 
         for(int i = 0; i< costAmount.length; i++){
@@ -326,6 +339,8 @@ public class Command{
         int cardPosition = CheckCommand.leaderCardChecker("depot", commandPlayer);
         for(int i : commandPlayer.getPersonalBoard().getWarehouseDepot().getDepotResourceAmount())
             counter += i;
+        for(int i : commandPlayer.getPersonalBoard().getStrongbox().getStrongboxResourcesAmount())
+            counter += i;
         if (counter >= 2)
             return new Response ("$standard", 253);
         else if (cardPosition > 0) {
@@ -364,9 +379,11 @@ public class Command{
         if(commandPlayer.getLeaderProductionActivated()[chosenCard-1])
             return new Response("You have already activated this production during this turn", 426);
         Resource requested = ((LeaderOfProductions)commandPlayer.getActiveLeaderCards()[chosenCard-1]).getRequiredResource();
-        for (int i = 0; i < 3; i++) {
-            if(requested.equals(commandPlayer.getPersonalBoard().getWarehouseDepot().checkResource(i)))
-                found = true;
+        if(commandPlayer.getPersonalBoard().getWarehouseDepot().isEnoughWarehouse(requested, 1) >=0)
+            found = true;
+        if(!found) {
+            if(commandPlayer.getPersonalBoard().getStrongbox().isEnough(requested,1)>=0)
+                found=true;
         }
         if(!found) {
             int depot = CheckCommand.leaderCardChecker("depot", commandPlayer);

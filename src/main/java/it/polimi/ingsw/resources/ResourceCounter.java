@@ -15,7 +15,6 @@ public final class ResourceCounter {
     public static int[] resCount(Resource[] resources){
         int[] counter = {0, 0, 0, 0};
         for (Resource resource : resources) {
-
             if (resource != null) {
                 if (resource.getResType() == 0)
                     counter[0]++;

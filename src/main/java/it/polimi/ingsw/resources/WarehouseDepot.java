@@ -94,7 +94,7 @@ public class WarehouseDepot implements Serializable {
         int column=-1;
         int i;
         for(i=0; i<3; i++) {
-            if (resource == checkResource(i))
+            if (resource.equals(checkResource(i)))
                 column = i;
         }
         if(column==-1)
@@ -143,6 +143,10 @@ public class WarehouseDepot implements Serializable {
      * @throws IllegalArgumentException e
      */
     public void moveResources(int line1, int line2) throws IllegalArgumentException {
+        if(line1<0 || line1>2 || line2<0 || line2>2)
+            throw new IllegalArgumentException("Index out of bounds");
+        if(line1==line2)
+            throw new IllegalArgumentException("Can't switch a line with itself");
         if(line1>line2) { //big brain time to reduce code lines
             int temp = line1;
             line1 = line2;

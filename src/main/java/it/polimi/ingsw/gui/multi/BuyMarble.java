@@ -3,7 +3,7 @@ package it.polimi.ingsw.gui.multi;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
-import it.polimi.ingsw.gui.Error;
+import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.marbles.MarketStructure;
 
@@ -147,43 +147,64 @@ public class BuyMarble extends JPanel implements ActionListener {
             try{
                 handler.sendMessageToServer("buy marble -line -1", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == line2){
             try{
                 handler.sendMessageToServer("buy marble -line -2", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == line3){
             try{
                 handler.sendMessageToServer("buy marble -line -3", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == column1){
             try{
                 handler.sendMessageToServer("buy marble -column -1", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if (e.getSource() == column2){
             try{
                 handler.sendMessageToServer("buy marble -column -2", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == column3){
             try{
                 handler.sendMessageToServer("buy marble -column -3", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == column4){
             try{
                 handler.sendMessageToServer("buy marble -column -4", 166);
             } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+                MainGUI.frame.remove(this);
+                MainGUI.frame.add(new Intro("error", 1));
+                MainGUI.frame.revalidate();
+                MainGUI.frame.repaint();
             }
         } else if(e.getSource() == back){
             MainGUI.frame.remove(this);

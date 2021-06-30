@@ -47,8 +47,8 @@ public class ActionToken implements Serializable {
                     break;
         }
         if(action>3)
-            EventManager.notifyListener(EventType.LEADERCARD, lorenzo.getPersonalBoard());
+            EventManager.notifyListener(EventType.PERSONALBOARD, lorenzo.getPersonalBoard());
         else
-            EventManager.notifyListener(EventType.MARKET, game.getMarket());
+            EventManager.notifyListener(EventType.CARDMARKET, game.getCardsMarket());
     }
 }

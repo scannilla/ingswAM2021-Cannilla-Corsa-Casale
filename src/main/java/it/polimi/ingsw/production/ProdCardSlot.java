@@ -37,7 +37,7 @@ public class ProdCardSlot implements Serializable {
     public void insertNewCard(ProductionCard card, int place) throws IllegalArgumentException, EndingGameException {
         int level = card.getLevel();
         String s = "Place not empty";
-        if(place<=0 || place>3)
+        if(place<1 || place>3)
             throw new IllegalArgumentException("Illegal place");
         int i=0;
         if (level==1) {

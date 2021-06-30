@@ -28,6 +28,8 @@ public class ServerMain {
 
     private static final CommandsHandler handler = CommandsHandler.instanceCreator(new Automaton());
 
+    private static final ArrayList<MessageHandler> mHandlers = new ArrayList<>();
+
 
 
     /**
@@ -44,8 +46,8 @@ public class ServerMain {
             try {
                 futures.add(createConnection());
             } catch (EndingGameException e) {
-                for (Socket sock : mapAllPlayer.values()) {
-                    //EndGame.end(); TODO change endgame
+                for (MessageHandler m : mHandlers) {
+                    EndGame.end(m);
                 }
                 System.out.println("Server shutting down");
                 System.exit(1);
@@ -65,8 +67,8 @@ public class ServerMain {
                 try {
                     end = f.get(5, TimeUnit.SECONDS);
                 } catch (InterruptedException | ExecutionException e) {
-                    for(Socket sock : mapAllPlayer.values())
-                        //EndGame.end(sock); TODO change endgame
+                    for(MessageHandler m : mHandlers)
+                        EndGame.end(m);
                     System.out.println("Server shutting down");
                     System.exit(1);
                 } catch (TimeoutException e) {
@@ -104,6 +106,7 @@ public class ServerMain {
         }
         String nickname;
         MessageHandler mHandler = new MessageHandler(clientSocket);
+        mHandlers.add(mHandler);
         try {
             nickname = askForNickname(mHandler);
         } catch (EndingGameException e) {

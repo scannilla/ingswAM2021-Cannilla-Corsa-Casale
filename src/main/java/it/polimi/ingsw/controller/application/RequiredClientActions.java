@@ -93,7 +93,7 @@ public class RequiredClientActions {
             switch (depotType) {
                 case "warehousedepot":
                     for (int i=0; i<3; i++) {
-                        if (player.getPersonalBoard().getWarehouseDepot().checkResource(i).equals(resource)) {
+                        if (resource.equals(player.getPersonalBoard().getWarehouseDepot().checkResource(i))) {
                             try {
                                 player.getPersonalBoard().getWarehouseDepot().useResource(resource);
                                 sendResponse("resource taken", 129);
@@ -381,7 +381,7 @@ public class RequiredClientActions {
     }
 
     private void buyCard() throws EndingGameException {
-        Resource[] costArray = player.getConnectedGame().getCardsMarket().getCard(Integer.parseInt(parameters[0])-1, Integer.parseInt(parameters[1])-1).getCostArray();
+        Resource[] costArray = player.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])-1][Integer.parseInt(parameters[1])-1].getCostArray();
         boolean discountActivated = false;
         boolean done;
         CheckCommand.checkDiscount(player, costArray, mHandler);
@@ -456,7 +456,11 @@ public class RequiredClientActions {
             sendResponse("Select a position to insert the card in", 121);
             position = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
         } while (position<1 || position > 3);
-        player.buyProductionCard(Integer.parseInt(parameters[0]),Integer.parseInt(parameters[1]), position);
+        try {
+            player.buyProductionCard(Integer.parseInt(parameters[0])-1,Integer.parseInt(parameters[1])-1, position);
+        } catch (IllegalArgumentException e) {
+            sendResponse("so na sega io", 400);
+        }
         sendResponse("Card inserted in the selected slot", 122);
     }
 

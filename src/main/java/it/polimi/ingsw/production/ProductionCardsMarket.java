@@ -72,7 +72,7 @@ public class ProductionCardsMarket implements Serializable {
         ProductionCard[][] topCards = new ProductionCard[3][4];
         for(int i=0; i<3; i++)
             for(int j=0; j<4; j++) {
-                while (productionCardsMarket[i][j][k]!=null && k<3)
+                while (productionCardsMarket[i][j][k]==null && k<3)
                     k++;
                 topCards[i][j] = productionCardsMarket[i][j][k];
             }
@@ -87,10 +87,10 @@ public class ProductionCardsMarket implements Serializable {
      * @throws IllegalArgumentException
      */
     public ProductionCard getCard(int x, int y) throws IllegalArgumentException{
-        if(productionCardsMarket[x][y][2]==null)
+        if(productionCardsMarket[x][y][3]==null)
             throw new IllegalArgumentException();
         int k=0;
-        while(productionCardsMarket[x][y][k]!=null && k<3)
+        while(productionCardsMarket[x][y][k]==null && k<3)
         k++;
         return productionCardsMarket[x][y][k];
     }

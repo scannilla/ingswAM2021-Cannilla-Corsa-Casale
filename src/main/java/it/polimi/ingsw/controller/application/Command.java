@@ -115,7 +115,7 @@ public class Command{
         } catch (IndexOutOfBoundsException e) {
             return new Response("Missing parameters", 408);
         }
-        if(row<1 || row>4 || column<1 || column>3)
+        if(row<1 || row>3 || column<1 || column>4)
             return new Response("Index out of bounds", 407);
         if(commandPlayer.getConnectedGame().getCardsMarket().getTopCards()[row-1][column-1]==null)
             return new Response("there are no cards left on the selected pile", 410);

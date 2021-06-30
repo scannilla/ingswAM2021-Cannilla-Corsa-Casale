@@ -270,9 +270,9 @@ class WarehouseDepotTest {
             warehouseDepotTest.moveResources(2, 1);
         } catch (IllegalArgumentException e){
             String actualMessage = e.getMessage();
-            assertTrue(actualMessage.contains("Unable to move resource"));
+            assertTrue(actualMessage.contains("Unable to move these two lines"));
         }
-        }
+    }
 
     @Test
     void moveResourceTestException2(){
@@ -288,7 +288,7 @@ class WarehouseDepotTest {
             warehouseDepotTest.moveResources(1, 2);
         } catch (IllegalArgumentException e){
             String actualMessage = e.getMessage();
-            assertTrue(actualMessage.contains("Unable to move resource"));
+            assertTrue(actualMessage.contains("Unable to move these two lines"));
         }
     }
 

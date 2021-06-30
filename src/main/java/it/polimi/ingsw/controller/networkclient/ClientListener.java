@@ -64,7 +64,14 @@ public class ClientListener implements Runnable{
             }
         }
         else {
-            //gui controller
+            while (true) {
+                try {
+                    GuiMessageHandler.readMessage(cmHandler);
+                } catch (EndingGameException e) {
+                    MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
+                    break;
+                }
+            }
         }
     }
 

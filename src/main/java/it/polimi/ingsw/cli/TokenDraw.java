@@ -36,14 +36,14 @@ public class TokenDraw {
                   case 4:
                       System.out.print(Color.ANSI_RESET.escape() + "  ----  " + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_RESET.escape() + " /    \\" + Color.ANSI_RESET.escape());
-                      System.out.print(Color.ANSI_RESET.escape() + "|  +1  |" + Color.ANSI_RESET.escape());
+                      System.out.print(Color.ANSI_RESET.escape() + "|  +2  |" + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_RESET.escape() + " \\    /" + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_RESET.escape() + "  ----  " + Color.ANSI_RESET.escape());
                       break;
                   case 5:
                       System.out.print(Color.ANSI_RESET.escape() + "  ----  " + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_RESET.escape() + " /    \\" + Color.ANSI_RESET.escape());
-                      System.out.print(Color.ANSI_RESET.escape() + "|  +2  |" + Color.ANSI_RESET.escape());
+                      System.out.print(Color.ANSI_RESET.escape() + "|  +1  |" + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_RESET.escape() + " \\    /" + Color.ANSI_RESET.escape());
                       System.out.print(Color.ANSI_RESET.escape() + "  ----  " + Color.ANSI_RESET.escape());
                       break;

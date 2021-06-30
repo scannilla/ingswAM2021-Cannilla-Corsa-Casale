@@ -66,7 +66,9 @@ public class Game implements Serializable{
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
         if (numberOfPlayers==1) {
             actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+            actionTokensPile.createPile();
             lorenzo = new Player("Lorenzo The Magnificent");
+            lorenzo.setConnectedGame(this);
         }
         deck = GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
         leaderCardsDeck = GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));

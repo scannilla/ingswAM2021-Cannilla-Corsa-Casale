@@ -139,7 +139,7 @@ public class Player implements Serializable {
      * @param columnIndex int
      * @throws IllegalArgumentException e
      */
-    public void buyProductionCard(int rowIndex, int columnIndex, int position) {
+    public void buyProductionCard(int rowIndex, int columnIndex, int position) throws IllegalArgumentException{
         try {
             ProductionCard card = this.getConnectedGame().getCardsMarket().buyCard(rowIndex, columnIndex);
             personalBoard.getProdCardSlot().insertNewCard(card, position);

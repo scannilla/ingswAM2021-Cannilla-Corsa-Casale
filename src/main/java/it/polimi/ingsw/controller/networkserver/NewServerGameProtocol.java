@@ -53,8 +53,12 @@ public class NewServerGameProtocol implements Callable<Integer> {
         //if (!local)
             //new Thread(new CheckConnection(mHandler));
         while (true) {
-            //if(!local)
-                //checkConnection();
+            /*if(!local)
+                try {
+                    checkConnection();
+                } catch (EndingGameException e) {
+                    throw new EndingGameException();
+                }*/
             String command;
             try {
                 command = mHandler.readClientMessage();
@@ -87,11 +91,11 @@ public class NewServerGameProtocol implements Callable<Integer> {
         return new String[] {command[0], jsonString};
     }
 
-    private void checkConnection(){
+    private void checkConnection() throws EndingGameException {
         try {
             clientSocket.setSoTimeout(5000);
         } catch (SocketException e) {
-            e.printStackTrace();
+            throw new EndingGameException();
         }
     }
 

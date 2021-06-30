@@ -1,12 +1,19 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
+import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.gui.multi.*;
+import it.polimi.ingsw.leader.LeaderCard;
+import it.polimi.ingsw.marbles.MarketStructure;
+import it.polimi.ingsw.production.ProductionCardsMarket;
 
 
 public class GuiMessageHandler {
+
+    private static final Data instance = Data.instanceCreator();
 
     public static void readMessage(ClientMessageHandler cmHandler) throws EndingGameException {
         Message received;
@@ -20,6 +27,9 @@ public class GuiMessageHandler {
 
     public static void readCode(Message received, ClientMessageHandler cmHandler){
         int code = received.getCode();
+        Object object = null;
+        if(code>=650)
+            object = ((ObjectMessage)received).getObj();
         switch (code){
             case 110:
                 MainGUI.changePanel(new AskNicknameMulti(cmHandler));
@@ -57,12 +67,27 @@ public class GuiMessageHandler {
                     MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
                 }
                 break;
-            case 653:
-                MainGUI.changePanel(new ActiveLeader(cmHandler));
-                break;
             case 310:
                 Data.instanceCreator().setNickname(received.getNickname());
                 MainGUI.changePanel(new JoinGame(cmHandler));
+                break;
+            case 650:
+                instance.setMarketStructure((MarketStructure) object);
+                break;
+            case 651:
+                instance.setProductionCardsMarket((ProductionCardsMarket) object);
+                break;
+            case 652:
+                instance.setPersonalBoard((PersonalBoard) object);
+                break;
+            case 653:
+                instance.setLeaderCards((LeaderCard[]) object);
+                break;
+            case 654:
+                instance.setActiveLeaderCards((LeaderCard[]) object);
+                break;
+            case 655:
+                instance.setToChooseLeaderCards((LeaderCard[]) object);
                 break;
         }
     }

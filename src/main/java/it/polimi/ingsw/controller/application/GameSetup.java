@@ -61,11 +61,11 @@ public class GameSetup {
     }
 
     private void insertResource() throws EndingGameException {
-        mHandler.sendMessageToClient("select now the resource: coin, stone, servant or shield", 181);
+        mHandler.sendMessageToClient("select now the resource: coin, stone, servant or shield", 182);
         String chosenResource = CheckCommand.commandChecker(new String[] {"coin", "stone", "servant", "shield"}, mHandler.readClientMessage(), mHandler);
         int chosenLine;
         do {
-            mHandler.sendMessageToClient("Select where to insert the chosen resource", 182);
+            mHandler.sendMessageToClient("Select in which line to insert the chosen resource", 197);
             chosenLine = CheckCommand.checkNumber(mHandler.readClientMessage(), mHandler);
         } while (chosenLine<1 || chosenLine>3);
         player.getPersonalBoard().getWarehouseDepot().insertNewResource(new Resource(chosenResource),chosenLine-1);
@@ -76,13 +76,13 @@ public class GameSetup {
         ArrayList<LeaderCard> cards = deck.pick4cards();
         ArrayList<LeaderCard> chosenCards = new ArrayList<>();
         LeaderCard[] cardsAsArray = cards.toArray(new LeaderCard[0]);
-        mHandler.sendMessageToClient("Select 2 of these 4 cards",183 );
         mHandler.sendObjectToClient(new ObjectMessage(cardsAsArray, 655, player.getNickname()));
+        mHandler.sendMessageToClient("Select 2 of these 4 cards",183);
         mHandler.sendMessageToClient("Send the number of the first card", 184);
         String chosen = mHandler.readClientMessage();
         int card = CheckCommand.checkNumber(chosen, mHandler);
         chosenCards.add(cards.get(card-1));
-        int card2 = 0;
+        int card2;
         do {
             mHandler.sendMessageToClient("Send the number of the second card", 185);
             chosen = mHandler.readClientMessage();

@@ -19,6 +19,7 @@ public class CommandsHandler {
     private static Game game;
     private int setup=0;
     private static boolean first = true;
+    private static boolean creator = true;
 
     /**
      * Constructor of this CommandsHandler
@@ -49,7 +50,7 @@ public class CommandsHandler {
      * @return ok or ko
      * @throws EndingGameException e
      */
-    public Response tryCommand(String[] cmd, Player player, MessageHandler mHandler) throws EndingGameException {
+    public synchronized Response tryCommand(String[] cmd, Player player, MessageHandler mHandler) throws EndingGameException {
         GamePhase phase = fsm.getPhase();
         if(!game.getPlayers().contains(player))
             game.addPlayer(player);
@@ -57,14 +58,19 @@ public class CommandsHandler {
             case ACCEPTANCE:
                 if(CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
                     fsm.evolveGamePhase();
-                    return new Response("ok", 201);
+                    if(first) {
+                        first = false;
+                        return new Response("Game joined", 202);
+                    }
+                    else
+                        return new Response("Game joined", 203);
                 }
                 return new Response("Incorrect command", 401);
             case GAME_CREATOR:
-                if(first) {
+                if(creator) {
                     int numbOfPlayers;
                     if (CheckCommand.commandChecker(fsm.validCommands(), cmd[0])) {
-                        first = false;
+                        creator = false;
                         numbOfPlayers = new GameCreator(mHandler).createGame(game);
                         if (game.getPlayers().indexOf(player) == 0)
                             new Thread(new AutoCheckerWait(game, fsm, numbOfPlayers)).start();
@@ -196,6 +202,7 @@ class AutoCheckerWait implements Runnable {
             }
             if (game.getPlayers().size() == numbOfPlayers && fsm.getPhase()==GamePhase.WAITING_ROOM) {
                 try {
+                    EventManager.notifyListener(EventType.GAMESTART, null);
                     game.initialSet();
                     fsm.evolveGamePhase();
                     return;

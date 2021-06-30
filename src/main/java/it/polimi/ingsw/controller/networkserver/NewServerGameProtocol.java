@@ -70,7 +70,7 @@ public class NewServerGameProtocol implements Callable<Integer> {
                 break;
             }
         }
-        return 1;
+        return null;
     }
 
     /**
@@ -105,5 +105,6 @@ public class NewServerGameProtocol implements Callable<Integer> {
         EventManager.subscribe(EventType.PERSONALBOARD, new PersonalBoardListener(mHandler));
         EventManager.subscribe(EventType.LEADERCARD, new LeaderCardListener(mHandler));
         EventManager.subscribe(EventType.LEADERBOARD, new LeaderboardListener(mHandler));
+        EventManager.subscribe(EventType.GAMESTART, new GameStartListener(mHandler));
     }
 }

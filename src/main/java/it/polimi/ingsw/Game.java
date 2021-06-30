@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
@@ -11,7 +10,6 @@ import it.polimi.ingsw.production.ProductionCardsDeck;
 import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.tokens.ActionToken;
 import it.polimi.ingsw.tokens.ActionTokenPile;
-import it.polimi.ingsw.leader.LeaderCard;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,6 +77,9 @@ public class Game implements Serializable{
         players.get(0).setActive(true);
         activePlayer = players.get(0);
         vaticanReport = GSON.vaticanReportParser(new File("src/main/java/it/polimi/ingsw/vatReport.json"));
+        for(Player p : players) {
+            EventManager.notifyListener(EventType.PERSONALBOARD, p.getPersonalBoard(), p.getNickname());
+        }
     }
 
     /**

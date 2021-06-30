@@ -79,8 +79,7 @@ public class Intro extends JPanel implements ActionListener {
             try {
                 clientSocket = new Socket(hostName, portNumber);
                 cmHandler = new ClientMessageHandler(clientSocket);
-                //new Thread(new ClientListener(cmHandler, true)).start();
-                cmHandler.sendMessageToServer("join game", 111);
+                new Thread(new ClientListener(cmHandler, true)).start();
             } catch (UnknownHostException ex) {
                 System.err.println("Don't know about host " + hostName);
                 System.exit(1);
@@ -90,21 +89,6 @@ public class Intro extends JPanel implements ActionListener {
             } catch (EndingGameException ex) {
                 System.err.println("Game over, disconnecting");
                 System.exit(1);
-            }
-            Message confirm = null;
-            try {
-                confirm = cmHandler.readMessage();
-            } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
-            }
-            if (confirm.getCode() == 110) {
-                MainGUI.frame.remove(MainGUI.frame.getContentPane());
-                MainGUI.frame.add(new AskNicknameMulti(cmHandler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
             }
         }
         else if(e.getSource()==local) {

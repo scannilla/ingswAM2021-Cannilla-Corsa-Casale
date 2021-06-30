@@ -9,5 +9,6 @@ public enum EventType {
     MARKET,
     CARDMARKET,
     TOKEN,
-    LEADERBOARD
+    LEADERBOARD,
+    GAMESTART
 }

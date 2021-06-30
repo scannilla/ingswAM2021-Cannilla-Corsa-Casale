@@ -81,16 +81,20 @@ public class ProdCardsMarketDraw {
         int stones=0;
         int servants=0;
         int shields=0;
-        for (int i=0; i<resourceArray.length; i++){
-            switch (resourceArray[i].toString()){
-                case "coin": coins++;
-                break;
-                case "stone": stones++;
-                break;
-                case "servant": servants++;
-                break;
-                case "shield": shields++;
-                break;
+        for (Resource resource : resourceArray) {
+            switch (resource.toString()) {
+                case "coin":
+                    coins++;
+                    break;
+                case "stone":
+                    stones++;
+                    break;
+                case "servant":
+                    servants++;
+                    break;
+                case "shield":
+                    shields++;
+                    break;
             }
         }
         System.out.print(Color.ANSI_YELLOW.escape() + coins + "C " + resetEscape);

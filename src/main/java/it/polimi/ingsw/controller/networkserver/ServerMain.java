@@ -53,8 +53,6 @@ public class ServerMain {
                 System.exit(1);
             }
         }
-
-        //the server checks if one of the thread connected to a player ends
         checkEnd(futures);
     }
 
@@ -98,7 +96,7 @@ public class ServerMain {
     }
 
     private static Future<Integer> createConnection() throws EndingGameException {
-        Socket clientSocket = null;
+        Socket clientSocket;
         try {
             clientSocket = serverSocket.accept();
         } catch (IOException e) {
@@ -140,5 +138,18 @@ public class ServerMain {
         return nickname;
     }
 
+}
+
+class CrashChecker implements Runnable {
+    private final Future<Integer> future;
+
+    public CrashChecker(Future<Integer> future) {
+        this.future = future;
+    }
+
+    @Override
+    public void run() {
+
+    }
 }
 

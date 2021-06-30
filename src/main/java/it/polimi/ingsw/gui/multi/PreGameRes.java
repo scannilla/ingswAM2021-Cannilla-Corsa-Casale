@@ -117,8 +117,9 @@ public class PreGameRes extends JPanel implements ActionListener {
         switch(received.getMessage()){
             case "You're the second player so you can choose a resource to add to your warehouse depot":
             case "You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one":
-                while(numAction!=1){
-                    if(e.getSource()==coinButton){
+            case "You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one":
+
+                if(e.getSource()==coinButton){
                         try {
                             handler.sendMessageToServer("coin", 160);
                         } catch(EndingGameException ex){

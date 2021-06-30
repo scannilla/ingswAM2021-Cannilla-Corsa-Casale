@@ -32,7 +32,7 @@ public class JoinGame extends JPanel implements ActionListener {
         if(e.getSource() == joinGame){
 
             try {
-                handler.sendMessageToServer("join game");
+                handler.sendMessageToServer("join game", 111);
             } catch (EndingGameException endingGameException) {
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }

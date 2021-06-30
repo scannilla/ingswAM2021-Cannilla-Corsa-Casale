@@ -81,14 +81,11 @@ public class Intro extends JPanel implements ActionListener {
                 cmHandler = new ClientMessageHandler(clientSocket);
                 new Thread(new ClientListener(cmHandler, true)).start();
             } catch (UnknownHostException ex) {
-                System.err.println("Don't know about host " + hostName);
-                System.exit(1);
+                MainGUI.changePanel(new Error("Don't know about host " + hostName, null, 0));
             } catch (IOException ex) {
-                System.err.println("Couldn't get the I/O for the current host");
-                System.exit(1);
+                MainGUI.changePanel(new Error("Couldn't get the I/O for the current host", null, 0));
             } catch (EndingGameException ex) {
-                System.err.println("Game over, disconnecting");
-                System.exit(1);
+                MainGUI.changePanel(new Error("Game over, disconnecting", null, 0));
             }
         }
         else if(e.getSource()==local) {

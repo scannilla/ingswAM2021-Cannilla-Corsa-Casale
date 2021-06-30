@@ -20,20 +20,13 @@ public class PreGameRes extends JPanel implements ActionListener {
 
 
     private JButton coinButton, stoneButton, servantButton, shieldButton, goAhead;
-    private ClientMessageHandler handler;
-    private Message received;
+    private final ClientMessageHandler handler;
+    private final String received;
 
-    public PreGameRes(ClientMessageHandler handler) {
+    public PreGameRes(String received, ClientMessageHandler handler) {
         this.handler = handler;
-        try {
-            received = handler.readMessage();
-        } catch (EndingGameException ex) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Intro("error", 1));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
-        }
-        if (!(received.getMessage().equals("You're the first player so you're not gonna receive any resource or faith point"))) {
+        this.received = received;
+        if (!(received.equals("You're the first player so you're not gonna receive any resource or faith point"))) {
             coinButton = new JButton("Select");
             stoneButton = new JButton("Select");
             servantButton = new JButton("Select");
@@ -63,15 +56,15 @@ public class PreGameRes extends JPanel implements ActionListener {
 
 
     public void paint(Graphics g) {
-        switch (received.getMessage()) {
+        switch (received) {
             case "You're the first player so you're not gonna receive any resource or faith point":
-                g.drawString(received.getMessage(), 100, 50);
+                g.drawString(received, 100, 50);
                 g.drawString("Please wait for other players", 100, 100);
                 break;
             case "You're the second player so you can choose a resource to add to your warehouse depot":
             case "You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one":
             case "You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one":
-                g.drawString(received.getMessage(), 100, 50);
+                g.drawString(received, 100, 50);
                 myDrawImagePNG(g);
                 break;
 
@@ -106,15 +99,10 @@ public class PreGameRes extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         chooseResource(e);
-        MainGUI.frame.remove(this);
-        MainGUI.frame.add(new PreGameLeader(handler));
-        MainGUI.frame.revalidate();
-        MainGUI.frame.repaint();
     }
 
     public void chooseResource(ActionEvent e){
-        int numAction = 0;
-        switch(received.getMessage()){
+        switch(received){
             case "You're the second player so you can choose a resource to add to your warehouse depot":
             case "You're the third player so you can choose a resource to add to your warehouse depot, increased faith points by one":
             case "You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one":
@@ -144,37 +132,7 @@ public class PreGameRes extends JPanel implements ActionListener {
                             MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                         }
                     }
-                numAction++;
-                }
-            case "You're the fourth player so you can choose two resources to add to your warehouse depot, increased faith points by one":
-                while(numAction!=2){
-                    if(e.getSource()==coinButton){
-                        try {
-                            handler.sendMessageToServer("coin", 160);
-                        } catch(EndingGameException ex){
-                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                        }
-                    } else if(e.getSource()==stoneButton){
-                        try{
-                            handler.sendMessageToServer("stone", 160);
-                        } catch(EndingGameException ex){
-                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                        }
-                    } else if(e.getSource()==servantButton){
-                        try{
-                            handler.sendMessageToServer("servant", 160);
-                        } catch (EndingGameException ex){
-                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                        }
-                    } else if(e.getSource() == shieldButton){
-                        try{
-                            handler.sendMessageToServer("shield", 160);
-                        } catch(EndingGameException ex){
-                            MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                        }
-                    }
-                    numAction++;
-                }
+                    break;
         }
 
     }

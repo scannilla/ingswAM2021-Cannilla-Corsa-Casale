@@ -170,7 +170,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
         g.drawRect(105, 500, 50, 50);
 
         Resource[][] depot = personalBoard.getWarehouseDepot().getDepot();
-
+try{
         switch (depot[0][0].getResType()) {
             case 0:
                 url = cl.getResourceAsStream("coin2.png");
@@ -215,110 +215,120 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
             default:
                 break;
         }
-        int k = 0;
-        for (int i = 0; i < 2; i++) {
-            switch (depot[1][i].getResType()) {
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 32 + k, 452, 40, 40, null);
-                    k += 50;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 32 + k, 452, 40, 40, null);
-                    k += 50;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 32 + k, 452, 40, 40, null);
-                    k += 50;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 32 + k, 452, 40, 40, null);
-                    k += 50;
-                    break;
-                default:
-                    k += 50;
-                    break;
-            }
+
+    } catch (NullPointerException ignored){
         }
-        k = 0;
-            for (int j = 0; j < 3; j++) {
-                switch(depot[2][j].getResType()){
-                    case 0:
-                        url = cl.getResourceAsStream("coin2.png");
-                        try {
-                            img = ImageIO.read(url);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-                        g.drawImage(img, 7+k, 502, 40, 40, null);
-                        k += 50;
-                        break;
-                    case 1:
-                        url = cl.getResourceAsStream("stone2.png");
-                        try {
-                            img = ImageIO.read(url);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-                        g.drawImage(img, 7+k, 502, 40, 40, null);
-                        k += 50;
-                        break;
-                    case 2:
-                        url = cl.getResourceAsStream("servant2.png");
-                        try {
-                            img = ImageIO.read(url);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-                        g.drawImage(img, 7+k, 502, 40, 40, null);
-                        k += 50;
-                        break;
-                    case 3:
-                        url = cl.getResourceAsStream("shield2.png");
-                        try {
-                            img = ImageIO.read(url);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-                        g.drawImage(img, 7+k, 502, 40, 40, null);
-                        k += 50;
-                        break;
-                    default:
-                        k += 50;
-                        break;
+        int k = 0;
+try {
+    for (int i = 0; i < 2; i++) {
+        switch (depot[1][i].getResType()) {
+            case 0:
+                url = cl.getResourceAsStream("coin2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
                 }
-            }
+                g.drawImage(img, 32 + k, 452, 40, 40, null);
+                k += 50;
+                break;
+            case 1:
+                url = cl.getResourceAsStream("stone2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 32 + k, 452, 40, 40, null);
+                k += 50;
+                break;
+            case 2:
+                url = cl.getResourceAsStream("servant2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 32 + k, 452, 40, 40, null);
+                k += 50;
+                break;
+            case 3:
+                url = cl.getResourceAsStream("shield2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 32 + k, 452, 40, 40, null);
+                k += 50;
+                break;
+            default:
+                k += 50;
+                break;
+        }
+    }
+} catch (NullPointerException ignored){
+
+}
+        k = 0;
+try {
+    for (int j = 0; j < 3; j++) {
+        switch (depot[2][j].getResType()) {
+            case 0:
+                url = cl.getResourceAsStream("coin2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 7 + k, 502, 40, 40, null);
+                k += 50;
+                break;
+            case 1:
+                url = cl.getResourceAsStream("stone2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 7 + k, 502, 40, 40, null);
+                k += 50;
+                break;
+            case 2:
+                url = cl.getResourceAsStream("servant2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 7 + k, 502, 40, 40, null);
+                k += 50;
+                break;
+            case 3:
+                url = cl.getResourceAsStream("shield2.png");
+                try {
+                    img = ImageIO.read(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                g.drawImage(img, 7 + k, 502, 40, 40, null);
+                k += 50;
+                break;
+            default:
+                k += 50;
+                break;
+        }
+    }
+} catch (NullPointerException ignored){
+}
 
 
         //PROD CARD SLOT

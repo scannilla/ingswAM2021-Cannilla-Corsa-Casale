@@ -140,6 +140,7 @@ public class Turn extends JPanel implements ActionListener {
         } else if(e.getSource() == viewMarketMarble){
             try{
                 handler.sendMessageToServer("view market", 163);
+
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }

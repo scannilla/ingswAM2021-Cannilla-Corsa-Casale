@@ -97,61 +97,71 @@ public class ActiveProduction extends JPanel implements ActionListener {
         for (int i = 0; i < 3; i++) {
             type[i] = topCard[i].getType();
         }
-        for (int i = 0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             winPoints[i] = topCard[i].getWp();
         }
+
         for (int i = 0; i < 3; i++) {
-            switch (type[i]) {
-                case 1:
-                    url = cl.getResourceAsStream("type 1.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280 + x, 420, null);
-                    x = x + 230;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("type 2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280 + x, 420, null);
-                    x = x + 230;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("type 3.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280 + x, 420, null);
-                    x = x + 230;
-                    break;
-                case 4:
-                    url = cl.getResourceAsStream("type 4.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280 + x, 420, null);
-                    x = x + 230;
-                    break;
-                default:
-                    break;
+            try {
+                switch (type[i]) {
+                    case 1:
+                        url = cl.getResourceAsStream("type 1.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280 + x, 420, null);
+                        x = x + 230;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("type 2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280 + x, 420, null);
+                        x = x + 230;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("type 3.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280 + x, 420, null);
+                        x = x + 230;
+                        break;
+                    case 4:
+                        url = cl.getResourceAsStream("type 4.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280 + x, 420, null);
+                        x = x + 230;
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException ignored) {
+
             }
         }
+
+
         for (int i = 0; i < 3; i++) {
-            g.drawString("Level:" + level[i], 280 + y, 450);
+            try {
+                g.drawString("Level:" + level[i], 280 + y, 450);
+            } catch (NullPointerException ignored) {
+            }
             y = y + 230;
         }
 
@@ -160,169 +170,181 @@ public class ActiveProduction extends JPanel implements ActionListener {
             j = j + 230;
         }
         for (int i = 0; i < 3; i++) {
-            g.drawString("Required:", 280 + k, 490);
+            try {
+                g.drawString("Required:", 280 + k, 490);
+            } catch (NullPointerException ignored) {
+            }
             k = k + 230;
         }
         for (int i = 0; i < 4; i++) {
-            switch (i){
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280, 500 + r, null);
-                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
-                    r = r + 20;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280, 500 + r, null);
-                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
-                    r = r + 20;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280, 500 + r, null);
-                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
-                    r = r +20;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 280, 500 + r, null);
-                    g.drawString("x" + requiredResType1[i], 280, 510 + r);
-                    r = r + 20;
-                    break;
-                default:
-                    break;
+            try {
+                switch (i) {
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280, 500 + r, null);
+                        g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                        r = r + 20;
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280, 500 + r, null);
+                        g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                        r = r + 20;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280, 500 + r, null);
+                        g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                        r = r + 20;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 280, 500 + r, null);
+                        g.drawString("x" + requiredResType1[i], 280, 510 + r);
+                        r = r + 20;
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException ignored) {
             }
         }
         for (int i = 0; i < 4; i++) {
-            switch (i){
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 510, 500 + r, null);
-                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
-                    p = p + 20;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 510, 500 + r, null);
-                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
-                    p = p +20;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 510, 500 + r, null);
-                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
-                    p = p + 20;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 510, 500 + r, null);
-                    g.drawString("x" + requiredResType2[i], 300, 510 + p);
-                    p = p + 20;
-                    break;
-                default:
-                    break;
+            try {
+                switch (i) {
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 510, 500 + r, null);
+                        g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                        p = p + 20;
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 510, 500 + r, null);
+                        g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                        p = p + 20;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 510, 500 + r, null);
+                        g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                        p = p + 20;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 510, 500 + r, null);
+                        g.drawString("x" + requiredResType2[i], 300, 510 + p);
+                        p = p + 20;
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException ignored) {
             }
         }
         for (int i = 0; i < 4; i++) {
-            switch (i){
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
-                    q = q + 20;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
-                    q = q + 20;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
-                    q = q + 20;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + requiredResType3[i], 320, 510 + q);
-                    q = q + 20;
-                    break;
-                default:
-                    break;
+            try {
+                switch (i) {
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                        q = q + 20;
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                        q = q + 20;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                        q = q + 20;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + requiredResType3[i], 320, 510 + q);
+                        q = q + 20;
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException ignored) {
             }
         }
         for (int i = 0; i < 3; i++) {
@@ -330,170 +352,178 @@ public class ActiveProduction extends JPanel implements ActionListener {
             k = k + 230;
         }
         for (int i = 0; i < 4; i++) {
-            switch (i){
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes1[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                default:
-                    break;
+            try {
+                switch (i) {
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes1[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + givenRes1[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes1[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes1[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException ignored) {
             }
         }
         for (int i = 0; i < 4; i++) {
-            switch (i){
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes2[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  totGivenRes2[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  totGivenRes2[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  totGivenRes2[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                default:
-                    break;
+            try {
+                switch (i) {
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes2[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes2[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes2[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes2[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NullPointerException ignored) {
             }
         }
         for (int i = 0; i < 4; i++) {
-            switch (i){
-                case 0:
-                    url = cl.getResourceAsStream("coin2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" +  totGivenRes3[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 1:
-                    url = cl.getResourceAsStream("stone2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes3[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 2:
-                    url = cl.getResourceAsStream("servant2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes3[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                case 3:
-                    url = cl.getResourceAsStream("shield2.png");
-                    try {
-                        img = ImageIO.read(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + totGivenRes3[i], 320, 590 + q);
-                    q = q + 20;
-                    break;
-                default:
-                    break;
+            try {
+                switch (i) {
+                    case 0:
+                        url = cl.getResourceAsStream("coin2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes3[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 1:
+                        url = cl.getResourceAsStream("stone2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes3[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 2:
+                        url = cl.getResourceAsStream("servant2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes3[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    case 3:
+                        url = cl.getResourceAsStream("shield2.png");
+                        try {
+                            img = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        g.drawImage(img, 740, 500 + r, null);
+                        g.drawString("x" + totGivenRes3[i], 320, 590 + q);
+                        q = q + 20;
+                        break;
+                    default:
+                        break;
+                }
+
+            } catch (NullPointerException ignored) {
             }
         }
     }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
 

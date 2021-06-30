@@ -36,7 +36,6 @@ public class JoinGame extends JPanel implements ActionListener {
             } catch (EndingGameException endingGameException) {
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-
         }
     }
 

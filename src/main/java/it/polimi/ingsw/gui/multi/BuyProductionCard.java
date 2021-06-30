@@ -94,11 +94,11 @@ public class BuyProductionCard extends JPanel implements ActionListener {
         int x = 0;
         int y = 0;
         Resource[][] costResource = new Resource[9][];
-        for (int i = 0; i<9; i++){
-            for(int j = 0; j<topCard[i/3][i%3].getCostArray().length; j++) {
-                costResource[i][j] = topCard[i/3][j%3].getCostArray()[j];
+        for (int i = 0; i<9; i++) {
+            for (int j = 0; j < topCard[i / 3][i % 3].getCostArray().length; j++) {
+                costResource[i][j] = topCard[i / 3][j % 3].getCostArray()[j];
             }
-            }
+        }
         int[][] costTotArray = new int[9][4];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 3; j++) {

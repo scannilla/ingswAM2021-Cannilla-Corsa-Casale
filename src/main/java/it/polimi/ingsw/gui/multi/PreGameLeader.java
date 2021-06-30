@@ -27,7 +27,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
     private final JButton leaderOne, leaderTwo, leaderThree, leaderFour;
     private final ClientMessageHandler handler;
 
-    public PreGameLeader(ClientMessageHandler handler){
+    public PreGameLeader(ClientMessageHandler handler) {
         this.handler = handler;
         leaderOne = new JButton("Select->");
         leaderTwo = new JButton("Select->");
@@ -52,10 +52,10 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         Font f = new Font("Times New Roman", Font.BOLD, 16);
         g.setFont(f);
-        g.drawString("Choose two of the four leader cards available", 0,0);
+        g.drawString("Choose two of the four leader cards available", 0, 0);
         g.drawString("1", 125, 50);
         g.drawString("1", 200, 50);
         g.drawString("1", 275, 50);
@@ -109,7 +109,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
         myDrawImagePNG(g);
     }
 
-    private void myDrawImagePNG(Graphics g){
+    private void myDrawImagePNG(Graphics g) {
         LeaderCard[] toChooseLeaderCard = Data.instanceCreator().getToChooseLeaderCards();
         ClassLoader cl = this.getClass().getClassLoader();
         int wp1 = toChooseLeaderCard[0].getWp();
@@ -182,7 +182,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
         g.drawImage(img, 650, 200, 50, 50, null);
         g.drawImage(img, 350, 600, 50, 50, null);
         g.drawImage(img, 650, 600, 50, 50, null);
-        url = cl.getResourceAsStream("type 1.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 1.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -195,7 +195,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
         g.drawImage(img, 425, 50, 50, 50, null);
         g.drawImage(img, 425, 100, 50, 50, null);
         g.drawImage(img, 425, 150, 50, 50, null);
-        url = cl.getResourceAsStream("type 2.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 2.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -208,7 +208,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
         g.drawImage(img, 500, 50, 50, 50, null);
         g.drawImage(img, 500, 100, 50, 50, null);
         g.drawImage(img, 500, 150, 50, 50, null);
-        url = cl.getResourceAsStream("type 3.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 3.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -221,7 +221,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
         g.drawImage(img, 575, 50, 50, 50, null);
         g.drawImage(img, 575, 100, 50, 50, null);
         g.drawImage(img, 575, 150, 50, 50, null);
-        url = cl.getResourceAsStream("type 4.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 4.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -234,14 +234,29 @@ public class PreGameLeader extends JPanel implements ActionListener {
         g.drawImage(img, 650, 50, 50, 50, null);
         g.drawImage(img, 650, 100, 50, 50, null);
         g.drawImage(img, 650, 150, 50, 50, null);
+        int k = 0;
+        for (int i = 0; i < 12; i++) {
+            switch (i) {
+                case 0:
+                case 1:
+                case 2:
+                    g.drawString(String.valueOf(reqCards1[i]), 100, 50 + k);
+                    g.drawString(String.valueOf(reqCards2[i]), 400, 50 + k);
+                    g.drawString(String.valueOf(reqCards3[i]), 100, 400 + k);
+                    g.drawString(String.valueOf(reqCards4[0]), 400, 400 + k);
 
-        g.drawString(String.valueOf(reqCards1[0]), 100, 50);
-        g.drawString(String.valueOf(reqCards1[1]), 100, 100);
-        g.drawString(String.valueOf(reqCards1[2]), 100, 150);
-
-        g.drawString(String.valueOf(reqCards1[3]), 175, 50);
-        g.drawString(String.valueOf(reqCards1[4]), 175, 100);
-        g.drawString(String.valueOf(reqCards1[5]), 175, 150);
+                    k += 50;
+                    if (i == 2) {
+                        k = 0;
+                    }
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    g.drawString(String.valueOf(reqCards1[i]), 175, 50 + k);
+                    g.drawString(String.valueOf(reqCards2[i]), 475, 50 + k);
+                    g.drawString(String.valueOf(reqCards3[i]), 100, 400 + k);
+                    g.drawString(String.valueOf(reqCards4[i]), 475, 400 + k);
 
                     k += 50;
                     if (i == 5) {
@@ -977,7 +992,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
             }
     }
 
-}
+
     public int switchRes(int ability, LeaderCard leaderCard) {
         int num = 22;
         int res;

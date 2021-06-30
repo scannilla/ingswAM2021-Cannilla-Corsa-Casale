@@ -51,7 +51,6 @@ public class Multi extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Message received = null;
         if (e.getSource() == two) {
             try {
                 handler.sendMessageToServer("2", 140 );
@@ -81,5 +80,6 @@ public class Multi extends JPanel implements ActionListener {
             }
 
         }
+    MainGUI.changePanel(new WaitingRoom(handler));
     }
 }

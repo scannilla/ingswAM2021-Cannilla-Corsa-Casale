@@ -58,7 +58,7 @@ public class    ActiveProduction extends JPanel implements ActionListener{
     }
 
     private void myDrawImagePNG(Graphics g) {
-        prodCardSlot = personalBoard.getProdCardSlot();
+        prodCardSlot = Data.instanceCreator().getPersonalBoard().getProdCardSlot();
         ProductionCard[] topCard = prodCardSlot.getTopCards();
         ClassLoader cl = this.getClass().getClassLoader();
         InputStream url;
@@ -66,18 +66,30 @@ public class    ActiveProduction extends JPanel implements ActionListener{
         int[] type = new int[3];
         int[] level = new int[3];
         int[] winPoints = new int[3];
-        Resource[] reqRes1 = topCard[0].getRequiredRes();
-        Resource[] reqRes2 = topCard[1].getRequiredRes();
-        Resource[] reqRes3 = topCard[2].getRequiredRes();
-        int[] requiredResType1 = ResourceCounter.resCount(reqRes1);
-        int[] requiredResType2 = ResourceCounter.resCount(reqRes2);
-        int[] requiredResType3 = ResourceCounter.resCount(reqRes3);
-        Resource[] givenRes1 = topCard[0].getGivenRes();
-        Resource[] givenRes2 = topCard[1].getGivenRes();
-        Resource[] givenRes3 = topCard[2].getGivenRes();
-        int[] totGivenRes1 = ResourceCounter.resCount(givenRes1);
-        int[] totGivenRes2 = ResourceCounter.resCount(givenRes2);
-        int[] totGivenRes3 = ResourceCounter.resCount(givenRes3);
+        int[] requiredResType1 = new int[40];
+        int[] totGivenRes1 = new int [40];
+        int[] requiredResType2 = new int[40];
+        int[] totGivenRes2 = new int [40];
+        int[] requiredResType3 = new int[40];
+        int[] totGivenRes3 = new int [40];
+        if (topCard[0]!=null) {
+            Resource[] reqRes1 = topCard[0].getRequiredRes();
+            requiredResType1 = ResourceCounter.resCount(reqRes1);
+            Resource[] givenRes1 = topCard[0].getGivenRes();
+            totGivenRes1 = ResourceCounter.resCount(givenRes1);
+        }
+        if (topCard[1]!=null) {
+            Resource[] reqRes2 = topCard[1].getRequiredRes();
+            requiredResType2 = ResourceCounter.resCount(reqRes2);
+            Resource[] givenRes2 = topCard[1].getGivenRes();
+            totGivenRes2 = ResourceCounter.resCount(givenRes2);
+        }
+        if (topCard[1]!=null) {
+            Resource[] reqRes3 = topCard[2].getRequiredRes();
+            requiredResType3 = ResourceCounter.resCount(reqRes3);
+            Resource[] givenRes3 = topCard[2].getGivenRes();
+            totGivenRes3 = ResourceCounter.resCount(givenRes3);
+        }
         int x = 0;
         int y = 0;
         int j = 0;
@@ -86,13 +98,16 @@ public class    ActiveProduction extends JPanel implements ActionListener{
         int p = 0;
         int q = 0;
         for (int i = 0; i < 3; i++) {
-            level[i] = topCard[i].getLevel();
+            if (topCard[i] !=null){
+                level[i] = topCard[i].getLevel();}
         }
         for (int i = 0; i < 3; i++) {
-            type[i] = topCard[i].getType();
+            if (topCard[i] !=null){
+                type[i] = topCard[i].getType();}
         }
-        for (int i = 0; i<3; i++) {
-            winPoints[i] = topCard[i].getWp();
+        for (int i = 0; i < 3; i++) {
+            if (topCard[i] !=null){
+                winPoints[i] = topCard[i].getWp();}
         }
         for (int i = 0; i < 3; i++) {
             switch (type[i]) {
@@ -346,7 +361,7 @@ public class    ActiveProduction extends JPanel implements ActionListener{
                         return;
                     }
                     g.drawImage(img, 740, 500 + r, null);
-                    g.drawString("x" + givenRes1[i], 320, 590 + q);
+                    g.drawString("x" + totGivenRes1[i], 320, 590 + q);
                     q = q + 20;
                     break;
                 case 2:

@@ -13,59 +13,112 @@ public class ProdCardsMarketDraw {
         System.out.print(resetEscape + "-------------------------------------------------------------------");
         System.out.print("\n");
         for (int i=0; i<4; i++) {
-            System.out.print(resetEscape + "|Level: " + prodCardTensor[0][i].getLevel() + "      WP: " + prodCardTensor[0][i].getWp());
-            if (prodCardTensor[0][i].getWp()>9)
-                System.out.print(" ");
-            else System.out.print("  ");
-            System.out.print(resetEscape + "|Level: " + prodCardTensor[1][i].getLevel() + "      WP: " + prodCardTensor[1][i].getWp());
-            if (prodCardTensor[1][i].getWp()>9)
-                System.out.print(" ");
-            else System.out.print("  ");
+            if (prodCardTensor[0][i]!=null) {
+                System.out.print(resetEscape + "|Level: " + prodCardTensor[0][i].getLevel() + "      WP: " + prodCardTensor[0][i].getWp());
+                if (prodCardTensor[0][i].getWp()>9)
+                    System.out.print(" ");
+                else System.out.print("  ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[1][i]!=null) {
+                System.out.print(resetEscape + "|Level: " + prodCardTensor[1][i].getLevel() + "      WP: " + prodCardTensor[1][i].getWp());
+                if (prodCardTensor[1][i].getWp() > 9)
+                    System.out.print(" ");
+                else System.out.print("  ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[2][i]!=null) {
             System.out.print(resetEscape + "|Level: " + prodCardTensor[2][i].getLevel() + "      WP: " + prodCardTensor[2][i].getWp());
             if (prodCardTensor[2][i].getWp()>9)
                 System.out.print(" |");
-            else System.out.print("  |");
+            else System.out.print("  |");}
+            else System.out.print(resetEscape + "|                     |");
             System.out.print("\n");
 
-            System.out.print(resetEscape + "|Type: " + prodCardTensor[0][i].getType() + "              ");
-            System.out.print(resetEscape + "|Type: " + prodCardTensor[1][i].getType() + "              ");
-            System.out.print(resetEscape + "|Type: " + prodCardTensor[2][i].getType() + "              |");
+            if (prodCardTensor[0][i]!=null) {
+                System.out.print(resetEscape + "|Type: " + prodCardTensor[0][i].getType() + "              ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[1][i]!=null) {
+                System.out.print(resetEscape + "|Type: " + prodCardTensor[1][i].getType() + "              ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[2][i]!=null) {
+                System.out.print(resetEscape + "|Type: " + prodCardTensor[2][i].getType() + "              |");
+            }
+            else System.out.print(resetEscape + "|                     |");
             System.out.print("\n");
 
-            System.out.print(resetEscape + "|Cost: ");
-            drawResCounter(prodCardTensor[0][i].getCostArray());
-            System.out.print("   ");
-            System.out.print(resetEscape + "|Cost: ");
-            drawResCounter(prodCardTensor[1][i].getCostArray());
-            System.out.print("   ");
-            System.out.print(resetEscape + "|Cost: ");
-            drawResCounter(prodCardTensor[2][i].getCostArray());
-            System.out.print("   |");
+            if (prodCardTensor[0][i]!=null) {
+                System.out.print(resetEscape + "|Cost: ");
+                drawResCounter(prodCardTensor[0][i].getCostArray());
+                System.out.print("   ");
+            }
+            else System.out.print(resetEscape + "|     EMPTY SLOT      ");
+            if (prodCardTensor[1][i]!=null) {
+                System.out.print(resetEscape + "|Cost: ");
+                drawResCounter(prodCardTensor[1][i].getCostArray());
+                System.out.print("   ");
+            }
+            else System.out.print(resetEscape + "|     EMPTY SLOT      ");
+            if (prodCardTensor[2][i]!=null) {
+                System.out.print(resetEscape + "|Cost: ");
+                drawResCounter(prodCardTensor[2][i].getCostArray());
+                System.out.print("   |");
+            }
+            else System.out.print(resetEscape + "|     EMPTY SLOT      |");
             System.out.print("\n");
 
-            System.out.print(resetEscape + "|Req Res: ");
-            drawResCounter(prodCardTensor[0][i].getRequiredRes());
-            System.out.print(resetEscape + "|Req Res: ");
-            drawResCounter(prodCardTensor[1][i].getRequiredRes());
-            System.out.print(resetEscape + "|Req Res: ");
-            drawResCounter(prodCardTensor[2][i].getRequiredRes());
-            System.out.print(resetEscape + "|");
+            if (prodCardTensor[0][i]!=null) {
+                System.out.print(resetEscape + "|Req Res: ");
+                drawResCounter(prodCardTensor[0][i].getRequiredRes());
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[1][i]!=null) {
+                System.out.print(resetEscape + "|Req Res: ");
+                drawResCounter(prodCardTensor[1][i].getRequiredRes());
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[2][i]!=null) {
+                System.out.print(resetEscape + "|Req Res: ");
+                drawResCounter(prodCardTensor[2][i].getRequiredRes());
+                System.out.print(resetEscape + "|");
+            }
+            else System.out.print(resetEscape + "|                     |");
             System.out.print("\n");
 
-            System.out.print(resetEscape + "|Given: ");
-            drawResCounter(prodCardTensor[0][i].getGivenRes());
-            System.out.print("  ");
-            System.out.print(resetEscape + "|Given: ");
-            drawResCounter(prodCardTensor[1][i].getGivenRes());
-            System.out.print("  ");
-            System.out.print(resetEscape + "|Given: ");
-            drawResCounter(prodCardTensor[2][i].getGivenRes());
-            System.out.print("  |");
+            if (prodCardTensor[0][i]!=null) {
+                System.out.print(resetEscape + "|Given: ");
+                drawResCounter(prodCardTensor[0][i].getGivenRes());
+                System.out.print("  ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[1][i]!=null) {
+                System.out.print(resetEscape + "|Given: ");
+                drawResCounter(prodCardTensor[1][i].getGivenRes());
+                System.out.print("  ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[2][i]!=null) {
+                System.out.print(resetEscape + "|Given: ");
+                drawResCounter(prodCardTensor[2][i].getGivenRes());
+                System.out.print("  |");
+            }
+            else System.out.print(resetEscape + "|                     ");
             System.out.print("\n");
 
-            System.out.print(resetEscape + "|Given FP: " + prodCardTensor[0][i].getGivenFaithPoints() + "          ");
-            System.out.print(resetEscape + "|Given FP: " + prodCardTensor[1][i].getGivenFaithPoints() + "          ");
-            System.out.print(resetEscape + "|Given FP: " + prodCardTensor[2][i].getGivenFaithPoints() + "          |");
+            if (prodCardTensor[0][i]!=null) {
+                System.out.print(resetEscape + "|Given FP: " + prodCardTensor[0][i].getGivenFaithPoints() + "          ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[1][i]!=null) {
+                System.out.print(resetEscape + "|Given FP: " + prodCardTensor[1][i].getGivenFaithPoints() + "          ");
+            }
+            else System.out.print(resetEscape + "|                     ");
+            if (prodCardTensor[2][i]!=null) {
+                System.out.print(resetEscape + "|Given FP: " + prodCardTensor[2][i].getGivenFaithPoints() + "          |");
+            }
+            else System.out.print(resetEscape + "|                     ");
             System.out.print("\n");
             System.out.print(resetEscape + "-------------------------------------------------------------------");
             System.out.print("\n");

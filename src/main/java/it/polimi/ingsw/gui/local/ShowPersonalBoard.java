@@ -721,13 +721,9 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == back && fromTurn){
             if(e.getSource() == back && fromTurn){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Turn(handler));
-                MainGUI.frame.revalidate();
+                MainGUI.changePanel(new Turn(handler));
             } else if (e.getSource() == back && !fromTurn){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingTurn(handler));
-                MainGUI.frame.revalidate();
+                MainGUI.changePanel(new WaitingTurn(handler));
             }
         }
     }

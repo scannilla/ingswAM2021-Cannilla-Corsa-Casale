@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.EndingGameException;
 
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.gui.multi.WaitingTurn;
@@ -27,7 +28,7 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
     private final JButton leaderOne, leaderTwo, leaderThree, leaderFour;
     private final SPClientMessageHandler handler;
 
-    public PreGameLeaderCard(SPClientMessageHandler handler){
+    public PreGameLeaderCard(SPClientMessageHandler handler) {
         this.handler = handler;
         leaderOne = new JButton("Select->");
         leaderTwo = new JButton("Select->");
@@ -52,7 +53,7 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
 
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         Font f = new Font("Times New Roman", Font.BOLD, 16);
         LeaderCard[] toChooseLeaderCard = Data.instanceCreator().getToChooseLeaderCards();
         g.setFont(f);
@@ -60,7 +61,7 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
         myDrawImagePNG(g);
     }
 
-    private void myDrawImagePNG(Graphics g){
+    private void myDrawImagePNG(Graphics g) {
         LeaderCard[] toChooseLeaderCard = Data.instanceCreator().getToChooseLeaderCards();
         ClassLoader cl = this.getClass().getClassLoader();
         int wp1 = toChooseLeaderCard[0].getWp();
@@ -1121,62 +1122,36 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
     }
 
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        chooseLeader(e);
-        MainGUI.frame.remove(this);
-        MainGUI.frame.add(new WaitingTurn(handler));
-        MainGUI.frame.revalidate();
-    }
-
-    public void chooseLeader(ActionEvent e){
-        int numAction = 0;
-        while(numAction!=2){
-            if (e.getSource() == leaderOne){
-                try {
-                    handler.sendMessageToServer("1", 161);
-                } catch(EndingGameException ex){
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new Intro("error", 1));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
-                }
-            } else if(e.getSource() == leaderTwo){
-                try {
-                    handler.sendMessageToServer("2", 161);
-                } catch(EndingGameException ex){
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new Intro("error", 1));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
-                }
-            } else if(e.getSource() == leaderThree){
-                try {
-                    handler.sendMessageToServer("3", 161);
-                } catch(EndingGameException ex){
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new Intro("error", 1));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
-                }
-            } else if(e.getSource() == leaderFour){
-                try {
-                    handler.sendMessageToServer("4", 161);
-                } catch(EndingGameException ex){
-                    MainGUI.frame.remove(this);
-                    MainGUI.frame.add(new Intro("error", 1));
-                    MainGUI.frame.revalidate();
-                    MainGUI.frame.repaint();
-                }
+        if (e.getSource() == leaderOne) {
+            try {
+                handler.sendMessageToServer("1", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            numAction++;
-        }
 
-    MainGUI.frame.remove(this);
-        MainGUI.frame.add(new Turn(handler));
-        MainGUI.frame.revalidate();
-        MainGUI.frame.repaint();
+        } else if (e.getSource() == leaderTwo) {
+
+            try {
+                handler.sendMessageToServer("2", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+        } else if (e.getSource() == leaderThree) {
+            try {
+                handler.sendMessageToServer("3", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+        } else if (e.getSource() == leaderFour) {
+            try {
+                handler.sendMessageToServer("4", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+
+        }
     }
 
     public int[] requiredCardCounter (int[] reqType, int[] reqLevel){

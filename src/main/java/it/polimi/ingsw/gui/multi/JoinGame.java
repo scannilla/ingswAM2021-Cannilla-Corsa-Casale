@@ -30,7 +30,6 @@ public class JoinGame extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == joinGame){
-
             try {
                 handler.sendMessageToServer("join game", 111);
             } catch (EndingGameException endingGameException) {

@@ -89,10 +89,7 @@ public class Intro extends JPanel implements ActionListener {
             }
         }
         else if(e.getSource()==local) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Local(spHandler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new Local(spHandler));
         }
 
     }

@@ -45,7 +45,7 @@ public class Turn extends JPanel implements ActionListener {
         viewLeaderCard = new JButton("View Leader Cards");
         viewLeaderCard.setBounds(610, 310, 180, 180);
         endTurn = new JButton("End turn");
-        endTurn.setBounds(660, 710, 130, 80);
+        endTurn.setBounds(650, 650, 100, 50);
         switch(numPlayer){
             case 1:  viewPB1 = new JButton("View Lorenzo's personal board");
                 viewPB1.setBounds(210, 510, 180, 180);

@@ -11,6 +11,7 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.singleplayer.LocalSinglePlayer;
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 
@@ -44,15 +45,8 @@ public class AskNickname extends JPanel implements ActionListener {
             try {
                 handler.sendMessageToServer(nickname.getText());
             } catch (EndingGameException endingGameException) {
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new PreGameLeaderCard(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
 
         }
 

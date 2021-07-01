@@ -37,13 +37,14 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
         back.addActionListener(this);
         back.setBounds(650, 650, 100, 50);
         this.add(back);
+        this.setSize(800,800);
         this.setLayout(null);
         this.setVisible(true);
         this.setBackground(Color.white);
     }
 
     public void paint(Graphics g) {
-
+        myDrawingPNG(g);
         }
 
 
@@ -65,7 +66,7 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
         for (int j = activationPos[0] - length[0] + 1; j <= activationPos[0]; j++) {
-            g.setColor(Color.yellow);
+            g.setColor(Color.red);
             g.drawRect(j * 32, 50, 32, 32);
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
@@ -75,17 +76,17 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
         for (int j = activationPos[1] - length[1] + 1; j <= activationPos[1]; j++) {
-            g.setColor(Color.yellow);
+            g.setColor(Color.red);
             g.drawRect(j * 32, 50, 32, 32);
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
         for (int j = activationPos[1] + 1; j <= activationPos[2] - length[2]; j++) {
-            g.setColor(Color.white);
+            g.setColor(Color.red);
             g.drawRect(j * 32, 50, 32, 32);
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
         for (int j = activationPos[2] - length[2] + 1; j <= activationPos[2]; j++) {
-            g.setColor(Color.yellow);
+            g.setColor(Color.red);
             g.drawRect(j * 32, 50, 32, 32);
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
@@ -94,8 +95,8 @@ public class ShowPersonalBoard extends JPanel implements ActionListener {
             g.drawRect(j * 32, 50, 32, 32);
             g.drawString("P" + j, 1 + 32 * j, 51);
         }
-        g.setColor(Color.yellow);
-        drawPosition(g, personalBoard.getPosition());
+        g.setColor(Color.black);
+        drawPosition(g, personalBoard.getPosition(), cl);
         int index = 0;
         for (int i = 0; i<25;i++){
             if((i+1) % 3 == 0){
@@ -716,15 +717,9 @@ try {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == back && fromTurn){
             if(e.getSource() == back && fromTurn){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Turn(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Turn(handler));
             } else if (e.getSource() == back && !fromTurn){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new WaitingTurn(handler));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new WaitingTurn(handler));
             }
         }
     }

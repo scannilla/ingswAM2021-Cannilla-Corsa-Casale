@@ -1,14 +1,20 @@
 package it.polimi.ingsw.gui;
 
 import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.Player;
+import it.polimi.ingsw.VaticanReport;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
+import it.polimi.ingsw.gui.local.GameOverLose;
+import it.polimi.ingsw.gui.local.GameOverWin;
 import it.polimi.ingsw.gui.multi.*;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
+
+import java.util.ArrayList;
 
 
 public class GuiMessageHandler {
@@ -44,6 +50,12 @@ public class GuiMessageHandler {
                     break;
                 case 112:
                     MainGUI.changePanel(new Error(received.getMessage(), cmHandler, 8));
+                    break;
+                case 124:
+                    MainGUI.changePanel(new Turn(cmHandler));
+                    break;
+                case 133:
+                    MainGUI.changePanel(new DiscardOrMoveOrTransform(cmHandler, 1));
                     break;
                 case 180:
                     MainGUI.changePanel(new PreGameRes(received.getMessage(), cmHandler));
@@ -92,6 +104,14 @@ public class GuiMessageHandler {
                     Data.instanceCreator().setNickname(received.getNickname());
                     MainGUI.changePanel(new JoinGame(cmHandler));
                     break;
+                case 320:
+                    MainGUI.changePanel(new Turn(cmHandler));
+                    break;
+                case 321:
+                case 322:
+                case 323:
+                    MainGUI.changePanel(new WaitingTurn(cmHandler));
+                    break;
                 case 650:
                     instance.setMarketStructure((MarketStructure) object);
                     break;
@@ -109,6 +129,21 @@ public class GuiMessageHandler {
                     break;
                 case 655:
                     instance.setToChooseLeaderCards((LeaderCard[]) object);
+                    break;
+                case 657:
+                    instance.setLeaderBoard((ArrayList<Player>) object);
+                    MainGUI.changePanel(new GameOver());
+                    break;
+                case 658:
+                    instance.setLeaderBoard((ArrayList<Player>) object);
+                    MainGUI.changePanel(new GameOverWin());
+                    break;
+                case 659:
+                    instance.setLeaderBoard((ArrayList<Player>) object);
+                    MainGUI.changePanel(new GameOverLose());
+                    break;
+                case 660:
+                    instance.setVatReport((VaticanReport) object);
                     break;
             }
         }

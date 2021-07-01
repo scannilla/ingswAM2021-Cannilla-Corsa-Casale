@@ -24,7 +24,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
 
    private LeaderCard[] leaderCards;
     private final JButton active1, active2, back;
-    private ClientMessageHandler handler;
+    private final ClientMessageHandler handler;
 
     public ActiveLeader(ClientMessageHandler handler){
         this.handler = handler;
@@ -755,10 +755,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == back){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Turn(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new Turn(handler));
         }
     }
 }

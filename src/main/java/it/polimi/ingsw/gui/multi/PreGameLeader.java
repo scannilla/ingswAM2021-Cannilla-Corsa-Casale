@@ -5,11 +5,10 @@ import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 
 import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Error;
-import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
-import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.resources.ResourceCounter;
 
 
 import javax.imageio.ImageIO;
@@ -74,6 +73,22 @@ public class PreGameLeader extends JPanel implements ActionListener {
         Resource[] reqRes2 = toChooseLeaderCard[1].getRequiredRes();
         Resource[] reqRes3 = toChooseLeaderCard[2].getRequiredRes();
         Resource[] reqRes4 = toChooseLeaderCard[3].getRequiredRes();
+        int[] reqRess1 = new int[4];
+        int[] reqRess2 = new int[4];
+        int[] reqRess3 = new int[4];
+        int[] reqRess4 = new int[4];
+        if (reqRes1.length!=0) {
+            reqRess1 = ResourceCounter.resCount(toChooseLeaderCard[0].getRequiredRes());
+        }
+        if (reqRes1.length!=0) {
+            reqRess2 = ResourceCounter.resCount(toChooseLeaderCard[1].getRequiredRes());
+        }
+        if (reqRes1.length!=0) {
+            reqRess3 = ResourceCounter.resCount(toChooseLeaderCard[2].getRequiredRes());
+        }
+        if (reqRes1.length!=0) {
+            reqRess4 = ResourceCounter.resCount(toChooseLeaderCard[3].getRequiredRes());
+        }
         int[] reqType1 = toChooseLeaderCard[0].getRequiredType();
         int[] reqType2 = toChooseLeaderCard[1].getRequiredType();
         int[] reqType3 = toChooseLeaderCard[2].getRequiredType();

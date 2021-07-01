@@ -1,8 +1,10 @@
 package it.polimi.ingsw.gui.local;
 
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.gui.multi.Turn;

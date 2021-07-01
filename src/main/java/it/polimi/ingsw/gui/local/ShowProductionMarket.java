@@ -39,11 +39,11 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
         this.setBackground(Color.white);
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g){
         productionCardsMarket = Data.instanceCreator().getProductionCardsMarket();
-        for (int x = 50; x < 400; x = x + 150) {
-            for (int y = 50; y < 750; y = y + 250) {
-                g.drawRect(x, y, 100, 200);
+        for(int x = 50; x < 400; x = x + 150){
+            for (int y = 50; y < 500; y = y + 150){
+                g.drawRect(x, y, 100, 150);
             }
         }
         myDrawImagePNG(g);
@@ -54,39 +54,61 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
         ClassLoader cl = this.getClass().getClassLoader();
         InputStream url;
         BufferedImage img;
-        int[] type = new int[9];
-        int[] level = new int[9];
-        int[] winPoints = new int[9];
+        int[] type = new int[12];
+        int[] level = new int[12];
+        int[] winPoints = new int[12];
         int x = 0;
         int y = 0;
-        Resource[][] costResource = new Resource[9][];
-        for (int i = 0; i<9; i++){
-            for(int j = 0; j<topCard[i/3][i%3].getCostArray().length; j++) {
-                costResource[i][j] = topCard[i/3][j%3].getCostArray()[j];
+        Resource[][] costResource = new Resource[12][];
+        for (int i = 0; i<12; i++) {
+            for (int k = 0; k<3; k++) {
+                if (topCard[i][k] != null && topCard[i][k].getCostArray() != null) {
+                    for (int j = 0; j < topCard[i][k].getCostArray().length; j++) {
+                        costResource[i][j] = topCard[i][k].getCostArray()[j];
+                    }
+                }
             }
         }
-        int[][] costTotArray = new int[9][4];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 3; j++) {
-                costTotArray[i][j] = ResourceCounter.resCount(costResource[i])[j];
+        int[][] costTotArray = new int[12][4];
+        for (int i = 0; i < 12; i++) {
+            if (costResource[i] != null) {
+                for (int j = 0; j < 3; j++) {
+                    costTotArray[i][j] = ResourceCounter.resCount(costResource[i])[j];
+                }
             }
         }
-        int[][] requiredRes = new int[9][4];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 3; j++) {
-                requiredRes[i][j] = ResourceCounter.resCount(topCard[i/3][i%3].getRequiredRes())[j];
+        int[][] requiredRes = new int[12][4];
+        for (int i = 0; i<12; i++) {
+            for (int k = 0; k<3; k++) {
+                if (topCard[i][k] != null && topCard[i][k].getRequiredRes() != null) {
+                    for (int j = 0; j < topCard[i][k].getRequiredRes().length; j++) {
+                        requiredRes[i][j] = ResourceCounter.resCount(topCard[i][k].getRequiredRes())[j];
+                    }
+                }
             }
         }
-        int[][] givenRes = new int[9][4];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 3; j++) {
-                givenRes[i][j] = ResourceCounter.resCount(topCard[i/3][i%3].getGivenRes())[j];
+
+        int[][] givenRes = new int[12][4];
+        for (int i = 0; i<12; i++) {
+            for (int k = 0; k<3; k++) {
+                if (topCard[i][k] != null && topCard[i][k].getGivenRes() != null) {
+                    for (int j = 0; j < topCard[i][k].getGivenRes().length; j++) {
+                        givenRes[i][j] = ResourceCounter.resCount(topCard[i][k].getRequiredRes())[j];
+                    }
+                }
             }
         }
-        for (int i = 0; i < 9; i++) {
-            type[i] = topCard[i/3][i%3].getType();
+        for (int i = 0; i<12; i++) {
+            for (int k = 0; k<3; k++) {
+                if (topCard[i][k] != null && topCard[i][k] != null) {
+                    type[i] = topCard[i][k].getType();
+                    i++;
+                }
+            }
+            i--;
         }
-        for (int i = 0; i < 9; i++) {
+
+        for (int i = 0; i < 12; i++) {
             switch (type[i]) {
                 case 1:
                     url = cl.getResourceAsStream("type 1.png");
@@ -136,22 +158,26 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
                     break;
             }
             if (i%3 == 0 && i !=0){
-                y = y + 250;
+                y = y + 150;
                 x = 0;
             }
         }
-        for (int i = 0; i < 9; i++) {
-            level[i] = topCard[i/3][i%3].getLevel();
+        for (int i = 0; i < 12; i++) {
+            for(int k = 0; k<3; k++) {
+                if (topCard[i][k] != null && topCard[i][k] != null) {
+                    level[i] = topCard[i][k].getLevel();
+                }
+            }
         }
 
         drawCostArray(g, costTotArray);
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             g.drawString("Level:" + level[i], 55 + x, 440 + y);
             x += 150;
             if(i%3==0 && i!=0) {
                 x = 0;
-                y = y + 250;
+                y = y + 150;
             }
 
         }
@@ -160,15 +186,22 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
 
         drawRequiredRes(g, requiredRes);
 
-        for (int i = 0; i < 9; i++) {
-            winPoints[i] = topCard[i/3][i%3].getWp();
+        for (int i = 0; i < 12; i++) {
+            for(int k = 0; k<3; k++) {
+                if(topCard[i][k] != null && topCard[i][k] != null) {
+                    winPoints[i] = topCard[i][k].getWp();
+                    i++;
+                }
+                i--;
+            }
         }
-        for (int i = 0; i < 9; i++) {
+
+        for (int i = 0; i < 12; i++) {
             g.drawString("Win Points:" + winPoints[i], 55 + x, 450 + y);
             x += 150;
             if(i%3==0 && i!=0) {
                 x = 0;
-                y = y + 250;
+                y = y + 150;
             }
         }
 
@@ -176,12 +209,20 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == back && fromTurn){
+            MainGUI.changePanel(new Turn(handler));
+        } else if (e.getSource() == back && !fromTurn){
+            MainGUI.changePanel(new WaitingTurn(handler));
+        }
+    }
     private void drawCostArray(Graphics g, int[][] costArrays) {
         ClassLoader cl = this.getClass().getClassLoader();
         InputStream url;
         BufferedImage img = null;
         int x = 0,y = 0;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             for(int j = 0; j<4; j++) {
                 switch (j){
                     case 0:
@@ -228,7 +269,7 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
                 x += 150;
                 if(i%3==0 && i!=0) {
                     x = 0;
-                    y += 250;
+                    y += 150;
                 }
             }
         }
@@ -240,7 +281,7 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
         ClassLoader cl = this.getClass().getClassLoader();
         BufferedImage img;
         InputStream url;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 4; j++) {
                 switch (j) {
                     case 0:
@@ -294,7 +335,7 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
             }
             if(i%3==0 && i!=0) {
                 x = 0;
-                y = y + 250;
+                y = y + 150;
             }
         }
     }
@@ -304,7 +345,7 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
         ClassLoader cl = this.getClass().getClassLoader();
         BufferedImage img;
         InputStream url;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 4; j++) {
                 switch (j) {
                     case 0:
@@ -358,22 +399,8 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
             }
             if(i%3==0 && i!=0) {
                 x = 0;
-                y = y + 250;
+                y = y + 150;
             }
-        }
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == back && fromTurn){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Turn(handler));
-            MainGUI.frame.revalidate();
-        } else if (e.getSource() == back && !fromTurn){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new WaitingTurn(handler));
-            MainGUI.frame.revalidate();
         }
     }
 }

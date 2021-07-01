@@ -13,9 +13,11 @@ import java.awt.event.ActionListener;
 
 public class DepotSelection extends JPanel implements ActionListener {
 
-    private final JButton depot, strongbox, extraDepot, discard;
+    private final JButton depot;
+    private final JButton strongbox;
+    private final JButton extraDepot;
+    private final JButton discard;
     private final ClientMessageHandler cmHandler;
-    private int code;
 
     public DepotSelection(ClientMessageHandler cmHandler, int code){
         discard = new JButton("discard");
@@ -25,7 +27,6 @@ public class DepotSelection extends JPanel implements ActionListener {
             this.add(discard);
         }
         this.cmHandler = cmHandler;
-        this.code = code;
         depot = new JButton("WareHouse Depot");
         depot.setBounds(250, 500, 100, 50);
         depot.addActionListener(this);
@@ -35,6 +36,13 @@ public class DepotSelection extends JPanel implements ActionListener {
         extraDepot = new JButton("Extra Depot");
         extraDepot.setBounds(450,500, 100, 50);
         extraDepot.addActionListener(this);
+        this.add(depot);
+        this.add(strongbox);
+        this.add(extraDepot);
+        this.setSize(800, 800);
+        this.setVisible(true);
+        this.setLayout(null);
+        this.setBackground(Color.white);
     }
 
     public void paint(Graphics g){
@@ -46,7 +54,7 @@ public class DepotSelection extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == depot){
             try {
-                cmHandler.sendMessageToServer("depot");
+                cmHandler.sendMessageToServer("warehouse depot");
             } catch (EndingGameException endingGameException) {
                 MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
             }
@@ -59,6 +67,12 @@ public class DepotSelection extends JPanel implements ActionListener {
         } else if(e.getSource() == extraDepot){
             try {
                 cmHandler.sendMessageToServer("extradepot");
+            } catch (EndingGameException endingGameException) {
+                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
+            }
+        } else if(e.getSource() == discard){
+            try {
+                cmHandler.sendMessageToServer("discard");
             } catch (EndingGameException endingGameException) {
                 MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
             }

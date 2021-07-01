@@ -4,6 +4,7 @@ import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.gui.Data;
+import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
 import it.polimi.ingsw.gui.multi.Turn;
@@ -509,43 +510,28 @@ public class    ActiveProduction extends JPanel implements ActionListener{
             try{
                 handler.sendMessageToServer("standard production", 169);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == selectSlot1){
             try{
                 handler.sendMessageToServer("card production 1", 170);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == selectSlot2){
             try{
                 handler.sendMessageToServer("card production 2", 170);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == selectSlot3){
             try{
                 handler.sendMessageToServer("card production 3", 170);
             } catch (EndingGameException ex){
-                MainGUI.frame.remove(this);
-                MainGUI.frame.add(new Intro("error", 1));
-                MainGUI.frame.revalidate();
-                MainGUI.frame.repaint();
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == back){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Turn(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new Turn(handler));
         }
 
 

@@ -11,9 +11,9 @@ import java.awt.event.ActionListener;
 public class Error extends JPanel implements ActionListener {
 
     private final JButton goBack;
-    private String error;
+    private final String error;
     private final ClientMessageHandler cmHandler;
-    private int code;   // 0 = Error, 1 = ActiveLeader, 2 = ActiveProduction, 3 = AskNicknameMulti, 4 = BuyMarble, 5 = BuyProductionCard
+    private final int code;   // 0 = Error, 1 = ActiveLeader, 2 = ActiveProduction, 3 = AskNicknameMulti, 4 = BuyMarble, 5 = BuyProductionCard
                         // 6 = Turn, 7 = LineSelectionDepot, 8 = JoinGame
 
     public Error(String error, ClientMessageHandler cmHandler, int code){

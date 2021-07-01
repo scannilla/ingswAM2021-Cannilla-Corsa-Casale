@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.io.File;
-
+import java.io.InputStream;
 
 
 class GSONTest {
@@ -18,8 +18,7 @@ class GSONTest {
 
     @Test
     void productionCardParserTest(){
-
-        File fileTest = new File("src/main/java/it/polimi/ingsw/production/prodcards.json");
+        InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/prodcards.json");
 
         try{
             ProductionCardsDeck productionCardsDeckTest = GSON.productionCardParser(fileTest);
@@ -46,7 +45,7 @@ class GSONTest {
 
     @Test
     void leaderCardParserTest() {
-        File fileTest = new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json");
+        InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/allLeaderCards.json");
 
         try {
             int i=0;
@@ -70,7 +69,7 @@ class GSONTest {
 
     @Test
     void actionTokensPileParserTest() {
-        File fileTest = new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json");
+        InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/actiontokens.json");
 
         try {
             ActionTokenPile actionTokenPileTest = GSON.actionTokensPileParser(fileTest);
@@ -87,7 +86,7 @@ class GSONTest {
     @Test
     void marketStructureParserTest() {
 
-        File fileTest = new File("src/main/java/it/polimi/ingsw/marbles/marbles.json");
+        InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/marbles.json");
 
         try{
             MarketStructure marketStructureTest = GSON.marketStructureParser(fileTest);
@@ -116,7 +115,7 @@ class GSONTest {
     @Test
     void vaticanReportParserTest(){
 
-        File fileTest = new File("src/main/java/it/polimi/ingsw/vatReport.json");
+        InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/vatReport.json");
 
 
         try{

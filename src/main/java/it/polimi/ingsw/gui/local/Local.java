@@ -41,10 +41,7 @@ public class Local extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startGame) {
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new AskNickname(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new AskNickname(handler));
         }
     }
 }

@@ -196,17 +196,11 @@ public class WaitingTurn extends JPanel implements ActionListener {
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
         } else if(e.getSource() == goAhead){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new Turn(handler));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
-        } else if(e.getSource() == leaderCard){
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowLeaderCard(handler, false));
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new Turn(handler));
+        } else if(e.getSource() == leaderCard)
+            MainGUI.changePanel(new ShowLeaderCard(handler, false));
         }
 
     }
 
-}
+

@@ -2,13 +2,17 @@ package it.polimi.ingsw.cli;
 
 import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.VaticanReport;
+
+/**
+ * this class draws the vatican board
+ */
 public class VaticanBoardDraw {
-
-    VaticanReport vaticanReport = new VaticanReport();
-
-    public int pos;
-
-    public void drawVaticanRoad(VaticanReport vaticanReport, PersonalBoard personalBoard) {
+    /**
+     * draws the vatican road
+     * @param vaticanReport
+     * @param personalBoard
+     */
+    public static void drawVaticanRoad(VaticanReport vaticanReport, PersonalBoard personalBoard) {
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] activationPosition = vaticanReport.getActivationPosition();
         int[] vaticanLength = vaticanReport.getReportsLength();
@@ -22,7 +26,13 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    public void drawSecondLine(int[] winPoints, int[] vatican, int[] vaticanLength){
+    /**
+     * draws the second line
+     * @param winPoints
+     * @param vatican
+     * @param vaticanLength
+     */
+    public static void drawSecondLine(int[] winPoints, int[] vatican, int[] vaticanLength){
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] slotStart = new int[3];
         int wp=0;
@@ -45,7 +55,9 @@ public class VaticanBoardDraw {
                 if (i<10)
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -64,7 +76,9 @@ public class VaticanBoardDraw {
                 System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
             System.out.print(Color.ANSI_BLUE.escape() + "   " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-            System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
+            if (winPoints[wp]<10) {
+                System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
+            }
             wp++;
         }
         counter++;
@@ -84,7 +98,9 @@ public class VaticanBoardDraw {
                 if (i<10)
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_YELLOW.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_YELLOW.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -103,7 +119,10 @@ public class VaticanBoardDraw {
                 System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + "   " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-            System.out.print(Color.ANSI_YELLOW.escape() + " |" + blueEscape);
+            if (winPoints[wp]<10) {
+                System.out.print(Color.ANSI_YELLOW.escape() + " |" + blueEscape);
+            }
+            else System.out.print(Color.ANSI_YELLOW.escape() + "|" + blueEscape);
             wp++;
         }
         counter++;
@@ -123,7 +142,9 @@ public class VaticanBoardDraw {
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_BLUE.escape() + "   " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -142,7 +163,10 @@ public class VaticanBoardDraw {
                 System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
             System.out.print(Color.ANSI_BLUE.escape() + "   " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-            System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
+            if (winPoints[wp]<10) {
+                System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
+            }
+            else System.out.print(Color.ANSI_BLUE.escape() + "|" + blueEscape);
             wp++;
         }
         counter++;
@@ -162,7 +186,9 @@ public class VaticanBoardDraw {
                 if (i<10)
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_YELLOW.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_YELLOW.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -181,7 +207,10 @@ public class VaticanBoardDraw {
                 System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + "   " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-            System.out.print(Color.ANSI_YELLOW.escape() + " |" + blueEscape);
+            if (winPoints[wp]<10) {
+                System.out.print(Color.ANSI_YELLOW.escape() + " |" + blueEscape);
+            }
+            else System.out.print(Color.ANSI_YELLOW.escape() + "|" + blueEscape);
             wp++;
         }
         counter++;
@@ -201,7 +230,9 @@ public class VaticanBoardDraw {
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_BLUE.escape() + "   " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -220,7 +251,10 @@ public class VaticanBoardDraw {
                 System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
             System.out.print(Color.ANSI_BLUE.escape() + "   " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-            System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
+            if (winPoints[wp]<10) {
+                System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
+            }
+            else System.out.print(Color.ANSI_BLUE.escape() + "|" + blueEscape);
             wp++;
         }
         counter++;
@@ -240,7 +274,9 @@ public class VaticanBoardDraw {
                 if (i<10)
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_YELLOW.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_YELLOW.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -259,7 +295,10 @@ public class VaticanBoardDraw {
                 System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + "   " + blueEscape);
             System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-            System.out.print(Color.ANSI_YELLOW.escape() + " |" + blueEscape);
+            if (winPoints[wp]<10) {
+                System.out.print(Color.ANSI_YELLOW.escape() + " |" + blueEscape);
+            }
+            else System.out.print(Color.ANSI_YELLOW.escape() + "|" + blueEscape);
             wp++;
         }
         counter++;
@@ -278,7 +317,9 @@ public class VaticanBoardDraw {
                     System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
                 System.out.print(Color.ANSI_BLUE.escape() + "   " + blueEscape);
                 System.out.print(Color.ANSI_YELLOW.escape() + winPoints[wp] + blueEscape);
-                System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                if (winPoints[wp]<10) {
+                    System.out.print(Color.ANSI_BLUE.escape() + " " + blueEscape);
+                }
                 wp++;
             }
             counter++;
@@ -305,8 +346,13 @@ public class VaticanBoardDraw {
         System.out.print(Color.ANSI_RESET.escape() + "\n");
     }
 
-
-    public void drawThirdLineSlot(boolean posThere, boolean blueZeroYellowOne, boolean lastSlot){
+    /**
+     * draws a slot of the third line
+     * @param posThere
+     * @param blueZeroYellowOne
+     * @param lastSlot
+     */
+    public static void drawThirdLineSlot(boolean posThere, boolean blueZeroYellowOne, boolean lastSlot){
         String blueEscape = Color.ANSI_BLUE.escape();
         if (!blueZeroYellowOne){
             System.out.print(Color.ANSI_BLUE.escape() + "|   " + blueEscape);
@@ -326,14 +372,20 @@ public class VaticanBoardDraw {
         }
         if(lastSlot){
             if(!blueZeroYellowOne)
-                System.out.print(Color.ANSI_BLUE.escape() + "!" + blueEscape);
+                System.out.print(Color.ANSI_BLUE.escape() + "|" + blueEscape);
             if(blueZeroYellowOne)
-                System.out.print(Color.ANSI_YELLOW.escape() + "!" + blueEscape);
+                System.out.print(Color.ANSI_YELLOW.escape() + "|" + blueEscape);
         }
     }
 
 
-    public void drawThirdLine(int[] vatican, int[] vaticanLength, int pos){
+    /**
+     * draws the third line
+     * @param vatican
+     * @param vaticanLength
+     * @param pos
+     */
+    public static void drawThirdLine(int[] vatican, int[] vaticanLength, int pos){
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] slotStart = new int[3];
         int counter=0;
@@ -393,8 +445,13 @@ public class VaticanBoardDraw {
         System.out.print(Color.ANSI_RESET.escape() + "\n");
     }
 
-
-    public void drawFourthLineSlot(boolean posThere, boolean blueZeroYellowOne, boolean lastSlot){
+    /**
+     * draws a slot of the fourth line
+     * @param posThere
+     * @param blueZeroYellowOne
+     * @param lastSlot
+     */
+    public static void drawFourthLineSlot(boolean posThere, boolean blueZeroYellowOne, boolean lastSlot){
         String blueEscape = Color.ANSI_BLUE.escape();
         if (!blueZeroYellowOne){
             System.out.print(Color.ANSI_BLUE.escape() + "|      " + blueEscape);
@@ -412,13 +469,18 @@ public class VaticanBoardDraw {
         }
         if(lastSlot){
             if(!blueZeroYellowOne)
-                System.out.print(Color.ANSI_BLUE.escape() + "!" + blueEscape);
+                System.out.print(Color.ANSI_BLUE.escape() + "|" + blueEscape);
             if(blueZeroYellowOne)
-                System.out.print(Color.ANSI_YELLOW.escape() + "!" + blueEscape);
+                System.out.print(Color.ANSI_YELLOW.escape() + "|" + blueEscape);
         }
     }
 
-    public void drawFourthLine(int[] vatican, int[] vaticanLength){
+    /**
+     * draws the fourth line
+     * @param vatican
+     * @param vaticanLength
+     */
+    public static void drawFourthLine(int[] vatican, int[] vaticanLength){
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] slotStart = new int[3];
         for (int i=0; i < 3; i++){
@@ -478,7 +540,12 @@ public class VaticanBoardDraw {
         System.out.print("\n");
     }
 
-    public void drawColouredLine(int[] vatican, int[] vaticanLength) {
+    /**
+     * draws a coloured line
+     * @param vatican
+     * @param vaticanLength
+     */
+    public static void drawColouredLine(int[] vatican, int[] vaticanLength) {
         String blueEscape = Color.ANSI_BLUE.escape();
         int[] slotStart = new int[3];
         for (int i=0; i < 3; i++){
@@ -523,7 +590,12 @@ public class VaticanBoardDraw {
         System.out.print(Color.ANSI_RESET.escape() + "\n");
     }
 
-    private void drawLineSlot( boolean blueZeroYellowOne, boolean endOfReport){
+    /**
+     * draws a slot
+     * @param blueZeroYellowOne
+     * @param endOfReport
+     */
+    private static void drawLineSlot( boolean blueZeroYellowOne, boolean endOfReport){
         String blueEscape = Color.ANSI_BLUE.escape();
         if (!blueZeroYellowOne ){
             if (!endOfReport){

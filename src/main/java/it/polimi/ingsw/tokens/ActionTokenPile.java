@@ -2,11 +2,12 @@ package it.polimi.ingsw.tokens;
 
 import it.polimi.ingsw.tokens.ActionToken;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ActionTokenPile {
+public class ActionTokenPile  {
     /**
      * List that represents the pile with all Action Tokens
      */

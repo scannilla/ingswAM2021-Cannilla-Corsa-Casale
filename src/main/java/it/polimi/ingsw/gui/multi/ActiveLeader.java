@@ -109,7 +109,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
 
 
         //DRAWING REQUIRED CARDS
-        url = cl.getResourceAsStream("type 1.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 1.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -133,7 +133,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
             g.drawString("3", 425, 150);
         }
 
-        url = cl.getResourceAsStream("type 2.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 2.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -156,7 +156,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
             g.drawString("3", 500, 150);
         }
 
-        url = cl.getResourceAsStream("type 3.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 3.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -181,7 +181,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
         }
 
 
-        url = cl.getResourceAsStream("type 4.png");
+        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 4.png");
         try {
             img = ImageIO.read(url);
         } catch (IOException e) {
@@ -317,7 +317,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
         if (reqCards1!=null) {
         switch (switchRes(ability1, leaderCards[0])) {
             case 1:
-                url = cl.getResourceAsStream("conv coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -327,7 +327,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 2:
-                url = cl.getResourceAsStream("conv stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -337,7 +337,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 3:
-                url = cl.getResourceAsStream("conv servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -347,7 +347,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 4:
-                url = cl.getResourceAsStream("conv shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -357,7 +357,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 5:
-                url = cl.getResourceAsStream("depot coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -367,7 +367,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 6:
-                url = cl.getResourceAsStream("depot stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -377,7 +377,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 7:
-                url = cl.getResourceAsStream("depot servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -387,7 +387,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 8:
-                url = cl.getResourceAsStream("depot shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -397,7 +397,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 9:
-                url = cl.getResourceAsStream("disc coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -407,7 +407,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 10:
-                url = cl.getResourceAsStream("disc stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -417,7 +417,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 11:
-                url = cl.getResourceAsStream("disc servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -427,7 +427,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 12:
-                url = cl.getResourceAsStream("disc shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -437,7 +437,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 13:
-                url = cl.getResourceAsStream("prod coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -447,7 +447,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 14:
-                url = cl.getResourceAsStream("prod stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -457,7 +457,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 15:
-                url = cl.getResourceAsStream("prod servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -467,7 +467,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 400, 300, 100, null);
                 break;
             case 16:
-                url = cl.getResourceAsStream("prod shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -481,7 +481,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
         if (reqCards2!=null) {
         switch (switchRes(ability2, leaderCards[1])) {
             case 1:
-                url = cl.getResourceAsStream("conv coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -491,7 +491,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 2:
-                url = cl.getResourceAsStream("conv stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -501,7 +501,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 3:
-                url = cl.getResourceAsStream("conv servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -511,7 +511,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 4:
-                url = cl.getResourceAsStream("conv shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -521,7 +521,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 5:
-                url = cl.getResourceAsStream("depot coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -531,7 +531,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 6:
-                url = cl.getResourceAsStream("depot stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -541,7 +541,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 7:
-                url = cl.getResourceAsStream("depot servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -551,7 +551,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 8:
-                url = cl.getResourceAsStream("depot shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -561,7 +561,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 9:
-                url = cl.getResourceAsStream("disc coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -571,7 +571,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 10:
-                url = cl.getResourceAsStream("disc stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -581,7 +581,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 11:
-                url = cl.getResourceAsStream("disc servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -591,7 +591,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 12:
-                url = cl.getResourceAsStream("disc shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -601,7 +601,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 13:
-                url = cl.getResourceAsStream("prod coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -611,7 +611,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 14:
-                url = cl.getResourceAsStream("prod stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -621,7 +621,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 15:
-                url = cl.getResourceAsStream("prod servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -631,7 +631,7 @@ public class ActiveLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 400, 300, 100, null);
                 break;
             case 16:
-                url = cl.getResourceAsStream("prod shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {

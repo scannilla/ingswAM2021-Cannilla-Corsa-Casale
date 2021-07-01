@@ -100,13 +100,7 @@ public class Game implements Serializable{
     public LeaderCardsDeck getLeaderCardsDeck() {
         return leaderCardsDeck;
     }
-    /**
-     * This method returns pile of Action Tokens
-     * @return actionTokensPile
-     */
-    public ActionTokenPile getActionTokensPile() {
-        return actionTokensPile;
-    }
+
 
     /**
      * getter of number of players playing this match

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.cli;
 
+/**
+ * enum class for colors
+ */
 public enum Color {
     ANSI_RED("\u001B[31m"),
     ANSI_GREEN("\u001B[32m"),
@@ -12,11 +15,23 @@ public enum Color {
     ANSI_RESET("\u001b[0m");
 
 
+    /**
+     * escape for colors
+     */
     private String escape;
 
+    /**
+     * constructor for Color
+     * @param escape
+     */
     Color(String escape) {
         this.escape = escape;
     }
+
+    /**
+     * escape method
+     * @return
+     */
     public String escape(){
         return escape;
     }

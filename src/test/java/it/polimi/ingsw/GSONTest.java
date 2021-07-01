@@ -122,8 +122,8 @@ class GSONTest {
         try{
             VaticanReport vaticanReportTest = GSON.vaticanReportParser(fileTest);
             assertEquals(4, vaticanReportTest.getReportsLength()[0]);
-            assertEquals(4, vaticanReportTest.getReportsLength()[1]);
-            assertEquals(4, vaticanReportTest.getReportsLength()[2]);
+            assertEquals(5, vaticanReportTest.getReportsLength()[1]);
+            assertEquals(6, vaticanReportTest.getReportsLength()[2]);
             assertEquals(8, vaticanReportTest.getActivationPosition()[0]);
             assertEquals(16, vaticanReportTest.getActivationPosition()[1]);
             assertEquals(24, vaticanReportTest.getActivationPosition()[2]);

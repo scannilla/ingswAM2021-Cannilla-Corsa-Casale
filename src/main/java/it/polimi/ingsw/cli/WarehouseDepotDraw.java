@@ -4,6 +4,9 @@ import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.WarehouseDepot;
 
+/**
+ * this class draws the warehouse depot
+ */
 public class WarehouseDepotDraw {
 
     /**
@@ -86,7 +89,6 @@ public class WarehouseDepotDraw {
         WarehouseDepot depot = personalBoard.getWarehouseDepot();
         drawWarehouseDepot(depot.getDepot()[0], depot.getDepot()[1], depot.getDepot()[2]);
     }
-
 
     /**
      * This method draws the Resource passed as parameter

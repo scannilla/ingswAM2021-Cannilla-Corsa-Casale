@@ -5,7 +5,14 @@ import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.resources.Resource;
 
+/**
+ * this class draws the production cards market
+ */
 public class ProdCardsMarketDraw {
+    /**
+     * draws the production cards market
+     * @param prodCards
+     */
     public static void drawProdCardsMarket(ProductionCardsMarket prodCards){
         ProductionCard[][] prodCardTensor= prodCards.getTopCards();
         String resetEscape = Color.ANSI_RESET.escape();
@@ -126,8 +133,10 @@ public class ProdCardsMarketDraw {
     }
 
 
-
-
+    /**
+     * counts resources and draws them
+     * @param resourceArray
+     */
     private static void drawResCounter(Resource[] resourceArray) {
         String resetEscape = Color.ANSI_RESET.escape();
         int coins=0;

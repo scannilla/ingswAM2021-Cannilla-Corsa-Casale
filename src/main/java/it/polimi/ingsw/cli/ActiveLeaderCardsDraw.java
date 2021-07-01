@@ -8,6 +8,10 @@ import it.polimi.ingsw.resources.ResourceCounter;
  * this class draws the active leader cards
  */
 public class ActiveLeaderCardsDraw {
+    /**
+     * draws the active leader cards
+     * @param cardsArray
+     */
     public static void drawActiveLeaderCards(LeaderCard[] cardsArray){
         String resetEscape = Color.ANSI_RESET.escape();
         if (cardsArray.length==2) {
@@ -160,6 +164,11 @@ public class ActiveLeaderCardsDraw {
         }
     }
 
+    /**
+     * draws the ability
+     * @param cardsArray
+     * @param index
+     */
     public static void abilityPrinter(LeaderCard[] cardsArray, int index){
         switch (cardsArray[index].getAbility()){
             case 0: System.out.print(Color.ANSI_BLUE.escape() + "Leader of discounts");
@@ -174,6 +183,11 @@ public class ActiveLeaderCardsDraw {
 
     }
 
+    /**
+     * draws a coloured resource
+     * @param cardsArray
+     * @param index
+     */
     public static void drawRes(LeaderCard[] cardsArray, int index) {
         String resetEscape = Color.ANSI_RESET.escape();
         switch (cardsArray[index].getAbility()) {
@@ -200,6 +214,11 @@ public class ActiveLeaderCardsDraw {
         }
     }
 
+    /**
+     * useful method for drawing resources
+     * @param resetEscape
+     * @param disc
+     */
     private static void switchCases(String resetEscape, Resource disc) {
         int resIndex = disc.getResType();
         switch (resIndex) {
@@ -218,7 +237,11 @@ public class ActiveLeaderCardsDraw {
         }
     }
 
-
+    /**
+     * draws required resources
+     * @param cardsArray
+     * @param index
+     */
     public static void drawReqRes(LeaderCard[] cardsArray, int index){
         String resetEscape = Color.ANSI_RESET.escape();
         Resource[] reqRes = cardsArray[index].getRequiredRes();
@@ -226,17 +249,22 @@ public class ActiveLeaderCardsDraw {
         if (reqRess[0]!=0){
             System.out.print(resetEscape + reqRess[0]);
             System.out.print(Color.ANSI_YELLOW.escape() + "C" + resetEscape);}
-        if (stones!=0){
-            System.out.print(resetEscape + stones);
+        if (reqRess[1]!=0){
+            System.out.print(resetEscape + reqRess[1]);
             System.out.print(Color.ANSI_GREY.escape() + "R" + resetEscape);}
-        if (servants!=0){
-            System.out.print(resetEscape + servants);
+        if (reqRess[2]!=0){
+            System.out.print(resetEscape + reqRess[2]);
             System.out.print(Color.ANSI_PURPLE.escape() + "S" + resetEscape);}
-        if (shields!=0){
-            System.out.print(resetEscape + shields);
+        if (reqRess[3]!=0){
+            System.out.print(resetEscape + reqRess[3]);
             System.out.print(Color.ANSI_BLUE.escape() + "H" + resetEscape);}
     }
 
+    /**
+     * draws required cards
+     * @param cardsArray
+     * @param index
+     */
     public static void drawReqCards(LeaderCard[] cardsArray, int index){
         String resetEscape = Color.ANSI_RESET.escape();
         int[] reqType = cardsArray[index].getRequiredType();
@@ -248,6 +276,10 @@ public class ActiveLeaderCardsDraw {
         }
     }
 
+    /**
+     * draws extra depot
+     * @param card
+     */
     public static void drawExtraDepot(LeaderCard card){
         String reset = Color.ANSI_RESET.escape();
         if (card.getAbility()==1) {
@@ -295,7 +327,6 @@ public class ActiveLeaderCardsDraw {
                 System.out.print(reset + "---------");
                 System.out.print(reset + "\n");
             }
-
         }
     }
 }

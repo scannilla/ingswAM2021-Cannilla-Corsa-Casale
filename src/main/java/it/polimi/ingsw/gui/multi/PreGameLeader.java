@@ -30,9 +30,9 @@ public class PreGameLeader extends JPanel implements ActionListener {
     public PreGameLeader(ClientMessageHandler handler) {
         this.handler = handler;
         leaderOne = new JButton("Select->");
-        leaderTwo = new JButton("Select->");
+        leaderTwo = new JButton("<-Select");
         leaderThree = new JButton("Select->");
-        leaderFour = new JButton("Select->");
+        leaderFour = new JButton("<-Select");
         leaderOne.setBounds(5, 50, 90, 50);
         leaderTwo.setBounds(705, 50, 90, 50);
         leaderThree.setBounds(5, 400, 90, 50);
@@ -56,56 +56,6 @@ public class PreGameLeader extends JPanel implements ActionListener {
         Font f = new Font("Times New Roman", Font.BOLD, 16);
         g.setFont(f);
         g.drawString("Choose two of the four leader cards available", 0, 0);
-        g.drawString("1", 125, 50);
-        g.drawString("1", 200, 50);
-        g.drawString("1", 275, 50);
-        g.drawString("1", 350, 50);
-        g.drawString("1", 425, 50);
-        g.drawString("1", 500, 50);
-        g.drawString("1", 575, 50);
-        g.drawString("1", 650, 50);
-        g.drawString("1", 125, 400);
-        g.drawString("1", 200, 400);
-        g.drawString("1", 275, 400);
-        g.drawString("1", 350, 400);
-        g.drawString("1", 425, 400);
-        g.drawString("1", 500, 400);
-        g.drawString("1", 575, 400);
-        g.drawString("1", 650, 400);
-
-        g.drawString("2", 125, 100);
-        g.drawString("2", 200, 100);
-        g.drawString("2", 275, 100);
-        g.drawString("2", 350, 100);
-        g.drawString("2", 425, 100);
-        g.drawString("2", 500, 100);
-        g.drawString("2", 575, 100);
-        g.drawString("2", 650, 100);
-        g.drawString("2", 125, 450);
-        g.drawString("2", 200, 450);
-        g.drawString("2", 275, 450);
-        g.drawString("2", 350, 450);
-        g.drawString("2", 425, 450);
-        g.drawString("2", 500, 450);
-        g.drawString("2", 575, 450);
-        g.drawString("2", 650, 450);
-
-        g.drawString("3", 125, 150);
-        g.drawString("3", 200, 150);
-        g.drawString("3", 275, 150);
-        g.drawString("3", 350, 150);
-        g.drawString("3", 425, 150);
-        g.drawString("3", 500, 150);
-        g.drawString("3", 575, 150);
-        g.drawString("3", 650, 150);
-        g.drawString("3", 125, 500);
-        g.drawString("3", 200, 500);
-        g.drawString("3", 275, 500);
-        g.drawString("3", 350, 500);
-        g.drawString("3", 425, 500);
-        g.drawString("3", 500, 500);
-        g.drawString("3", 575, 500);
-        g.drawString("3", 650, 500);
         myDrawImagePNG(g);
     }
 

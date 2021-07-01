@@ -74,7 +74,7 @@ public class BuyMarble extends JPanel implements ActionListener {
                 myDrawImagePNG(g, x, j);
             }
         }
-        g.drawRect(550, 100, 100, 100); //out marble
+        g.drawRect(100, 600, 100, 100); //out marble
         myDrawImagePNG(g, 18, 0);
     }
 
@@ -135,7 +135,7 @@ public class BuyMarble extends JPanel implements ActionListener {
                 e.printStackTrace();
                 return;
             }
-            g.drawImage(img1, 550, 100, 100, 100, null);
+            g.drawImage(img1, 100, 600, 100, 100, null);
         }
     }
 

@@ -68,7 +68,6 @@ public class ShowLeaderCard extends JPanel implements ActionListener {
             if (leaderCard.getRequiredRes().length != 0) {
                 requiredRes = ResourceCounter.resCount(leaderCard.getRequiredRes());
             }
-
         }
         drawRequiredRes(g, requiredRes);
         int[] requiredType = new int[0];

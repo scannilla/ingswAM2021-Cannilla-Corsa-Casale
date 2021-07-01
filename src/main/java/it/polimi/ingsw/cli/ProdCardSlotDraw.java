@@ -5,6 +5,9 @@ import it.polimi.ingsw.production.ProdCardSlot;
 import it.polimi.ingsw.production.ProductionCard;
 import it.polimi.ingsw.resources.Resource;
 
+/**
+ * this class draws active production cards
+ */
 public class ProdCardSlotDraw {
     public static void drawActiveProdCards(PersonalBoard personalBoard) {
         ProdCardSlot activeProdCard = personalBoard.getProdCardSlot();
@@ -151,6 +154,11 @@ public class ProdCardSlotDraw {
             System.out.print(resetEscape + "\n");
         }
     }
+
+    /**
+     * draws a coloured resource
+     * @param resource
+     */
     public static void drawRes(int resource){
         String resetEscape = Color.ANSI_RESET.escape();
         switch (resource){

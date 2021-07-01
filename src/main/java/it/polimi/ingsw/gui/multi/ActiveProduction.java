@@ -120,7 +120,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
             try {
                 switch (type[i]) {
                     case 1:
-                        url = cl.getResourceAsStream("type 1.png");
+                        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 1.png");
                         try {
                             img = ImageIO.read(url);
                         } catch (IOException e) {
@@ -131,7 +131,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         x = x + 230;
                         break;
                     case 2:
-                        url = cl.getResourceAsStream("type 2.png");
+                        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 2.png");
                         try {
                             img = ImageIO.read(url);
                         } catch (IOException e) {
@@ -142,7 +142,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         x = x + 230;
                         break;
                     case 3:
-                        url = cl.getResourceAsStream("type 3.png");
+                        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 3.png");
                         try {
                             img = ImageIO.read(url);
                         } catch (IOException e) {
@@ -153,7 +153,7 @@ public class ActiveProduction extends JPanel implements ActionListener {
                         x = x + 230;
                         break;
                     case 4:
-                        url = cl.getResourceAsStream("type 4.png");
+                        url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 4.png");
                         try {
                             img = ImageIO.read(url);
                         } catch (IOException e) {

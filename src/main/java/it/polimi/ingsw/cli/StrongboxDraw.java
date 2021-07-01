@@ -6,10 +6,14 @@ import it.polimi.ingsw.resources.Strongbox;
 
 import java.util.ArrayList;
 
+/**
+ * this class draws the strongbox
+ */
 public class StrongboxDraw {
-
-    //private Strongbox strongboxDrawn;
-
+    /**
+     * draws the strongbox
+     * @param personalBoard
+     */
     public static void drawStrongbox(PersonalBoard personalBoard){
         String resetEscape = Color.ANSI_RESET.escape();
         int resCounter = 0;
@@ -44,7 +48,11 @@ public class StrongboxDraw {
             }
         }
 
-
+    /**
+     * draws a coloured resource
+     * @param personalBoards
+     * @param pos
+     */
     public static void drawResource(PersonalBoard personalBoards, int pos){
         String resetEscape = Color.ANSI_RESET.escape();
         Strongbox thisStrongbox = personalBoards.getStrongbox();

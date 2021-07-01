@@ -3,7 +3,15 @@ package it.polimi.ingsw.cli;
 import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.marbles.MarketStructure;
 
+/**
+ * this class draws the market
+ */
 public class MarketDraw {
+    /**
+     * draws the market
+     * @param market
+     * @param outMarble
+     */
     public static void drawMarket(int market[][], int outMarble){
         String whiteEscape = Color.ANSI_RESET.escape();
         System.out.print("\n");
@@ -75,6 +83,10 @@ public class MarketDraw {
         System.out.print("\n");
     }
 
+    /**
+     * used to draw the market
+     * @param structure
+     */
     public static void draw(MarketStructure structure){
         MarketMarble[][] marbles = structure.getMarketStructure();
         int[][] res = new int [4][3];
@@ -88,6 +100,10 @@ public class MarketDraw {
         drawMarket(res, structure.getOutMarble().getColor());
     }
 
+    /**
+     * draws a ball
+     * @param resource
+     */
     public static void drawBall(int resource){
         String whiteEscape = Color.ANSI_RESET.escape();
         switch (resource){
@@ -107,15 +123,24 @@ public class MarketDraw {
 
     }
 
+    /**
+     * draws a void line
+     */
     private static void drawVoidLine(){
         System.out.print(Color.ANSI_CYAN.escape() + "|         |         |         |         |" + Color.ANSI_RESET.escape());
         System.out.print("\n");
     }
 
+    /**
+     * draws an empty line
+     */
     private static void drawEmptyLine(){
         System.out.print(Color.ANSI_CYAN.escape() + "|    " + Color.ANSI_RESET.escape());
     }
 
+    /**
+     * draws an horizontal arrow
+     */
     private static void drawFrecciaOriz(){
         System.out.print(Color.ANSI_CYAN.escape() + " <--" + Color.ANSI_RESET.escape());
     }

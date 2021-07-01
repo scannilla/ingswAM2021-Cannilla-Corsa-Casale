@@ -80,16 +80,16 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
         int[] reqRess2 = new int[4];
         int[] reqRess3 = new int[4];
         int[] reqRess4 = new int[4];
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             reqRess1 = ResourceCounter.resCount(toChooseLeaderCard[0].getRequiredRes());
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             reqRess2 = ResourceCounter.resCount(toChooseLeaderCard[1].getRequiredRes());
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             reqRess3 = ResourceCounter.resCount(toChooseLeaderCard[2].getRequiredRes());
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             reqRess4 = ResourceCounter.resCount(toChooseLeaderCard[3].getRequiredRes());
         }
         int[] reqType1 = toChooseLeaderCard[0].getRequiredType();
@@ -173,19 +173,19 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             g.drawImage(img, 125, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess1[0]), 100, 125);
         }
-        if (reqRes2.length!=0) {
+        if (reqRes2.length != 0) {
             g.drawImage(img, 425, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess2[0]), 400, 125);
         }
-        if (reqRes3.length!=0) {
+        if (reqRes3.length != 0) {
             g.drawImage(img, 125, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess3[0]), 100, 525);
         }
-        if (reqRes4.length!=0) {
+        if (reqRes4.length != 0) {
             g.drawImage(img, 425, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess4[0]), 400, 525);
         }
@@ -196,19 +196,19 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             g.drawImage(img, 200, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess1[1]), 100, 125);
         }
-        if (reqRes2.length!=0) {
+        if (reqRes2.length != 0) {
             g.drawImage(img, 500, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess2[1]), 400, 125);
         }
-        if (reqRes3.length!=0) {
+        if (reqRes3.length != 0) {
             g.drawImage(img, 200, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess3[1]), 100, 525);
         }
-        if (reqRes4.length!=0) {
+        if (reqRes4.length != 0) {
             g.drawImage(img, 500, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess4[1]), 400, 525);
         }
@@ -219,19 +219,19 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             g.drawImage(img, 275, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess1[2]), 100, 125);
         }
-        if (reqRes2.length!=0) {
+        if (reqRes2.length != 0) {
             g.drawImage(img, 575, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess2[2]), 400, 125);
         }
-        if (reqRes3.length!=0) {
+        if (reqRes3.length != 0) {
             g.drawImage(img, 275, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess3[2]), 100, 525);
         }
-        if (reqRes4.length!=0) {
+        if (reqRes4.length != 0) {
             g.drawImage(img, 575, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess4[2]), 400, 525);
         }
@@ -242,19 +242,19 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        if (reqRes1.length!=0) {
+        if (reqRes1.length != 0) {
             g.drawImage(img, 350, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess1[3]), 100, 125);
         }
-        if (reqRes2.length!=0) {
+        if (reqRes2.length != 0) {
             g.drawImage(img, 650, 100, 50, 50, null);
             g.drawString(String.valueOf(reqRess2[3]), 400, 125);
         }
-        if (reqRes3.length!=0) {
+        if (reqRes3.length != 0) {
             g.drawImage(img, 350, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess3[3]), 100, 525);
         }
-        if (reqRes4.length!=0) {
+        if (reqRes4.length != 0) {
             g.drawImage(img, 650, 500, 50, 50, null);
             g.drawString(String.valueOf(reqRess4[3]), 400, 525);
         }
@@ -400,853 +400,871 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
             g.drawString(String.valueOf(reqCards2[9]), 625, 75);
             g.drawString(String.valueOf(reqCards2[10]), 625, 125);
             g.drawString(String.valueOf(reqCards2[11]), 625, 175);
-        }
-        if (reqType3.length != 0 && reqLevel3.length != 0) {
-            g.drawString(String.valueOf(reqCards3[0]), 100, 425);
-            g.drawString(String.valueOf(reqCards3[1]), 100, 475);
-            g.drawString(String.valueOf(reqCards3[2]), 100, 525);
 
-            g.drawString(String.valueOf(reqCards3[3]), 175, 425);
-            g.drawString(String.valueOf(reqCards3[4]), 175, 475);
-            g.drawString(String.valueOf(reqCards3[5]), 175, 525);
+            if (reqType3.length != 0 && reqLevel3.length != 0) {
+                g.drawString(String.valueOf(reqCards3[0]), 100, 425);
+                g.drawString(String.valueOf(reqCards3[1]), 100, 475);
+                g.drawString(String.valueOf(reqCards3[2]), 100, 525);
 
-            g.drawString(String.valueOf(reqCards3[6]), 250, 425);
-            g.drawString(String.valueOf(reqCards3[7]), 250, 475);
-            g.drawString(String.valueOf(reqCards3[8]), 250, 525);
+                g.drawString(String.valueOf(reqCards3[3]), 175, 425);
+                g.drawString(String.valueOf(reqCards3[4]), 175, 475);
+                g.drawString(String.valueOf(reqCards3[5]), 175, 525);
 
-            g.drawString(String.valueOf(reqCards3[9]), 325, 425);
-            g.drawString(String.valueOf(reqCards3[10]), 325, 475);
-            g.drawString(String.valueOf(reqCards3[11]), 325, 525);
-        }
-        if (reqType4.length != 0 && reqLevel4.length != 0) {
-            g.drawString(String.valueOf(reqCards4[0]), 400, 425);
-            g.drawString(String.valueOf(reqCards4[1]), 400, 475);
-            g.drawString(String.valueOf(reqCards4[2]), 400, 525);
+                g.drawString(String.valueOf(reqCards3[6]), 250, 425);
+                g.drawString(String.valueOf(reqCards3[7]), 250, 475);
+                g.drawString(String.valueOf(reqCards3[8]), 250, 525);
 
-            g.drawString(String.valueOf(reqCards4[3]), 475, 425);
-            g.drawString(String.valueOf(reqCards4[4]), 475, 475);
-            g.drawString(String.valueOf(reqCards4[5]), 475, 525);
+                g.drawString(String.valueOf(reqCards3[9]), 325, 425);
+                g.drawString(String.valueOf(reqCards3[10]), 325, 475);
+                g.drawString(String.valueOf(reqCards3[11]), 325, 525);
+            }
+            if (reqType4.length != 0 && reqLevel4.length != 0) {
+                g.drawString(String.valueOf(reqCards4[0]), 400, 425);
+                g.drawString(String.valueOf(reqCards4[1]), 400, 475);
+                g.drawString(String.valueOf(reqCards4[2]), 400, 525);
 
-            g.drawString(String.valueOf(reqCards4[6]), 550, 425);
-            g.drawString(String.valueOf(reqCards4[7]), 550, 475);
-            g.drawString(String.valueOf(reqCards4[8]), 550, 525);
+                g.drawString(String.valueOf(reqCards4[3]), 475, 425);
+                g.drawString(String.valueOf(reqCards4[4]), 475, 475);
+                g.drawString(String.valueOf(reqCards4[5]), 475, 525);
 
-            g.drawString(String.valueOf(reqCards4[9]), 625, 425);
-            g.drawString(String.valueOf(reqCards4[10]), 625, 475);
-            g.drawString(String.valueOf(reqCards4[11]), 625, 525);
-        }
-        if (reqRes1.length!=0) {
-            g.drawString(String.valueOf(reqRes1[0]), 100, 225);
-            g.drawString(String.valueOf(reqRes1[1]), 175, 225);
-            g.drawString(String.valueOf(reqRes1[2]), 250, 225);
-            g.drawString(String.valueOf(reqRes1[3]), 325, 225);
-        }
-        if (reqRes2.length!=0) {
-            g.drawString(String.valueOf(reqRes2[0]), 400, 225);
-            g.drawString(String.valueOf(reqRes2[1]), 475, 225);
-            g.drawString(String.valueOf(reqRes2[2]), 550, 225);
-            g.drawString(String.valueOf(reqRes2[3]), 625, 225);
-        }
-        if (reqRes3.length!=0) {
-            g.drawString(String.valueOf(reqRes3[0]), 100, 575);
-            g.drawString(String.valueOf(reqRes3[1]), 175, 575);
-            g.drawString(String.valueOf(reqRes3[2]), 250, 575);
-            g.drawString(String.valueOf(reqRes3[3]), 325, 575);
-        }
-        if (reqRes4.length!=0) {
-            g.drawString(String.valueOf(reqRes4[0]), 400, 575);
-            g.drawString(String.valueOf(reqRes4[1]), 475, 575);
-            g.drawString(String.valueOf(reqRes4[2]), 550, 575);
-            g.drawString(String.valueOf(reqRes4[3]), 625, 575);
-        }
+                g.drawString(String.valueOf(reqCards4[6]), 550, 425);
+                g.drawString(String.valueOf(reqCards4[7]), 550, 475);
+                g.drawString(String.valueOf(reqCards4[8]), 550, 525);
 
-        switch (switchRes(ability1, toChooseLeaderCard[0])) {
-            case 1:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 2:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 3:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 4:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 5:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 6:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 7:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 8:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 9:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 10:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 11:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 12:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 13:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 14:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 15:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-            case 16:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 300, 300, 100, null);
-                break;
-        }
+                g.drawString(String.valueOf(reqCards4[9]), 625, 425);
+                g.drawString(String.valueOf(reqCards4[10]), 625, 475);
+                g.drawString(String.valueOf(reqCards4[11]), 625, 525);
+            }
+            if (reqRes1.length != 0) {
+                g.drawString(String.valueOf(reqRes1[0]), 100, 225);
+                g.drawString(String.valueOf(reqRes1[1]), 175, 225);
+                g.drawString(String.valueOf(reqRes1[2]), 250, 225);
+                g.drawString(String.valueOf(reqRes1[3]), 325, 225);
+            }
+            if (reqRes2.length != 0) {
+                g.drawString(String.valueOf(reqRes2[0]), 400, 225);
+                g.drawString(String.valueOf(reqRes2[1]), 475, 225);
+                g.drawString(String.valueOf(reqRes2[2]), 550, 225);
+                g.drawString(String.valueOf(reqRes2[3]), 625, 225);
+            }
+            if (reqRes3.length != 0) {
+                g.drawString(String.valueOf(reqRes3[0]), 100, 575);
+                g.drawString(String.valueOf(reqRes3[1]), 175, 575);
+                g.drawString(String.valueOf(reqRes3[2]), 250, 575);
+                g.drawString(String.valueOf(reqRes3[3]), 325, 575);
+            }
+            if (reqRes4.length != 0) {
+                g.drawString(String.valueOf(reqRes4[0]), 400, 575);
+                g.drawString(String.valueOf(reqRes4[1]), 475, 575);
+                g.drawString(String.valueOf(reqRes4[2]), 550, 575);
+                g.drawString(String.valueOf(reqRes4[3]), 625, 575);
+            }
 
-        switch (switchRes(ability2, toChooseLeaderCard[1])) {
-            case 1:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 2:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 3:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 4:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 5:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 6:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 7:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 8:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 9:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 10:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 11:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 12:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 13:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 14:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 15:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-            case 16:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 300, 300, 100, null);
-                break;
-        }
+            switch (switchRes(ability1, toChooseLeaderCard[0])) {
+                case 1:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 4:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 5:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 6:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 7:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 8:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 9:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 10:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 11:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 12:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 13:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 14:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 15:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+                case 16:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 300, 300, 100, null);
+                    break;
+            }
 
-        switch (switchRes(ability3, toChooseLeaderCard[2])) {
-            case 1:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 2:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 3:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 4:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 5:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 6:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 7:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 8:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 9:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 10:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 11:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 12:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 13:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 14:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 15:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-            case 16:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 100, 650, 300, 100, null);
-                break;
-        }
+            switch (switchRes(ability2, toChooseLeaderCard[1])) {
+                case 1:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 4:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 5:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 6:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 7:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 8:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 9:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 10:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 11:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 12:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 13:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 14:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 15:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+                case 16:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 300, 300, 100, null);
+                    break;
+            }
 
-        switch (switchRes(ability4, toChooseLeaderCard[3])) {
-            case 1:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 2:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 3:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 4:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 5:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 6:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 7:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 8:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 9:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 10:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 11:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 12:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 13:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 14:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 15:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
-            case 16:
-                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
-                try {
-                    img = ImageIO.read(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                g.drawImage(img, 400, 650, 300, 100, null);
-                break;
+            switch (switchRes(ability3, toChooseLeaderCard[2])) {
+                case 1:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 4:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 5:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 6:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 7:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 8:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 9:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 10:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 11:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 12:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 13:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 14:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 15:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+                case 16:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 100, 650, 300, 100, null);
+                    break;
+            }
+
+            switch (switchRes(ability4, toChooseLeaderCard[3])) {
+                case 1:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 2:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 3:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 4:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 5:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 6:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 7:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 8:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 9:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 10:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 11:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 12:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 13:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 14:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 15:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+                case 16:
+                    url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
+                    try {
+                        img = ImageIO.read(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    g.drawImage(img, 400, 650, 300, 100, null);
+                    break;
+            }
+            g.drawString("WP: ", 100, 250);
+            g.drawString("WP: ", 400, 250);
+            g.drawString("WP: ", 100, 600);
+            g.drawString("WP: ", 400, 600);
+            g.drawString(String.valueOf(wp1), 230, 250);
+            g.drawString(String.valueOf(wp2), 530, 250);
+            g.drawString(String.valueOf(wp3), 230, 600);
+            g.drawString(String.valueOf(wp4), 530, 600);
         }
-        g.drawString("WP: ", 100, 250);
-        g.drawString("WP: ", 400, 250);
-        g.drawString("WP: ", 100, 600);
-        g.drawString("WP: ", 400, 600);
-        g.drawString(String.valueOf(wp1), 230, 250);
-        g.drawString(String.valueOf(wp2), 530, 250);
-        g.drawString(String.valueOf(wp3), 230, 600);
-        g.drawString(String.valueOf(wp4), 530, 600);
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == leaderOne) {
-            try {
-                handler.sendMessageToServer("1", 161);
-            } catch (EndingGameException ex) {
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-            }
-
-        } else if (e.getSource() == leaderTwo) {
-
-            try {
-                handler.sendMessageToServer("2", 161);
-            } catch (EndingGameException ex) {
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-            }
-        } else if (e.getSource() == leaderThree) {
-            try {
-                handler.sendMessageToServer("3", 161);
-            } catch (EndingGameException ex) {
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-            }
-        } else if (e.getSource() == leaderFour) {
-            try {
-                handler.sendMessageToServer("4", 161);
-            } catch (EndingGameException ex) {
-                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-            }
-
-        }
-    }
-
-    public int[] requiredCardCounter (int[] reqType, int[] reqLevel){
-        int[] reqCards = new int[12];
-        for(int i = 0; i<reqType.length; i++){
-            if (reqType[i]==1){
-                switch(reqLevel[i]){
-                    case 1: reqCards[0]++;
-                        break;
-                    case 2: reqCards[1]++;
-                        break;
-                    case 3: reqCards[2]++;
-                        break;
+        @Override
+        public void actionPerformed (ActionEvent e){
+            if (e.getSource() == leaderOne) {
+                try {
+                    handler.sendMessageToServer("1", 161);
+                } catch (EndingGameException ex) {
+                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                 }
-            }
-            if (reqType[i]==2){
-                switch(reqLevel[i]){
-                    case 1: reqCards[3]++;
-                        break;
-                    case 2: reqCards[4]++;
-                        break;
-                    case 3: reqCards[5]++;
-                        break;
+
+            } else if (e.getSource() == leaderTwo) {
+
+                try {
+                    handler.sendMessageToServer("2", 161);
+                } catch (EndingGameException ex) {
+                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                 }
-            }
-            if (reqType[i]==3){
-                switch(reqLevel[i]){
-                    case 1: reqCards[6]++;
-                        break;
-                    case 2: reqCards[7]++;
-                        break;
-                    case 3: reqCards[8]++;
-                        break;
+            } else if (e.getSource() == leaderThree) {
+                try {
+                    handler.sendMessageToServer("3", 161);
+                } catch (EndingGameException ex) {
+                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                 }
-            }
-            if (reqType[i]==4){
-                switch(reqLevel[i]){
-                    case 1: reqCards[9]++;
-                        break;
-                    case 2: reqCards[10]++;
-                        break;
-                    case 3: reqCards[11]++;
-                        break;
+            } else if (e.getSource() == leaderFour) {
+                try {
+                    handler.sendMessageToServer("4", 161);
+                } catch (EndingGameException ex) {
+                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
                 }
+
             }
         }
 
-        return reqCards;
+        public int[] requiredCardCounter ( int[] reqType, int[] reqLevel){
+            int[] reqCards = new int[12];
+            for (int i = 0; i < reqType.length; i++) {
+                if (reqType[i] == 1) {
+                    switch (reqLevel[i]) {
+                        case 1:
+                            reqCards[0]++;
+                            break;
+                        case 2:
+                            reqCards[1]++;
+                            break;
+                        case 3:
+                            reqCards[2]++;
+                            break;
+                    }
+                }
+                if (reqType[i] == 2) {
+                    switch (reqLevel[i]) {
+                        case 1:
+                            reqCards[3]++;
+                            break;
+                        case 2:
+                            reqCards[4]++;
+                            break;
+                        case 3:
+                            reqCards[5]++;
+                            break;
+                    }
+                }
+                if (reqType[i] == 3) {
+                    switch (reqLevel[i]) {
+                        case 1:
+                            reqCards[6]++;
+                            break;
+                        case 2:
+                            reqCards[7]++;
+                            break;
+                        case 3:
+                            reqCards[8]++;
+                            break;
+                    }
+                }
+                if (reqType[i] == 4) {
+                    switch (reqLevel[i]) {
+                        case 1:
+                            reqCards[9]++;
+                            break;
+                        case 2:
+                            reqCards[10]++;
+                            break;
+                        case 3:
+                            reqCards[11]++;
+                            break;
+                    }
+                }
+            }
+
+            return reqCards;
+        }
+
+        public int switchRes ( int ability, LeaderCard leaderCard){
+            int num = 22;
+            int res;
+            switch (ability) {
+                case 0:
+                    res = ((LeaderOfDiscounts) leaderCard).getDiscountedRes().getResType();
+                    if (res == 0)
+                        num = 1;
+                    if (res == 1)
+                        num = 2;
+                    if (res == 2)
+                        num = 3;
+                    if (res == 3)
+                        num = 4;
+                    break;
+                case 1:
+                    res = ((LeaderOfDepots) leaderCard).getResource().getResType();
+                    if (res == 0)
+                        num = 5;
+                    if (res == 1)
+                        num = 6;
+                    if (res == 2)
+                        num = 7;
+                    if (res == 3)
+                        num = 8;
+                    break;
+                case 2:
+                    res = ((LeaderOfConversions) leaderCard).getConvertedResource().getResType();
+                    if (res == 0)
+                        num = 9;
+                    if (res == 1)
+                        num = 10;
+                    if (res == 2)
+                        num = 11;
+                    if (res == 3)
+                        num = 12;
+                    break;
+                case 3:
+                    res = ((LeaderOfProductions) leaderCard).getRequiredResource().getResType();
+                    if (res == 0)
+                        num = 13;
+                    if (res == 1)
+                        num = 14;
+                    if (res == 2)
+                        num = 15;
+                    if (res == 3)
+                        num = 16;
+                    break;
+            }
+            return num;
+        }
     }
 
-    public int switchRes(int ability, LeaderCard leaderCard) {
-        int num = 22;
-        int res;
-        switch (ability) {
-            case 0: res = ((LeaderOfDiscounts) leaderCard).getDiscountedRes().getResType();
-                if (res == 0)
-                    num = 1;
-                if (res == 1)
-                    num = 2;
-                if (res == 2)
-                    num = 3;
-                if (res == 3)
-                    num = 4;
-                break;
-            case 1: res = ((LeaderOfDepots) leaderCard).getResource().getResType();
-                if (res == 0)
-                    num = 5;
-                if (res == 1)
-                    num = 6;
-                if (res == 2)
-                    num = 7;
-                if (res == 3)
-                    num = 8;
-                break;
-            case 2: res = ((LeaderOfConversions) leaderCard).getConvertedResource().getResType();
-                if (res == 0)
-                    num = 9;
-                if (res == 1)
-                    num = 10;
-                if (res == 2)
-                    num = 11;
-                if (res == 3)
-                    num = 12;
-                break;
-            case 3: res = ((LeaderOfProductions) leaderCard).getRequiredResource().getResType();
-                if (res == 0)
-                    num = 13;
-                if (res == 1)
-                    num = 14;
-                if (res == 2)
-                    num = 15;
-                if (res == 3)
-                    num = 16;
-                break;
-        }
-        return num;
-    }
-}

@@ -17,6 +17,9 @@
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
+
+
+
   <dependencies>
     <!-- JUnit5 -->
     <dependency>
@@ -71,10 +74,7 @@
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
         </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
+
         <!-- added SHADE plug in -->
 
         <plugin>

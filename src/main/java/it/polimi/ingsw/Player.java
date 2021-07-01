@@ -1,17 +1,12 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.EndingGameException;
-import it.polimi.ingsw.controller.virtualview.EventManager;
-import it.polimi.ingsw.controller.virtualview.EventType;
 import it.polimi.ingsw.leader.LeaderCard;
-import it.polimi.ingsw.leader.LeaderCardsDeck;
-import it.polimi.ingsw.leader.LeaderOfConversions;
 import it.polimi.ingsw.leader.LeaderOfDepots;
 import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.production.ProductionCard;
-import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
-import it.polimi.ingsw.resources.WarehouseDepot;
+
 
 import java.io.Serializable;
 
@@ -96,18 +91,19 @@ public class Player implements Serializable {
             int[] strongboxCounter = personalBoard.getStrongbox().getStrongboxResourcesAmount();
             int[] leaderDepotCounter1 = {0, 0, 0, 0};
             int[] leaderDepotCounter2 = {0, 0, 0, 0};
-            if (activeLeaderCards[0].getAbility() == 1)
+            if (activeLeaderCards[0]!=null && activeLeaderCards[0].getAbility() == 1)
                 leaderDepotCounter1 = ResourceCounter.resCount(((LeaderOfDepots) activeLeaderCards[0]).getExtraDepot());
+            if (activeLeaderCards[1]!=null && activeLeaderCards[1].getAbility() == 1)
+                leaderDepotCounter2 = ResourceCounter.resCount(((LeaderOfDepots)activeLeaderCards[1]).getExtraDepot());
 
             for (int i = 0; i < 4; i++) {
                 if (counter[i] > (depotCounter[i] + strongboxCounter[i] + leaderDepotCounter1[i] + leaderDepotCounter2[i])) {
                     throw new IllegalArgumentException("Not enough resources");
-                } else {
-                    if (activeLeaderCards[0] != null)
-                        activeLeaderCards[1] = leaderCard;
-                    else activeLeaderCards[0] = leaderCard;
                 }
             }
+            if (activeLeaderCards[0] != null)
+                activeLeaderCards[1] = leaderCard;
+            else activeLeaderCards[0] = leaderCard;
         }
         else {
             for(int i=0; i<leaderCard.getRequiredType().length; i++) {
@@ -164,6 +160,8 @@ public class Player implements Serializable {
             if (p.getPersonalBoard().getPosition()>=24)
                 connectedGame.previousPlayer(this).setLast();
         }
+        if(connectedGame.getPlayers().size()==1 && connectedGame.getLorenzo().getPersonalBoard().getPosition()>=24)
+            connectedGame.getLorenzo().setLast();
 
     }
 
@@ -270,6 +268,8 @@ public class Player implements Serializable {
 
 
     public void discardedResourceUser(Player player){
+        if(connectedGame.getPlayers().size()==1)
+            connectedGame.getLorenzo().increaseFaith(1);
         for (Player p : connectedGame.getPlayers()){
             if (p != player){
                 p.increaseFaith(1);

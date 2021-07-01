@@ -1,6 +1,5 @@
 package it.polimi.ingsw.gui;
 
-import it.polimi.ingsw.gui.multi.AskNicknameMulti;
 
 import javax.swing.*;
 

@@ -104,21 +104,6 @@ public class WarehouseDepot implements Serializable {
             i--;
         }
         depot[column][i] = null;
-        if (i==0) {
-            if (column==1) {
-                depot [1][0] = depot [0][0];
-                depot [0][0] = null;
-            }
-            if (column==2) {
-                for(int j=0; i<2; i++) {
-                    if(depot[1][j]!=null) {
-                        depot[2][j] = depot[1][i];
-                        depot[1][j] = null;
-                    }
-                }
-            }
-        }
-
     }
 
     /**

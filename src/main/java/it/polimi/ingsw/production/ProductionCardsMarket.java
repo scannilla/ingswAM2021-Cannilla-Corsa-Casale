@@ -3,8 +3,6 @@ package it.polimi.ingsw.production;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.virtualview.EventManager;
 import it.polimi.ingsw.controller.virtualview.EventType;
-import it.polimi.ingsw.production.ProductionCard;
-import it.polimi.ingsw.production.ProductionCardsDeck;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -113,6 +111,11 @@ public class ProductionCardsMarket implements Serializable {
                     }
                 }
             }
+        }
+        try {
+            getCard(2,type);
+        } catch (IllegalArgumentException e) {
+            throw new EndingGameException();
         }
     }
 }

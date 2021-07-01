@@ -13,6 +13,7 @@ import it.polimi.ingsw.marbles.MarketMarble;
 import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.resources.ResourceCounter;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class RequiredClientActions {
@@ -269,7 +270,7 @@ public class RequiredClientActions {
                                     }
                                     try {
                                         player.getPersonalBoard().getWarehouseDepot().moveResources(line1-1, line2-1);
-                                        sendResponse("The selected line have been correctly switched, now insert the command again", 133);
+                                        sendResponse("The selected line have been correctly switched, now insert the command again", 134);
                                         EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard(), player.getNickname());
                                     } catch (IllegalArgumentException exc) {
                                         sendResponse(exc.getMessage(), 437);
@@ -381,7 +382,9 @@ public class RequiredClientActions {
     }
 
     private void buyCard() throws EndingGameException {
-        Resource[] costArray = player.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])-1][Integer.parseInt(parameters[1])-1].getCostArray();
+        Resource[] cost = player.getConnectedGame().getCardsMarket().getTopCards()[Integer.parseInt(parameters[0])-1][Integer.parseInt(parameters[1])-1].getCostArray();
+        Resource[] costArray = new Resource[cost.length];
+        System.arraycopy(cost, 0, costArray, 0, cost.length);
         boolean discountActivated = false;
         boolean done;
         CheckCommand.checkDiscount(player, costArray, mHandler);
@@ -425,19 +428,8 @@ public class RequiredClientActions {
                     break;
 
                 case "strongbox":
-                    for (int i = 0; i<costArray.length; i++) {
-                        if (costArray[i].equals(chosenResource)) {
-                            try {
-                                player.getPersonalBoard().getStrongbox().useResourceStrongbox(costArray[i]);
-                                costArray[i] = null;
-                            } catch (IllegalArgumentException e) {
-                                sendResponse("This resource isn't available in your Strongbox", 428);
-                            }
-                            break; //break for each
-                        }
-                        sendResponse("This resource isn't required", 429);
-                    }
-                    break; //break case "strongbox"
+                    useStrongboxResource(costArray, chosenResource);
+                    break;
                 default:
                     sendResponse("select a valid resource location (Warehouse Depot, Extra Depot or Strongbox", 430);
                     break;
@@ -466,10 +458,14 @@ public class RequiredClientActions {
 
     private void activateProduction() throws EndingGameException {
         sendResponse("You can activate this production, select where you want to take the resources from", 122);
-        Resource[] requiredRes = player.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()[Integer.parseInt(parameters[0])].getRequiredRes();
+        Resource[] required = player.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()[Integer.parseInt(parameters[0])-1].getRequiredRes();
+        Resource[] requiredRes = new Resource[required.length];
+        System.arraycopy(required, 0, requiredRes, 0, requiredRes.length);
+        boolean done;
         do {
+            String chosenDepot = selectDepot(new String[] {"warehouse depot", "extra depot", "strongbox"});
             Resource chosenResource = selectResource();
-            switch (selectDepot(new String[] {"warehouse depot", "extra depot", "strongbox"})) {
+            switch (chosenDepot) {
                 case "warehousedepot":
                     useWarehouseResource(requiredRes, chosenResource);
                     break;
@@ -484,7 +480,14 @@ public class RequiredClientActions {
                     sendResponse("Select a valid resource location (Warehouse Depot, Extra Depot or strongbox)", 430);
                     break;
             }
-        } while(Arrays.equals(requiredRes, new Resource[requiredRes.length]));
+            done = true;
+            for (Resource resource : requiredRes) {
+                if (resource != null) {
+                    done = false;
+                    break;
+                }
+            }
+        } while(!done);
         for (Resource r : player.getPersonalBoard().getProdCardSlot().getActiveCardsAsArr()[Integer.parseInt(parameters[0])].getGivenRes())
             player.getPersonalBoard().getStrongbox().insertNewResource(r);
         EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
@@ -511,15 +514,14 @@ public class RequiredClientActions {
         sendResponse("Now choose a resource to get from the production", 126);
         Resource choice = selectResource();
         player.getPersonalBoard().getStrongbox().insertNewResource(choice);
-        EventManager.notifyListener(EventType.PERSONALBOARD, player.getPersonalBoard());
-        sendResponse("Standard production finished", 126);
+        sendResponse("Standard production finished, faith increased", 126);
     }
 
     private void leaderProduction() throws EndingGameException{
         LeaderOfProductions chosenCard = (LeaderOfProductions)player.getActiveLeaderCards()[Integer.parseInt(parameters[0])];
         mHandler.sendMessageToClient("You can activate this production", 127);
         Resource[] requiredRes = new Resource[1];
-        requiredRes[0] = chosenCard.getRequiredResource();
+        requiredRes[0] = new Resource(chosenCard.getRequiredResource().toString());
         do {
             sendResponse("Select where you want to take the required resource from", 127);
             String selectedDepot = selectDepot(new String[] {"Warehouse depot", "Extra depot", "Strongbox"});

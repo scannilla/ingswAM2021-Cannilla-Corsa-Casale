@@ -1,7 +1,9 @@
 package it.polimi.ingsw.controller.networkclient;
 
-import com.sun.tools.javac.Main;
+import it.polimi.ingsw.LeaderBoard;
 import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.Player;
+import it.polimi.ingsw.VaticanReport;
 import it.polimi.ingsw.cli.*;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.Message;
@@ -9,15 +11,15 @@ import it.polimi.ingsw.controller.ObjectMessage;
 import it.polimi.ingsw.gui.Data;
 import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.GuiMessageHandler;
-import it.polimi.ingsw.gui.Intro;
 import it.polimi.ingsw.gui.MainGUI;
-import it.polimi.ingsw.gui.local.BuyMarble;
-import it.polimi.ingsw.gui.multi.Multi;
 import it.polimi.ingsw.leader.LeaderCard;
+import it.polimi.ingsw.leader.LeaderOfDepots;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
-import it.polimi.ingsw.resources.Resource;
 import it.polimi.ingsw.tokens.ActionToken;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ClientListener implements Runnable{
@@ -28,10 +30,11 @@ public class ClientListener implements Runnable{
     private  final ClientMessageHandler cmHandler;
 
     private final boolean gui;
-    
-    private Data instance = Data.instanceCreator();
+
 
     private String nickname ="";
+
+    private static VaticanReport report;
 
     /**
      * constructor for ClientListener
@@ -97,7 +100,7 @@ public class ClientListener implements Runnable{
                 break;
             case 652:
                 PersonalBoard personalBoard = (PersonalBoard) obj.getObj();
-                PersonalBoardDraw.drawPB(personalBoard);
+                PersonalBoardDraw.drawPB(personalBoard, report);
                 break;
             case 653:
             case 654:
@@ -108,38 +111,26 @@ public class ClientListener implements Runnable{
                 TokenDraw.drawToken((ActionToken) obj.getObj());
                 break;
             case 657:
-                //leaderboard draw
+                LeaderBoard lb = (LeaderBoard) obj.getObj();
+                ArrayList<String> nicknames = new ArrayList<>(lb.getMap().keySet());
+                ArrayList<Integer> wp = new ArrayList<>(lb.getMap().values());
+                LeaderBoardDraw.drawLeaderboard(nicknames, wp);
+                break;
             case 658:
-                //single player leaderboard draw (player win)
+                LeaderBoard lb1;
+                lb1 = (LeaderBoard) obj.getObj();
+                ArrayList<Integer> wp1 = new ArrayList<>(lb1.getMap().values());
+                LeaderBoardDraw.drawWin(wp1);
+                break;
             case 659:
-                //single player leaderboard draw (lorenzo win)
+                LeaderBoard lb2;
+                lb2 = (LeaderBoard) obj.getObj();
+                ArrayList<Integer> wp2 = new ArrayList<>(lb2.getMap().values());
+                LeaderBoardDraw.drawLose(wp2);
+                break;
+            case 660:
+                report = (VaticanReport)obj.getObj();
         }
     }
 
-    private void readObjectGui(Message m, Data instance){
-        ObjectMessage object = (ObjectMessage) m;
-        switch(m.getCode()){
-            case 650:
-                instance.setMarketStructure((MarketStructure) object.getObj());
-                break;
-            case 651:
-                instance.setProductionCardsMarket((ProductionCardsMarket) object.getObj());
-                break;
-            case 652:
-                instance.setPersonalBoard((PersonalBoard) object.getObj());
-                break;
-            case 653:
-                instance.setLeaderCards((LeaderCard[]) object.getObj());
-                break;
-            case 654:
-                instance.setActiveLeaderCards((LeaderCard[]) object.getObj());
-                break;
-            case 655:
-                instance.setToChooseLeaderCards((LeaderCard[]) object.getObj());
-                break;
-
-        }
-        
-    }
-    
 }

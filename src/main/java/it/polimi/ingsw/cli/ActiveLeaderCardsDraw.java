@@ -2,7 +2,11 @@ package it.polimi.ingsw.cli;
 
 import it.polimi.ingsw.leader.*;
 import it.polimi.ingsw.resources.Resource;
+import it.polimi.ingsw.resources.ResourceCounter;
 
+/**
+ * this class draws the active leader cards
+ */
 public class ActiveLeaderCardsDraw {
     public static void drawActiveLeaderCards(LeaderCard[] cardsArray){
         String resetEscape = Color.ANSI_RESET.escape();
@@ -218,30 +222,9 @@ public class ActiveLeaderCardsDraw {
     public static void drawReqRes(LeaderCard[] cardsArray, int index){
         String resetEscape = Color.ANSI_RESET.escape();
         Resource[] reqRes = cardsArray[index].getRequiredRes();
-        int[] reqRess = new int[10];
-        int coins = 0;
-        int stones = 0;
-        int servants = 0;
-        int shields = 0;
-        int j=0;
-        for (Resource i : reqRes){
-            reqRess[j]=i.getResType();
-            j++;
-        }
-        for (int l=0; l<10; l++){
-            switch (reqRess[l]){
-                case 0: coins++;
-                break;
-                case 1: stones++;
-                break;
-                case 2: servants++;
-                break;
-                case 3: shields++;
-                break;
-            }
-        }
-        if (coins!=0){
-            System.out.print(resetEscape + coins);
+        int[] reqRess = ResourceCounter.resCount(reqRes);
+        if (reqRess[0]!=0){
+            System.out.print(resetEscape + reqRess[0]);
             System.out.print(Color.ANSI_YELLOW.escape() + "C" + resetEscape);}
         if (stones!=0){
             System.out.print(resetEscape + stones);

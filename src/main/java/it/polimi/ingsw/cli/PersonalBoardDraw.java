@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cli;
 
 import it.polimi.ingsw.PersonalBoard;
+import it.polimi.ingsw.VaticanReport;
 
 
 public class PersonalBoardDraw {
@@ -9,5 +10,6 @@ public class PersonalBoardDraw {
         WarehouseDepotDraw.drawWarehouseDepot(pb);
         StrongboxDraw.drawStrongbox(pb);
         ProdCardSlotDraw.drawActiveProdCards(pb);
+        VaticanBoardDraw.drawVaticanRoad(report, pb);
     }
 }

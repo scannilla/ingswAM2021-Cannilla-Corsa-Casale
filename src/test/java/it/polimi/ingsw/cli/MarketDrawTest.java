@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +21,7 @@ class MarketDrawTest {
 
     @Test
     void draw() {
-        File fileTest = new File("src/main/java/it/polimi/ingsw/marbles/marbles.json");
+        InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/marbles.json");
         MarketStructure marketStructureTest;
         try{
             marketStructureTest = GSON.marketStructureParser(fileTest);

@@ -50,6 +50,7 @@ public class GuiMessageHandler {
                     break;
                 case 183:
                     MainGUI.changePanel(new PreGameLeader(cmHandler));
+                    break;
                 case 405:
                     MainGUI.changePanel(new Error(received.getMessage(), cmHandler, 6));
                     break;

@@ -140,16 +140,3 @@ public class ServerMain {
 
 }
 
-class CrashChecker implements Runnable {
-    private final Future<Integer> future;
-
-    public CrashChecker(Future<Integer> future) {
-        this.future = future;
-    }
-
-    @Override
-    public void run() {
-
-    }
-}
-

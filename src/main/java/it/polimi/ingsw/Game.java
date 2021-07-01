@@ -11,9 +11,7 @@ import it.polimi.ingsw.production.ProductionCardsMarket;
 import it.polimi.ingsw.tokens.ActionToken;
 import it.polimi.ingsw.tokens.ActionTokenPile;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Game implements Serializable{
@@ -46,8 +44,6 @@ public class Game implements Serializable{
 
     private final ProductionCardsMarket cardsMarket = new ProductionCardsMarket();
 
-    private ProductionCardsDeck deck;
-
     private Player activePlayer;
 
     private Player lorenzo;
@@ -61,25 +57,33 @@ public class Game implements Serializable{
     public void initialSet() throws IOException {
         for(Player p: players)
             p.setConnectedGame(this);
+        ClassLoader classLoader = this.getClass().getClassLoader();
     /* create prod card deck, create leader card deck, if numberOfPlayers==1 create action token pile */
         if (numberOfPlayers==1) {
-            actionTokensPile = GSON.actionTokensPileParser(new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json"));
+            InputStream in = classLoader.getResourceAsStream("JsonFiles/actiontokens.json");
+            actionTokensPile = GSON.actionTokensPileParser(in);
             actionTokensPile.createPile();
             lorenzo = new Player("Lorenzo The Magnificent");
             lorenzo.setConnectedGame(this);
         }
-        deck = GSON.productionCardParser(new File("src/main/java/it/polimi/ingsw/production/prodcards.json"));
-        leaderCardsDeck = GSON.leaderCardParser(new File("src/main/java/it/polimi/ingsw/leader/allLeaderCards.json"));
-        market = GSON.marketStructureParser(new File("src/main/java/it/polimi/ingsw/marbles/marbles.json"));
+        InputStream dk = classLoader.getResourceAsStream("JsonFiles/prodcards.json");
+        ProductionCardsDeck deck = GSON.productionCardParser(dk);
+        InputStream leaderCardStream = classLoader.getResourceAsStream("JsonFiles/allLeaderCards.json");
+        leaderCardsDeck = GSON.leaderCardParser(leaderCardStream);
+        InputStream mrkt = classLoader.getResourceAsStream("JsonFiles/marbles.json");
+        market = GSON.marketStructureParser(mrkt);
         market.initializeMarket();
         cardsMarket.setMarket(deck);
         leaderCardsDeck.shuffleDeck();
         players.get(0).setActive(true);
         activePlayer = players.get(0);
-        vaticanReport = GSON.vaticanReportParser(new File("src/main/java/it/polimi/ingsw/vatReport.json"));
+        InputStream vatRep = classLoader.getResourceAsStream("JsonFiles/vatReport.json");
+        vaticanReport = GSON.vaticanReportParser(vatRep);
+        EventManager.notifyListener(EventType.VATICANBOARD, vaticanReport);
         for(Player p : players) {
             EventManager.notifyListener(EventType.PERSONALBOARD, p.getPersonalBoard(), p.getNickname());
         }
+
     }
 
     /**
@@ -228,7 +232,17 @@ public class Game implements Serializable{
         activePlayer.setActive(false);
         activePlayer.endTurn();
         if(numberOfPlayers==1) {
-            lorenzoTurn();
+            try {
+                lorenzoTurn();
+            } catch (Error e) {
+                throw new Error();
+            }
+            if(lorenzo.isLast()) {
+                EventManager.notifyListener(EventType.PERSONALBOARD, lorenzo.getPersonalBoard());
+                players.add(0, lorenzo);
+                EventManager.notifyListener(EventType.LEADERBOARD, players, null, 659);
+                throw new Error();
+            }
         }
         else {
             activePlayer = nextPlayer(activePlayer);
@@ -245,6 +259,8 @@ public class Game implements Serializable{
         EventManager.notifyListener(EventType.TOKEN, token);
         try {
             token.activateAction(this, lorenzo);
+            if(lorenzo.isLast())
+                throw new Error();
         } catch (EndingGameException e) {
             throw new Error();
         }

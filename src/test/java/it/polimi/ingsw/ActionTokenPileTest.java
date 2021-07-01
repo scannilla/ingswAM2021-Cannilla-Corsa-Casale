@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.File;
+import java.io.InputStream;
+
 import it.polimi.ingsw.tokens.ActionTokenPile;
 
 
 class ActionTokenPileTest {
 
-    File fileTest = new File("src/main/java/it/polimi/ingsw/tokens/actiontokens.json");
+    InputStream fileTest = this.getClass().getClassLoader().getResourceAsStream("JsonFiles/actiontokens.json");
 
     @Test
     void createPile (){

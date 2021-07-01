@@ -54,57 +54,7 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
     public void paint(Graphics g){
         Font f = new Font("Times New Roman", Font.BOLD, 16);
         g.setFont(f);
-        g.drawString("Choose two of the four leader cards available", 0,0);
-        g.drawString("1", 125, 50);
-        g.drawString("1", 200, 50);
-        g.drawString("1", 275, 50);
-        g.drawString("1", 350, 50);
-        g.drawString("1", 425, 50);
-        g.drawString("1", 500, 50);
-        g.drawString("1", 575, 50);
-        g.drawString("1", 650, 50);
-        g.drawString("1", 125, 400);
-        g.drawString("1", 200, 400);
-        g.drawString("1", 275, 400);
-        g.drawString("1", 350, 400);
-        g.drawString("1", 425, 400);
-        g.drawString("1", 500, 400);
-        g.drawString("1", 575, 400);
-        g.drawString("1", 650, 400);
-
-        g.drawString("2", 125, 100);
-        g.drawString("2", 200, 100);
-        g.drawString("2", 275, 100);
-        g.drawString("2", 350, 100);
-        g.drawString("2", 425, 100);
-        g.drawString("2", 500, 100);
-        g.drawString("2", 575, 100);
-        g.drawString("2", 650, 100);
-        g.drawString("2", 125, 450);
-        g.drawString("2", 200, 450);
-        g.drawString("2", 275, 450);
-        g.drawString("2", 350, 450);
-        g.drawString("2", 425, 450);
-        g.drawString("2", 500, 450);
-        g.drawString("2", 575, 450);
-        g.drawString("2", 650, 450);
-
-        g.drawString("3", 125, 150);
-        g.drawString("3", 200, 150);
-        g.drawString("3", 275, 150);
-        g.drawString("3", 350, 150);
-        g.drawString("3", 425, 150);
-        g.drawString("3", 500, 150);
-        g.drawString("3", 575, 150);
-        g.drawString("3", 650, 150);
-        g.drawString("3", 125, 500);
-        g.drawString("3", 200, 500);
-        g.drawString("3", 275, 500);
-        g.drawString("3", 350, 500);
-        g.drawString("3", 425, 500);
-        g.drawString("3", 500, 500);
-        g.drawString("3", 575, 500);
-        g.drawString("3", 650, 500);
+        g.drawString("Choose two of the four leader cards available", 10, 10);
         myDrawImagePNG(g);
     }
 
@@ -262,13 +212,14 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
         g.drawString(String.valueOf(reqCards2[7]), 550, 100);
         g.drawString(String.valueOf(reqCards2[8]), 550, 150);
 
-        g.drawString(String.valueOf(reqCards2[9]), 625, 50);
-        g.drawString(String.valueOf(reqCards2[10]), 625, 100);
-        g.drawString(String.valueOf(reqCards2[11]),625, 150);
-
-        g.drawString(String.valueOf(reqCards3[0]), 100, 400);
-        g.drawString(String.valueOf(reqCards3[1]), 100, 450);
-        g.drawString(String.valueOf(reqCards3[2]), 100, 500);
+            g.drawString(String.valueOf(reqCards2[9]), 625, 75);
+            g.drawString(String.valueOf(reqCards2[10]), 625, 125);
+            g.drawString(String.valueOf(reqCards2[11]), 625, 175);
+        }
+        if (reqType3.length != 0 && reqLevel3.length != 0) {
+            g.drawString(String.valueOf(reqCards3[0]), 100, 425);
+            g.drawString(String.valueOf(reqCards3[1]), 100, 475);
+            g.drawString(String.valueOf(reqCards3[2]), 100, 525);
 
         g.drawString(String.valueOf(reqCards3[3]), 175, 400);
         g.drawString(String.valueOf(reqCards3[4]), 175, 450);
@@ -294,27 +245,34 @@ public class PreGameLeaderCard extends JPanel implements ActionListener {
         g.drawString(String.valueOf(reqCards4[7]), 550, 450);
         g.drawString(String.valueOf(reqCards4[8]), 550, 500);
 
-        g.drawString(String.valueOf(reqCards4[9]), 625, 400);
-        g.drawString(String.valueOf(reqCards4[10]), 625, 450);
-        g.drawString(String.valueOf(reqCards4[11]),625, 500);
-
-        g.drawString(String.valueOf(reqRes1[0]), 100, 200);
-        g.drawString(String.valueOf(reqRes1[1]), 175, 200);
-        g.drawString(String.valueOf(reqRes1[2]), 250, 200);
-        g.drawString(String.valueOf(reqRes1[3]), 325, 200);
-        g.drawString(String.valueOf(reqRes2[0]), 400, 200);
-        g.drawString(String.valueOf(reqRes2[1]), 475, 200);
-        g.drawString(String.valueOf(reqRes2[2]), 550, 200);
-        g.drawString(String.valueOf(reqRes2[3]), 625, 200);
-
-        g.drawString(String.valueOf(reqRes3[0]), 100, 550);
-        g.drawString(String.valueOf(reqRes3[1]), 175, 550);
-        g.drawString(String.valueOf(reqRes3[2]), 250, 550);
-        g.drawString(String.valueOf(reqRes3[3]), 325, 550);
-        g.drawString(String.valueOf(reqRes4[0]), 400, 550);
-        g.drawString(String.valueOf(reqRes4[1]), 475, 550);
-        g.drawString(String.valueOf(reqRes4[2]), 550, 550);
-        g.drawString(String.valueOf(reqRes4[3]), 625, 550);
+            g.drawString(String.valueOf(reqCards4[9]), 625, 425);
+            g.drawString(String.valueOf(reqCards4[10]), 625, 475);
+            g.drawString(String.valueOf(reqCards4[11]), 625, 525);
+        }
+        if (reqRes1.length!=0) {
+            g.drawString(String.valueOf(reqRes1[0]), 100, 225);
+            g.drawString(String.valueOf(reqRes1[1]), 175, 225);
+            g.drawString(String.valueOf(reqRes1[2]), 250, 225);
+            g.drawString(String.valueOf(reqRes1[3]), 325, 225);
+        }
+        if (reqRes2.length!=0) {
+            g.drawString(String.valueOf(reqRes2[0]), 400, 225);
+            g.drawString(String.valueOf(reqRes2[1]), 475, 225);
+            g.drawString(String.valueOf(reqRes2[2]), 550, 225);
+            g.drawString(String.valueOf(reqRes2[3]), 625, 225);
+        }
+        if (reqRes3.length!=0) {
+            g.drawString(String.valueOf(reqRes3[0]), 100, 575);
+            g.drawString(String.valueOf(reqRes3[1]), 175, 575);
+            g.drawString(String.valueOf(reqRes3[2]), 250, 575);
+            g.drawString(String.valueOf(reqRes3[3]), 325, 575);
+        }
+        if (reqRes4.length!=0) {
+            g.drawString(String.valueOf(reqRes4[0]), 400, 575);
+            g.drawString(String.valueOf(reqRes4[1]), 475, 575);
+            g.drawString(String.valueOf(reqRes4[2]), 550, 575);
+            g.drawString(String.valueOf(reqRes4[3]), 625, 575);
+        }
 
         switch (switchRes(ability1, toChooseLeaderCard[0])) {
             case 1: url = cl.getResourceAsStream("conv coin.png");

@@ -1,0 +1,69 @@
+{
+  "leaderCardsDeck" : [
+      {
+        "requiredRes": [
+        ],
+        "requiredType": [
+        3,
+        3,
+        2
+        ],
+        "requiredLevel": [
+          1,
+          1,
+          1
+        ],
+        "wp": 5,
+        "convertedResource": 2
+      },
+      {
+        "requiredRes": [
+        ],
+        "requiredType": [
+        1,
+        1,
+        4
+        ],
+        "requiredLevel": [
+          1,
+          1,
+          1
+        ],
+        "wp": 5,
+        "convertedResource": 4
+      },
+      {
+        "requiredRes": [
+        ],
+        "requiredType": [
+        2,
+        2,
+        3
+        ],
+        "requiredLevel": [
+          1,
+          1,
+          1
+        ],
+        "wp": 5,
+        "convertedResource": 1
+      },
+      {
+        "requiredRes": [
+        ],
+        "requiredType": [
+        4,
+        4,
+        1
+        ],
+        "requiredLevel": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "wp": 5,
+        "convertedResource": 0
+      }
+    ]
+  }

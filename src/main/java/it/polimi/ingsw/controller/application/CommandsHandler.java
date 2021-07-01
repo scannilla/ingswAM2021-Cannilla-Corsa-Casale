@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.application;
 
 import it.polimi.ingsw.GSON;
 import it.polimi.ingsw.Game;
+import it.polimi.ingsw.LeaderBoard;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndingGameException;
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
@@ -111,8 +112,10 @@ public class CommandsHandler {
                         game.endTurn();
                     } catch (RuntimeException e) {
                         createLeaderboard(true);
-                    } catch (Error e) {
+                        return new Response("end", 999);
+                    } catch (Error e1) {
                         createLeaderboard(false);
+                        return new Response("end", 999);
                     }
                     return new Response("Turn ended", 191);
                 }
@@ -155,18 +158,17 @@ public class CommandsHandler {
                     }
                 }
             }
-            EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard);
+            LeaderBoard lb = new LeaderBoard(leaderBoard);
+            EventManager.notifyListener(EventType.LEADERBOARD, lb);
         }
         else {
             if(!win) {
-                leaderBoard.add(game.getLorenzo());
-                leaderBoard.add(game.getPlayers().get(0));
-                EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 659);
+                LeaderBoard lb= new LeaderBoard(game.getPlayers().get(0), game.getLorenzo(), false);
+                EventManager.notifyListener(EventType.LEADERBOARD, lb, null, 659);
             }
             else {
-                leaderBoard.add(game.getPlayers().get(0));
-                leaderBoard.add(game.getLorenzo());
-                EventManager.notifyListener(EventType.LEADERBOARD, leaderBoard, null, 658);
+                LeaderBoard lb = new LeaderBoard(game.getPlayers().get(0), game.getLorenzo(), true);
+                EventManager.notifyListener(EventType.LEADERBOARD, lb, null, 658);
             }
         }
     }

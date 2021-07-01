@@ -28,7 +28,6 @@ public class Turn extends JPanel implements ActionListener {
     private int numPlayer;
     public Turn(ClientMessageHandler handler){
         this.handler = handler;
-        //TODO trovare come ottenere l'indice del player che si trova in Turn
         buyMarble = new JButton ("Buy marble");
         buyMarble.setBounds(10, 110, 180, 180);
         buyProd = new JButton("Buy production card");
@@ -53,21 +52,21 @@ public class Turn extends JPanel implements ActionListener {
                 viewPB1.addActionListener(this);
                 this.add(viewPB1);
                 break;
-            case 2:  viewPB1 = new JButton("View nickname personal board");
+            case 2:  viewPB1 = new JButton("View player 1 personal board");
                 viewPB1.setBounds(210, 510, 180, 180);
                 viewPB1.addActionListener(this);
                 this.add(viewPB1);
                 break;
-            case 3: viewPB2 = new JButton("View nickname personal board");
-                viewPB1 = new JButton("View nickname personal board");
+            case 3: viewPB2 = new JButton("View player 1 personal board");
+                viewPB1 = new JButton("View player 2 personal board");
                 viewPB1.setBounds(210, 510, 180, 180);
                 viewPB2.setBounds(410, 510, 180, 180);
                 this.add(viewPB2);
                 this.add(viewPB1);
                 break;
-            case 4: viewPB3 = new JButton("View nickname personal board");
-                viewPB1 = new JButton("View nickname personal board");
-                viewPB2 = new JButton("View nickname personal board");
+            case 4: viewPB3 = new JButton("View player 1 personal board");
+                viewPB1 = new JButton("View player 2 personal board");
+                viewPB2 = new JButton("View player 3 personal board");
                 viewPB1.setBounds(210, 510, 180, 180);
                 viewPB2.setBounds(410, 510, 180, 180);
                 viewPB3.setBounds(610, 510, 180, 180);
@@ -113,30 +112,16 @@ public class Turn extends JPanel implements ActionListener {
 
     public void chooseAction(ActionEvent e){
         if (e.getSource() == buyMarble){
-            MainGUI.frame.add(new BuyMarble(handler));
-            MainGUI.frame.remove(this);
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new BuyMarble(handler));
+
         } else if(e.getSource() == buyProd){
-            MainGUI.frame.add(new BuyProductionCard(handler));
-            MainGUI.frame.remove(this);
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new BuyProductionCard(handler));
         } else if(e.getSource() == activeLeader){
-            MainGUI.frame.add(new ActiveLeader(handler));
-            MainGUI.frame.remove(this);
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new ActiveLeader(handler));
         } else if(e.getSource() == activeProd) {
-            MainGUI.frame.add(new ActiveProduction(handler));
-            MainGUI.frame.remove(this);
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new ActiveProduction(handler));
         } else if(e.getSource() == viewLeaderCard){
-            MainGUI.frame.add(new ShowLeaderCard(handler, true));
-            MainGUI.frame.remove(this);
-            MainGUI.frame.revalidate();
-            MainGUI.frame.repaint();
+            MainGUI.changePanel(new ShowLeaderCard(handler, true));
         } else if(e.getSource() == viewMarketMarble){
             try{
                 handler.sendMessageToServer("view market", 163);
@@ -144,54 +129,43 @@ public class Turn extends JPanel implements ActionListener {
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowMarketMarble(handler, true));
-            MainGUI.frame.revalidate();
+            MainGUI.changePanel(new ShowMarketMarble(handler, true));
         } else if(e.getSource() == viewProdMarket){
             try{
                 handler.sendMessageToServer("view card market", 162);
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowProductionMarket(handler, true));
-            MainGUI.frame.revalidate();
+            MainGUI.changePanel(new ShowProductionMarket(handler, true));
         } else if(e.getSource() == viewMyPB){
             try{
                 handler.sendMessageToServer("view -personalboard", 164);
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
-            MainGUI.frame.revalidate();
+            MainGUI.changePanel(new ShowPersonalBoard(handler, true));
         } else if (e.getSource() == viewPB1){
             try{
                 handler.sendMessageToServer("view -personalboard -2", 164);
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
-            MainGUI.frame.revalidate();
+            MainGUI.changePanel(new ShowPersonalBoard(handler, true));
         } else if(e.getSource() == viewPB2){
             try{
                 handler.sendMessageToServer("view -personalboard -3", 164);
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
-            MainGUI.frame.revalidate();
+            MainGUI.changePanel(new ShowPersonalBoard(handler, true));
+
         } else if(e.getSource() == viewPB3){
             try{
                 handler.sendMessageToServer("view -personalboard -4", 164);
             } catch (EndingGameException ex){
                 MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
             }
-            MainGUI.frame.remove(this);
-            MainGUI.frame.add(new ShowPersonalBoard(handler, true));
-            MainGUI.frame.revalidate();
+            MainGUI.changePanel(new ShowPersonalBoard(handler, true));
         } else if(e.getSource() == endTurn){
             try{
                 handler.sendMessageToServer("endturn", 165);

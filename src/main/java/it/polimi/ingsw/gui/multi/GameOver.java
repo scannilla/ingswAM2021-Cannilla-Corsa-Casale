@@ -56,9 +56,7 @@ public class GameOver extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
             if(e.getSource() == exit){
-                MainGUI.frame.remove(this);
-                //Main.frame.add(new Intro());
-                MainGUI.frame.revalidate();
+               MainGUI.changePanel(new Intro("endgame", 0));
             }
     }
 }

@@ -62,7 +62,11 @@ public class NewServerGameProtocol implements Callable<Integer> {
             String command;
             try {
                 command = mHandler.readClientMessage();
+                System.out.println(command);
                 Response response = handler.tryCommand(createCommand(command), player, mHandler);
+                if (response.getCode()==999)
+                    System.exit(1);
+                System.out.println(response.getMessage() + response.getCode());
                 if(response.getCode() == 401)
                     response = handler.getValidCommands();
                 mHandler.sendMessageToClient(response);
@@ -106,5 +110,6 @@ public class NewServerGameProtocol implements Callable<Integer> {
         EventManager.subscribe(EventType.LEADERCARD, new LeaderCardListener(mHandler));
         EventManager.subscribe(EventType.LEADERBOARD, new LeaderboardListener(mHandler));
         EventManager.subscribe(EventType.GAMESTART, new GameStartListener(mHandler));
+        EventManager.subscribe(EventType.VATICANBOARD, new VaticanBoardListener(mHandler));
     }
 }

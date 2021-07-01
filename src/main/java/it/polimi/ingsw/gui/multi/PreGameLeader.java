@@ -132,10 +132,22 @@ public class PreGameLeader extends JPanel implements ActionListener {
         int[] reqLevel2 = toChooseLeaderCard[1].getRequiredLevel();
         int[] reqLevel3 = toChooseLeaderCard[2].getRequiredLevel();
         int[] reqLevel4 = toChooseLeaderCard[3].getRequiredLevel();
-        int[] reqCards1 = requiredCardCounter(reqType1, reqLevel1);
-        int[] reqCards2 = requiredCardCounter(reqType2, reqLevel2);
-        int[] reqCards3 = requiredCardCounter(reqType3, reqLevel3);
-        int[] reqCards4 = requiredCardCounter(reqType4, reqLevel4);
+        int[] reqCards1 = new int[12];
+        int[] reqCards2 = new int[12];
+        int[] reqCards3 = new int[12];
+        int[] reqCards4 = new int[12];
+        if (reqType1.length != 0 && reqLevel1.length != 0) {
+            reqCards1 = requiredCardCounter(reqType1, reqLevel1);
+        }
+        if (reqType2.length != 0 && reqLevel2.length != 0) {
+            reqCards2 = requiredCardCounter(reqType2, reqLevel2);
+        }
+        if (reqType3.length != 0 && reqLevel3.length != 0) {
+            reqCards3 = requiredCardCounter(reqType3, reqLevel3);
+        }
+        if (reqType4.length != 0 && reqLevel4.length != 0) {
+            reqCards4 = requiredCardCounter(reqType4, reqLevel4);
+        }
         InputStream url;
         BufferedImage img;
         url = cl.getResourceAsStream("coin2.png");
@@ -145,10 +157,22 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 125, 200, 50, 50, null);
-        g.drawImage(img, 425, 200, 50, 50, null);
-        g.drawImage(img, 125, 600, 50, 50, null);
-        g.drawImage(img, 425, 600, 50, 50, null);
+        if (reqRes1.length!=0) {
+            g.drawImage(img, 125, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess1[0]), 100, 125);
+        }
+        if (reqRes2.length!=0) {
+            g.drawImage(img, 425, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess2[0]), 400, 125);
+        }
+        if (reqRes3.length!=0) {
+            g.drawImage(img, 125, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess3[0]), 100, 525);
+        }
+        if (reqRes4.length!=0) {
+            g.drawImage(img, 425, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess4[0]), 400, 525);
+        }
         url = cl.getResourceAsStream("stone2.png");
         try {
             img = ImageIO.read(url);
@@ -156,10 +180,22 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 200, 200, 50, 50, null);
-        g.drawImage(img, 500, 200, 50, 50, null);
-        g.drawImage(img, 200, 600, 50, 50, null);
-        g.drawImage(img, 500, 600, 50, 50, null);
+        if (reqRes1.length!=0) {
+            g.drawImage(img, 200, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess1[1]), 100, 125);
+        }
+        if (reqRes2.length!=0) {
+            g.drawImage(img, 500, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess2[1]), 400, 125);
+        }
+        if (reqRes3.length!=0) {
+            g.drawImage(img, 200, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess3[1]), 100, 525);
+        }
+        if (reqRes4.length!=0) {
+            g.drawImage(img, 500, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess4[1]), 400, 525);
+        }
         url = cl.getResourceAsStream("servant2.png");
         try {
             img = ImageIO.read(url);
@@ -167,10 +203,22 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 275, 200, 50, 50, null);
-        g.drawImage(img, 575, 200, 50, 50, null);
-        g.drawImage(img, 275, 600, 50, 50, null);
-        g.drawImage(img, 575, 600, 50, 50, null);
+        if (reqRes1.length!=0) {
+            g.drawImage(img, 275, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess1[2]), 100, 125);
+        }
+        if (reqRes2.length!=0) {
+            g.drawImage(img, 575, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess2[2]), 400, 125);
+        }
+        if (reqRes3.length!=0) {
+            g.drawImage(img, 275, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess3[2]), 100, 525);
+        }
+        if (reqRes4.length!=0) {
+            g.drawImage(img, 575, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess4[2]), 400, 525);
+        }
         url = cl.getResourceAsStream("shield2.png");
         try {
             img = ImageIO.read(url);
@@ -178,10 +226,22 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 350, 200, 50, 50, null);
-        g.drawImage(img, 650, 200, 50, 50, null);
-        g.drawImage(img, 350, 600, 50, 50, null);
-        g.drawImage(img, 650, 600, 50, 50, null);
+        if (reqRes1.length!=0) {
+            g.drawImage(img, 350, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess1[3]), 100, 125);
+        }
+        if (reqRes2.length!=0) {
+            g.drawImage(img, 650, 100, 50, 50, null);
+            g.drawString(String.valueOf(reqRess2[3]), 400, 125);
+        }
+        if (reqRes3.length!=0) {
+            g.drawImage(img, 350, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess3[3]), 100, 525);
+        }
+        if (reqRes4.length!=0) {
+            g.drawImage(img, 650, 500, 50, 50, null);
+            g.drawString(String.valueOf(reqRess4[3]), 400, 525);
+        }
         url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 1.png");
         try {
             img = ImageIO.read(url);
@@ -189,12 +249,75 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 125, 50, 50, 50, null);
-        g.drawImage(img, 125, 100, 50, 50, null);
-        g.drawImage(img, 125, 150, 50, 50, null);
-        g.drawImage(img, 425, 50, 50, 50, null);
-        g.drawImage(img, 425, 100, 50, 50, null);
-        g.drawImage(img, 425, 150, 50, 50, null);
+        if (reqType1.length != 0 && reqLevel1.length != 0) {
+            g.drawImage(img, 125, 50, 50, 50, null);
+            g.drawImage(img, 125, 100, 50, 50, null);
+            g.drawImage(img, 125, 150, 50, 50, null);
+            g.drawString("L1", 110, 75);
+            g.drawString("L1", 185, 75);
+            g.drawString("L1", 260, 75);
+            g.drawString("L1", 335, 75);
+            g.drawString("L2", 110, 125);
+            g.drawString("L2", 185, 125);
+            g.drawString("L2", 260, 125);
+            g.drawString("L2", 335, 125);
+            g.drawString("L3", 110, 175);
+            g.drawString("L3", 185, 175);
+            g.drawString("L3", 260, 175);
+            g.drawString("L3", 335, 175);
+
+        }
+        if (reqType2.length != 0 && reqLevel2.length != 0) {
+            g.drawImage(img, 425, 50, 50, 50, null);
+            g.drawImage(img, 425, 100, 50, 50, null);
+            g.drawImage(img, 425, 150, 50, 50, null);
+            g.drawString("L1", 410, 75);
+            g.drawString("L1", 485, 75);
+            g.drawString("L1", 560, 75);
+            g.drawString("L1", 635, 75);
+            g.drawString("L2", 410, 125);
+            g.drawString("L2", 485, 125);
+            g.drawString("L2", 560, 125);
+            g.drawString("L2", 635, 125);
+            g.drawString("L3", 410, 175);
+            g.drawString("L3", 485, 175);
+            g.drawString("L3", 560, 175);
+            g.drawString("L3", 635, 175);
+        }
+        if (reqType3.length != 0 && reqLevel3.length != 0) {
+            g.drawImage(img, 125, 400, 50, 50, null);
+            g.drawImage(img, 125, 450, 50, 50, null);
+            g.drawImage(img, 125, 500, 50, 50, null);
+            g.drawString("L1", 110, 425);
+            g.drawString("L1", 185, 425);
+            g.drawString("L1", 260, 425);
+            g.drawString("L1", 335, 425);
+            g.drawString("L2", 110, 475);
+            g.drawString("L2", 185, 475);
+            g.drawString("L2", 260, 475);
+            g.drawString("L2", 335, 475);
+            g.drawString("L3", 110, 525);
+            g.drawString("L3", 185, 525);
+            g.drawString("L3", 260, 525);
+            g.drawString("L3", 335, 525);
+        }
+        if (reqType4.length != 0 && reqLevel4.length != 0) {
+            g.drawImage(img, 425, 400, 50, 50, null);
+            g.drawImage(img, 425, 450, 50, 50, null);
+            g.drawImage(img, 425, 500, 50, 50, null);
+            g.drawString("L1", 410, 425);
+            g.drawString("L1", 485, 425);
+            g.drawString("L1", 560, 425);
+            g.drawString("L1", 635, 425);
+            g.drawString("L2", 410, 475);
+            g.drawString("L2", 485, 475);
+            g.drawString("L2", 560, 475);
+            g.drawString("L2", 635, 475);
+            g.drawString("L3", 410, 525);
+            g.drawString("L3", 485, 525);
+            g.drawString("L3", 560, 525);
+            g.drawString("L3", 635, 525);
+        }
         url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 2.png");
         try {
             img = ImageIO.read(url);
@@ -202,12 +325,26 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 200, 50, 50, 50, null);
-        g.drawImage(img, 200, 100, 50, 50, null);
-        g.drawImage(img, 200, 150, 50, 50, null);
-        g.drawImage(img, 500, 50, 50, 50, null);
-        g.drawImage(img, 500, 100, 50, 50, null);
-        g.drawImage(img, 500, 150, 50, 50, null);
+        if (reqType1.length != 0 && reqLevel1.length != 0) {
+            g.drawImage(img, 200, 50, 50, 50, null);
+            g.drawImage(img, 200, 100, 50, 50, null);
+            g.drawImage(img, 200, 150, 50, 50, null);
+        }
+        if (reqType2.length != 0 && reqLevel2.length != 0) {
+            g.drawImage(img, 500, 50, 50, 50, null);
+            g.drawImage(img, 500, 100, 50, 50, null);
+            g.drawImage(img, 500, 150, 50, 50, null);
+        }
+        if (reqType3.length != 0 && reqLevel3.length != 0) {
+            g.drawImage(img, 200, 400, 50, 50, null);
+            g.drawImage(img, 200, 450, 50, 50, null);
+            g.drawImage(img, 200, 500, 50, 50, null);
+        }
+        if (reqType4.length != 0 && reqLevel4.length != 0) {
+            g.drawImage(img, 500, 400, 50, 50, null);
+            g.drawImage(img, 500, 450, 50, 50, null);
+            g.drawImage(img, 500, 500, 50, 50, null);
+        }
         url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 3.png");
         try {
             img = ImageIO.read(url);
@@ -215,12 +352,26 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 275, 50, 50, 50, null);
-        g.drawImage(img, 275, 100, 50, 50, null);
-        g.drawImage(img, 275, 150, 50, 50, null);
-        g.drawImage(img, 575, 50, 50, 50, null);
-        g.drawImage(img, 575, 100, 50, 50, null);
-        g.drawImage(img, 575, 150, 50, 50, null);
+        if (reqType1.length != 0 && reqLevel1.length != 0) {
+            g.drawImage(img, 275, 50, 50, 50, null);
+            g.drawImage(img, 275, 100, 50, 50, null);
+            g.drawImage(img, 275, 150, 50, 50, null);
+        }
+        if (reqType2.length != 0 && reqLevel2.length != 0) {
+            g.drawImage(img, 575, 50, 50, 50, null);
+            g.drawImage(img, 575, 100, 50, 50, null);
+            g.drawImage(img, 575, 150, 50, 50, null);
+        }
+        if (reqType3.length != 0 && reqLevel3.length != 0) {
+            g.drawImage(img, 275, 400, 50, 50, null);
+            g.drawImage(img, 275, 450, 50, 50, null);
+            g.drawImage(img, 275, 500, 50, 50, null);
+        }
+        if (reqType4.length != 0 && reqLevel4.length != 0) {
+            g.drawImage(img, 575, 400, 50, 50, null);
+            g.drawImage(img, 575, 450, 50, 50, null);
+            g.drawImage(img, 575, 500, 50, 50, null);
+        }
         url = cl.getResourceAsStream("Cards/Leader/Requisiti Leader/Requisiti No Level/type 4.png");
         try {
             img = ImageIO.read(url);
@@ -228,22 +379,44 @@ public class PreGameLeader extends JPanel implements ActionListener {
             e.printStackTrace();
             return;
         }
-        g.drawImage(img, 350, 50, 50, 50, null);
-        g.drawImage(img, 350, 100, 50, 50, null);
-        g.drawImage(img, 350, 150, 50, 50, null);
-        g.drawImage(img, 650, 50, 50, 50, null);
-        g.drawImage(img, 650, 100, 50, 50, null);
-        g.drawImage(img, 650, 150, 50, 50, null);
+        if (reqType1.length != 0 && reqLevel1.length != 0) {
+            g.drawImage(img, 350, 50, 50, 50, null);
+            g.drawImage(img, 350, 100, 50, 50, null);
+            g.drawImage(img, 350, 150, 50, 50, null);
+        }
+        if (reqType2.length != 0 && reqLevel2.length != 0) {
+            g.drawImage(img, 650, 50, 50, 50, null);
+            g.drawImage(img, 650, 100, 50, 50, null);
+            g.drawImage(img, 650, 150, 50, 50, null);
+        }
+        if (reqType3.length != 0 && reqLevel3.length != 0) {
+            g.drawImage(img, 350, 400, 50, 50, null);
+            g.drawImage(img, 350, 450, 50, 50, null);
+            g.drawImage(img, 350, 500, 50, 50, null);
+        }
+        if (reqType4.length != 0 && reqLevel4.length != 0) {
+            g.drawImage(img, 650, 400, 50, 50, null);
+            g.drawImage(img, 650, 450, 50, 50, null);
+            g.drawImage(img, 650, 500, 50, 50, null);
+        }
         int k = 0;
         for (int i = 0; i < 12; i++) {
             switch (i) {
                 case 0:
                 case 1:
                 case 2:
-                    g.drawString(String.valueOf(reqCards1[i]), 100, 50 + k);
-                    g.drawString(String.valueOf(reqCards2[i]), 400, 50 + k);
-                    g.drawString(String.valueOf(reqCards3[i]), 100, 400 + k);
-                    g.drawString(String.valueOf(reqCards4[0]), 400, 400 + k);
+                    if (reqType1.length != 0 && reqLevel1.length != 0) {
+                        g.drawString(String.valueOf(reqCards1[i]), 100, 75 + k);
+                    }
+                    if (reqType2.length != 0 && reqLevel2.length != 0) {
+                        g.drawString(String.valueOf(reqCards2[i]), 400, 75 + k);
+                    }
+                    if (reqType3.length != 0 && reqLevel3.length != 0) {
+                        g.drawString(String.valueOf(reqCards3[i]), 100, 425 + k);
+                    }
+                    if (reqType4.length != 0 && reqLevel4.length != 0) {
+                        g.drawString(String.valueOf(reqCards4[i]), 400, 425 + k);
+                    }
 
                     k += 50;
                     if (i == 2) {
@@ -253,10 +426,18 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 case 3:
                 case 4:
                 case 5:
-                    g.drawString(String.valueOf(reqCards1[i]), 175, 50 + k);
-                    g.drawString(String.valueOf(reqCards2[i]), 475, 50 + k);
-                    g.drawString(String.valueOf(reqCards3[i]), 100, 400 + k);
-                    g.drawString(String.valueOf(reqCards4[i]), 475, 400 + k);
+                    if (reqType1.length != 0 && reqLevel1.length != 0) {
+                        g.drawString(String.valueOf(reqCards1[i]), 175, 75 + k);
+                    }
+                    if (reqType2.length != 0 && reqLevel2.length != 0) {
+                        g.drawString(String.valueOf(reqCards2[i]), 475,75 + k);
+                    }
+                    if (reqType3.length != 0 && reqLevel3.length != 0) {
+                        g.drawString(String.valueOf(reqCards3[i]), 100, 425 + k);
+                    }
+                    if (reqType4.length != 0 && reqLevel4.length != 0) {
+                        g.drawString(String.valueOf(reqCards4[i]), 475, 425 + k);
+                    }
 
                     k += 50;
                     if (i == 5) {
@@ -266,10 +447,18 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 case 6:
                 case 7:
                 case 8:
-                    g.drawString(String.valueOf(reqCards1[i]), 250, 50 + k);
-                    g.drawString(String.valueOf(reqCards2[i]), 550, 50 + k);
-                    g.drawString(String.valueOf(reqCards3[i]), 250, 400 + k);
-                    g.drawString(String.valueOf(reqCards4[i]), 550, 400 + k);
+                    if (reqType1.length != 0 && reqLevel1.length != 0) {
+                        g.drawString(String.valueOf(reqCards1[i]), 250, 75 + k);
+                    }
+                    if (reqType2.length != 0 && reqLevel2.length != 0) {
+                        g.drawString(String.valueOf(reqCards2[i]), 550, 75 + k);
+                    }
+                    if (reqType3.length != 0 && reqLevel3.length != 0) {
+                        g.drawString(String.valueOf(reqCards3[i]), 250, 425 + k);
+                    }
+                    if (reqType4.length != 0 && reqLevel4.length != 0) {
+                        g.drawString(String.valueOf(reqCards4[i]), 550, 425 + k);
+                    }
                     k += 50;
                     if (i == 8) {
                         k = 0;
@@ -278,10 +467,18 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 case 9:
                 case 10:
                 case 11:
-                    g.drawString(String.valueOf(reqCards1[i]), 325, 50 + k);
-                    g.drawString(String.valueOf(reqCards2[i]), 625, 50 + k);
-                    g.drawString(String.valueOf(reqCards3[i]), 325, 400 + k);
-                    g.drawString(String.valueOf(reqCards4[i]), 625, 400 + k);
+                    if (reqType1.length != 0 && reqLevel1.length != 0) {
+                        g.drawString(String.valueOf(reqCards1[i]), 325, 75 + k);
+                    }
+                    if (reqType2.length != 0 && reqLevel2.length != 0) {
+                        g.drawString(String.valueOf(reqCards2[i]), 625, 75 + k);
+                    }
+                    if (reqType3.length != 0 && reqLevel3.length != 0) {
+                        g.drawString(String.valueOf(reqCards3[i]), 325, 425 + k);
+                    }
+                    if (reqType4.length != 0 && reqLevel4.length != 0) {
+                        g.drawString(String.valueOf(reqCards4[i]), 625, 425 + k);
+                    }
                     k += 50;
                     if (i == 11) {
                         k = 0;
@@ -291,17 +488,20 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
         }
         k = 0;
-        for (int i = 0; i < 4; i++) {
-            g.drawString(String.valueOf(reqRes1[i]), 100 + k, 200);
-            g.drawString(String.valueOf(reqRes2[0]), 400 + k, 200);
-            g.drawString(String.valueOf(reqRes3[i]), 100 + k, 550);
-            g.drawString(String.valueOf(reqRes4[i]), 400 + k, 550);
-            k += 50;
+        try {
+            for (int i = 0; i < 4; i++) {
+                g.drawString(String.valueOf(reqRes1[i]), 100 + k, 225);
+                g.drawString(String.valueOf(reqRes2[i]), 400 + k, 225);
+                g.drawString(String.valueOf(reqRes3[i]), 100 + k, 575);
+                g.drawString(String.valueOf(reqRes4[i]), 400 + k, 575);
+                k += 50;
+            }
+        } catch (IndexOutOfBoundsException ignored) {
         }
 
         switch (switchRes(ability1, toChooseLeaderCard[0])) {
             case 1:
-                url = cl.getResourceAsStream("conv coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -311,7 +511,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 2:
-                url = cl.getResourceAsStream("conv stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -321,7 +521,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 3:
-                url = cl.getResourceAsStream("conv servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -331,7 +531,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 4:
-                url = cl.getResourceAsStream("conv shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -341,7 +541,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 5:
-                url = cl.getResourceAsStream("depot coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -351,7 +551,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 6:
-                url = cl.getResourceAsStream("depot stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -361,7 +561,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 7:
-                url = cl.getResourceAsStream("depot servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -371,7 +571,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 8:
-                url = cl.getResourceAsStream("depot shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -381,7 +581,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 9:
-                url = cl.getResourceAsStream("disc coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -391,7 +591,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 10:
-                url = cl.getResourceAsStream("disc stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -401,7 +601,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 11:
-                url = cl.getResourceAsStream("disc servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -411,7 +611,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 12:
-                url = cl.getResourceAsStream("disc shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -421,7 +621,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 13:
-                url = cl.getResourceAsStream("prod coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -431,7 +631,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 14:
-                url = cl.getResourceAsStream("prod stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -441,7 +641,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 15:
-                url = cl.getResourceAsStream("prod servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -451,7 +651,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 300, 300, 100, null);
                 break;
             case 16:
-                url = cl.getResourceAsStream("prod shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -464,7 +664,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
         switch (switchRes(ability2, toChooseLeaderCard[1])) {
             case 1:
-                url = cl.getResourceAsStream("conv coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -474,7 +674,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 2:
-                url = cl.getResourceAsStream("conv stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -484,7 +684,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 3:
-                url = cl.getResourceAsStream("conv servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -494,7 +694,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 4:
-                url = cl.getResourceAsStream("conv shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -504,7 +704,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 5:
-                url = cl.getResourceAsStream("depot coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -514,7 +714,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 6:
-                url = cl.getResourceAsStream("depot stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -524,7 +724,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 7:
-                url = cl.getResourceAsStream("depot servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -534,7 +734,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 8:
-                url = cl.getResourceAsStream("depot shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -544,7 +744,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 9:
-                url = cl.getResourceAsStream("disc coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -554,7 +754,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 10:
-                url = cl.getResourceAsStream("disc stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -564,7 +764,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 11:
-                url = cl.getResourceAsStream("disc servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -574,7 +774,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 12:
-                url = cl.getResourceAsStream("disc shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -584,7 +784,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 13:
-                url = cl.getResourceAsStream("prod coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -594,7 +794,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 14:
-                url = cl.getResourceAsStream("prod stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -604,7 +804,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 15:
-                url = cl.getResourceAsStream("prod servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -614,7 +814,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 300, 300, 100, null);
                 break;
             case 16:
-                url = cl.getResourceAsStream("prod shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -627,7 +827,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
         switch (switchRes(ability3, toChooseLeaderCard[2])) {
             case 1:
-                url = cl.getResourceAsStream("conv coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -637,7 +837,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 2:
-                url = cl.getResourceAsStream("conv stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -647,7 +847,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 3:
-                url = cl.getResourceAsStream("conv servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -657,7 +857,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 4:
-                url = cl.getResourceAsStream("conv shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -667,7 +867,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 5:
-                url = cl.getResourceAsStream("depot coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -677,7 +877,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 6:
-                url = cl.getResourceAsStream("depot stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -687,7 +887,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 7:
-                url = cl.getResourceAsStream("depot servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -697,7 +897,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 8:
-                url = cl.getResourceAsStream("depot shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -707,7 +907,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 9:
-                url = cl.getResourceAsStream("disc coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -717,7 +917,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 10:
-                url = cl.getResourceAsStream("disc stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -727,7 +927,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 11:
-                url = cl.getResourceAsStream("disc servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -737,7 +937,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 12:
-                url = cl.getResourceAsStream("disc shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -747,7 +947,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 13:
-                url = cl.getResourceAsStream("prod coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -757,7 +957,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 14:
-                url = cl.getResourceAsStream("prod stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -767,7 +967,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 15:
-                url = cl.getResourceAsStream("prod servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -777,7 +977,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 100, 650, 300, 100, null);
                 break;
             case 16:
-                url = cl.getResourceAsStream("prod shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -790,7 +990,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
 
         switch (switchRes(ability4, toChooseLeaderCard[3])) {
             case 1:
-                url = cl.getResourceAsStream("conv coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -800,7 +1000,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 2:
-                url = cl.getResourceAsStream("conv stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -810,7 +1010,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 3:
-                url = cl.getResourceAsStream("conv servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -820,7 +1020,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 4:
-                url = cl.getResourceAsStream("conv shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Conversions/conv shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -830,7 +1030,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 5:
-                url = cl.getResourceAsStream("depot coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -840,7 +1040,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 6:
-                url = cl.getResourceAsStream("depot stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -850,7 +1050,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 7:
-                url = cl.getResourceAsStream("depot servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -860,7 +1060,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 8:
-                url = cl.getResourceAsStream("depot shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Depots/depot shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -870,7 +1070,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 9:
-                url = cl.getResourceAsStream("disc coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -880,7 +1080,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 10:
-                url = cl.getResourceAsStream("disc stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -890,7 +1090,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 11:
-                url = cl.getResourceAsStream("disc servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -900,7 +1100,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 12:
-                url = cl.getResourceAsStream("disc shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Discounts/disc shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -910,7 +1110,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 13:
-                url = cl.getResourceAsStream("prod coin.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod coin.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -920,7 +1120,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 14:
-                url = cl.getResourceAsStream("prod stone.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod stone.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -930,7 +1130,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 15:
-                url = cl.getResourceAsStream("prod servant.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod servant.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -940,7 +1140,7 @@ public class PreGameLeader extends JPanel implements ActionListener {
                 g.drawImage(img, 400, 650, 300, 100, null);
                 break;
             case 16:
-                url = cl.getResourceAsStream("prod shield.png");
+                url = cl.getResourceAsStream("Cards/Leader/Poteri Leader/Leader Of Productions/prod shield.png");
                 try {
                     img = ImageIO.read(url);
                 } catch (IOException e) {
@@ -961,36 +1161,33 @@ public class PreGameLeader extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-    chooseLeader(e);
+        if (e.getSource() == leaderOne) {
+            try {
+                handler.sendMessageToServer("1", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+        } else if (e.getSource() == leaderTwo) {
+            try {
+                handler.sendMessageToServer("2", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+        } else if (e.getSource() == leaderThree) {
+            try {
+                handler.sendMessageToServer("3", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+        } else if (e.getSource() == leaderFour) {
+            try {
+                handler.sendMessageToServer("4", 161);
+            } catch (EndingGameException ex) {
+                MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
+            }
+        }
     }
 
-    public void chooseLeader(ActionEvent e) {
-            if (e.getSource() == leaderOne) {
-                try {
-                    handler.sendMessageToServer("1", 161);
-                } catch (EndingGameException ex) {
-                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                }
-            } else if (e.getSource() == leaderTwo) {
-                try {
-                    handler.sendMessageToServer("2", 161);
-                } catch (EndingGameException ex) {
-                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                }
-            } else if (e.getSource() == leaderThree) {
-                try {
-                    handler.sendMessageToServer("3", 161);
-                } catch (EndingGameException ex) {
-                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                }
-            } else if (e.getSource() == leaderFour) {
-                try {
-                    handler.sendMessageToServer("4", 161);
-                } catch (EndingGameException ex) {
-                    MainGUI.changePanel(new Error("FATAL ERROR", handler, 0));
-                }
-            }
-    }
 
 
     public int switchRes(int ability, LeaderCard leaderCard) {

@@ -1,0 +1,1002 @@
+{
+  "productionCardsDeck" : [
+    {
+      "type": 1,
+      "level": 1,
+      "wp": 1,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType": 0}
+      ],
+      "givenRes": [
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 1,
+      "level": 1,
+      "wp": 2,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 1,
+      "level": 1,
+      "wp": 3,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 1,
+      "level": 1,
+      "wp": 4,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 1},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 0}
+        ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 2,
+      "level": 1,
+      "wp": 1,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 3}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 2,
+      "level": 1,
+      "wp": 2,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 2,
+      "level": 1,
+      "wp": 3,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 2},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 2,
+      "level": 1,
+      "wp": 4,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 1},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 3,
+      "level": 1,
+      "wp": 1,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 2}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 3,
+      "level": 1,
+      "wp": 2,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 0}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 3,
+      "level": 1,
+      "wp": 3,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 3,
+      "level": 1,
+      "wp": 4,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 4,
+      "level": 1,
+      "wp": 1,
+      "costArray": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 1}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 4,
+      "level": 1,
+      "wp": 2,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 2},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 0}
+      ],
+      "givenRes": [
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 4,
+      "level": 1,
+      "wp": 3,
+      "costArray": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 4,
+      "level": 1,
+      "wp": 4,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 1,
+      "level": 2,
+      "wp": 5,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 1}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 1,
+      "level": 2,
+      "wp": 6,
+      "costArray": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 2},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 1,
+      "level": 2,
+      "wp": 7,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 1,
+      "level": 2,
+      "wp": 8,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 0}
+      ],
+      "givenRes": [
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 2,
+      "level": 2,
+      "wp": 5,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 2}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 2,
+      "level": 2,
+      "wp": 6,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 2,
+      "level": 2,
+      "wp": 7,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 2,
+      "level": 2,
+      "wp": 8,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 3,
+      "level": 2,
+      "wp": 5,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 3}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 3,
+      "level": 2,
+      "wp": 6,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 3},
+        {"resType" : 3}
+        ],
+      "requiredRes": [
+        {"resType" : 1},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 3,
+      "level": 2,
+      "wp": 7,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 3,
+      "level": 2,
+      "wp": 8,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 4,
+      "level": 2,
+      "wp": 5,
+      "costArray": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 0}
+      ],
+      "givenRes": [
+
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 4,
+      "level": 2,
+      "wp": 6,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 4,
+      "level": 2,
+      "wp": 7,
+      "costArray": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 4,
+      "level": 2,
+      "wp": 8,
+      "costArray": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 1,
+      "level": 3,
+      "wp": 9,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 1,
+      "level": 3,
+      "wp": 10,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 1,
+      "level": 3,
+      "wp": 11,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "requiredRes": [
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 0}
+      ],
+      "givenFaithPoint": 3
+    },
+    {
+      "type": 1,
+      "level": 3,
+      "wp": 12,
+      "costArray": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 2,
+      "level": 3,
+      "wp": 9,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 2,
+      "level": 3,
+      "wp": 10,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 0},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 2,
+      "level": 3,
+      "wp": 11,
+      "costArray": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 1}
+      ],
+      "givenRes": [
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 3
+    },
+    {
+      "type": 2,
+      "level": 3,
+      "wp": 12,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 0}
+      ],
+      "requiredRes": [
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 3},
+        {"resType" : 0}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 3,
+      "level": 3,
+      "wp": 9,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 3,
+      "level": 3,
+      "wp": 10,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 1},
+        {"resType" : 2}
+      ],
+      "givenRes": [
+        {"resType" : 0},
+        {"resType" : 0},
+        {"resType" : 3},
+        {"resType" : 3}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 3,
+      "level": 3,
+      "wp": 11,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1}
+      ],
+      "requiredRes": [
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 2}
+      ],
+      "givenFaithPoint": 3
+    },
+    {
+      "type": 3,
+      "level": 3,
+      "wp": 12,
+      "costArray": [
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 1},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2}
+      ],
+      "requiredRes": [
+        {"resType" : 3}
+      ],
+      "givenRes": [
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 2},
+        {"resType" : 1}
+      ],
+      "givenFaithPoint": 0
+    },
+    {
+      "type": 4,
+      "level": 3,
+      "wp": 9,
+      "costArray": [
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2}
+      ],
+      "requiredRes": [
+        {"resType" :1},
+        {"resType" :1}
+      ],
+      "givenRes": [
+        {"resType" :0},
+        {"resType" :0},
+        {"resType" :0}
+      ],
+      "givenFaithPoint": 2
+    },
+    {
+      "type": 4,
+      "level": 3,
+      "wp": 10,
+      "costArray": [
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :0},
+        {"resType" :0}
+      ],
+      "requiredRes": [
+        {"resType" :1},
+        {"resType" :3}
+      ],
+      "givenRes": [
+        {"resType" :0},
+        {"resType" :0},
+        {"resType" :2},
+        {"resType" :2}
+      ],
+      "givenFaithPoint": 1
+    },
+    {
+      "type": 4,
+      "level": 3,
+      "wp": 11,
+      "costArray": [
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2}
+      ],
+      "requiredRes": [
+        {"resType" :0}
+      ],
+      "givenRes": [
+        {"resType" :1}
+      ],
+      "givenFaithPoint": 3
+    },
+    {
+      "type": 4,
+      "level": 3,
+      "wp": 12,
+      "costArray": [
+        {"resType" :3},
+        {"resType" :3},
+        {"resType" :3},
+        {"resType" :3},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2}
+      ],
+      "requiredRes": [
+        {"resType" :0}
+      ],
+      "givenRes": [
+        {"resType" :1},
+        {"resType" :1},
+        {"resType" :1},
+        {"resType" :2}
+      ],
+      "givenFaithPoint": 0
+    }
+
+  ]
+}
+

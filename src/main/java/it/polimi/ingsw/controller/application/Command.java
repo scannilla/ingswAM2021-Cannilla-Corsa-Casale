@@ -246,18 +246,20 @@ public class Command{
         if (chosenPosition < 1 || chosenPosition > 3){
             return new Response("Choose a valid position", 418);
         }
+        if(commandPlayer.getPersonalBoard().getProdCardSlot().getTopCards()[chosenPosition-1]==null)
+            return new Response("You don't have any active production card in this slot", 418);
         if(commandPlayer.getPersonalBoard().getProdCardSlot().getProductionActivated()[chosenPosition-1])
             return new Response("You have already activated this production", 418);
         ProductionCard card = commandPlayer.getPersonalBoard().getProdCardSlot().getTopCards()[chosenPosition-1];
-        Resource[] costArray = card.getCostArray();
+        Resource[] costArray = card.getRequiredRes();
         int[] costAmount = ResourceCounter.resCount(costArray);
         int[] resExtraAmount = {0, 0, 0, 0};
         int[] resWarehouseAmount = commandPlayer.getPersonalBoard().getWarehouseDepot().getDepotResourceAmount();
         int[] resAllAmount = {0, 0, 0, 0};
         int[] resStrongbox = commandPlayer.getPersonalBoard().getStrongbox().getStrongboxResourcesAmount();
         int numberOfDepotCards;
-        for (int j=0; j<costArray.length; j++){
-            numberOfDepotCards = CheckCommand.leaderCardChecker("depot", commandPlayer, costArray[j]);
+        for (int j=0; j<4; j++){
+            numberOfDepotCards = CheckCommand.leaderCardChecker("depot", commandPlayer, new Resource(j));
             if (numberOfDepotCards==1 || numberOfDepotCards == 2){
                 resExtraAmount[j] = ResourceCounter.resCount(((LeaderOfDepots)commandPlayer.getActiveLeaderCards()[numberOfDepotCards-1]).getExtraDepot())[j];
             } else if (numberOfDepotCards == 3){
@@ -276,7 +278,7 @@ public class Command{
         commandPlayer.setActionDone(true);
         commandPlayer.getPersonalBoard().getProdCardSlot().setProductionActivated(chosenPosition);
         commandPlayer.setProductionsActivated(commandPlayer.getProductionsActivated()+1);
-        return new Response("$production " + chosenPosition, 252);
+        return new Response("$production" , 252);
     }
 
     /**

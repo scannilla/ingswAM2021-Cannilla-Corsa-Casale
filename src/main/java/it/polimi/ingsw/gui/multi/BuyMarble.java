@@ -70,7 +70,7 @@ public class BuyMarble extends JPanel implements ActionListener {
         }
 
         for (int x=0; x<4; x++){
-            for (int j=0; j<4; j++){
+            for (int j=0; j<3; j++){
                 myDrawImagePNG(g, x, j);
             }
         }
@@ -80,9 +80,9 @@ public class BuyMarble extends JPanel implements ActionListener {
 
     private void myDrawImagePNG(Graphics g, int x, int y) {
         ClassLoader cl = this.getClass().getClassLoader();
-        int color = marketStructure.getMarketStructure()[x][y].getColor();
         InputStream url = null;
         if (x!=18) {
+            int color = marketStructure.getMarketStructure()[x][y].getColor();
             switch (color) {
                 case 0:  url = cl.getResourceAsStream("BigliaBianca.png");
                     break;
@@ -145,7 +145,7 @@ public class BuyMarble extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == line1){
             try{
-                handler.sendMessageToServer("buy marble -line -1", 166);
+                handler.sendMessageToServer("buy resource -line -1", 166);
             } catch (EndingGameException ex){
                 MainGUI.frame.remove(this);
                 MainGUI.frame.add(new Intro("error", 1));

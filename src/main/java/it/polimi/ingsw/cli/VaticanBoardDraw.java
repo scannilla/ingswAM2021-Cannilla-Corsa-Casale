@@ -283,7 +283,7 @@ public class VaticanBoardDraw {
             }
             counter++;
         }
-        if (counter!=3&&counter!=6&&counter!=9&&counter!=12&&counter!=15&&counter!=18&&counter!=21&&counter!=24){
+        /*if (counter!=3&&counter!=6&&counter!=9&&counter!=12&&counter!=15&&counter!=18&&counter!=21&&counter!=24){
             System.out.print(Color.ANSI_BLUE.escape() + "|" + blueEscape);
             System.out.print(Color.ANSI_GREEN.escape() + counter + blueEscape);
             if (counter<10)
@@ -300,9 +300,9 @@ public class VaticanBoardDraw {
             System.out.print(Color.ANSI_BLUE.escape() + " |" + blueEscape);
             wp++;
         }
-        counter++;
+        counter++; */
 
-        System.out.print("\n");
+        System.out.print(Color.ANSI_RESET.escape() + "\n");
     }
 
 
@@ -387,10 +387,10 @@ public class VaticanBoardDraw {
             drawThirdLineSlot(pos==counter, false, false);
             counter++;
         }
-        drawThirdLineSlot(pos==counter, false, true);
+        //drawThirdLineSlot(pos==counter, false, true);
         counter++;
 
-        System.out.print("\n");
+        System.out.print(Color.ANSI_RESET.escape() + "\n");
     }
 
 
@@ -472,7 +472,7 @@ public class VaticanBoardDraw {
             drawFourthLineSlot((vatican[0]==counter)||(vatican[1]==counter)||(vatican[2]==counter), false, false);
             counter++;
         }
-        drawFourthLineSlot((vatican[0]==counter)||(vatican[1]==counter)||(vatican[2]==counter), false, true);
+        //drawFourthLineSlot((vatican[0]==counter)||(vatican[1]==counter)||(vatican[2]==counter), false, true);
         counter++;
 
         System.out.print("\n");
@@ -518,9 +518,9 @@ public class VaticanBoardDraw {
         for (int i = vatican[2]+1; i < 24; i++){
             drawLineSlot(false, false);
         }
-        drawLineSlot(false, true);
+        //drawLineSlot(false, true);
 
-        System.out.print("\n");
+        System.out.print(Color.ANSI_RESET.escape() + "\n");
     }
 
     private void drawLineSlot( boolean blueZeroYellowOne, boolean endOfReport){
@@ -544,7 +544,7 @@ public class VaticanBoardDraw {
         }
     }
 
-    private void drawPosSlot(int pos, boolean posThere) {
+    private static void drawPosSlot(int pos, boolean posThere) {
         String blueEscape = Color.ANSI_BLUE.escape();
 
         if (((pos >= 0) && (pos < 4)) || ((pos > 8) && (pos < 11)) || (pos == 17)) {
@@ -608,7 +608,7 @@ public class VaticanBoardDraw {
 
     }
 
-    private void drawVatSlot(int vatPos, boolean vatPosThere){
+    private static void drawVatSlot(int vatPos, boolean vatPosThere){
         String blueEscape = Color.ANSI_BLUE.escape();
 
         if (((vatPos >= 0) && (vatPos < 4)) || ((vatPos > 8) && (vatPos < 11)) || (vatPos == 17)) {

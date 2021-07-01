@@ -1,0 +1,54 @@
+{
+  "leaderOfProductions" : [
+
+
+    {
+    "requiredRes" : [],
+    "requiredType" : [
+        3
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : {"resType" :3}
+
+},
+
+{
+    "requiredRes" : [],
+    "requiredType" : [
+        2
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : {"resType" :2}
+},
+
+{
+    "requiredRes" : [],
+    "requiredType" : [
+        4
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : {"resType" :1}
+},
+
+{
+    "requiredRes" : [],
+    "requiredType" : [
+        1
+    ],
+    "requiredLevel" : [
+        2
+    ],
+    "wp" : 4,
+    "requiredResource" : {"resType" :0}
+}
+    ]
+}

@@ -39,6 +39,7 @@ public class EventManager {
         }
     }
 
+
     /**
      * Used to inform a specific client about a new update
      * @param type EventType

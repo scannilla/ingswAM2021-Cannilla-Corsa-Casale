@@ -1,8 +1,8 @@
 package it.polimi.ingsw;
 
-import java.util.LinkedHashMap;
+import java.io.Serializable;
 
-public final class VaticanReport {
+public final class VaticanReport implements Serializable {
 
     /**
      * This attribute represents the length of each report

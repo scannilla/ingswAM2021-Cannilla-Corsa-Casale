@@ -1,0 +1,77 @@
+{
+  "leaderOfDepotsDeck" : [
+    {
+      "requiredRes": [
+        {"resType" :3},
+        {"resType" :3},
+        {"resType" :3},
+        {"resType" :3},
+        {"resType" :3}
+      ],
+      "requiredType": [
+      ],
+      "requiredLevel": [
+      ],
+      "wp": 3,
+      "extraResource":
+      {"resType" : 0},
+
+      "extraDepot": [
+      ]
+    },
+    {
+      "requiredRes": [
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2},
+        {"resType" :2}
+      ],
+      "requiredType": [
+      ],
+      "requiredLevel": [
+      ],
+      "wp": 3,
+      "extraResource":
+      {"resType" :3},
+      "extraDepot": [
+      ]
+    },
+    {
+      "requiredRes": [
+        {"resType" :1},
+        {"resType" :1},
+        {"resType" :1},
+        {"resType" :1},
+        {"resType" :1}
+      ],
+      "requiredType": [
+      ],
+      "requiredLevel": [
+      ],
+      "wp": 3,
+      "extraResource":
+      {"resType" :2},
+      "extraDepot": [
+      ]
+    },
+    {
+      "requiredRes": [
+        {"resType" :0},
+        {"resType" :0},
+        {"resType" :0},
+        {"resType" :0},
+        {"resType" :0}
+      ],
+      "requiredType": [
+      ],
+      "requiredLevel": [
+      ],
+      "wp": 3,
+      "extraResource":
+      {"resType" :1},
+      "extraDepot": [
+      ]
+    }
+  ]
+}

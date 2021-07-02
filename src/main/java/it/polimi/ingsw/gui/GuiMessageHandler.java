@@ -13,6 +13,7 @@ import it.polimi.ingsw.gui.multi.*;
 import it.polimi.ingsw.leader.LeaderCard;
 import it.polimi.ingsw.marbles.MarketStructure;
 import it.polimi.ingsw.production.ProductionCardsMarket;
+import it.polimi.ingsw.LeaderBoard;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,9 @@ public class GuiMessageHandler {
                     break;
                 case 405:
                     MainGUI.changePanel(new Error(received.getMessage(), cmHandler, 6));
+                    break;
+                case 193:
+                    MainGUI.changePanel(new DiscardOrMoveOrTransform(cmHandler, 2));
                     break;
                 case 194:
                     MainGUI.changePanel(new SelectLeaderCard(cmHandler));
@@ -131,15 +135,15 @@ public class GuiMessageHandler {
                     instance.setToChooseLeaderCards((LeaderCard[]) object);
                     break;
                 case 657:
-                    instance.setLeaderBoard((ArrayList<Player>) object);
+                    instance.setLeaderBoard((LeaderBoard) object);
                     MainGUI.changePanel(new GameOver());
                     break;
                 case 658:
-                    instance.setLeaderBoard((ArrayList<Player>) object);
+                    instance.setLeaderBoard((LeaderBoard) object);
                     MainGUI.changePanel(new GameOverWin());
                     break;
                 case 659:
-                    instance.setLeaderBoard((ArrayList<Player>) object);
+                    instance.setLeaderBoard((LeaderBoard) object);
                     MainGUI.changePanel(new GameOverLose());
                     break;
                 case 660:

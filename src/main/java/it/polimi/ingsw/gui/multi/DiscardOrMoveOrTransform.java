@@ -52,17 +52,9 @@ public class DiscardOrMoveOrTransform extends JPanel implements ActionListener {
                 MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
             }
         } else if (e.getSource() == move){
-            try{
-                cmHandler.sendMessageToServer("move resources");
-            } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
-            }
+            MainGUI.changePanel(new Move(cmHandler));
         } else if(e.getSource() == transform){
-            try{
-                cmHandler.sendMessageToServer("transform");
-            } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
-            }
+           MainGUI.changePanel(new ResourceSelection(cmHandler));
         }
     }
 }

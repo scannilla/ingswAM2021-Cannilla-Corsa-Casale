@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
@@ -29,33 +31,34 @@ public class GameOver extends JPanel implements ActionListener {
 
     public void paint(Graphics g){
         g.drawString("GAME OVER", 150, 50);
-        int i = 1;
-       for (Player player : Data.instanceCreator().getLeaderBoard()){
-            switch (i) {
-                case 1:
-                    g.drawString("1st" + player.getNickname() + "total WinPoints" + player.getWp(), 200, 100);
-                    i++;
-                    break;
-                case 2:
-                    g.drawString("2nd " + player.getNickname() + "total WinPoints " + player.getWp(), 200, 150);
-                    i++;
-                    break;
-                case 3:
-                    g.drawString("3rd " + player.getNickname() + "total WinPoints " + player.getWp(), 200, 200);
-                    i++;
-                    break;
-                case 4:
-                    g.drawString("4rd " + player.getNickname() + "total WinPoints " + player.getWp(), 200, 250);
-                    i++;
-                    break;
-            }
-        }
+        ArrayList<String> strings = new ArrayList<>(Data.instanceCreator().getLeaderBoard().getMap().keySet());
+        ArrayList<Integer> wp = new ArrayList<>(Data.instanceCreator().getLeaderBoard().getMap().values());
+        drawLeaderboard(strings, wp, g);
     }
 
 
 
 
+    public static void drawLeaderboard(ArrayList<String> leaderboardString, ArrayList<Integer> leaderBoardInt, Graphics g){
+        int i=0;
+        for(String p : leaderboardString) {
+            if(i==0) {
+                g.drawString("First player: " + p + " Points: " + leaderBoardInt.get(i), 200, 100);
+            }
+            if(i==1) {
+                g.drawString("Second player: " + p + " Points: " + leaderBoardInt.get(i), 200, 200);
+                System.out.print("\n");
+            }
+            if(i==2) {
+                g.drawString("Third player: " + p + " Points: " + leaderBoardInt.get(i), 200, 300);
 
+            }
+            if(i==3) {
+                g.drawString("Fourth player: " + p + " Points: " + leaderBoardInt.get(i), 200, 400);
+            }
+            i++;
+        }
+    }
 
 
     @Override

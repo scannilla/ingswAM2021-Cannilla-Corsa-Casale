@@ -1,5 +1,6 @@
 package it.polimi.ingsw.gui;
 
+import it.polimi.ingsw.LeaderBoard;
 import it.polimi.ingsw.PersonalBoard;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.VaticanReport;
@@ -22,7 +23,7 @@ public class Data {
     private static ActionTokenPile tokenPile;
     private static VaticanReport vatReport;
     private static Data instance;
-    private static ArrayList<Player> leaderBoard;
+    private static LeaderBoard leaderBoard;
 
     private Data(){ }
 
@@ -117,7 +118,7 @@ public class Data {
         Data.vatReport = vatReport;
     }
 
-    public void setLeaderBoard(ArrayList<Player> leaderBoard){
+    public void setLeaderBoard(LeaderBoard leaderBoard){
         Data.leaderBoard = leaderBoard;
     }
 
@@ -185,7 +186,7 @@ public class Data {
         return vatReport;
     }
 
-    public ArrayList<Player> getLeaderBoard(){
+    public LeaderBoard getLeaderBoard(){
         return leaderBoard;
     }
 

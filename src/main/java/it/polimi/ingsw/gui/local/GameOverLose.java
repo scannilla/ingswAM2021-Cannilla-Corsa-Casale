@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GameOverLose extends JPanel implements ActionListener {
 
@@ -34,14 +35,16 @@ public class GameOverLose extends JPanel implements ActionListener {
     public void paint(Graphics g){
         g.drawString("YOU LOSE", 350, 100);
         int i = 1;
-        for(Player player : Data.instanceCreator().getLeaderBoard()){
+        ArrayList<String> leaderBoardsName= new ArrayList<>(Data.instanceCreator().getLeaderBoard().getMap().keySet());
+        ArrayList<Integer> wp = new ArrayList<>(Data.instanceCreator().getLeaderBoard().getMap().values());
+        for(String name : leaderBoardsName){
             switch(i){
                 case 1:
-                    g.drawString("1st " + player.getNickname() + "total WinPoints " + player.getWp(), 100, 300);
+                    g.drawString("1st " + name + "total WinPoints " + wp.get(i), 100, 300);
                     i++;
                     break;
                 case 2:
-                    g.drawString("2nd" + player.getNickname() + "total WinPoints" + player.getWp(), 100, 350);
+                    g.drawString("2nd" + name + "total WinPoints" + wp.get(i), 100, 350);
                     break;
             }
 

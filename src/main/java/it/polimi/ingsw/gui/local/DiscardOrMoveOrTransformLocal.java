@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.networkclient.ClientMessageHandler;
 import it.polimi.ingsw.controller.singleplayer.SPClientMessageHandler;
 import it.polimi.ingsw.gui.Error;
 import it.polimi.ingsw.gui.MainGUI;
+import it.polimi.ingsw.gui.multi.ResourceSelection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,17 +54,9 @@ public class DiscardOrMoveOrTransformLocal extends JPanel implements ActionListe
                 MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
             }
         } else if (e.getSource() == move){
-            try{
-                cmHandler.sendMessageToServer("move resources");
-            } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
-            }
+            MainGUI.changePanel(new Move(cmHandler));
         } else if(e.getSource() == transform){
-            try{
-                cmHandler.sendMessageToServer("transform");
-            } catch (EndingGameException ex){
-                MainGUI.changePanel(new Error("FATAL ERROR", cmHandler, 0));
-            }
+            MainGUI.changePanel(new ResourceSelection(cmHandler));
         }
     }
 }

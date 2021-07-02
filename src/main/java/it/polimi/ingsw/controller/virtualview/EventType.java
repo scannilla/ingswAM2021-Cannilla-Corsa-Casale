@@ -11,5 +11,6 @@ public enum EventType {
     TOKEN,
     LEADERBOARD,
     GAMESTART,
-    VATICANBOARD
+    VATICANBOARD,
+    ENDGAME
 }

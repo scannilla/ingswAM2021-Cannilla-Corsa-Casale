@@ -58,9 +58,10 @@ public class ShowProductionMarket extends JPanel implements ActionListener {
         int x = 0;
         int y = 0;
         Resource[][] costResource = new Resource[12][];
-        for (int i = 0; i<12; i++) {
+        for (int i = 0; i<4; i++) {
             for (int k = 0; k<3; k++) {
-                if (topCard[i][k] != null && topCard[i][k].getCostArray() != null) {
+                if (topCard[i][k] != null && topCard[i][k].getCostArray()[0] != null) {
+                    costResource[i] = new Resource[topCard[i][k].getCostArray().length];
                     for (int j = 0; j < topCard[i][k].getCostArray().length; j++) {
                         costResource[i][j] = topCard[i][k].getCostArray()[j];
                     }

@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.Callable;
 
-public class NewServerGameProtocol implements Callable<Integer> {
+public class NewServerGameProtocol implements Runnable {
     /**
      * this attribute represents the client socket
      */
@@ -48,33 +48,27 @@ public class NewServerGameProtocol implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() throws Exception {
+    public void run() {
         createListeners();
-        //if (!local)
-            //new Thread(new CheckConnection(mHandler));
+        if (!local)
+            new Thread(new CheckConnection(mHandler)).start();
         while (true) {
-            /*if(!local)
-                try {
-                    checkConnection();
-                } catch (EndingGameException e) {
-                    throw new EndingGameException();
-                }*/
+            if(!local)
+                checkConnection();
             String command;
             try {
                 command = mHandler.readClientMessage();
-                System.out.println(command);
                 Response response = handler.tryCommand(createCommand(command), player, mHandler);
-                if (response.getCode()==999)
-                    System.exit(1);
-                System.out.println(response.getMessage() + response.getCode());
-                if(response.getCode() == 401)
+                if (response.getCode() == 999)
+                    EventManager.notifyListener(EventType.ENDGAME, null);
+                if (response.getCode() == 401)
                     response = handler.getValidCommands();
                 mHandler.sendMessageToClient(response);
             } catch (EndingGameException e) {
-                break;
+                EventManager.notifyListener(EventType.ENDGAME, null);
+                return;
             }
         }
-        return null;
     }
 
     /**
@@ -95,11 +89,11 @@ public class NewServerGameProtocol implements Callable<Integer> {
         return new String[] {command[0], jsonString};
     }
 
-    private void checkConnection() throws EndingGameException {
+    private void checkConnection(){
         try {
             clientSocket.setSoTimeout(5000);
         } catch (SocketException e) {
-            throw new EndingGameException();
+            EventManager.notifyListener(EventType.ENDGAME, null);
         }
     }
 

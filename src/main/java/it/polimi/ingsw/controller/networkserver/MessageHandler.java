@@ -43,9 +43,12 @@ public class MessageHandler {
      * @throws EndingGameException e
      */
     public String readClientMessage() throws EndingGameException {
-
         try{
-            return ((Message)in.readObject()).getMessage();
+            Message m = (Message) in.readObject();
+            while (m.getCode()==351) {
+                m = (Message) in.readObject();
+            }
+            return m.getMessage();
         } catch (IOException | ClassNotFoundException e) {
             throw new EndingGameException();
         }

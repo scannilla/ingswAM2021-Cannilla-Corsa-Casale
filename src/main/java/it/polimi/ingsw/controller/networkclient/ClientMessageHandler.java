@@ -70,16 +70,11 @@ public class ClientMessageHandler {
     public Message readMessage() throws EndingGameException {
         try {
             Object read = in.readObject();
-            Message received = (Message) read;
-            if (received.getCode() == 350)
-                sendMessageToServer("pong", 351);
-            else
-                return received;
-
+            return (Message) read;
         } catch (IOException | ClassNotFoundException e) {
             throw new EndingGameException();
         }
-        return null;
+
     }
 
 

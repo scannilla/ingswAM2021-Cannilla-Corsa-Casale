@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.controller.networkserver.MessageHandler;
-import java.net.Socket;
 
 
 public class EndGame {
@@ -11,13 +10,10 @@ public class EndGame {
      * @param mHandler MessageHandler
      */
     public static void end (MessageHandler mHandler){
-
         try {
-            mHandler.sendMessageToClient("Game over, server shutting down");
+            mHandler.sendMessageToClient("Game over, server shutting down", 0);
         } catch (EndingGameException e) {
             System.err.println("User already disconnected");
         }
-
-
     }
 }

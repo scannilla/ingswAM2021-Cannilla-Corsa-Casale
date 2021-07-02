@@ -5,9 +5,12 @@ package it.polimi.ingsw.controller.networkserver;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.controller.EndGame;
 import it.polimi.ingsw.controller.EndingGameException;
+import it.polimi.ingsw.controller.Message;
 import it.polimi.ingsw.controller.application.Automaton;
 import it.polimi.ingsw.controller.application.CommandsHandler;
-
+import it.polimi.ingsw.controller.virtualview.EndGameListener;
+import it.polimi.ingsw.controller.virtualview.EventManager;
+import it.polimi.ingsw.controller.virtualview.EventType;
 
 
 import java.io.IOException;
@@ -40,41 +43,15 @@ public class ServerMain {
         //starting server
         startServer(args);
         //creating socket for each player, the server only accept a maximum number of 4 players, as soon as someone disconnects from the server
-        //everyone receives a warning and the server shut down
-        ArrayList<Future<Integer>> futures = new ArrayList<>();
-        while(futures.size()<=4) {
+        for (int i = 0; i < 4; i++) {
             try {
-                futures.add(createConnection());
+                createConnection();
             } catch (EndingGameException e) {
-                for (MessageHandler m : mHandlers) {
-                    EndGame.end(m);
-                }
-                System.out.println("Server shutting down");
-                System.exit(1);
+                endGame();
             }
         }
-        checkEnd(futures);
-    }
-
-
-
-    private static Integer checkEnd (ArrayList<Future<Integer>> futures){
-        Integer end = 0;
-        while (end.equals(0)) {
-            for (Future<Integer> f : futures) {
-                try {
-                    end = f.get(5, TimeUnit.SECONDS);
-                } catch (InterruptedException | ExecutionException e) {
-                    for(MessageHandler m : mHandlers)
-                        EndGame.end(m);
-                    System.out.println("Server shutting down");
-                    System.exit(1);
-                } catch (TimeoutException e) {
-                    System.out.println("waiting for a thread to end");
-                }
-            }
-        }
-        return end;
+        executor.shutdown();
+        endGame();
     }
 
 
@@ -93,9 +70,10 @@ public class ServerMain {
         }
         if(serverSocket==null)
             System.exit(9);
+        EventManager.subscribe(EventType.ENDGAME, new EndGameListener());
     }
 
-    private static Future<Integer> createConnection() throws EndingGameException {
+    private static void createConnection() throws EndingGameException {
         Socket clientSocket;
         try {
             clientSocket = serverSocket.accept();
@@ -113,7 +91,7 @@ public class ServerMain {
 
         Player player = new Player(nickname);
         mapAllPlayer.put(player, clientSocket);
-        return executor.submit(new NewServerGameProtocol(clientSocket, player, handler, mHandler, false));
+        executor.submit(new NewServerGameProtocol(clientSocket, player, handler, mHandler, false));
     }
 
     private static String askForNickname(MessageHandler mHandler) throws EndingGameException {
@@ -136,6 +114,12 @@ public class ServerMain {
         } while (nickname.isBlank() || nickname.isEmpty() || used);
         mHandler.sendMessageToClient(nickname, 310);
         return nickname;
+    }
+
+    public static void endGame(){
+        for(MessageHandler m : mHandlers)
+            EndGame.end(m);
+        System.exit(1);
     }
 
 }

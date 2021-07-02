@@ -53,13 +53,19 @@ public class ClientListener implements Runnable{
             while (true) {
                 try {
                     Message read = cmHandler.readMessage();
-                    if (read.getCode()==310)
+                    if(read.getCode()==350) {
+                        cmHandler.sendMessageToServer("pong", 351);
+                    }
+                    else if (read.getCode()==310)
                         nickname = read.getMessage();
                     else if(read.getNickname()== null || nickname.equals(read.getNickname())) {
                         if (read.getCode() >= 650)
                             readObject(read);
                         else
                             System.out.println(read.getMessage());
+                    }
+                    if(read.getCode()==0) {
+                        System.exit(1);
                     }
                 } catch (EndingGameException e) {
                     break;

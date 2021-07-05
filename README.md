@@ -2,6 +2,8 @@
 
 For other information on messages please check /Documentation/DataDiagram.pdf
 
+Errata Corrige: the ASCII "art" is visible only in wsl2, terminal must be in full screen otherwise the faith track is printed incorrectly
+
 This game is a digital version of the board game Master of Renaissance by Cragno Games®.
 
 Game is designed for 1 to 4 player(s).
